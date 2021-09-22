@@ -1,5 +1,5 @@
 <template>
-	<div class="frm__gnrtr-input-text">
+	<div id="app" class="frm__gnrtr-input-text">
 		<label>
 			<span class="frm__gnrtr-text"> {{ label }} </span>
 
@@ -53,5 +53,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../../assets/styles/fields/index';
+@import '../../../assets/css/fields/index';
 </style>

@@ -32,4 +32,4 @@ const options = {
 	},
 };
 
-Vue.customElement('form-widget', App, options);
+Vue.customElement('form-widget-g', App, options);

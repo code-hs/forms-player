@@ -43,5 +43,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/styles/fields/index';
+@import '../assets/css/fields/index';
 </style>

@@ -12,8 +12,9 @@
 		</div>
 	</div>
 </template>
+
 <script>
-import Page from '../components/Page';
+import Page from './components/Page';
 import {mapActions} from 'vuex';
 
 export default {
@@ -48,5 +49,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/styles/indexView';
+@import './assets/css/main';
 </style>

@@ -94,5 +94,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/styles/group';
+@import '../assets/css/group';
 </style>

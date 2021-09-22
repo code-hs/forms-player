@@ -57,7 +57,7 @@ module.exports = {
 		devtool: 'source-map',
 		output: {
 			path: path.resolve(__dirname, 'dist'),
-			filename: 'form-s.js',
+			filename: 'form-widget-g.js',
 		},
 		plugins: [
 			new webpack.optimize.LimitChunkCountPlugin({

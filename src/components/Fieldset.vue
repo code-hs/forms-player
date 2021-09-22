@@ -70,5 +70,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/styles/fieldset';
+@import '../assets/css/fieldset';
 </style>
