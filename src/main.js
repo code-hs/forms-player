@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
-import store from './store/index';
+import store from './store';
 
+App.store = store;
 // (optional) 'Custom elements polyfill'
 import 'document-register-element/build/document-register-element';
 
@@ -9,11 +10,12 @@ import vueCustomElement from 'vue-custom-element';
 Vue.use(vueCustomElement);
 
 Vue.config.productionTip = false;
+// Vue.config.devtools = false;
 
-App.store = store;
 const options = {
 	shadow: true,
 	beforeCreateVueInstance(root) {
+		// for working shadow
 		const rootNode = root.el.getRootNode();
 
 		if (rootNode instanceof ShadowRoot) {
@@ -29,4 +31,5 @@ const options = {
 		return root;
 	},
 };
-Vue.customElement('vue-widget', App, options);
+
+Vue.customElement('form-widget', App, options);
