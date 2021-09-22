@@ -1,0 +1,27 @@
+@import '../utils/index';
+
+.#{$pr}-input-text {
+	margin-bottom: 20px;
+
+	label {
+		display: flex;
+		flex-direction: column;
+
+		.#{$pr}-text {
+			margin-bottom: 13px;
+		}
+
+		input {
+			height: 30px;
+			border: none;
+			border-radius: 3px;
+			outline: none;
+			background-color: #817f7f;
+
+			&:focus-visible {
+				outline: none;
+				background-color: #aeaeae;
+			}
+		}
+	}
+}

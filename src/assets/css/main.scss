@@ -1,0 +1,22 @@
+@import 'utils/index';
+
+.#{$pr}-form-s {
+  font-family: sans-serif;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: #aeaeae;
+  background-color: #323232;
+
+  .#{$pr}-page-container {
+    width: 300px;
+  }
+
+  .#{$pr}-dump {
+    width: 300px;
+    margin-top: 50px;
+    white-space: pre-line;
+    color: #dedede;
+    border-top: 1px dashed;
+  }
+}
