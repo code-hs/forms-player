@@ -1,6 +1,6 @@
 @import 'utils/index';
 
-.#{$pr}-form-s {
+.form-s {
   font-family: sans-serif;
   display: flex;
   align-items: center;
@@ -8,11 +8,11 @@
   color: #aeaeae;
   background-color: #323232;
 
-  .#{$pr}-page-container {
+  .page-container {
     width: 300px;
   }
 
-  .#{$pr}-dump {
+  .dump {
     width: 300px;
     margin-top: 50px;
     white-space: pre-line;

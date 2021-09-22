@@ -1,13 +1,13 @@
 @import '../utils/index';
 
-.#{$pr}-input-text {
+.input-text {
 	margin-bottom: 20px;
 
 	label {
 		display: flex;
 		flex-direction: column;
 
-		.#{$pr}-text {
+		.text {
 			margin-bottom: 13px;
 		}
 

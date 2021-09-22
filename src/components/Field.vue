@@ -1,5 +1,5 @@
 <template>
-	<div class="frm__gnrtr-field-item">
+	<div class="field-item">
 		<component
 			:is="fieldParams.component"
 			v-bind="fieldParams"

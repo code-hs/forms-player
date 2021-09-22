@@ -1,7 +1,7 @@
 <template>
-	<div id="app" class="frm__gnrtr-input-text">
+	<div id="app" class="input-text">
 		<label>
-			<span class="frm__gnrtr-text"> {{ label }} </span>
+			<span class="text"> {{ label }} </span>
 
 			<input v-model="fieldsetModel[vModel]" type="text" />
 		</label>

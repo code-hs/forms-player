@@ -1,6 +1,6 @@
 <template>
-	<div class="frm__gnrtr-page-item">
-		<div class="frm__gnrtr-groups-container">
+	<div class="page-item">
+		<div class="groups-container">
 			<Group
 				v-for="(group, index) in page.groups"
 				:key="index"

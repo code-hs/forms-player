@@ -1,13 +1,10 @@
 <template>
-	<div class="frm__gnrtr-form-s">
-		<div
-			v-if="currentPage && inputsStructure"
-			class="frm__gnrtr-page-container"
-		>
+	<div class="form-s">
+		<div v-if="currentPage && inputsStructure" class="page-container">
 			<Page :page="currentPage" :inputs-structure="inputsStructure" />
 		</div>
 
-		<div class="frm__gnrtr-dump">
+		<div class="dump">
 			{{ inputsStructure }}
 		</div>
 	</div>

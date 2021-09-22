@@ -1,8 +1,8 @@
 <template>
-	<div class="frm__gnrtr-group-item">
-		<span class="frm__gnrtr-title"> {{ group.name }} </span>
+	<div class="group-item">
+		<span class="title"> {{ group.name }} </span>
 
-		<div class="frm__gnrtr-fieldsets-container">
+		<div class="fieldsets-container">
 			<Fieldset
 				v-for="(fieldset, index) in group.fieldsets"
 				:key="index"
@@ -16,12 +16,8 @@
 			/>
 		</div>
 
-		<div class="frm__gnrtr-buttons-container" v-if="group.multiple">
-			<div
-				v-show="showButAdd"
-				class="frm__gnrtr-button-add"
-				@click="handleButAdd()"
-			>
+		<div class="buttons-container" v-if="group.multiple">
+			<div v-show="showButAdd" class="button-add" @click="handleButAdd()">
 				+
 			</div>
 		</div>

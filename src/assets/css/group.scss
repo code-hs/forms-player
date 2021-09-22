@@ -1,19 +1,19 @@
 @import 'utils/index';
 
-.#{$pr}-group-item {
+.group-item {
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 40px;
 
-	.#{$pr}-title {
+	.title {
 		text-align: center;
 	}
 
-	.#{$pr}-buttons-container {
+	.buttons-container {
 		display: flex;
 		justify-content: center;
 
-		.#{$pr}-button-add {
+		.button-add {
 			line-height: 20px;
 			width: 20px;
 			height: 20px;

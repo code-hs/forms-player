@@ -1,8 +1,8 @@
 <template>
-	<div class="frm__gnrtr-fieldset-item">
-		<div class="frm__gnrtr-title">{{ fieldset.name }}</div>
+	<div class="fieldset-item">
+		<div class="title">{{ fieldset.name }}</div>
 
-		<div class="frm__gnrtr-fields-container">
+		<div class="fields-container">
 			<Field
 				v-for="(field, index) in fieldset.fields"
 				:key="index"
@@ -16,7 +16,7 @@
 		<div
 			v-if="enableMultiple"
 			v-show="showButRemove"
-			class="frm__gnrtr-button-remove"
+			class="button-remove"
 			@click="$emit('remove', fieldsetIndex)"
 		>
 			✖
