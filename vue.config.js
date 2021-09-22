@@ -54,7 +54,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 // 	.BundleAnalyzerPlugin;
 
 module.exports = {
-	// devServer: {clientLogLevel: 'info', hot: true, inline: true},
+	// devServer: {clientLogLevel: 'info'},
 	configureWebpack: {
 		devtool: 'source-map',
 		output: {
@@ -96,7 +96,6 @@ module.exports = {
 	css: {
 		sourceMap: false, // + 31kb
 		extract: false,
-		// modules: true,
 	},
 	filenameHashing: false,
 };

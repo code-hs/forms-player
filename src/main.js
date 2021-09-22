@@ -4,7 +4,7 @@ import store from './store';
 
 App.store = store;
 // (optional) 'Custom elements polyfill'
-import 'document-register-element/build/document-register-element';
+// import 'document-register-element/build/document-register-element';
 
 import vueCustomElement from 'vue-custom-element';
 Vue.use(vueCustomElement);
