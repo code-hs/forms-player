@@ -53,8 +53,9 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin;
 
 module.exports = {
+	// devServer: {clientLogLevel: 'info', hot: true, inline: true},
 	configureWebpack: {
-		devtool: 'source-map',
+		// devtool: 'source-map',
 		output: {
 			path: path.resolve(__dirname, 'dist'),
 			filename: 'form-widget-g.js',
