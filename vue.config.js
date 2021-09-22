@@ -1,3 +1,68 @@
+const {configMode} = require('./src/config/mode');
+const webpack = require('webpack');
+const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+let BundleAnalyzerPlugin;
+
+const configureWebpack = {
+	devtool: 'source-map',
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'form-widget-g.js',
+	},
+	plugins: [
+		new webpack.optimize.LimitChunkCountPlugin({
+			maxChunks: 1,
+		}),
+		new webpack.LoaderOptionsPlugin({
+			minimize: true,
+			debug: false,
+		}),
+	],
+
+	optimization: {
+		minimizer: [
+			new UglifyJsPlugin({
+				uglifyOptions: {
+					compress: {
+						drop_console: true,
+					},
+					output: {
+						comments: false,
+					},
+				},
+			}),
+		],
+	},
+};
+
+const css = {
+	sourceMap: false, // + 31kb
+	extract: false,
+};
+
+if (configMode === 'analyze') {
+	BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+		.BundleAnalyzerPlugin;
+
+	configureWebpack.plugins.push(new BundleAnalyzerPlugin());
+} else if (configMode === 'dev') {
+	css.sourceMap = true; // + 31kb
+}
+
+module.exports = {
+	// devServer: {clientLogLevel: 'info'},
+	configureWebpack,
+	chainWebpack: config => {
+		config.optimization.delete('splitChunks');
+		config.optimization.minimize = true;
+
+		enableShadowCss(config);
+	},
+	css,
+	filenameHashing: false,
+};
+
 function enableShadowCss(config) {
 	const configs = [
 		// Required to explicitly call the __inject__ function exported by
@@ -46,56 +111,3 @@ function enableShadowCss(config) {
 		})
 	);
 }
-
-const webpack = require('webpack');
-const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-// 	.BundleAnalyzerPlugin;
-
-module.exports = {
-	// devServer: {clientLogLevel: 'info'},
-	configureWebpack: {
-		devtool: 'source-map',
-		output: {
-			path: path.resolve(__dirname, 'dist'),
-			filename: 'form-widget-g.js',
-		},
-		plugins: [
-			new webpack.optimize.LimitChunkCountPlugin({
-				maxChunks: 1,
-			}),
-			new webpack.LoaderOptionsPlugin({
-				minimize: true,
-				debug: false,
-			}),
-			// new BundleAnalyzerPlugin(),
-		],
-
-		optimization: {
-			minimizer: [
-				new UglifyJsPlugin({
-					uglifyOptions: {
-						compress: {
-							drop_console: true,
-						},
-						output: {
-							comments: false,
-						},
-					},
-				}),
-			],
-		},
-	},
-	chainWebpack: config => {
-		config.optimization.delete('splitChunks');
-		config.optimization.minimize = true;
-
-		enableShadowCss(config);
-	},
-	css: {
-		sourceMap: false, // + 31kb
-		extract: false,
-	},
-	filenameHashing: false,
-};
