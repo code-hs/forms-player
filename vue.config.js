@@ -49,13 +49,14 @@ function enableShadowCss(config) {
 
 const webpack = require('webpack');
 const path = require('path');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-	.BundleAnalyzerPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+// 	.BundleAnalyzerPlugin;
 
 module.exports = {
 	// devServer: {clientLogLevel: 'info', hot: true, inline: true},
 	configureWebpack: {
-		// devtool: 'source-map',
+		devtool: 'source-map',
 		output: {
 			path: path.resolve(__dirname, 'dist'),
 			filename: 'form-widget-g.js',
@@ -66,17 +67,34 @@ module.exports = {
 			}),
 			new webpack.LoaderOptionsPlugin({
 				minimize: true,
+				debug: false,
 			}),
 			// new BundleAnalyzerPlugin(),
 		],
+
+		optimization: {
+			minimizer: [
+				new UglifyJsPlugin({
+					uglifyOptions: {
+						compress: {
+							drop_console: true,
+						},
+						output: {
+							comments: false,
+						},
+					},
+				}),
+			],
+		},
 	},
 	chainWebpack: config => {
 		config.optimization.delete('splitChunks');
 		config.optimization.minimize = true;
+
 		enableShadowCss(config);
 	},
 	css: {
-		sourceMap: true,
+		sourceMap: false, // + 31kb
 		extract: false,
 		// modules: true,
 	},
