@@ -1,53 +1,69 @@
 {
-  "name": "form-generator",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "axios": "^0.21.4",
-    "document-register-element": "^1.11.0",
-    "vue": "^2.5.16",
-    "vue-custom-element": "^3.2.2",
-    "vuex": "^3.0.1"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.4.1",
-    "@vue/cli-plugin-eslint": "^3.4.1",
-    "@vue/cli-service": "^3.5.3",
-    "@vue/eslint-config-standard": "^3.0.0-rc.5",
-    "node-sass": "^6.0.1",
-    "sass": "^1.42.1",
-    "sass-loader": "^7.0.3",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.46.0",
-    "webpack-bundle-analyzer": "^4.4.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "not dead"
-  ]
+	"name": "form-generator",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint"
+	},
+	"dependencies": {
+		"axios": "^0.21.4",
+		"document-register-element": "^1.11.0",
+		"vue": "^2.5.16",
+		"vue-custom-element": "^3.2.2",
+		"vuex": "^3.0.1"
+	},
+	"devDependencies": {
+		"@vue/cli-plugin-babel": "^3.4.1",
+		"@vue/cli-plugin-eslint": "^3.4.1",
+		"@vue/cli-service": "^3.5.3",
+		"@vue/eslint-config-airbnb": "^5.3.0",
+		"eslint": "^7.32.0",
+		"eslint-plugin-vue": "^7.18.0",
+		"node-sass": "^6.0.1",
+		"sass": "^1.42.1",
+		"sass-loader": "^7.0.3",
+		"uglifyjs-webpack-plugin": "^2.2.0",
+		"vue-template-compiler": "^2.5.16",
+		"webpack": "^4.46.0",
+		"webpack-bundle-analyzer": "^4.4.2"
+	},
+	"eslintConfig": {
+		"root": true,
+		"env": {
+			"node": true
+		},
+		"extends": [
+			"plugin:vue/essential",
+			"@vue/airbnb"
+		],
+		"rules": {
+			"no-tabs": "off",
+			"indent": "off",
+			"import/extensions": "off",
+			"linebreak-style": "off",
+			"arraysInObjects": "off",
+			"object-curly-spacing": [
+				"error",
+				"never"
+			],
+			"arrow-parens": [
+				"error",
+				"as-needed"
+			],
+			"no-shadow": "off",
+			"no-param-reassign": "off",
+			"vue/comment-directive": "off",
+			"no-multiple-empty-lines": "off",
+			"no-trailing-spaces": "off"
+		},
+		"parserOptions": {
+			"parser": "babel-eslint"
+		}
+	},
+	"browserslist": [
+		"> 1%",
+		"not dead"
+	]
 }
