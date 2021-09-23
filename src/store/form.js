@@ -1,4 +1,4 @@
-import Scheme from '../classes/Scheme';
+import SchemeParser from '../classes/scheme/SchemeParser';
 // экземпляр класса Scheme
 let S = null;
 
@@ -17,8 +17,8 @@ const mutations = {
 };
 
 const actions = {
-	async init(ctx, id) {
-		S = new Scheme(id);
+	async init() {
+		S = new SchemeParser();
 		await S.load();
 	},
 
@@ -30,7 +30,7 @@ const actions = {
 	},
 
 	generateInputStructure({getters}) {
-		return Scheme.generateInputStructure(getters.page);
+		return SchemeParser.generateInputStructure(getters.page);
 	},
 };
 

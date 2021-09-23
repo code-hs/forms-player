@@ -30,8 +30,9 @@ class SchemeFiltration {
 
 		return groups.map(group => {
 			// добавляем фильтрацию в объект multiply
-			if ('multiple' in group)
+			if ('multiple' in group) {
 				group.multiple = this.filtrateItem(group.multiple);
+			}
 
 			if (!group.fieldsets || !group.fieldsets.length) return group;
 

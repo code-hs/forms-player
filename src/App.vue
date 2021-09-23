@@ -31,7 +31,7 @@ export default {
 		};
 	},
 	async created() {
-		await this.schemeInit(this.id);
+		await this.schemeInit();
 		this.currentPage = await this.getPage(this.urlHash);
 		this.inputsStructure = await this.generateInputStructure();
 	},

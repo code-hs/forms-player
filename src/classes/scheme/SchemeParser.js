@@ -1,13 +1,13 @@
-import SchemeFiltration from './scheme/SchemeFiltration';
+import SchemeFiltration from './SchemeFiltration';
 
 // noinspection JSValidateTypes
-class Scheme {
+class SchemeParser {
 	oSchema;
 
 	load() {
 		// в будущем будет передаваться параметр id, и мы загружает необходимый нам файл схемы
 		// eslint-disable-next-line global-require
-		this.oSchema = require('../schemes/index.json');
+		this.oSchema = require('../../schemes');
 		// is valid scheme
 		if (!this.isValidScheme()) return false;
 
@@ -45,4 +45,4 @@ class Scheme {
 	}
 }
 
-export default Scheme;
+export default SchemeParser;
