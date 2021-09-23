@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import InputText from './fields/inputs/Text';
+import InputText from '@/components/fields/inputs/Text';
 
 export default {
 	name: 'Field',
@@ -41,5 +41,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/css/fields/index';
+@import '~@/assets/css/fields/index';
 </style>

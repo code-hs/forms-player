@@ -6,9 +6,7 @@ import store from './store';
 App.store = store;
 // (optional) 'Custom elements polyfill'
 // import 'document-register-element/build/document-register-element';
-
 Vue.use(vueCustomElement);
-
 Vue.config.productionTip = false;
 // Vue.config.devtools = false;
 
@@ -20,11 +18,9 @@ const options = {
 
 		if (rootNode instanceof ShadowRoot) {
 			// console.debug('shadowRoot found! Using as root node ');
-			// eslint-disable-next-line no-param-reassign
 			root.shadowRoot = rootNode;
 		} else {
 			// console.debug('shadowRoot not found! Using document head ');
-			// eslint-disable-next-line no-param-reassign
 			root.shadowRoot = document.head;
 		}
 

@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Field from './Field';
+import Field from '@/components/Field';
 
 export default {
 	name: 'Fieldset',
@@ -70,5 +70,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/css/fieldset';
+@import '~@/assets/css/fieldset';
 </style>

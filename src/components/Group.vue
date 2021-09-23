@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import Fieldset from './Fieldset';
+import Fieldset from '@/components/Fieldset';
 
 export default {
 	name: 'Group',
@@ -90,5 +90,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/css/group';
+@import '~@/assets/css/group';
 </style>

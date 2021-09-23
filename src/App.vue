@@ -12,7 +12,7 @@
 
 <script>
 import {mapActions} from 'vuex';
-import Page from './components/Page';
+import Page from '@/components/Page';
 
 export default {
 	components: {Page},
@@ -46,5 +46,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import './assets/css/main';
+@import '~@/assets/css/main';
 </style>

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Group from './Group';
+import Group from '@/components/Group';
 
 export default {
 	name: 'Page',
@@ -38,5 +38,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/css/page';
+@import '~@/assets/css/page';
 </style>
