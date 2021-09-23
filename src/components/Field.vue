@@ -12,13 +12,11 @@
 
 <script>
 import InputText from './fields/inputs/Text';
-import InputPassword from './fields/inputs/Text';
 
 export default {
 	name: 'Field',
 	components: {
 		InputText,
-		InputPassword,
 	},
 	props: {
 		fieldParams: {

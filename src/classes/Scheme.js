@@ -2,32 +2,28 @@ import SchemeFiltration from './scheme/SchemeFiltration';
 
 // noinspection JSValidateTypes
 class Scheme {
-	constructor() {
-		this.data = null;
-	}
+	oSchema;
 
 	load() {
 		// в будущем будет передаваться параметр id, и мы загружает необходимый нам файл схемы
-		// eslint-disable-next-line no-undef
-		let data = require('../schemes/index.json');
-
+		// eslint-disable-next-line global-require
+		this.oSchema = require('../schemes/index.json');
 		// is valid scheme
-		if (!this.isValidScheme(data)) return false;
+		if (!this.isValidScheme()) return false;
 
-		data = SchemeFiltration.filtrateParamEnable(data);
-		this.data = data;
+		this.oSchema = SchemeFiltration.filtrateParamEnable(this.oSchema);
 
-		return data;
+		return this.oSchema;
 	}
 
-	isValidScheme(oData) {
-		return oData && Object.keys(oData).length;
+	isValidScheme() {
+		return this.oSchema && Object.keys(this.oSchema).length;
 	}
 
 	getPage(urlHash) {
-		if (!this.data || !this.data.pages) return false;
+		if (!this.oSchema || !this.oSchema.pages) return false;
 
-		return this.data.pages.find(p => p.url === urlHash);
+		return this.oSchema.pages.find(p => p.url === urlHash);
 	}
 
 	static generateInputStructure(page) {
@@ -39,11 +35,10 @@ class Scheme {
 			acc.push([]);
 
 			// а потом и по fieldset, и генерируем схему для значений инпутов
-			for (const fieldset of group.fieldsets) {
-				if (!('fields' in fieldset)) continue;
+			group.fieldsets.forEach(fieldset => {
 				// {} = input store
-				acc[groupId].push({});
-			}
+				if ('fields' in fieldset) acc[groupId].push({});
+			});
 
 			return acc;
 		}, []);

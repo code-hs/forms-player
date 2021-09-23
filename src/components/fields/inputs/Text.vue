@@ -10,6 +10,7 @@
 
 <script>
 export default {
+	name: 'InputText',
 	props: {
 		inputsStructure: {
 			// global input values store
@@ -42,7 +43,8 @@ export default {
 		fieldsetModel() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
 			// если это поле находиться в дата, происходит баг с ключами,
-			// воспроизводится путем нажатия на + и потом удаления первого элемента, а вместо него удаляется последний и не работает binding
+			// воспроизводится путем нажатия на + и потом удаления первого элемента,
+			// а вместо него удаляется последний и не работает binding
 			return this.inputsStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},

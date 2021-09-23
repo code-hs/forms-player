@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import Page from './components/Page';
 import {mapActions} from 'vuex';
+import Page from './components/Page';
 
 export default {
 	components: {Page},

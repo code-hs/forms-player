@@ -1,13 +1,13 @@
-let endpoint = null;
-let wsRoute = null;
+let endpoint;
+let wsRoute;
 
 const useProdConfig = process.env.mode;
 if (useProdConfig) {
-	endpoint = `prod`;
-	wsRoute = `prod`;
+	endpoint = 'prod';
+	wsRoute = 'prod';
 } else {
-	endpoint = `dev`;
-	wsRoute = `dev`;
+	endpoint = 'dev';
+	wsRoute = 'dev';
 }
 
 export default {wsRoute, endpoint};

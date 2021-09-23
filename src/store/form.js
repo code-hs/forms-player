@@ -29,7 +29,6 @@ const actions = {
 		return page;
 	},
 
-	// eslint-disable-next-line no-unused-vars
 	generateInputStructure({getters}) {
 		return Scheme.generateInputStructure(getters.page);
 	},
