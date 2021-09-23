@@ -56,7 +56,20 @@
 			"no-param-reassign": "off",
 			"vue/comment-directive": "off",
 			"no-multiple-empty-lines": "off",
-			"no-trailing-spaces": "off"
+			"no-trailing-spaces": "off",
+			"comma-dangle": [
+				"error",
+				{
+					"functions": "never",
+					"arrays": "ignore",
+					"objects": "ignore",
+					"imports": "ignore",
+					"exports": "ignore"
+				}
+			],
+			"implicit-arrow-linebreak": "off",
+			"function-paren-newline": "off",
+			"vue/no-mutating-props": "off"
 		},
 		"parserOptions": {
 			"parser": "babel-eslint"

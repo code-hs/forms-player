@@ -8,7 +8,6 @@ App.store = store;
 // import 'document-register-element/build/document-register-element';
 Vue.use(vueCustomElement);
 Vue.config.productionTip = false;
-// Vue.config.devtools = false;
 
 const options = {
 	shadow: true,

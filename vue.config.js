@@ -1,8 +1,8 @@
-const {configMode} = require('./src/config/mode');
 const webpack = require('webpack');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-let BundleAnalyzerPlugin;
+const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
+const {configMode} = require('./src/config/mode');
 
 const configureWebpack = {
 	devtool: 'source-map',
@@ -42,9 +42,6 @@ const css = {
 };
 
 if (configMode === 'analyze') {
-	BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-		.BundleAnalyzerPlugin;
-
 	configureWebpack.plugins.push(new BundleAnalyzerPlugin());
 } else if (configMode === 'dev') {
 	css.sourceMap = true; // + 31kb
@@ -57,6 +54,7 @@ module.exports = {
 		config.optimization.delete('splitChunks');
 		config.optimization.minimize = true;
 
+		// eslint-disable-next-line no-use-before-define
 		enableShadowCss(config);
 	},
 	css,
@@ -103,6 +101,7 @@ function enableShadowCss(config) {
 	if (!process.env.BUILD_MODE) {
 		process.env.BUILD_MODE = config.store.get('mode');
 	}
+
 	configs.forEach(c =>
 		c.tap(options => {
 			// eslint-disable-next-line no-param-reassign
