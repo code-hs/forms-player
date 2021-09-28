@@ -2,28 +2,28 @@ import SchemeFiltration from './SchemeFiltration';
 
 // noinspection JSValidateTypes
 class SchemeParser {
-	oSchema;
+	schema;
 
 	load() {
 		// в будущем будет передаваться параметр id, и мы загружает необходимый нам файл схемы
 		// eslint-disable-next-line global-require
-		this.oSchema = require('../../schemes');
+		this.schema = require('../../schemes');
 		// is valid scheme
 		if (!this.isValidScheme()) return false;
 
-		this.oSchema = SchemeFiltration.filtrateParamEnable(this.oSchema);
+		this.schema = SchemeFiltration.filtrateParamEnable(this.schema);
 
-		return this.oSchema;
+		return this.schema;
 	}
 
 	isValidScheme() {
-		return this.oSchema && Object.keys(this.oSchema).length;
+		return this.schema && Object.keys(this.schema).length;
 	}
 
 	getPage(urlHash) {
-		if (!this.oSchema || !this.oSchema.pages) return false;
+		if (!this.schema || !this.schema.pages) return false;
 
-		return this.oSchema.pages.find(p => p.url === urlHash);
+		return this.schema.pages.find(p => p.url === urlHash);
 	}
 
 	static generateInputStructure(page) {

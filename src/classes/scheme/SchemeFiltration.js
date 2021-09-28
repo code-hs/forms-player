@@ -42,12 +42,15 @@ class SchemeFiltration {
 		});
 	}
 
-	static filtrateParamEnable(oSchema) {
-		if (!oSchema.pages || !oSchema.pages.length) return oSchema;
+	/**
+	 * @param {Object} schema - Scheme
+	 */
+	static filtrateParamEnable(schema) {
+		if (!schema.pages || !schema.pages.length) return schema;
 
 		// фильтруем страницы, а потом и все внутреннее запускаем на фильтрацию
-		oSchema.pages = oSchema.pages.filter(page => this.filtrateItem(page));
-		oSchema.pages = oSchema.pages.map(page => {
+		schema.pages = schema.pages.filter(page => this.filtrateItem(page));
+		schema.pages = schema.pages.map(page => {
 			if (!page.groups || !page.groups.length) return page;
 
 			// запускаем на фильтрацию группы
@@ -56,7 +59,7 @@ class SchemeFiltration {
 			return page;
 		});
 
-		return oSchema;
+		return schema;
 	}
 }
 
