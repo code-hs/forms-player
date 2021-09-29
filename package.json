@@ -100,7 +100,7 @@
 			"^.+\\.js$": "<rootDir>/node_modules/babel-jest"
 		},
 		"transformIgnorePatterns": [
-			"/node_modules/"
+			"/node_modules/(?!@babel/runtime)"
 		],
 		"moduleNameMapper": {
 			"^@/(.*)$": "<rootDir>/src/$1"
