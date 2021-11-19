@@ -17,9 +17,9 @@ const mutations = {
 };
 
 const actions = {
-	async init() {
+	async init(ctx, mode) {
 		S = new SchemeParser();
-		await S.load();
+		await S.load(mode);
 	},
 
 	async getPage({commit}, urlHash) {

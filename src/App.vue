@@ -22,6 +22,10 @@ export default {
 			type: Number,
 			required: true,
 		},
+		mode: {
+			type: String,
+			required: false,
+		},
 	},
 	data() {
 		return {
@@ -31,7 +35,7 @@ export default {
 		};
 	},
 	async created() {
-		await this.schemeInit();
+		await this.schemeInit(this.mode);
 		this.currentPage = await this.getPage(this.urlHash);
 		this.inputsStructure = await this.generateInputStructure();
 	},

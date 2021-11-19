@@ -1,12 +1,17 @@
 class SchemeParser {
 	schema;
 
-	load() {
+	load(mode) {
 		const storageKey = 'WDFL:init:schemeStructure';
 
-		this.schema = localStorage.getItem(storageKey);
-		this.schema = JSON.parse(this.schema);
-
+		if (mode === 'dev') {
+			// если запускается build в dev режиме
+			// eslint-disable-next-line global-require
+			this.schema = require('../../schemes');
+		} else {
+			this.schema = localStorage.getItem(storageKey);
+			this.schema = JSON.parse(this.schema);
+		}
 		// is valid scheme
 		if (!this.isValidScheme()) return false;
 
