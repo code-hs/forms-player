@@ -1,6 +1,5 @@
 {
 	"config": {
-		"hash_id": "eadi3duy",
 		"step_by_step": "strict",
 		"modules": {
 			"auth_module": true,

@@ -4,6 +4,11 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const {configMode} = require('./src/config/mode');
 
+let dropConsole = true;
+if (configMode === 'dev') {
+	dropConsole = false;
+}
+
 const configureWebpack = {
 	devtool: 'source-map',
 	output: {
@@ -25,7 +30,7 @@ const configureWebpack = {
 			new UglifyJsPlugin({
 				uglifyOptions: {
 					compress: {
-						drop_console: true,
+						drop_console: dropConsole,
 					},
 					output: {
 						comments: false,
