@@ -1,17 +1,14 @@
-import SchemeFiltration from './SchemeFiltration';
-
-// noinspection JSValidateTypes
 class SchemeParser {
 	schema;
 
 	load() {
-		// в будущем будет передаваться параметр id, и мы загружает необходимый нам файл схемы
-		// eslint-disable-next-line global-require
-		this.schema = require('../../schemes');
+		const storageKey = 'WDFL:init:schemeStructure';
+
+		this.schema = localStorage.getItem(storageKey);
+		this.schema = JSON.parse(this.schema);
+
 		// is valid scheme
 		if (!this.isValidScheme()) return false;
-
-		this.schema = SchemeFiltration.filtrateParamEnable(this.schema);
 
 		return this.schema;
 	}
