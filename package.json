@@ -79,7 +79,8 @@
 			"implicit-arrow-linebreak": "off",
 			"function-paren-newline": "off",
 			"vue/no-mutating-props": "off",
-			"import/no-extraneous-dependencies": "off"
+			"import/no-extraneous-dependencies": "off",
+			"no-underscore-dangle": "off"
 		},
 		"parserOptions": {
 			"parser": "babel-eslint"

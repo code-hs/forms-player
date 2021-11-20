@@ -11,7 +11,7 @@
 				:inputs-structure="inputsStructure"
 				:group-index="groupIndex"
 				:fieldset-index="index"
-				:enableMultiple="group.multiple"
+				:enableMultiple="!!group.multiple"
 				@remove="handleButRemove"
 			/>
 		</div>
