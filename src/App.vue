@@ -17,12 +17,8 @@ import Page from '@/components/Page';
 export default {
 	components: {Page},
 	props: {
-		id: {
-			// customer id
-			type: Number,
-			required: true,
-		},
-		mode: {
+		// необходим для получения схемы без запросов в апи
+		dataMode: {
 			type: String,
 			required: false,
 		},
@@ -35,7 +31,7 @@ export default {
 		};
 	},
 	async created() {
-		await this.schemeInit(this.mode);
+		await this.schemeInit(this.dataMode);
 		this.currentPage = await this.getPage(this.urlHash);
 		this.inputsStructure = await this.generateInputStructure();
 	},

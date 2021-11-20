@@ -1,3 +1,6 @@
+/* eslint-disable global-require */
+// noinspection JSUnresolvedFunction
+
 class SchemeParser {
 	schema;
 
@@ -5,9 +8,12 @@ class SchemeParser {
 		const storageKey = 'WDFL:init:schemeStructure';
 
 		if (mode === 'dev') {
-			// если запускается build в dev режиме
-			// eslint-disable-next-line global-require
-			this.schema = require('../../schemes');
+			// если запускается serve,
+			// схема берется из папки в апи
+			// так как нужен HRM, а для этого все должно быть подключено напрямую
+			this.schema = require('../../../../api/classes/scheme/tempSource/mainSchemeStructure.json');
+			const SchemaFiltrator = require('../../../../api/classes/scheme/SchemeFiltrator');
+			this.schema = SchemaFiltrator.filtrateParamEnable(this.schema);
 		} else {
 			this.schema = localStorage.getItem(storageKey);
 			this.schema = JSON.parse(this.schema);

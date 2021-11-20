@@ -7,14 +7,16 @@
 		<title>Form widget runtime</title>
 	</head>
 	<body>
-		<!--		этот файл очень важен, без него не запуститься runtime-->
+		<!--		этот файл очень важен, без него не запуститься serve-->
 		<noscript>
 			<strong
 				>We're sorry but Form widget doesn't work properly without JavaScript
 				enabled. Please enable it to continue.</strong
 			>
 		</noscript>
-		<form-widget-g id="123"></form-widget-g>
+		<!--		data-mode="dev" необходим, что бы при запуске serve, HRM работал со всеми-->
+		<!--		подключенными файлами-->
+		<form-widget-g data-mode="dev"></form-widget-g>
 	</body>
 
 	<style>
