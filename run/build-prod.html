@@ -19,7 +19,13 @@
 			</strong>
 		</noscript>
 
-		<form-widget-g data-client-id="345" data-page="welcome"></form-widget-g>
+		<!--		data-dev-bundle-path необходим, что бы бандлы брались не с папки
+		в апи, а прямо с клиентского dist-->
+		<form-widget-g
+			data-client-id="345"
+			data-page="welcome"
+			data-dev-bundle-path="true"
+		></form-widget-g>
 		<script src="http://localhost:3033/p/forms/widget-forms-loader.js"></script>
 	</body>
 
