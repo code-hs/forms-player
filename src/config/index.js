@@ -1,13 +1,9 @@
-let endpoint;
-let wsRoute;
+let endpoint = 'dev';
+let wsRoute = 'dev';
 
-const useProdConfig = process.env.mode;
-if (useProdConfig) {
+if (process.env.NODE_MODE === 'prod') {
 	endpoint = 'prod';
 	wsRoute = 'prod';
-} else {
-	endpoint = 'dev';
-	wsRoute = 'dev';
 }
 
 export default {wsRoute, endpoint};

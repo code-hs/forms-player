@@ -1,11 +1,9 @@
-const {configMode} = require('../src/config/mode');
-
 const css = {
 	sourceMap: false, // - 31kb
 	extract: false,
 };
 
-if (configMode === 'dev') {
+if (process.env.NODE_MODE === 'dev') {
 	// если в билде необходима возможность, просматривать файлы стилей
 	// корректно, по папкам и файлам раздельно
 	css.sourceMap = true; // + 31kb

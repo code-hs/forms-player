@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
-const {configMode} = require('../src/config/mode');
 
 const plugins = [
 	new webpack.optimize.LimitChunkCountPlugin({
@@ -16,9 +15,9 @@ const plugins = [
 
 let dropConsole = true;
 
-if (configMode === 'dev') {
+if (process.env.NODE_MODE === 'dev') {
 	dropConsole = false;
-} else if (configMode === 'analyze') {
+} else if (process.env.NODE_MODE === 'analyze') {
 	plugins.push(new BundleAnalyzerPlugin());
 }
 
