@@ -17,7 +17,7 @@ import Page from '@/components/Page';
 export default {
 	components: {Page},
 	props: {
-		// необходим для получения схемы без запросов в апи
+		// опция, указывает на получения схемы без запросов в апи
 		dataMode: {
 			type: String,
 			required: false,
