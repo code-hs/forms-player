@@ -4,7 +4,7 @@
 			<Page :page="currentPage" :inputs-structure="inputsStructure" />
 		</div>
 
-		<div class="dump">
+		<div v-if="showDump" class="dump">
 			{{ inputsStructure }}
 		</div>
 	</div>
@@ -13,6 +13,7 @@
 <script>
 import {mapActions} from 'vuex';
 import Page from '@/components/Page';
+import config from './config/index';
 
 export default {
 	components: {Page},
@@ -22,6 +23,11 @@ export default {
 			currentPage: null,
 			inputsStructure: null,
 		};
+	},
+	computed: {
+		showDump() {
+			return config.showDump;
+		},
 	},
 	async created() {
 		await this.schemeInit();
