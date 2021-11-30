@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable global-require,max-len */
 // noinspection JSUnresolvedFunction,JSIncompatibleTypesComparison
 
 class SchemeParser {
@@ -7,7 +7,7 @@ class SchemeParser {
 	load() {
 		const storageKey = 'WDFL:init:schemeStructure';
 
-		if (process.env?.NODE_ENV === 'development') {
+		if (process.env.CUSTOM_RUN_COMMAND === 'serve') {
 			// при запуске через serve,
 			// схема берется из папки в апи
 			// так как нужен HRM, а для этого все должно быть подключено напрямую

@@ -1,9 +1,7 @@
-let endpoint = 'dev';
-let wsRoute = 'dev';
+let showDump = false;
 
-if (process.env.NODE_MODE === 'prod') {
-	endpoint = 'prod';
-	wsRoute = 'prod';
+if (process.env.CUSTOM_MODE === 'dev') {
+	showDump = true;
 }
 
-export default {wsRoute, endpoint};
+export default {showDump};

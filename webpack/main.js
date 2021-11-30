@@ -11,13 +11,19 @@ const plugins = [
 		minimize: true,
 		debug: false,
 	}),
+	new webpack.DefinePlugin({
+		'process.env.CUSTOM_MODE': JSON.stringify(process.env.CUSTOM_MODE),
+		'process.env.CUSTOM_RUN_COMMAND': JSON.stringify(
+			process.env.CUSTOM_RUN_COMMAND
+		),
+	}),
 ];
 
 let dropConsole = true;
 
-if (process.env.NODE_MODE === 'dev') {
+if (process.env.CUSTOM_MODE === 'dev') {
 	dropConsole = false;
-} else if (process.env.NODE_MODE === 'analyze') {
+} else if (process.env.CUSTOM_MODE === 'analyze') {
 	plugins.push(new BundleAnalyzerPlugin());
 }
 

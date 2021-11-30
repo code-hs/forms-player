@@ -3,7 +3,7 @@ const css = {
 	extract: false,
 };
 
-if (process.env.NODE_MODE === 'dev') {
+if (process.env.CUSTOM_MODE === 'dev') {
 	// если в билде необходима возможность, просматривать файлы стилей
 	// корректно, по папкам и файлам раздельно
 	css.sourceMap = true; // + 31kb
