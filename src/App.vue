@@ -16,13 +16,6 @@ import Page from '@/components/Page';
 
 export default {
 	components: {Page},
-	props: {
-		// опция, указывает на получения схемы без запросов в апи
-		dataMode: {
-			type: String,
-			required: false,
-		},
-	},
 	data() {
 		return {
 			urlHash: window.location.hash.slice(1),
@@ -31,7 +24,7 @@ export default {
 		};
 	},
 	async created() {
-		await this.schemeInit(this.dataMode);
+		await this.schemeInit();
 		this.currentPage = await this.getPage(this.urlHash);
 		this.inputsStructure = await this.generateInputStructure();
 	},

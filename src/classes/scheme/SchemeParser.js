@@ -1,20 +1,22 @@
 /* eslint-disable global-require */
-// noinspection JSUnresolvedFunction
+// noinspection JSUnresolvedFunction,JSIncompatibleTypesComparison
 
 class SchemeParser {
 	schema;
 
-	load(mode) {
+	load() {
 		const storageKey = 'WDFL:init:schemeStructure';
 
-		if (mode === 'dev') {
-			// если запускается serve,
+		if (process && process.env && process.env.NODE_ENV === 'development') {
+			// при запуске через serve,
 			// схема берется из папки в апи
 			// так как нужен HRM, а для этого все должно быть подключено напрямую
 			this.schema = require('../../../../api/classes/scheme/tempSource/mainSchemeStructure.json');
 			const SchemaFiltrator = require('../../../../api/classes/scheme/SchemeFiltrator');
 			this.schema = SchemaFiltrator.filtrateParamEnable(this.schema);
 		} else {
+			// loader сделал запрос по апи и получил схему
+			// loader и записал в localStorage
 			this.schema = localStorage.getItem(storageKey);
 			this.schema = JSON.parse(this.schema);
 		}
