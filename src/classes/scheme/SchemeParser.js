@@ -7,10 +7,11 @@ class SchemeParser {
 	load() {
 		const storageKey = 'WDFL:init:schemeStructure';
 
-		if (process && process.env && process.env.NODE_ENV === 'development') {
+		if (process.env?.NODE_ENV === 'development') {
 			// при запуске через serve,
 			// схема берется из папки в апи
 			// так как нужен HRM, а для этого все должно быть подключено напрямую
+			// для прод билда, коментить эти блоки
 			this.schema = require('../../../../api/classes/scheme/tempSource/mainSchemeStructure.json');
 			const SchemaFiltrator = require('../../../../api/classes/scheme/SchemeFiltrator');
 			this.schema = SchemaFiltrator.filtrateParamEnable(this.schema);

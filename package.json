@@ -21,6 +21,7 @@
 	},
 	"devDependencies": {
 		"@babel/plugin-transform-modules-commonjs": "^7.15.4",
+		"@babel/preset-env": "^7.16.4",
 		"@jest/globals": "^27.2.3",
 		"@vue/cli-plugin-babel": "^3.4.1",
 		"@vue/cli-plugin-eslint": "^3.4.1",
