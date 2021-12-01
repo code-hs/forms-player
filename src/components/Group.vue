@@ -43,7 +43,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapGetters({inputsStructure: 'Form/inputsStructure'}),
+		...mapGetters({inputsStructure: 'inputsModel/structure'}),
 		modelGroup() {
 			return this.inputsStructure[this.groupIndex];
 		},

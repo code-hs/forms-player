@@ -37,7 +37,7 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters({inputsStructure: 'Form/inputsStructure'}),
+		...mapGetters({inputsStructure: 'inputsModel/structure'}),
 		fieldsetModel() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
 			// если это поле находиться в дата, происходит баг с ключами,
