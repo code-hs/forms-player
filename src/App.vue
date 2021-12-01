@@ -1,7 +1,7 @@
 <template>
 	<div class="form-s">
-		<div v-if="currentPage" class="page-container">
-			<Page :page="currentPage" />
+		<div v-if="showContent" class="page-container">
+			<Page />
 		</div>
 
 		<div v-if="showDump" class="dump">
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import Page from '@/components/Page';
 import config from './config/index';
 
@@ -20,24 +20,30 @@ export default {
 	data() {
 		return {
 			urlHash: window.location.hash.slice(1),
-			currentPage: null,
 			showContent: false,
 		};
 	},
 	computed: {
+		...mapGetters({
+			currentPage: 'Form/page',
+			inputsStructure: 'Form/inputsStructure',
+		}),
 		showDump() {
 			return config.showDump;
 		},
 	},
 	async created() {
-		await this.schemeInit();
-		this.currentPage = await this.getPage(this.urlHash);
+		await this.initScheme();
+		await this.initPage(this.urlHash);
 		this.generateInputsStructure();
+
+		// after all data loaded and valid
+		if (this.currentPage && this.inputsStructure) this.showContent = true;
 	},
 	methods: {
 		...mapActions({
-			schemeInit: 'Form/init',
-			getPage: 'Form/getPage',
+			initScheme: 'Form/init',
+			initPage: 'Form/initPage',
 			generateInputsStructure: 'Form/generateInputsStructure',
 		}),
 	},

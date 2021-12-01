@@ -28,7 +28,7 @@ const actions = {
 		await schemeObject.load();
 	},
 
-	async getPage({commit}, urlHash) {
+	async initPage({commit}, urlHash) {
 		const page = await schemeObject.getPage(urlHash);
 		commit('setPage', page);
 
