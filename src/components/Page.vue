@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import Group from '@/components/Group';
 
 export default {
@@ -19,11 +20,8 @@ export default {
 	components: {
 		Group,
 	},
-	props: {
-		page: {
-			type: Object,
-			required: true,
-		},
+	computed: {
+		...mapGetters({page: 'Form/page'}),
 	},
 };
 </script>
