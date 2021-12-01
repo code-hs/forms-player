@@ -4,21 +4,15 @@ let schemeObject;
 
 const state = () => ({
 	page: null,
-	inputsStructure: null,
 });
 
 const getters = {
 	page: s => s.page,
-	// inputsStructure - use only from computed
-	inputsStructure: s => s.inputsStructure,
 };
 
 const mutations = {
 	setPage: (s, v) => {
 		s.page = v;
-	},
-	setInputsStructure: (s, v) => {
-		s.inputsStructure = v;
 	},
 };
 
@@ -33,12 +27,6 @@ const actions = {
 		commit('setPage', page);
 
 		return page;
-	},
-
-	generateInputsStructure({commit, getters}) {
-		const inputsStructure = SchemeParser.generateInputsStructure(getters.page);
-
-		commit('setInputsStructure', inputsStructure);
 	},
 };
 

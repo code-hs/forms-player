@@ -21,7 +21,7 @@ export default {
 		Group,
 	},
 	computed: {
-		...mapGetters({page: 'Form/page'}),
+		...mapGetters({page: 'form/page'}),
 	},
 };
 </script>

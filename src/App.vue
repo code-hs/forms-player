@@ -25,8 +25,8 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			currentPage: 'Form/page',
-			inputsStructure: 'Form/inputsStructure',
+			currentPage: 'form/page',
+			inputsStructure: 'inputsModel/structure',
 		}),
 		showDump() {
 			return config.showDump;
@@ -35,16 +35,16 @@ export default {
 	async created() {
 		await this.initScheme();
 		await this.initPage(this.urlHash);
-		this.generateInputsStructure();
+		await this.generateInputsStructure(this.currentPage);
 
 		// after all data loaded and valid
 		if (this.currentPage && this.inputsStructure) this.showContent = true;
 	},
 	methods: {
 		...mapActions({
-			initScheme: 'Form/init',
-			initPage: 'Form/initPage',
-			generateInputsStructure: 'Form/generateInputsStructure',
+			initScheme: 'form/init',
+			initPage: 'form/initPage',
+			generateInputsStructure: 'inputsModel/generateStructure',
 		}),
 	},
 };
