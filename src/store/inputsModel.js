@@ -12,15 +12,12 @@ const mutations = {
 	setStructure: (s, v) => {
 		s.structure = v;
 	},
-};
-
-const actions = {
-	generateStructure({commit}, page) {
-		const structure = SchemeParser.generateInputsStructure(page);
-
-		commit('setStructure', structure);
+	generateStructure: (s, page) => {
+		s.structure = SchemeParser.generateInputsStructure(page);
 	},
 };
+
+const actions = {};
 
 export default {
 	namespaced: true,

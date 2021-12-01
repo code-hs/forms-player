@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import {mapActions, mapGetters, mapMutations} from 'vuex';
 import Page from '@/components/Page';
 import config from './config/index';
 
@@ -44,6 +44,8 @@ export default {
 		...mapActions({
 			initScheme: 'form/init',
 			initPage: 'form/initPage',
+		}),
+		...mapMutations({
 			generateInputsStructure: 'inputsModel/generateStructure',
 		}),
 	},
