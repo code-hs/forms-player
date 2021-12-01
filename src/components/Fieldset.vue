@@ -7,7 +7,6 @@
 				v-for="(field, index) in fieldset.fields"
 				:key="index"
 				:field-params="field"
-				:inputs-structure="inputsStructure"
 				:group-index="groupIndex"
 				:fieldset-index="fieldsetIndex"
 			/>
@@ -39,11 +38,6 @@ export default {
 		},
 		fieldsetsCount: {
 			type: Number,
-			required: true,
-		},
-		inputsStructure: {
-			// global input values store
-			type: Array,
 			required: true,
 		},
 		groupIndex: {

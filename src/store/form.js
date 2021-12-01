@@ -1,36 +1,44 @@
 import SchemeParser from '../classes/scheme/SchemeParser';
 // экземпляр класса Scheme
-let S = null;
+let schemeObject;
 
 const state = () => ({
 	page: null,
+	inputsStructure: null,
 });
 
 const getters = {
 	page: s => s.page,
+	// inputsStructure - use only from computed
+	inputsStructure: s => s.inputsStructure,
 };
 
 const mutations = {
 	setPage: (s, v) => {
 		s.page = v;
 	},
+	setInputsStructure: (s, v) => {
+		s.inputsStructure = v;
+	},
 };
 
 const actions = {
 	async init() {
-		S = new SchemeParser();
-		await S.load();
+		schemeObject = new SchemeParser();
+		await schemeObject.load();
 	},
 
 	async getPage({commit}, urlHash) {
-		const page = await S.getPage(urlHash);
+		const page = await schemeObject.getPage(urlHash);
 		commit('setPage', page);
 
 		return page;
 	},
 
-	generateInputStructure({getters}) {
-		return SchemeParser.generateInputStructure(getters.page);
+	generateInputsStructure({commit, getters}) {
+		const inputsStructure = SchemeParser.generateInputsStructure(getters.page);
+
+		commit('setInputsStructure', inputsStructure);
 	},
 };
 

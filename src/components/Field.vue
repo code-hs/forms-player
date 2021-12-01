@@ -3,7 +3,6 @@
 		<component
 			:is="fieldParams.component"
 			v-bind="fieldParams"
-			:inputs-structure="inputsStructure"
 			:group-index="groupIndex"
 			:fieldset-index="fieldsetIndex"
 		/>
@@ -21,11 +20,6 @@ export default {
 	props: {
 		fieldParams: {
 			type: Object,
-			required: true,
-		},
-		inputsStructure: {
-			// global input values store
-			type: Array,
 			required: true,
 		},
 		groupIndex: {

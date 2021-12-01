@@ -1,7 +1,7 @@
 <template>
 	<div class="form-s">
-		<div v-if="currentPage && inputsStructure" class="page-container">
-			<Page :page="currentPage" :inputs-structure="inputsStructure" />
+		<div v-if="currentPage" class="page-container">
+			<Page :page="currentPage" />
 		</div>
 
 		<div v-if="showDump" class="dump">
@@ -21,7 +21,7 @@ export default {
 		return {
 			urlHash: window.location.hash.slice(1),
 			currentPage: null,
-			inputsStructure: null,
+			showContent: false,
 		};
 	},
 	computed: {
@@ -32,13 +32,13 @@ export default {
 	async created() {
 		await this.schemeInit();
 		this.currentPage = await this.getPage(this.urlHash);
-		this.inputsStructure = await this.generateInputStructure();
+		this.generateInputsStructure();
 	},
 	methods: {
 		...mapActions({
 			schemeInit: 'Form/init',
 			getPage: 'Form/getPage',
-			generateInputStructure: 'Form/generateInputStructure',
+			generateInputsStructure: 'Form/generateInputsStructure',
 		}),
 	},
 };

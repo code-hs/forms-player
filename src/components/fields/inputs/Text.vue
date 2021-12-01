@@ -9,14 +9,11 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
 	name: 'InputText',
 	props: {
-		inputsStructure: {
-			// global input values store
-			type: Array,
-			required: true,
-		},
 		groupIndex: {
 			type: Number,
 			required: true,
@@ -40,6 +37,7 @@ export default {
 		};
 	},
 	computed: {
+		...mapGetters({inputsStructure: 'Form/inputsStructure'}),
 		fieldsetModel() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
 			// если это поле находиться в дата, происходит баг с ключами,
