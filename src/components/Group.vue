@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 import Fieldset from '@/components/Fieldset';
 
 export default {
@@ -52,31 +52,23 @@ export default {
 		},
 	},
 	methods: {
+		...mapMutations({
+			removeFieldsetItem: 'inputsModel/removeFieldsetItem',
+			copyFieldsetItem: 'inputsModel/copyFieldsetItem',
+		}),
 		handleButRemove(fieldsetIndex) {
 			// remove by fieldset index
-			this.removeFieldsetItem(fieldsetIndex);
+			this.group.fieldsets.splice(fieldsetIndex, 1);
+			this.removeFieldsetItem({groupIndex: this.groupIndex, fieldsetIndex});
 		},
 		handleButAdd() {
-			this.copyFieldset();
-		},
-		removeFieldsetItem(index) {
-			// eslint-disable-next-line vue/no-mutating-props
-			this.group.fieldsets.splice(index, 1);
-			// отправляемся в модель текущей группы, и удаляем из нее fieldset
-			this.modelGroup.splice(index, 1);
-		},
-		copyFieldset() {
-			const fieldsetExampleIndex = 0;
-			// need add new item to model
-			const sourceFieldsetModel = this.modelGroup[fieldsetExampleIndex];
-			// without reactivity
-			const newFieldSetModel = JSON.parse(JSON.stringify(sourceFieldsetModel));
-			this.modelGroup.push(newFieldSetModel);
+			// add new item to inputs structure
+			this.copyFieldsetItem({groupIndex: this.groupIndex});
 
 			// add new item to view
-			const sourceFieldset = this.group.fieldsets[fieldsetExampleIndex];
-			// eslint-disable-next-line vue/no-mutating-props
-			this.group.fieldsets.push(sourceFieldset);
+			const exampleIndex = 0;
+			const exampleItem = this.group.fieldsets[exampleIndex];
+			this.group.fieldsets.push(exampleItem);
 		},
 	},
 };
