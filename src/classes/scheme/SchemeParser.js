@@ -5,8 +5,6 @@ class SchemeParser {
 	schema;
 
 	load() {
-		const storageKey = 'WDFL:init:schemeStructure';
-
 		if (process.env.CUSTOM_RUN_COMMAND === 'serve') {
 			// при запуске через serve,
 			// схема берется из папки в апи
@@ -18,6 +16,7 @@ class SchemeParser {
 		} else {
 			// loader сделал запрос по апи и получил схему
 			// loader и записал в localStorage
+			const storageKey = 'WDFL:init:schemeStructure';
 			this.schema = localStorage.getItem(storageKey);
 			this.schema = JSON.parse(this.schema);
 		}
@@ -37,14 +36,21 @@ class SchemeParser {
 		return this.schema.pages.find(p => p.url === urlHash);
 	}
 
-	static generateInputStructure(page) {
+	/**
+	 * Генерирует структуру для текущей страницы
+	 * структура из себя представляет вложенный массив со всеми инпутами
+	 *
+	 * @param page - page structure
+	 * @returns {[]}
+	 */
+	static generateInputsStructure(page) {
 		if (!page || !page.groups) return [];
 
+		// сначала проходим по группам
 		return page.groups.reduce((acc, group, groupId) => {
 			if (!group.fieldsets) return acc;
 
 			acc.push([]);
-
 			// а потом и по fieldset, и генерируем схему для значений инпутов
 			group.fieldsets.forEach(fieldset => {
 				// {} = input store
