@@ -8,7 +8,6 @@
 				:key="index"
 				:fieldset="fieldset"
 				:fieldsets-count="group.fieldsets.length"
-				:inputs-structure="inputsStructure"
 				:group-index="groupIndex"
 				:fieldset-index="index"
 				:enableMultiple="!!group.multiple"
@@ -25,6 +24,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 import Fieldset from '@/components/Fieldset';
 
 export default {
@@ -37,23 +37,16 @@ export default {
 			type: Object,
 			required: true,
 		},
-		inputsStructure: {
-			// global input values store
-			type: Array,
-			required: true,
-		},
 		groupIndex: {
 			type: Number,
 			required: true,
 		},
 	},
-	data() {
-		return {
-			// main model, current group array
-			modelGroup: this.inputsStructure[this.groupIndex],
-		};
-	},
 	computed: {
+		...mapGetters({inputsStructure: 'Form/inputsStructure'}),
+		modelGroup() {
+			return this.inputsStructure[this.groupIndex];
+		},
 		showButAdd() {
 			return this.group.fieldsets && this.group.fieldsets.length > 0;
 		},
