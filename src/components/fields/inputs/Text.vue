@@ -1,5 +1,5 @@
 <template>
-	<div id="app" class="input-text">
+	<div class="input-text">
 		<label>
 			<span class="text"> {{ label }} </span>
 
@@ -22,6 +22,7 @@ export default {
 			type: Number,
 			required: true,
 		},
+		// ниже значения идут от, v-bind
 		vModel: {
 			type: String,
 			required: true,
@@ -40,13 +41,14 @@ export default {
 		...mapGetters({inputsStructure: 'inputsModel/structure'}),
 		fieldsetModel() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
-			// если это поле находиться в дата, происходит баг с ключами,
+			// если это поле находиться в date, происходит баг с ключами,
 			// воспроизводится путем нажатия на + и потом удаления первого элемента,
 			// а вместо него удаляется последний и не работает binding
 			return this.inputsStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},
 	created() {
+		// как только отобразился текущий элемент, добавляем его реактивно в inputsModel/structure
 		this.$set(this.fieldsetModel, this.vModel, this.value);
 	},
 };
