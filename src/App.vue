@@ -13,7 +13,7 @@
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import Page from '@/components/Page';
-import config from './config/index';
+import config from '@/config/index';
 
 export default {
 	components: {Page},
@@ -21,37 +21,34 @@ export default {
 		return {
 			urlHash: window.location.hash.slice(1),
 			showContent: false,
+			showDump: config.showDump,
 		};
 	},
 	computed: {
 		...mapGetters({
-			currentPage: 'form/page',
 			inputsStructure: 'inputsModel/structure',
 		}),
-		showDump() {
-			return config.showDump;
-		},
 	},
 	async created() {
-		await this.initScheme();
-		await this.initPage(this.urlHash);
-		await this.generateInputsStructure(this.currentPage);
+		this.initScheme();
+		const currentPage = await this.initPage(this.urlHash);
+		this.generateInputsStructure(currentPage);
 
 		// after all data loaded and valid
-		if (this.currentPage && this.inputsStructure) this.showContent = true;
+		if (currentPage && this.inputsStructure) this.showContent = true;
 	},
 	methods: {
+		...mapMutations({
+			generateInputsStructure: 'inputsModel/generateStructure',
+		}),
 		...mapActions({
 			initScheme: 'form/init',
 			initPage: 'form/initPage',
-		}),
-		...mapMutations({
-			generateInputsStructure: 'inputsModel/generateStructure',
 		}),
 	},
 };
 </script>
 
 <style lang="scss">
-@import '~@/assets/css/index';
+@import '@/assets/css/index';
 </style>
