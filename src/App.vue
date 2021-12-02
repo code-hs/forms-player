@@ -42,8 +42,8 @@ export default {
 			generateInputsStructure: 'inputsModel/generateStructure',
 		}),
 		...mapActions({
-			initScheme: 'form/init',
-			initPage: 'form/initPage',
+			initScheme: 'scheme/init',
+			initPage: 'scheme/initPage',
 		}),
 	},
 };

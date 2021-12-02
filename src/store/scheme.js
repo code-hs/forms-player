@@ -1,29 +1,29 @@
 import SchemeParser from '../classes/scheme/SchemeParser';
 // экземпляр класса Scheme
-let schemeObject;
+let schemeParser;
 
 const state = () => ({
-	page: null,
+	currentPage: null,
 });
 
 const getters = {
-	page: s => s.page,
+	currentPage: s => s.currentPage,
 };
 
 const mutations = {
-	setPage: (s, v) => {
-		s.page = v;
+	setCurrentPage: (s, v) => {
+		s.currentPage = v;
 	},
 };
 
 const actions = {
 	init() {
-		schemeObject = new SchemeParser();
-		schemeObject.load();
+		schemeParser = new SchemeParser();
+		schemeParser.load();
 	},
 	initPage({commit}, urlHash) {
-		const page = schemeObject.getPage(urlHash);
-		commit('setPage', page);
+		const page = schemeParser.getPage(urlHash);
+		commit('setCurrentPage', page);
 
 		return page;
 	},
