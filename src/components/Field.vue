@@ -2,9 +2,9 @@
 	<div class="field-item">
 		<component
 			:is="fieldParams.component"
-			v-bind="fieldParams"
 			:group-index="groupIndex"
 			:fieldset-index="fieldsetIndex"
+			v-bind="fieldParams"
 		/>
 	</div>
 </template>
@@ -18,16 +18,17 @@ export default {
 		InputText,
 	},
 	props: {
-		fieldParams: {
-			type: Object,
-			required: true,
-		},
 		groupIndex: {
 			type: Number,
 			required: true,
 		},
 		fieldsetIndex: {
 			type: Number,
+			required: true,
+		},
+		// все поля по текущему field
+		fieldParams: {
+			type: Object,
 			required: true,
 		},
 	},

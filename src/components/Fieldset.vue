@@ -6,9 +6,9 @@
 			<Field
 				v-for="(field, index) in fieldset.fields"
 				:key="index"
-				:field-params="field"
 				:group-index="groupIndex"
 				:fieldset-index="fieldsetIndex"
+				:field-params="field"
 			/>
 		</div>
 
@@ -36,15 +36,15 @@ export default {
 			type: Object,
 			required: true,
 		},
-		fieldsetsCount: {
-			type: Number,
-			required: true,
-		},
 		groupIndex: {
 			type: Number,
 			required: true,
 		},
 		fieldsetIndex: {
+			type: Number,
+			required: true,
+		},
+		fieldsetsCount: {
 			type: Number,
 			required: true,
 		},
@@ -57,6 +57,7 @@ export default {
 
 	computed: {
 		showButRemove() {
+			// отображаем кнопку удалить, ток при наличии двух и более fieldset item
 			return this.fieldsetsCount > 1;
 		},
 	},

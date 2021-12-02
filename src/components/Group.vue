@@ -7,17 +7,18 @@
 				v-for="(fieldset, index) in group.fieldsets"
 				:key="index"
 				:fieldset="fieldset"
-				:fieldsets-count="group.fieldsets.length"
 				:group-index="groupIndex"
 				:fieldset-index="index"
+				:fieldsets-count="group.fieldsets.length"
 				:enableMultiple="!!group.multiple"
 				@remove="handleButRemove"
 			/>
 		</div>
 
 		<div class="buttons-container" v-if="group.multiple">
+			<!--suppress JSUnresolvedVariable -->
 			<div v-show="showButAdd" class="button-add" @click="handleButAdd()">
-				+
+				{{ group.multiple.buttonText }}
 			</div>
 		</div>
 	</div>
@@ -44,11 +45,12 @@ export default {
 	},
 	computed: {
 		...mapGetters({inputsStructure: 'inputsModel/structure'}),
-		modelGroup() {
-			return this.inputsStructure[this.groupIndex];
-		},
 		showButAdd() {
-			return this.group.fieldsets && this.group.fieldsets.length > 0;
+			// кнопка отображается только при условии наличия в "fieldsets": [] элементов,
+			// а если их нет, то и смысла нет рисовать кнопку
+			// ибо exampleItem будет пустым
+
+			return this.group.fieldsets?.length;
 		},
 	},
 	methods: {
