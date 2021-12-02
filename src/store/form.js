@@ -17,13 +17,12 @@ const mutations = {
 };
 
 const actions = {
-	async init() {
+	init() {
 		schemeObject = new SchemeParser();
-		await schemeObject.load();
+		schemeObject.load();
 	},
-
-	async initPage({commit}, urlHash) {
-		const page = await schemeObject.getPage(urlHash);
+	initPage({commit}, urlHash) {
+		const page = schemeObject.getPage(urlHash);
 		commit('setPage', page);
 
 		return page;
