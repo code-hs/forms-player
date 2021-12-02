@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import form from './form';
+import scheme from './scheme';
 import inputsModel from './inputsModel';
 
 Vue.use(Vuex);
@@ -10,5 +10,5 @@ export default new Vuex.Store({
 	getters: {},
 	mutations: {},
 	actions: {},
-	modules: {form, inputsModel},
+	modules: {scheme, inputsModel},
 });

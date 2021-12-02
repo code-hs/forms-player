@@ -2,7 +2,7 @@
 // noinspection JSUnresolvedFunction,JSIncompatibleTypesComparison
 
 class SchemeParser {
-	schema;
+	structure;
 
 	load() {
 		if (process.env.CUSTOM_RUN_COMMAND === 'serve') {
@@ -10,30 +10,30 @@ class SchemeParser {
 			// схема берется из папки в апи
 			// так как нужен HRM, а для этого все должно быть подключено напрямую
 			// для прод билда, коментить эти блоки
-			this.schema = require('../../../../api/classes/scheme/tempSource/mainSchemeStructure.json');
+			this.structure = require('../../../../api/classes/scheme/tempSource/mainSchemeStructure.json');
 			const SchemaFiltrator = require('../../../../api/classes/scheme/SchemeFiltrator');
-			this.schema = SchemaFiltrator.filtrateParamEnable(this.schema);
+			this.structure = SchemaFiltrator.filtrateParamEnable(this.structure);
 		} else {
 			// loader сделал запрос по апи и получил схему
 			// loader и записал в localStorage
 			const storageKey = 'WDFL:init:schemeStructure';
-			this.schema = localStorage.getItem(storageKey);
-			this.schema = JSON.parse(this.schema);
+			this.structure = localStorage.getItem(storageKey);
+			this.structure = JSON.parse(this.structure);
 		}
 		// is valid scheme
-		if (!this.isValidScheme()) return false;
+		if (!this.isValidStructure()) return false;
 
-		return this.schema;
+		return this.structure;
 	}
 
-	isValidScheme() {
-		return this.schema && Object.keys(this.schema).length;
+	isValidStructure() {
+		return this.structure && Object.keys(this.structure).length;
 	}
 
 	getPage(urlHash) {
-		if (!this.schema || !this.schema.pages) return false;
+		if (!this.structure || !this.structure.pages) return false;
 
-		return this.schema.pages.find(p => p.url === urlHash);
+		return this.structure.pages.find(p => p.url === urlHash);
 	}
 
 	/**
