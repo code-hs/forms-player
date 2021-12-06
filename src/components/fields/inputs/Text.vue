@@ -3,7 +3,7 @@
 		<label>
 			<span class="text"> {{ label }} </span>
 
-			<input v-model="fieldsetModel[vModel]" type="text" />
+			<input v-model="fieldsetModelItem[inputModelName]" type="text" />
 		</label>
 	</div>
 </template>
@@ -23,7 +23,8 @@ export default {
 			required: true,
 		},
 		// ниже значения идут от, v-bind
-		vModel: {
+		// inputModelName - это название поля в схеме
+		inputModelName: {
 			type: String,
 			required: true,
 		},
@@ -39,7 +40,7 @@ export default {
 	},
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
-		fieldsetModel() {
+		fieldsetModelItem() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
 			// если это поле находиться в date, происходит баг с ключами,
 			// воспроизводится путем нажатия на + и потом удаления первого элемента,
@@ -48,8 +49,8 @@ export default {
 		},
 	},
 	created() {
-		// как только отобразился текущий элемент, добавляем его реактивно в inputsModel/structure
-		this.$set(this.fieldsetModel, this.vModel, this.value);
+		// как только отобразился текущий элемент, добавляем его реактивно в model/structure
+		this.$set(this.fieldsetModelItem, this.inputModelName, this.value);
 	},
 };
 </script>
