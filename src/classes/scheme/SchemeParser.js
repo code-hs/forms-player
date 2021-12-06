@@ -37,13 +37,13 @@ class SchemeParser {
 	}
 
 	/**
-	 * Генерирует структуру для текущей страницы
-	 * структура из себя представляет вложенный массив со всеми инпутами
+	 * Генерирует структуру для текущей страницы, исходя из расположения
+	 * инпутов в схеме
 	 *
 	 * @param page - page structure
 	 * @returns {[]}
 	 */
-	static generateInputsStructure(page) {
+	static generateModelStructure(page) {
 		if (!page || !page.groups) return [];
 
 		// сначала проходим по группам

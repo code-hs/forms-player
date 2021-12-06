@@ -2,13 +2,13 @@
 	<div>
 		<label> {{ label }} </label>
 		<br />
-		<input v-model="inputsStructure[vModel]" type="password" />
+		<input v-model="modelStructure[vModel]" type="password" />
 	</div>
 </template>
 
 <script>
 export default {
-	props: ['inputsStructure', 'vModel', 'label'],
+	props: ['modelStructure', 'vModel', 'label'],
 	data() {
 		return {
 			value: '',

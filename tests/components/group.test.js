@@ -14,7 +14,7 @@ describe('Group.vue', () => {
 			},
 
 			groupIndex: 0,
-			inputsStructure: [
+			modelStructure: [
 				[
 					{
 						login: '',

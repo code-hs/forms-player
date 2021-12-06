@@ -4,9 +4,7 @@
 			<Page />
 		</div>
 
-		<div v-if="showDump" class="dump">
-			{{ inputsStructure }}
-		</div>
+		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
 	</div>
 </template>
 
@@ -17,34 +15,46 @@ import config from '@/config/index';
 
 export default {
 	components: {Page},
+	props: {
+		dataPage: {
+			type: String,
+		},
+	},
 	data() {
 		return {
-			urlHash: window.location.hash.slice(1),
+			urlHash: this.getPage(),
 			showContent: false,
 			showDump: config.showDump,
 		};
 	},
 	computed: {
 		...mapGetters({
-			inputsStructure: 'inputsModel/structure',
+			modelStructure: 'model/structure',
 		}),
 	},
 	async created() {
-		this.initScheme();
+		this.loadScheme();
 		const currentPage = await this.initPage(this.urlHash);
-		this.generateInputsStructure(currentPage);
+		this.generateModelStructure(currentPage);
 
 		// after all data loaded and valid
-		if (currentPage && this.inputsStructure) this.showContent = true;
+		if (currentPage && this.modelStructure) this.showContent = true;
 	},
 	methods: {
 		...mapMutations({
-			generateInputsStructure: 'inputsModel/generateStructure',
+			generateModelStructure: 'model/generateStructure',
 		}),
 		...mapActions({
-			initScheme: 'scheme/init',
+			loadScheme: 'scheme/load',
 			initPage: 'scheme/initPage',
 		}),
+		getPage() {
+			// can use hash url
+			// window.location.hash.slice(1)
+
+			// from tag attribute
+			return this.dataPage;
+		},
 	},
 };
 </script>

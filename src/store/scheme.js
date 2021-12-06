@@ -17,7 +17,7 @@ const mutations = {
 };
 
 const actions = {
-	init() {
+	load() {
 		schemeParser = new SchemeParser();
 		schemeParser.load();
 	},
