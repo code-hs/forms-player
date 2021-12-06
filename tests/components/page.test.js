@@ -10,7 +10,7 @@ describe('Page.vue', () => {
 			page: {
 				groups,
 			},
-			inputsStructure: [],
+			modelStructure: [],
 		},
 	});
 

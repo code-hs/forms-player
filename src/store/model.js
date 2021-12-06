@@ -13,7 +13,7 @@ const mutations = {
 		s.structure = v;
 	},
 	generateStructure: (s, page) => {
-		s.structure = SchemeParser.generateInputsStructure(page);
+		s.structure = SchemeParser.generateModelStructure(page);
 	},
 	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
 		// отправляемся в модель текущей группы, и удаляем из нее fieldset

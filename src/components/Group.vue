@@ -44,7 +44,7 @@ export default {
 		},
 	},
 	computed: {
-		...mapGetters({inputsStructure: 'inputsModel/structure'}),
+		...mapGetters({modelStructure: 'model/structure'}),
 		showButAdd() {
 			// кнопка отображается только при условии наличия в "fieldsets": [] элементов,
 			// а если их нет, то и смысла нет рисовать кнопку
@@ -55,8 +55,8 @@ export default {
 	},
 	methods: {
 		...mapMutations({
-			removeFieldsetItem: 'inputsModel/removeFieldsetItem',
-			copyFieldsetItem: 'inputsModel/copyFieldsetItem',
+			removeFieldsetItem: 'model/removeFieldsetItem',
+			copyFieldsetItem: 'model/copyFieldsetItem',
 		}),
 		handleButRemove(fieldsetIndex) {
 			// remove by fieldset index

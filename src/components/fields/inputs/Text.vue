@@ -38,13 +38,13 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters({inputsStructure: 'inputsModel/structure'}),
+		...mapGetters({modelStructure: 'model/structure'}),
 		fieldsetModel() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
 			// если это поле находиться в date, происходит баг с ключами,
 			// воспроизводится путем нажатия на + и потом удаления первого элемента,
 			// а вместо него удаляется последний и не работает binding
-			return this.inputsStructure[this.groupIndex][this.fieldsetIndex];
+			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},
 	created() {

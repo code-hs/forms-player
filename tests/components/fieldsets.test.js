@@ -13,7 +13,7 @@ describe('Fieldset.vue', () => {
 			fieldsetsCount,
 			groupIndex: 0,
 			fieldsetIndex: 0,
-			inputsStructure: [
+			modelStructure: [
 				[
 					{
 						login: '',
