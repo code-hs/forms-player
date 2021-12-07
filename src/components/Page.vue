@@ -8,6 +8,8 @@
 				:group-index="index"
 			/>
 		</div>
+
+		<!--		<component :is="`style`" type="text/css" v-html="customStyles"></component>-->
 	</div>
 </template>
 
@@ -22,6 +24,16 @@ export default {
 	},
 	computed: {
 		...mapGetters({page: 'scheme/currentPage'}),
+	},
+	data() {
+		// В дальнейшем уже продумывать, как добавлять стили, то ли тут все - все
+		// прописать. А потом в элементах добавлять новые классы, или как кто
+		// захочет. Тут уж все доступно и открыто
+		// const customStyles = '.page-item {background: red}';
+
+		return {
+			// customStyles,
+		};
 	},
 };
 </script>
