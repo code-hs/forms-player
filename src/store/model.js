@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-newline */
+import Vue from 'vue';
 import SchemeParser from '../classes/scheme/SchemeParser';
 
 const state = () => ({
@@ -15,6 +17,11 @@ const mutations = {
 	generateStructure: (s, page) => {
 		s.structure = SchemeParser.generateModelStructure(page);
 	},
+	initField: (s, {groupIndex, fieldsetIndex, inputModelName, inputValue}) => {
+		const fieldset = s.structure[groupIndex][fieldsetIndex];
+		Vue.set(fieldset, inputModelName, inputValue);
+	},
+
 	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
 		// отправляемся в модель текущей группы, и удаляем из нее fieldset
 		s.structure[groupIndex].splice(fieldsetIndex, 1);
