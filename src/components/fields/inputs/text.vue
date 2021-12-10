@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 
 export default {
 	name: 'InputText',
@@ -49,8 +49,19 @@ export default {
 		},
 	},
 	created() {
-		// как только отобразился текущий элемент, добавляем его реактивно в model/structure
-		this.$set(this.fieldsetModelItem, this.inputModelName, this.value);
+		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
+		// Что бы структура всегда была подготовлена исходя из всех инпутов.
+		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[inputModelName]"
+		const options = {
+			groupIndex: this.groupIndex,
+			fieldsetIndex: this.fieldsetIndex,
+			inputModelName: this.inputModelName,
+			inputValue: this.value,
+		};
+		this.initField(options);
+	},
+	methods: {
+		...mapMutations({initField: 'model/initField'}),
 	},
 };
 </script>
