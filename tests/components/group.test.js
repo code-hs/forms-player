@@ -1,7 +1,7 @@
 import {describe, it, expect} from '@jest/globals';
 import {shallowMount} from '@vue/test-utils';
 import Vue from 'vue';
-import Group from '../../src/components/Group';
+import Group from '../../src/components/group';
 
 describe('Group.vue', () => {
 	const fieldsets = [{}];

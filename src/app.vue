@@ -10,7 +10,7 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex';
-import Page from '@/components/Page';
+import Page from '@/components/page';
 import config from '@/config/index';
 
 export default {
@@ -22,7 +22,7 @@ export default {
 	},
 	data() {
 		return {
-			urlHash: this.getPage(),
+			urlHash: this.getPageHash(),
 			showContent: false,
 			showDump: config.showDump,
 		};
@@ -48,7 +48,7 @@ export default {
 			loadScheme: 'scheme/load',
 			initPage: 'scheme/initPage',
 		}),
-		getPage() {
+		getPageHash() {
 			// can use hash url
 			// window.location.hash.slice(1)
 

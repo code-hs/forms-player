@@ -26,7 +26,7 @@
 
 <script>
 import {mapGetters, mapMutations} from 'vuex';
-import Fieldset from '@/components/Fieldset';
+import Fieldset from '@/components/fieldset';
 
 export default {
 	name: 'Group',

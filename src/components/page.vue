@@ -15,7 +15,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import Group from '@/components/Group';
+import Group from '@/components/group';
 
 export default {
 	name: 'Page',

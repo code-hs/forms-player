@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Field from '@/components/Field';
+import Field from '@/components/field';
 
 export default {
 	name: 'Row',

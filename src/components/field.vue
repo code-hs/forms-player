@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import InputText from '@/components/fields/inputs/Text';
+import InputText from '@/components/fields/inputs/text';
 
 export default {
 	name: 'Field',
