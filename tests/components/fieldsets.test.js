@@ -1,7 +1,7 @@
 import {describe, it, expect} from '@jest/globals';
 import {shallowMount} from '@vue/test-utils';
 import Vue from 'vue';
-import Fieldset from '../../src/components/Fieldset';
+import Fieldset from '../../src/components/fieldset';
 
 describe('Fieldset.vue', () => {
 	const fieldset = {};
