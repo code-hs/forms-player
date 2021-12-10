@@ -3,6 +3,9 @@ import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
 
+// add dev log functions
+require('./utils/console');
+
 App.store = store;
 // (optional) 'Custom elements polyfill'
 // import 'document-register-element/build/document-register-element';
