@@ -1,5 +1,5 @@
 /* eslint-disable global-require,max-len */
-// noinspection JSUnresolvedFunction,JSIncompatibleTypesComparison
+// noinspection JSUnresolvedFunction,JSIncompatibleTypesComparison,GrazieInspection
 
 class SchemeParser {
 	structure;
@@ -42,6 +42,15 @@ class SchemeParser {
 	 *
 	 * @param page - page structure
 	 * @returns {[]}
+	 *
+	 * return like
+	 * [
+	 *  [
+	 *   {},
+	 *   {},
+	 *   {}
+	 *  ]
+	 * ]
 	 */
 	static generateModelStructure(page) {
 		if (!page || !page.groups) return [];
@@ -53,8 +62,16 @@ class SchemeParser {
 			acc.push([]);
 			// а потом и по fieldset, и генерируем схему для значений инпутов
 			group.fieldsets.forEach(fieldset => {
-				// {} = input store
-				if ('fields' in fieldset) acc[groupId].push({});
+				// а потом по rows
+				if (!fieldset.rows) return;
+
+				fieldset.rows.forEach(row => {
+					// {} = input store
+
+					if ('fields' in row && row.fields.length) {
+						acc[groupId].push({});
+					}
+				});
 			});
 
 			return acc;

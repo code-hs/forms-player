@@ -2,13 +2,13 @@
 	<div class="fieldset-item">
 		<div class="title">{{ fieldset.name }}</div>
 
-		<div class="fields-container">
-			<Field
-				v-for="(field, index) in fieldset.fields"
+		<div class="rows-container">
+			<Row
+				v-for="(row, index) in fieldset.rows"
 				:key="index"
 				:group-index="groupIndex"
 				:fieldset-index="fieldsetIndex"
-				:field-params="field"
+				:row="row"
 			/>
 		</div>
 
@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import Field from '@/components/Field';
+import Row from '@/components/row';
 
 export default {
 	name: 'Fieldset',
 	components: {
-		Field,
+		Row,
 	},
 	props: {
 		fieldset: {
