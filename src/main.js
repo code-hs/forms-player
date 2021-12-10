@@ -2,6 +2,7 @@ import vueCustomElement from 'vue-custom-element';
 import Vue from 'vue';
 import App from './app.vue';
 import store from './store';
+import {shadowRootInit} from './utils/initDom';
 
 // add dev log functions
 require('./utils/console');
@@ -14,19 +15,8 @@ Vue.config.productionTip = false;
 
 const options = {
 	shadow: true,
-	beforeCreateVueInstance(root) {
-		// for working shadow
-		const rootNode = root.el.getRootNode();
-
-		if (rootNode instanceof ShadowRoot) {
-			// console.debug('shadowRoot found! Using as root node ');
-			root.shadowRoot = rootNode;
-		} else {
-			// console.debug('shadowRoot not found! Using document head ');
-			root.shadowRoot = document.head;
-		}
-
-		return root;
+	beforeCreateVueInstance: root => {
+		shadowRootInit(root);
 	},
 };
 
