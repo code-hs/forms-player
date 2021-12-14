@@ -1,16 +1,12 @@
 <template>
-	<div class="row-item">
-		<div class="title">{{ row.name }}</div>
-
-		<div class="fields-container">
-			<Field
-				v-for="(field, index) in row.fields"
-				:key="index"
-				:group-index="groupIndex"
-				:fieldset-index="fieldsetIndex"
-				:field-params="field"
-			/>
-		</div>
+	<div class="row row-item">
+		<Field
+			v-for="(field, index) in row.fields"
+			:key="index"
+			:group-index="groupIndex"
+			:fieldset-index="fieldsetIndex"
+			:field-params="field"
+		/>
 	</div>
 </template>
 
