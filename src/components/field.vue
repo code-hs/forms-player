@@ -1,5 +1,5 @@
 <template>
-	<div class="field-item">
+	<div class="col-6 field-item">
 		<component
 			:is="fieldParams.component"
 			:group-index="groupIndex"
