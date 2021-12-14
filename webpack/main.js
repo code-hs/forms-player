@@ -50,6 +50,9 @@ const configureWebpack = {
 	optimization: {
 		minimizer,
 	},
+	module: {
+		rules: [],
+	},
 };
 
 module.exports = {configureWebpack};
