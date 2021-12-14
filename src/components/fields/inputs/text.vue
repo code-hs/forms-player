@@ -1,9 +1,12 @@
 <template>
 	<div class="input-text">
 		<label>
-			<span class="text"> {{ label }} </span>
-
-			<input v-model="fieldsetModelItem[inputModelName]" type="text" />
+			<input
+				v-model="fieldsetModelItem[inputModelName]"
+				type="text"
+				:placeholder="label"
+				:required="generalParams.required"
+			/>
 		</label>
 	</div>
 </template>
@@ -31,6 +34,10 @@ export default {
 		label: {
 			type: String,
 			default: '',
+		},
+		generalParams: {
+			type: Object,
+			required: true,
 		},
 	},
 	data() {
