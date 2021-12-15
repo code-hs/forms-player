@@ -1,14 +1,15 @@
 .form-s {
-	font-size: 16px;
-	font-family: sans-serif;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	color: #aeaeae;
-	background-color: #323232;
+	color: $t-dark-white;
+	background-color: $t-dark-bodyColor;
+	margin: 20px;
+
+	font: 18px/1.5 'Open Sans', sans-serif;
 
 	.page-container {
-		width: 300px;
+		width: 700px;
 	}
 
 	.dump {
