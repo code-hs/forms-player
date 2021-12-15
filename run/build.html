@@ -21,14 +21,21 @@
 
 		<!--	data-dev-bundle-path необходим, что бы бандлы брались не с папки
 		в апи, а прямо с клиентского dist	-->
-		<div class="form-widget-g">
-			<form-widget-g
-				data-layout="small"
-				data-client-id="345"
-				data-page="welcome"
-				data-dev-bundle-path="true"
-			></form-widget-g>
-		</div>
+		<form-widget-g
+			data-client-id="345"
+			data-page="welcome"
+			data-dev-bundle-path="true"
+		></form-widget-g>
+
+		<!--		для тестирования  формы в мелком расширении-->
+		<!--		<div class="form-widget-g-container">-->
+		<!--			<form-widget-g-->
+		<!--				data-layout="small"-->
+		<!--				data-client-id="345"-->
+		<!--				data-page="welcome"-->
+		<!--				data-dev-bundle-path="true"-->
+		<!--			></form-widget-g>-->
+		<!--		</div>-->
 
 		<script src="http://localhost:3033/p/client/widget-form-loader.js"></script>
 	</body>
@@ -49,8 +56,8 @@
 			background: #323232;
 		}
 
-		.form-widget-g {
+		/*.form-widget-g-container {
 			width: 380px;
-		}
+		}*/
 	</style>
 </html>
