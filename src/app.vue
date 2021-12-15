@@ -1,5 +1,5 @@
 <template>
-	<div class="form-s">
+	<div class="form-s" :data-layout="dataLayout">
 		<div v-if="showContent" class="page-container">
 			<Page />
 		</div>
@@ -16,6 +16,11 @@ import config from '@/config/index';
 export default {
 	components: {Page},
 	props: {
+		// Необходим для grid system, что бы правильно обрабатывать для малого расширения формы
+		dataLayout: {
+			type: String,
+			default: 'large',
+		},
 		dataPage: {
 			type: String,
 		},

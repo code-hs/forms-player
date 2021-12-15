@@ -115,45 +115,47 @@ $breakpoint-large: 60em; // 960px
 	width: $width;
 }
 
-@media only screen and (min-width: $breakpoint-med) {
-	.col-1 {
-		width: math.div($width, 12) - math.div($gutter * 11, 12);
-	}
-	.col-2 {
-		width: math.div($width, 6) - math.div($gutter * 10, 12);
-	}
-	.col-3 {
-		width: math.div($width, 4) - math.div($gutter * 9, 12);
-	}
-	.col-4 {
-		width: math.div($width, 3) - math.div($gutter * 8, 12);
-	}
-	.col-5 {
-		width: math.div($width, math.div(12, 5)) - math.div($gutter * 7, 12);
-	}
-	.col-6 {
-		width: math.div($width, 2) - math.div($gutter * 6, 12);
-	}
-	.col-7 {
-		width: math.div($width, math.div(12, 7)) - math.div($gutter * 5, 12);
-	}
-	.col-8 {
-		width: math.div($width, math.div(12, 8)) - math.div($gutter * 4, 12);
-	}
-	.col-9 {
-		width: math.div($width, math.div(12, 9)) - math.div($gutter * 3, 12);
-	}
-	.col-10 {
-		width: math.div($width, math.div(12, 10)) - math.div($gutter * 2, 12);
-	}
-	.col-11 {
-		width: math.div($width, math.div(12, 11)) - math.div($gutter * 1, 12);
-	}
-	.col-12 {
-		width: $width;
-	}
+.form-s[data-layout='large'] {
+	@media only screen and (min-width: $breakpoint-med) {
+		.col-1 {
+			width: math.div($width, 12) - math.div($gutter * 11, 12);
+		}
+		.col-2 {
+			width: math.div($width, 6) - math.div($gutter * 10, 12);
+		}
+		.col-3 {
+			width: math.div($width, 4) - math.div($gutter * 9, 12);
+		}
+		.col-4 {
+			width: math.div($width, 3) - math.div($gutter * 8, 12);
+		}
+		.col-5 {
+			width: math.div($width, math.div(12, 5)) - math.div($gutter * 7, 12);
+		}
+		.col-6 {
+			width: math.div($width, 2) - math.div($gutter * 6, 12);
+		}
+		.col-7 {
+			width: math.div($width, math.div(12, 7)) - math.div($gutter * 5, 12);
+		}
+		.col-8 {
+			width: math.div($width, math.div(12, 8)) - math.div($gutter * 4, 12);
+		}
+		.col-9 {
+			width: math.div($width, math.div(12, 9)) - math.div($gutter * 3, 12);
+		}
+		.col-10 {
+			width: math.div($width, math.div(12, 10)) - math.div($gutter * 2, 12);
+		}
+		.col-11 {
+			width: math.div($width, math.div(12, 11)) - math.div($gutter * 1, 12);
+		}
+		.col-12 {
+			width: $width;
+		}
 
-	.hidden-sm {
-		display: block;
+		.hidden-sm {
+			display: block;
+		}
 	}
 }

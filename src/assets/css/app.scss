@@ -1,15 +1,15 @@
 .form-s {
+	width: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	color: $t-dark-white;
 	background-color: $t-dark-bodyColor;
-	margin: 20px;
-
+	padding: 20px;
 	font: 18px/1.5 'Open Sans', sans-serif;
 
 	.page-container {
-		width: 700px;
+		width: 100%;
 	}
 
 	.dump {
