@@ -1,4 +1,4 @@
-/* eslint-disable global-require,max-len */
+/* eslint-disable global-require,max-len,no-restricted-syntax */
 // noinspection JSUnresolvedFunction,JSIncompatibleTypesComparison,GrazieInspection
 
 class SchemeParser {
@@ -57,25 +57,34 @@ class SchemeParser {
 
 		// сначала проходим по группам
 		return page.groups.reduce((acc, group, groupId) => {
-			if (!group.fieldsets) return acc;
-
+			// каждую группу инициализируем как массив
 			acc.push([]);
-			// а потом и по fieldset, и генерируем схему для значений инпутов
-			group.fieldsets.forEach(fieldset => {
-				// а потом по rows
-				if (!fieldset.rows) return;
 
-				fieldset.rows.forEach(row => {
-					// {} = input store
-
-					if ('fields' in row && row.fields.length) {
-						acc[groupId].push({});
-					}
-				});
-			});
+			// если хоть одно поле есть в текущей группе,
+			// то создаем store для будущих полей
+			// {} = inputs store
+			if (this._isHasGroupAnyField(group)) acc[groupId].push({});
 
 			return acc;
 		}, []);
+	}
+
+	static _isHasGroupAnyField(group) {
+		const {fieldsets} = group;
+		if (!fieldsets) return false;
+
+		for (const fieldset of fieldsets) {
+			const {rows} = fieldset;
+			if (!rows) return false;
+
+			for (const row of rows) {
+				const {fields} = row;
+
+				if (fields && fields.length) return true;
+			}
+		}
+
+		return false;
 	}
 }
 
