@@ -1,3 +1,7 @@
+:host {
+	font: 18px/1.5 sans-serif;
+}
+
 .form-s {
 	width: 100%;
 	display: flex;
@@ -6,7 +10,6 @@
 	color: $t-dark-white;
 	background-color: $t-dark-bodyColor;
 	padding: 20px;
-	font: 18px/1.5 'Open Sans', sans-serif;
 
 	.page-container {
 		width: 100%;
