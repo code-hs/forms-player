@@ -11,11 +11,13 @@
 
 <script>
 import InputText from '@/components/fields/inputs/text';
+import Selector from '@/components/fields/inputs/selector';
 
 export default {
 	name: 'Field',
 	components: {
 		InputText,
+		Selector,
 	},
 	props: {
 		groupIndex: {
