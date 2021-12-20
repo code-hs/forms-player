@@ -12,12 +12,14 @@
 <script>
 import InputText from '@/components/fields/inputs/text';
 import Selector from '@/components/fields/inputs/selector';
+import Textarea from '@/components/fields/inputs/textarea';
 
 export default {
 	name: 'Field',
 	components: {
 		InputText,
 		Selector,
+		Textarea,
 	},
 	props: {
 		groupIndex: {
