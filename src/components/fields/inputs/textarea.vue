@@ -1,3 +1,4 @@
+<!--suppress HtmlUnknownAttribute -->
 <template>
 	<div class="input-textarea">
 		<textarea
@@ -31,10 +32,6 @@ export default {
 			type: String,
 			required: true,
 		},
-		label: {
-			type: String,
-			default: '',
-		},
 		generalParams: {
 			type: Object,
 			required: true,
@@ -48,17 +45,10 @@ export default {
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 		fieldsetModelItem() {
-			// Объект в котором хранятся значения инуптов в текущем fieldset
-			// если это поле находиться в date, происходит баг с ключами,
-			// воспроизводится путем нажатия на + и потом удаления первого элемента,
-			// а вместо него удаляется последний и не работает binding
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},
 	created() {
-		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
-		// Что бы структура всегда была подготовлена исходя из всех инпутов.
-		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[inputModelName]"
 		const options = {
 			groupIndex: this.groupIndex,
 			fieldsetIndex: this.fieldsetIndex,
