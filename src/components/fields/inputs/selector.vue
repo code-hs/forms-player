@@ -1,10 +1,21 @@
 <template>
 	<div class="input-selector">
-		<select>
-			<option selected disabled>-- Please choose an option --</option>
-			<option>Request Quote</option>
-			<option>Send Resume</option>
-			<option>Other</option>
+		<select v-model="fieldsetModelItem[inputModelName]">
+			<option
+				v-if="customParams.values && customParams.values.default"
+				value=""
+				disabled
+			>
+				{{ customParams.values.default }}
+			</option>
+
+			<option
+				v-for="(value, key) in customParams.values.options"
+				:value="key"
+				:key="key"
+			>
+				{{ value }}
+			</option>
 		</select>
 	</div>
 </template>
@@ -29,11 +40,11 @@ export default {
 			type: String,
 			required: true,
 		},
-		label: {
-			type: String,
-			default: '',
-		},
 		generalParams: {
+			type: Object,
+			required: true,
+		},
+		customParams: {
 			type: Object,
 			required: true,
 		},
@@ -46,17 +57,10 @@ export default {
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 		fieldsetModelItem() {
-			// Объект в котором хранятся значения инуптов в текущем fieldset
-			// если это поле находиться в date, происходит баг с ключами,
-			// воспроизводится путем нажатия на + и потом удаления первого элемента,
-			// а вместо него удаляется последний и не работает binding
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},
 	created() {
-		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
-		// Что бы структура всегда была подготовлена исходя из всех инпутов.
-		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[inputModelName]"
 		const options = {
 			groupIndex: this.groupIndex,
 			fieldsetIndex: this.fieldsetIndex,
