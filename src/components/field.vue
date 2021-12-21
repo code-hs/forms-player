@@ -13,6 +13,7 @@
 import InputText from '@/components/fields/inputs/text';
 import Selector from '@/components/fields/inputs/selector';
 import Textarea from '@/components/fields/inputs/textarea';
+import Checkbox from '@/components/fields/checkbox';
 
 export default {
 	name: 'Field',
@@ -20,6 +21,7 @@ export default {
 		InputText,
 		Selector,
 		Textarea,
+		Checkbox,
 	},
 	props: {
 		groupIndex: {
