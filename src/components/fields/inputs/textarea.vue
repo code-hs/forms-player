@@ -3,7 +3,7 @@
 	<div class="input-textarea">
 		<textarea
 			v-model="fieldsetModelItem[inputModelName]"
-			placeholder="message"
+			:placeholder="customParams.placeholder"
 			cols="30"
 			rows="10"
 			:required="generalParams.required"
@@ -33,6 +33,10 @@ export default {
 			required: true,
 		},
 		generalParams: {
+			type: Object,
+			required: true,
+		},
+		customParams: {
 			type: Object,
 			required: true,
 		},
