@@ -1,5 +1,5 @@
 <template>
-	<div class="col-6 field-item">
+	<div class="field-item" :class="getFieldClasses()">
 		<component
 			:is="fieldParams.component"
 			:group-index="groupIndex"
@@ -36,6 +36,21 @@ export default {
 		fieldParams: {
 			type: Object,
 			required: true,
+		},
+	},
+	methods: {
+		// for grid system
+		getFieldClasses() {
+			let classes = '';
+
+			// col-6, col-12,...
+			if (this.fieldParams.styles?.col) {
+				classes += `col-${this.fieldParams.styles.col}`;
+			} else {
+				classes += 'col-12';
+			}
+
+			return classes;
 		},
 	},
 };
