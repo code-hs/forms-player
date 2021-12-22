@@ -46,20 +46,15 @@ $breakpoint-large: 60em; // 960px
 }
 
 .row {
+	display: flex;
+	flex-wrap: wrap;
 	position: relative;
 	width: 100%;
 }
 
 .row [class*='col'] {
-	float: left;
 	margin: 0.5em 2%;
 	min-height: 0.125em;
-}
-
-.row::after {
-	content: '';
-	display: table;
-	clear: both;
 }
 
 .col-1,
