@@ -1,6 +1,6 @@
 <template>
 	<div class="group-item">
-		<span class="title"> {{ group.name }} </span>
+		<!--		<span class="title"> {{ group.name }} </span>-->
 
 		<div class="fieldsets-container">
 			<Fieldset

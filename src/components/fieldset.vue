@@ -1,6 +1,6 @@
 <template>
 	<div class="fieldset-item">
-		<div class="title">{{ fieldset.name }}</div>
+		<!--		<div class="title">{{ fieldset.name }}</div>-->
 
 		<div class="rows-container">
 			<Row
