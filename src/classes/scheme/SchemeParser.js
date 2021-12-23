@@ -44,8 +44,8 @@ class SchemeParser {
 	 * @returns {[]}
 	 *
 	 * return like
-	 * [
-	 *  [
+	 * [ group items
+	 *  [ fieldset items
 	 *   {},
 	 *   {},
 	 *   {}
@@ -57,16 +57,27 @@ class SchemeParser {
 
 		// сначала проходим по группам
 		return page.groups.reduce((acc, group, groupId) => {
+			// если в группе нету полей, пропускаем
+			if (!this._isHasGroupAnyField(group)) return acc;
+
 			// каждую группу инициализируем как массив
 			acc.push([]);
-
-			// если хоть одно поле есть в текущей группе,
-			// то создаем store для будущих полей
+			// создаем store для будущих полей
 			// {} = inputs store
-			if (this._isHasGroupAnyField(group)) acc[groupId].push({});
+			acc[groupId].push({});
 
 			return acc;
 		}, []);
+	}
+
+	static _isFieldInput(field) {
+		const notFieldsComponents = ['ButtonSubmit'];
+
+		return !notFieldsComponents.includes(field.component);
+	}
+
+	static _filtrateFields(fields) {
+		return fields.filter(field => this._isFieldInput(field));
 	}
 
 	static _isHasGroupAnyField(group) {
@@ -78,7 +89,8 @@ class SchemeParser {
 			if (!rows) return false;
 
 			for (const row of rows) {
-				const {fields} = row;
+				let fields = JSON.parse(JSON.stringify(row.fields));
+				fields = this._filtrateFields(fields);
 
 				if (fields && fields.length) return true;
 			}
