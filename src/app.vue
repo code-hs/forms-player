@@ -1,6 +1,6 @@
 <template>
 	<div class="form-s" :data-layout="dataLayout">
-		<div v-if="showContent" class="page-container">
+		<div v-if="showContent" class="page-container grid-container">
 			<Page />
 		</div>
 
