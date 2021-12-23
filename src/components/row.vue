@@ -1,5 +1,5 @@
 <template>
-	<div class="row row-item">
+	<div class="row row-item" :style="getStyleObj()">
 		<Field
 			v-for="(field, index) in row.fields"
 			:key="index"
@@ -30,6 +30,17 @@ export default {
 		fieldsetIndex: {
 			type: Number,
 			required: true,
+		},
+	},
+	methods: {
+		getStyleObj() {
+			const obj = {};
+
+			if (this.row.styles?.['justify-content']) {
+				obj['justify-content'] = this.row.styles?.['justify-content'];
+			}
+
+			return obj;
 		},
 	},
 };
