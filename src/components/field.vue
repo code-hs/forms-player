@@ -14,6 +14,7 @@ import InputText from '@/components/fields/inputs/text';
 import Selector from '@/components/fields/inputs/selector';
 import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
+import ButtonSubmit from '@/components/fields/buttons/submit';
 
 export default {
 	name: 'Field',
@@ -22,6 +23,7 @@ export default {
 		Selector,
 		Textarea,
 		Checkbox,
+		ButtonSubmit,
 	},
 	props: {
 		groupIndex: {

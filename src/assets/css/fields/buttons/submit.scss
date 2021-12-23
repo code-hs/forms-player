@@ -1,0 +1,28 @@
+//noinspection SassScssResolvedByNameOnly
+
+.submit {
+	button {
+		display: block;
+		width: 100%;
+		line-height: 1.5;
+		padding: 13px 40px;
+		border: 1px solid $t-dark-borderFormEls;
+		color: $t-dark-white;
+		font-family: inherit;
+		font-size: 100%;
+		background: $t-dark-bgFormEls;
+		transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
+			transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+		cursor: pointer;
+
+		&:disabled {
+			cursor: default;
+			filter: blur(2px);
+		}
+
+		&:enabled:hover,
+		&:focus {
+			background: $t-dark-bgFormElsFocus;
+		}
+	}
+}
