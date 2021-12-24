@@ -1,10 +1,13 @@
+//noinspection SassScssResolvedByNameOnly
+
 .fieldset-item {
 	position: relative;
-	margin: 8px 0 20px 0;
 	padding: 10px;
-	border: 1px solid hsl(0deg 0% 36%);
-	border-radius: 3px;
 	background-color: $t-dark-bodyColor;
+
+	&[data-show-multiple-separator='true']:not(:first-child) {
+		border-top: 1px solid #5f5f5f;
+	}
 
 	.title {
 		width: 100%;

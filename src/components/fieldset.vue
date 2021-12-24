@@ -1,5 +1,8 @@
 <template>
-	<div class="fieldset-item">
+	<div
+		class="fieldset-item"
+		:data-show-multiple-separator="showMultipleSeparator"
+	>
 		<!--		<div class="title">{{ fieldset.name }}</div>-->
 
 		<div class="rows-container">
@@ -59,6 +62,12 @@ export default {
 		showButRemove() {
 			// отображаем кнопку удалить, ток при наличии двух и более fieldset item
 			return this.fieldsetsCount > 1;
+		},
+		showMultipleSeparator() {
+			// отображаем только при включенном multiple в блоке, а так же при наличии
+			// двух и более блоков
+
+			return this.enableMultiple && this.showButRemove;
 		},
 	},
 };

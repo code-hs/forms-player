@@ -1,7 +1,12 @@
+.groups-container {
+	border: 1px solid hsl(0deg 0% 36%);
+	border-radius: 3px;
+}
+
 .group-item {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 
 	.title {
 		text-align: center;
@@ -12,17 +17,23 @@
 		justify-content: center;
 
 		.button-add {
-			line-height: 20px;
+			line-height: 19px;
+			font-size: 18px;
 			width: 20px;
 			height: 20px;
 			cursor: pointer;
 			text-align: center;
 			border: 1px solid gray;
 			border-radius: 3px;
+			font-family: serif;
 
 			&:hover {
 				background-color: #454444;
 			}
 		}
+	}
+
+	&:last-child {
+		margin-bottom: 0;
 	}
 }
