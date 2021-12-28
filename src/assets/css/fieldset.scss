@@ -6,7 +6,7 @@
 	background-color: $t-dark-bodyColor;
 
 	&[data-show-multiple-separator='true']:not(:first-child) {
-		border-top: 1px solid #5f5f5f;
+		border-top: 2px solid $t-dark-fieldsetsSeparatorColor;
 	}
 
 	.title {
@@ -16,8 +16,7 @@
 		padding-bottom: 9px;
 		text-align: center;
 		letter-spacing: 1px;
-		color: #d5d5d5;
-		border-bottom: 1px solid #5f5f5f;
+		color: $t-dark-white;
 	}
 
 	.button-remove {
@@ -29,11 +28,11 @@
 		height: 20px;
 		cursor: pointer;
 		text-align: center;
-		color: #b3b3b3;
+		color: $t-dark-buttonsBorder;
 		border-radius: 3px;
 
 		&:hover {
-			background-color: #454444;
+			background-color: $t-dark-bgFormElsFocus;
 		}
 	}
 }

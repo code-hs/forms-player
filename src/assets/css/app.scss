@@ -2,6 +2,8 @@
 	font: 18px/1.5 sans-serif;
 }
 
+//noinspection SassScssResolvedByNameOnly
+
 .form-s {
 	width: 100%;
 	display: flex;
@@ -9,7 +11,6 @@
 	flex-direction: column;
 	color: $t-dark-white;
 	background-color: $t-dark-bodyColor;
-	padding: 20px;
 
 	.page-container {
 		width: 100%;
@@ -19,7 +20,7 @@
 		width: 300px;
 		margin-top: 50px;
 		white-space: pre;
-		color: #bbbdfc;
+		color: $t-dark-dumpColor;
 		border-top: 1px dashed;
 	}
 }
