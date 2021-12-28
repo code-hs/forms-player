@@ -8,8 +8,8 @@
 	align-items: center;
 	flex-direction: column;
 	width: 100%;
-	color: $t-dark-white;
-	background-color: $t-dark-bodyColor;
+	color: $t-dark-text;
+	background-color: $t-dark-appBackground;
 
 	.page-container {
 		width: 100%;
@@ -19,7 +19,7 @@
 		width: 300px;
 		margin-top: 50px;
 		white-space: pre;
-		color: $t-dark-dumpColor;
+		color: $t-dark-dump;
 		border-top: 1px dashed;
 	}
 }

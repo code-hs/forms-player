@@ -3,10 +3,9 @@
 .fieldset-item {
 	position: relative;
 	padding: 10px;
-	background-color: $t-dark-bodyColor;
 
 	&[data-show-multiple-separator='true']:not(:first-child) {
-		border-top: 2px solid $t-dark-fieldsetsSeparatorColor;
+		border-top: 2px solid $t-dark-fieldsetsSeparator;
 	}
 
 	.title {
@@ -16,7 +15,7 @@
 		padding-bottom: 9px;
 		text-align: center;
 		letter-spacing: 1px;
-		color: $t-dark-white;
+		color: $t-dark-text;
 	}
 
 	.button-remove {
@@ -32,7 +31,7 @@
 		line-height: 20px;
 
 		&:hover {
-			background-color: $t-dark-bgFormElsFocus;
+			background-color: $t-dark-formItemBgFocus;
 		}
 	}
 }

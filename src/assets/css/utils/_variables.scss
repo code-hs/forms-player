@@ -1,15 +1,21 @@
-$t-dark-white: #afafaf;
-$t-dark-white-checkbox: #fff;
-$t-dark-red: #e31b23;
-$t-dark-bodyColor: #292a2b;
-$t-dark-borderFormEls: hsl(0, 0%, 10%);
-$t-dark-bgFormEls: hsl(0, 0%, 14%);
-$t-dark-bgFormElsFocus: hsl(0, 7%, 20%);
+//layout
+$t-dark-appBackground: hsl(210, 2%, 16%);
+$t-dark-dump: hsl(238, 92%, 86%);
 
-$t-dark-mainBlockShadowColor: #000000ad;
-$t-dark-mainBlockBorderColor: #272727;
+// group item layout
+$t-dark-groupItemShadow: hsl(0, 0%, 0%, 68%);
+$t-dark-groupItemBorder: hsl(0, 0%, 15%);
 
-$t-dark-dumpColor: #bbbdfc;
+// fieldset
+$t-dark-fieldsetsSeparator: hsl(0, 0%, 14%);
 
-$t-dark-buttonsBorder: #494949;
-$t-dark-fieldsetsSeparatorColor: #222;
+// text
+$t-dark-text: hsl(0, 0%, 69%);
+
+// inputs
+$t-dark-formItemBorder: hsl(0, 0%, 10%);
+$t-dark-formItemBg: hsl(0, 0%, 14%);
+$t-dark-formItemBgFocus: hsl(0, 7%, 20%);
+$t-dark-checkboxBorderInto: hsl(0, 0%, 69%);
+$t-dark-buttonsBorder: hsl(0, 0%, 29%);
+$t-dark-selectorPlaceholder: hsl(0, 0%, 39%);

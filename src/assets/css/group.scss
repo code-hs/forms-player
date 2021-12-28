@@ -1,11 +1,11 @@
 //noinspection SassScssResolvedByNameOnly
-
 .groups-container {
-	border: 1px solid $t-dark-mainBlockBorderColor;
+	border: 2px solid $t-dark-groupItemBorder;
 	border-radius: 3px;
-	box-shadow: 6px 6px 15px 1px $t-dark-mainBlockShadowColor;
+	box-shadow: 6px 6px 15px 1px $t-dark-groupItemShadow;
 }
 
+//noinspection SassScssResolvedByNameOnly
 .group-item {
 	display: flex;
 	flex-direction: column;
@@ -31,7 +31,7 @@
 			line-height: 19px;
 
 			&:hover {
-				background-color: $t-dark-bgFormElsFocus;
+				background-color: $t-dark-formItemBgFocus;
 			}
 		}
 	}
