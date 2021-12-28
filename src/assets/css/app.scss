@@ -3,12 +3,11 @@
 }
 
 //noinspection SassScssResolvedByNameOnly
-
 .form-s {
-	width: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	width: 100%;
 	color: $t-dark-white;
 	background-color: $t-dark-bodyColor;
 
