@@ -6,7 +6,7 @@
 		padding: 15px 10px;
 		transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
 			transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
-		color: $t-dark-white;
+		color: $t-dark-textColor;
 		border: 1px solid $t-dark-borderFormEls;
 		background-color: $t-dark-bgFormEls;
 		background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHlsZT0iZmlsbDojYWZhZmFmOyI+PHBhdGggZD0iTTAgNy4zM2wyLjgyOS0yLjgzIDkuMTc1IDkuMzM5IDkuMTY3LTkuMzM5IDIuODI5IDIuODMtMTEuOTk2IDEyLjE3eiIvPjwvc3ZnPg==);
@@ -26,12 +26,16 @@
 
 		&:-moz-focusring {
 			color: transparent !important;
-			text-shadow: 0 0 0 $t-dark-white;
+			text-shadow: 0 0 0 $t-dark-textColor;
 		}
 
 		&:focus {
 			transform: scale(1.02);
 			background: $t-dark-bgFormElsFocus;
+		}
+
+		&:invalid {
+			color: $t-dark-selectorPlaceholderColor;
 		}
 	}
 }

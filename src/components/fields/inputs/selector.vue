@@ -1,6 +1,6 @@
 <template>
 	<div class="input-selector">
-		<select v-model="fieldsetModelItem[inputModelName]">
+		<select v-model="fieldsetModelItem[inputModelName]" required>
 			<option
 				v-if="customParams.values && customParams.values.default"
 				value=""
