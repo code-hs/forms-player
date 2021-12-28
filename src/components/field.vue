@@ -11,7 +11,7 @@
 
 <script>
 import InputText from '@/components/fields/inputs/text';
-import Selector from '@/components/fields/inputs/selector';
+import Selector from '@/components/fields/selector';
 import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
 import ButtonSubmit from '@/components/fields/buttons/submit';
