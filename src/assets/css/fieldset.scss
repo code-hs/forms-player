@@ -20,7 +20,6 @@
 	}
 
 	.button-remove {
-		line-height: 20px;
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -30,6 +29,7 @@
 		text-align: center;
 		color: $t-dark-buttonsBorder;
 		border-radius: 3px;
+		line-height: 20px;
 
 		&:hover {
 			background-color: $t-dark-bgFormElsFocus;

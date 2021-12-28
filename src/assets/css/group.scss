@@ -20,8 +20,6 @@
 		justify-content: center;
 
 		.button-add {
-			line-height: 19px;
-			font-size: 18px;
 			width: 20px;
 			height: 20px;
 			cursor: pointer;
@@ -29,6 +27,8 @@
 			border: 1px solid $t-dark-buttonsBorder;
 			border-radius: 3px;
 			font-family: serif;
+			font-size: 18px;
+			line-height: 19px;
 
 			&:hover {
 				background-color: $t-dark-bgFormElsFocus;
