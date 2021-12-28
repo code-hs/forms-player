@@ -11,8 +11,8 @@
 			width: 6px;
 			height: 14px;
 			transform: rotate(45deg);
-			border-right: 2px solid $t-dark-white-checkbox;
-			border-bottom: 2px solid $t-dark-white-checkbox;
+			border-right: 2px solid $t-dark-checkboxBorderInto;
+			border-bottom: 2px solid $t-dark-checkboxBorderInto;
 		}
 	}
 
@@ -32,7 +32,7 @@
 			left: 0;
 			width: 22px;
 			height: 22px;
-			border: 2px solid $t-dark-white;
+			border: 2px solid $t-dark-buttonsBorder;
 		}
 	}
 }

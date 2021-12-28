@@ -8,9 +8,9 @@
 		cursor: pointer;
 		transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
 			transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
-		color: $t-dark-white;
-		border: 1px solid $t-dark-borderFormEls;
-		background: $t-dark-bgFormEls;
+		color: $t-dark-text;
+		border: 1px solid $t-dark-formItemBorder;
+		background: $t-dark-formItemBg;
 		font-family: inherit;
 		font-size: 100%;
 		line-height: 1.5;
@@ -22,7 +22,7 @@
 
 		&:enabled:hover,
 		&:focus {
-			background: $t-dark-bgFormElsFocus;
+			background: $t-dark-formItemBgFocus;
 		}
 	}
 }
