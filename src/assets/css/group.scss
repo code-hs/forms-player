@@ -1,6 +1,9 @@
+//noinspection SassScssResolvedByNameOnly
+
 .groups-container {
-	border: 1px solid hsl(0deg 0% 36%);
+	border: 1px solid $t-dark-mainBlockBorderColor;
 	border-radius: 3px;
+	box-shadow: 6px 6px 15px 1px $t-dark-mainBlockShadowColor;
 }
 
 .group-item {
@@ -23,12 +26,12 @@
 			height: 20px;
 			cursor: pointer;
 			text-align: center;
-			border: 1px solid gray;
+			border: 1px solid $t-dark-buttonsBorder;
 			border-radius: 3px;
 			font-family: serif;
 
 			&:hover {
-				background-color: #454444;
+				background-color: $t-dark-bgFormElsFocus;
 			}
 		}
 	}
