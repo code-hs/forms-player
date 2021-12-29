@@ -1,13 +1,11 @@
 <template>
 	<div class="input-text">
-		<label>
-			<input
-				v-model="fieldsetModelItem[inputModelName]"
-				type="text"
-				:placeholder="label"
-				:required="generalParams.required"
-			/>
-		</label>
+		<input
+			v-model="fieldsetModelItem[inputModelName]"
+			type="text"
+			:placeholder="label"
+			:required="generalParams.required"
+		/>
 	</div>
 </template>
 
