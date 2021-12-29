@@ -11,8 +11,8 @@
 
 			<option
 				v-for="(value, key) in customParams.values.options"
-				:value="key"
 				:key="key"
+				:value="key"
 			>
 				{{ value }}
 			</option>
@@ -49,17 +49,20 @@ export default {
 			required: true,
 		},
 	},
+
 	data() {
 		return {
 			value: '',
 		};
 	},
+
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 		fieldsetModelItem() {
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},
+
 	created() {
 		const options = {
 			groupIndex: this.groupIndex,
@@ -69,6 +72,7 @@ export default {
 		};
 		this.initField(options);
 	},
+
 	methods: {
 		...mapMutations({initField: 'model/initField'}),
 	},

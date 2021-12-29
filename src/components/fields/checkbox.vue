@@ -1,9 +1,9 @@
-<!--suppress HtmlUnknownAttribute -->
+<!--suppress JSUnresolvedVariable -->
 <template>
 	<div class="checkbox">
 		<label>
-			<input type="checkbox" v-model="fieldsetModelItem[inputModelName]" />
-			<span class="text" v-html="customParams.bodyHTML"></span>
+			<input v-model="fieldsetModelItem[inputModelName]" type="checkbox" />
+			<span class="text" v-html="customParams.bodyHTML" />
 		</label>
 	</div>
 </template>
@@ -37,17 +37,20 @@ export default {
 			required: true,
 		},
 	},
+
 	data() {
 		return {
 			value: '',
 		};
 	},
+
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 		fieldsetModelItem() {
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},
+
 	created() {
 		const options = {
 			groupIndex: this.groupIndex,
@@ -57,6 +60,7 @@ export default {
 		};
 		this.initField(options);
 	},
+
 	methods: {
 		...mapMutations({initField: 'model/initField'}),
 	},

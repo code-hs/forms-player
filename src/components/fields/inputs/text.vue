@@ -40,11 +40,13 @@ export default {
 			required: true,
 		},
 	},
+
 	data() {
 		return {
 			value: '',
 		};
 	},
+
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 		fieldsetModelItem() {
@@ -55,6 +57,7 @@ export default {
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},
+
 	created() {
 		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
 		// Что бы структура всегда была подготовлена исходя из всех инпутов.
@@ -67,6 +70,7 @@ export default {
 		};
 		this.initField(options);
 	},
+
 	methods: {
 		...mapMutations({initField: 'model/initField'}),
 	},

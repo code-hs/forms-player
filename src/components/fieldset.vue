@@ -34,6 +34,7 @@ export default {
 	components: {
 		Row,
 	},
+
 	props: {
 		fieldset: {
 			type: Object,

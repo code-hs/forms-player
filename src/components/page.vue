@@ -22,9 +22,7 @@ export default {
 	components: {
 		Group,
 	},
-	computed: {
-		...mapGetters({page: 'scheme/currentPage'}),
-	},
+
 	data() {
 		// В дальнейшем уже продумывать, как добавлять стили, то ли тут все - все
 		// прописать. А потом в элементах добавлять новые классы, или как кто
@@ -34,6 +32,10 @@ export default {
 		return {
 			// customStyles,
 		};
+	},
+
+	computed: {
+		...mapGetters({page: 'scheme/currentPage'}),
 	},
 };
 </script>
