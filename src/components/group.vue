@@ -10,14 +10,19 @@
 				:group-index="groupIndex"
 				:fieldset-index="index"
 				:fieldsets-count="group.fieldsets.length"
-				:enableMultiple="!!group.multiple"
+				:enable-multiple="!!group.multiple"
 				@remove="handleButRemove"
 			/>
 		</div>
 
-		<div class="buttons-container" v-if="group.multiple">
+		<div class="buttons-container">
 			<!--suppress JSUnresolvedVariable -->
-			<div v-show="showButAdd" class="button-add" @click="handleButAdd()">
+			<div
+				v-show="showButAdd"
+				v-if="group.multiple"
+				class="button-add"
+				@click="handleButAdd()"
+			>
 				{{ group.multiple.buttonText }}
 			</div>
 		</div>
@@ -33,6 +38,7 @@ export default {
 	components: {
 		Fieldset,
 	},
+
 	props: {
 		group: {
 			type: Object,
@@ -43,6 +49,7 @@ export default {
 			required: true,
 		},
 	},
+
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 		showButAdd() {
@@ -53,6 +60,7 @@ export default {
 			return this.group.fieldsets?.length;
 		},
 	},
+
 	methods: {
 		...mapMutations({
 			removeFieldsetItem: 'model/removeFieldsetItem',

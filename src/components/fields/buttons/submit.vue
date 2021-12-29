@@ -28,11 +28,13 @@ export default {
 			required: true,
 		},
 	},
+
 	data() {
 		return {
 			value: '',
 		};
 	},
+
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 	},

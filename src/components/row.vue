@@ -18,6 +18,7 @@ export default {
 	components: {
 		Field,
 	},
+
 	props: {
 		row: {
 			type: Object,
@@ -32,6 +33,7 @@ export default {
 			required: true,
 		},
 	},
+
 	methods: {
 		getStyleObj() {
 			const obj = {};

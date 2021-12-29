@@ -25,6 +25,7 @@ export default {
 		Checkbox,
 		ButtonSubmit,
 	},
+
 	props: {
 		groupIndex: {
 			type: Number,
@@ -40,12 +41,14 @@ export default {
 			required: true,
 		},
 	},
+
 	methods: {
 		// for grid system
 		getFieldClasses() {
 			let classes = '';
 
 			// col-6, col-12,...
+			// noinspection JSUnresolvedVariable
 			if (this.fieldParams.styles?.col) {
 				classes += `col-${this.fieldParams.styles.col}`;
 			} else {

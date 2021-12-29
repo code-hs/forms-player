@@ -41,17 +41,20 @@ export default {
 			required: true,
 		},
 	},
+
 	data() {
 		return {
 			value: '',
 		};
 	},
+
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 		fieldsetModelItem() {
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 	},
+
 	created() {
 		const options = {
 			groupIndex: this.groupIndex,
@@ -61,6 +64,7 @@ export default {
 		};
 		this.initField(options);
 	},
+
 	methods: {
 		...mapMutations({initField: 'model/initField'}),
 	},

@@ -1,5 +1,5 @@
 <template>
-	<div class="form-s" :data-layout="dataLayout">
+	<div class="app" :data-layout="dataLayout">
 		<div v-if="showContent" class="page-container grid-container">
 			<Page />
 		</div>
@@ -23,8 +23,10 @@ export default {
 		},
 		dataPage: {
 			type: String,
+			default: '',
 		},
 	},
+
 	data() {
 		return {
 			urlHash: this.getPageHash(),
@@ -32,11 +34,13 @@ export default {
 			showDump: config.showDump,
 		};
 	},
+
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
 		}),
 	},
+
 	async created() {
 		this.loadScheme();
 		const currentPage = await this.initPage(this.urlHash);
@@ -45,6 +49,7 @@ export default {
 		// after all data loaded and valid
 		if (currentPage && this.modelStructure) this.showContent = true;
 	},
+
 	methods: {
 		...mapMutations({
 			generateModelStructure: 'model/generateStructure',
