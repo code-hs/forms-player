@@ -91,7 +91,7 @@ $breakpoint-large: 60em; // 960px
 	width: $width;
 }
 
-.form-s[data-layout='large'] {
+.app[data-layout='large'] {
 	@media only screen and (min-width: $breakpoint-med) {
 		.col-1 {
 			width: math.div($width, 12) - math.div($gutter * 11, 12);
