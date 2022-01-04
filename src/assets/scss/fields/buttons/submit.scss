@@ -5,6 +5,9 @@
 		display: block;
 		padding: 13px 40px;
 		cursor: pointer;
+		letter-spacing: 2px;
+		color: $t-dark-submitText;
+		background: $t-dark-submitBackground;
 
 		&:disabled {
 			cursor: default;
@@ -14,7 +17,22 @@
 		&:enabled:hover,
 		&:focus {
 			transform: none;
-			background: $t-dark-formItemBgFocus;
+			background: $t-dark-submitFocusBackground;
+		}
+	}
+}
+
+//noinspection SassScssResolvedByNameOnly
+.app[data-theme='light'] {
+	.submit {
+		button {
+			color: $t-light-submitText;
+			background: $t-light-submitBackground;
+
+			&:enabled:hover,
+			&:focus {
+				background: $t-light-submitFocusBackground;
+			}
 		}
 	}
 }

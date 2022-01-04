@@ -1,5 +1,5 @@
 <template>
-	<div class="app" :data-layout="dataLayout">
+	<div class="app" :data-layout="dataLayout" :data-theme="dataTheme">
 		<div v-if="showContent" class="page-container grid-container">
 			<Page />
 		</div>
@@ -19,8 +19,13 @@ export default {
 		// Необходим для grid system, что бы правильно обрабатывать для малого расширения формы
 		dataLayout: {
 			type: String,
-			default: 'large',
+			default: 'large', // | small
 		},
+		dataTheme: {
+			type: String,
+			default: 'dark', // | light
+		},
+		// current opened page
 		dataPage: {
 			type: String,
 			default: '',
