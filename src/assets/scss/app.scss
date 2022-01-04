@@ -23,3 +23,14 @@
 		border-top: 1px dashed;
 	}
 }
+
+//for light theme
+//noinspection SassScssResolvedByNameOnly
+.app[data-theme='light'] {
+	color: $t-light-text;
+	background-color: $t-light-appBackground;
+
+	.dump {
+		color: $t-light-dump;
+	}
+}

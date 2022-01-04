@@ -35,3 +35,22 @@
 		}
 	}
 }
+
+//noinspection SassScssResolvedByNameOnly
+.app[data-theme='light'] .fieldset-item {
+	&[data-show-multiple-separator='true']:not(:first-child) {
+		border-top: 2px solid $t-light-fieldsetsSeparator;
+	}
+
+	.title {
+		color: $t-light-text;
+	}
+
+	.button-remove {
+		color: $t-light-buttonsBorder;
+
+		&:hover {
+			background-color: $t-light-formItemBgFocus;
+		}
+	}
+}

@@ -25,3 +25,18 @@
 		}
 	}
 }
+
+//noinspection SassScssResolvedByNameOnly
+.app[data-theme='light'] {
+	.input-selector {
+		select {
+			&:-moz-focusring {
+				text-shadow: 0 0 0 $t-light-text;
+			}
+
+			&:invalid {
+				color: $t-light-selectorPlaceholder;
+			}
+		}
+	}
+}

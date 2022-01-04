@@ -40,3 +40,24 @@
 		margin-bottom: 0;
 	}
 }
+
+//for light theme
+//noinspection SassScssResolvedByNameOnly
+.app[data-theme='light'] {
+	.groups-container {
+		border: 2px solid $t-light-groupItemBorder;
+		box-shadow: 6px 6px 15px 1px $t-light-groupItemShadow;
+	}
+
+	.group-item {
+		.buttons-container {
+			.button-add {
+				border: 1px solid $t-light-buttonsBorder;
+
+				&:hover {
+					background-color: $t-light-formItemBgFocus;
+				}
+			}
+		}
+	}
+}
