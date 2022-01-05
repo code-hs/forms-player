@@ -1,4 +1,5 @@
 import SchemeParser from '../classes/scheme/SchemeParser';
+
 // экземпляр класса Scheme
 let schemeParser;
 

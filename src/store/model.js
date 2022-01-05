@@ -1,6 +1,6 @@
 /* eslint-disable object-curly-newline */
 import Vue from 'vue';
-import SchemeParser from '../classes/scheme/SchemeParser';
+import ModelStructure from '../classes/scheme/ModelStructure';
 
 const state = () => ({
 	structure: null,
@@ -15,7 +15,7 @@ const mutations = {
 		s.structure = v;
 	},
 	generateStructure: (s, page) => {
-		s.structure = SchemeParser.generateModelStructure(page);
+		s.structure = ModelStructure.generate(page);
 	},
 	initField: (s, {groupIndex, fieldsetIndex, inputModelName, inputValue}) => {
 		const fieldset = s.structure[groupIndex][fieldsetIndex];
