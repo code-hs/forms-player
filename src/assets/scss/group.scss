@@ -1,11 +1,9 @@
-//noinspection SassScssResolvedByNameOnly
 .groups-container {
 	border: 2px solid $t-dark-groupItemBorder;
 	border-radius: 3px;
 	box-shadow: 6px 6px 15px 1px $t-dark-groupItemShadow;
 }
 
-//noinspection SassScssResolvedByNameOnly
 .group-item {
 	display: flex;
 	flex-direction: column;

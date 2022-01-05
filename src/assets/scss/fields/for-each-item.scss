@@ -2,8 +2,6 @@
 	margin-bottom: 20px;
 }
 
-//noinspection SassScssResolvedByNameOnly
-
 .input-text input,
 .input-textarea textarea,
 .input-selector select,
@@ -28,7 +26,6 @@
 	}
 }
 
-//noinspection SassScssResolvedByNameOnly
 .app[data-theme='light'] {
 	.input-text input,
 	.input-textarea textarea,
