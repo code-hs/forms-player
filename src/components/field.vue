@@ -48,10 +48,10 @@ export default {
 			let classes = '';
 
 			// col-6, col-12,...
-			// noinspection JSUnresolvedVariable
 			if (this.fieldParams.styles?.col) {
 				classes += `col-${this.fieldParams.styles.col}`;
 			} else {
+				// col size default value
 				classes += 'col-12';
 			}
 

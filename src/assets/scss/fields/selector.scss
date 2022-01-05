@@ -1,5 +1,3 @@
-//noinspection SassScssResolvedByNameOnly
-
 .input-selector {
 	select {
 		background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHlsZT0iZmlsbDojYWZhZmFmOyI+PHBhdGggZD0iTTAgNy4zM2wyLjgyOS0yLjgzIDkuMTc1IDkuMzM5IDkuMTY3LTkuMzM5IDIuODI5IDIuODMtMTEuOTk2IDEyLjE3eiIvPjwvc3ZnPg==);
@@ -26,7 +24,6 @@
 	}
 }
 
-//noinspection SassScssResolvedByNameOnly
 .app[data-theme='light'] {
 	.input-selector {
 		select {

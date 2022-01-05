@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 import Vue from 'vue';
 import ModelStructure from '../classes/scheme/ModelStructure';
 
