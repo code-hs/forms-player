@@ -36,7 +36,7 @@ class ModelStructure {
 	static _isFieldInput(field) {
 		const notFieldsComponents = ['ButtonSubmit'];
 
-		return !notFieldsComponents.includes(field.component);
+		return !notFieldsComponents.includes(field.generalParams.component);
 	}
 
 	static _filtrateFields(fields) {

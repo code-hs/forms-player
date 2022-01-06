@@ -2,5 +2,9 @@
 	textarea {
 		height: 170px;
 		resize: none;
+
+		&:required {
+			background-position: top 12px right 12px;
+		}
 	}
 }

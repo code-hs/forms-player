@@ -1,10 +1,10 @@
 <template>
 	<div class="input-text">
 		<input
-			v-model="fieldsetModelItem[inputModelName]"
+			v-model="fieldsetModelItem[generalParams.model]"
 			type="text"
-			:placeholder="label"
-			:required="generalParams.required"
+			:placeholder="text.placeholder"
+			:required="validation.required"
 		/>
 	</div>
 </template>
@@ -24,14 +24,9 @@ export default {
 			required: true,
 		},
 		// ниже значения идут от, v-bind
-		// inputModelName - это название поля в схеме
-		inputModelName: {
-			type: String,
+		text: {
+			type: Object,
 			required: true,
-		},
-		label: {
-			type: String,
-			default: '',
 		},
 		generalParams: {
 			type: Object,
@@ -59,11 +54,11 @@ export default {
 	created() {
 		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
 		// Что бы структура всегда была подготовлена исходя из всех инпутов.
-		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[inputModelName]"
+		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[this.generalParams.model]"
 		const options = {
 			groupIndex: this.groupIndex,
 			fieldsetIndex: this.fieldsetIndex,
-			inputModelName: this.inputModelName,
+			inputModelName: this.generalParams.model,
 			inputValue: this.value,
 		};
 		this.initField(options);

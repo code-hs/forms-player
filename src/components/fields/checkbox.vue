@@ -2,7 +2,7 @@
 <template>
 	<div class="checkbox">
 		<label>
-			<input v-model="fieldsetModelItem[inputModelName]" type="checkbox" />
+			<input v-model="fieldsetModelItem[generalParams.model]" type="checkbox" />
 			<span class="text" v-html="customParams.bodyHTML" />
 		</label>
 	</div>
@@ -23,11 +23,6 @@ export default {
 			required: true,
 		},
 		// ниже значения идут от, v-bind
-		// inputModelName - это название поля в схеме
-		inputModelName: {
-			type: String,
-			required: true,
-		},
 		generalParams: {
 			type: Object,
 			required: true,
@@ -55,7 +50,7 @@ export default {
 		const options = {
 			groupIndex: this.groupIndex,
 			fieldsetIndex: this.fieldsetIndex,
-			inputModelName: this.inputModelName,
+			inputModelName: this.generalParams.model,
 			inputValue: this.value,
 		};
 		this.initField(options);
