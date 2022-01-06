@@ -1,12 +1,11 @@
-<!--suppress HtmlUnknownAttribute -->
 <template>
 	<div class="input-textarea">
 		<textarea
-			v-model="fieldsetModelItem[inputModelName]"
-			:placeholder="customParams.placeholder"
+			v-model="fieldsetModelItem[generalParams.model]"
+			:placeholder="text.placeholder"
 			cols="30"
 			rows="10"
-			:required="generalParams.required"
+			:required="validation.required"
 		>
 		</textarea>
 	</div>
@@ -27,11 +26,6 @@ export default {
 			required: true,
 		},
 		// ниже значения идут от, v-bind
-		// inputModelName - это название поля в схеме
-		inputModelName: {
-			type: String,
-			required: true,
-		},
 		generalParams: {
 			type: Object,
 			required: true,
@@ -39,6 +33,11 @@ export default {
 		customParams: {
 			type: Object,
 			required: true,
+		},
+		text: {
+			type: Object,
+			required: false,
+			default: () => {},
 		},
 	},
 
@@ -59,7 +58,7 @@ export default {
 		const options = {
 			groupIndex: this.groupIndex,
 			fieldsetIndex: this.fieldsetIndex,
-			inputModelName: this.inputModelName,
+			inputModelName: this.generalParams.model,
 			inputValue: this.value,
 		};
 		this.initField(options);

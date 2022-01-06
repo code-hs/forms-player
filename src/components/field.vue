@@ -1,7 +1,7 @@
 <template>
 	<div class="field-item" :class="getFieldClasses()">
 		<component
-			:is="fieldParams.component"
+			:is="fieldParams.generalParams.component"
 			:group-index="groupIndex"
 			:fieldset-index="fieldsetIndex"
 			v-bind="fieldParams"
