@@ -5,12 +5,15 @@
 			type="text"
 			:placeholder="text.placeholder"
 			:required="validation.required"
+			@input="handleInput"
 		/>
 	</div>
 </template>
 
 <script>
 import {mapGetters, mapMutations} from 'vuex';
+import {debounce} from '@/utils/debounce';
+import {FieldValidator} from '@/classes/FieldValidator';
 
 export default {
 	name: 'InputText',
@@ -24,20 +27,24 @@ export default {
 			required: true,
 		},
 		// ниже значения идут от, v-bind
-		text: {
-			type: Object,
-			required: true,
-		},
 		generalParams: {
 			type: Object,
 			required: true,
 		},
+		validation: {
+			type: Object,
+			required: false,
+			default: () => {},
+		},
+		text: {
+			type: Object,
+			required: false,
+			default: () => {},
+		},
 	},
 
 	data() {
-		return {
-			value: '',
-		};
+		return {};
 	},
 
 	computed: {
@@ -52,6 +59,7 @@ export default {
 	},
 
 	created() {
+		const defaultValue = '';
 		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
 		// Что бы структура всегда была подготовлена исходя из всех инпутов.
 		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[this.generalParams.model]"
@@ -59,13 +67,33 @@ export default {
 			groupIndex: this.groupIndex,
 			fieldsetIndex: this.fieldsetIndex,
 			inputModelName: this.generalParams.model,
-			inputValue: this.value,
+			inputValue: defaultValue,
 		};
 		this.initField(options);
+
+		this.handleInput = debounce(this.handleInput, 750);
 	},
 
 	methods: {
 		...mapMutations({initField: 'model/initField'}),
+		handleInput() {
+			const value = this.fieldsetModelItem[this.generalParams.model];
+			let valid;
+
+			try {
+				valid = FieldValidator.isValid(this.validation, value);
+			} catch (e) {
+				// eslint-disable-next-line no-console
+				console.error(e);
+				valid = false;
+			}
+
+			if (valid) {
+				// set field valid
+			} else {
+				// set field error status
+			}
+		},
 	},
 };
 </script>
