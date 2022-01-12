@@ -1,6 +1,6 @@
 <template>
 	<div class="submit">
-		<button type="submit" disabled>Submit</button>
+		<button type="submit">Submit</button>
 	</div>
 </template>
 

@@ -39,6 +39,11 @@ export default {
 			required: false,
 			default: () => {},
 		},
+		validation: {
+			type: Object,
+			required: false,
+			default: () => {},
+		},
 	},
 
 	data() {

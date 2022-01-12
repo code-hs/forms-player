@@ -1,5 +1,5 @@
 <template>
-	<div class="page-item">
+	<form class="page-item" novalidate @submit.prevent="submit">
 		<div class="groups-container">
 			<Group
 				v-for="(group, index) in page.groups"
@@ -10,7 +10,7 @@
 		</div>
 
 		<!--		<component :is="`style`" type="text/css" v-html="customStyles"></component>-->
-	</div>
+	</form>
 </template>
 
 <script>
@@ -36,6 +36,11 @@ export default {
 
 	computed: {
 		...mapGetters({page: 'scheme/currentPage'}),
+	},
+	methods: {
+		submit() {
+			console.log('submit handler');
+		},
 	},
 };
 </script>
