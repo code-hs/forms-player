@@ -4,7 +4,9 @@
 			v-model="fieldsetModelItem[generalParams.model]"
 			type="text"
 			:placeholder="text.placeholder"
-			:required="validation.required"
+			:required="required"
+			:class="{error: !valid.isValid}"
+			@blur="handleBlur"
 			@input="handleInput"
 		/>
 	</div>
@@ -44,7 +46,12 @@ export default {
 	},
 
 	data() {
-		return {};
+		return {
+			valid: {
+				dirty: false,
+				isValid: true,
+			},
+		};
 	},
 
 	computed: {
@@ -55,6 +62,14 @@ export default {
 			// воспроизводится путем нажатия на + и потом удаления первого элемента,
 			// а вместо него удаляется последний и не работает binding
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
+		},
+		value() {
+			return this.fieldsetModelItem[this.generalParams.model];
+		},
+		required() {
+			if (!this.validation) return false;
+
+			return this.validation.required;
 		},
 	},
 
@@ -71,27 +86,44 @@ export default {
 		};
 		this.initField(options);
 
-		this.handleInput = debounce(this.handleInput, 750);
+		this.handleInput = debounce(this.handleInput, 300);
 	},
 
 	methods: {
 		...mapMutations({initField: 'model/initField'}),
+		handleBlur() {
+			const isValid = this.processValidation();
+
+			if (isValid) this.valid.dirty = false;
+		},
 		handleInput() {
-			const value = this.fieldsetModelItem[this.generalParams.model];
-			let valid;
+			// use function when dirty === true
+			if (!this.valid.dirty) return;
+
+			this.processValidation();
+		},
+		processValidation() {
+			if (!this.validation || !Object.keys(this.validation).length) {
+				return false;
+			}
+
+			let isValid;
 
 			try {
-				valid = FieldValidator.isValid(this.validation, value);
+				isValid = FieldValidator.isValid(this.validation, this.value);
+				this.updateValidOptions(isValid);
 			} catch (e) {
 				// eslint-disable-next-line no-console
 				console.error(e);
-				valid = false;
 			}
 
-			if (valid) {
-				// set field valid
-			} else {
-				// set field error status
+			return isValid;
+		},
+		updateValidOptions(isValid) {
+			this.valid.isValid = isValid;
+
+			if (!isValid) {
+				this.valid.dirty = true;
 			}
 		},
 	},
