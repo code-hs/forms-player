@@ -16,29 +16,18 @@ export class FieldValidator {
 		return regexp;
 	}
 
-	/**
-	 *
-	 * @param validationRules - validation options
-	 */
-	// eslint-disable-next-line no-unused-vars
-	static generatePattern(validationRules) {
-		// console.log(+validationRules);
-	}
-
 	static isValid(validationRules, fieldValue) {
-		if (
-			!validationRules ||
-			!Object.keys(validationRules).length ||
-			!fieldValue
-		) {
-			return false;
+		if (!validationRules || !Object.keys(validationRules).length) {
+			return true;
 		}
 
-		const pattern =
-			validationRules.pattern || this.generatePattern(validationRules);
+		if ('required' in validationRules && !validationRules.pattern) {
+			if (validationRules.required) return Boolean(fieldValue);
+			return true;
+		}
 
 		try {
-			const regexp = this.stringToRegex(pattern);
+			const regexp = this.stringToRegex(validationRules.pattern);
 
 			return regexp.test(fieldValue);
 		} catch {

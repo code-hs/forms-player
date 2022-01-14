@@ -34,6 +34,10 @@
 		background-position: center right 12px;
 		background-size: 15px 15px;
 	}
+
+	&.error {
+		border-color: red;
+	}
 }
 
 .app[data-theme='light'] {
