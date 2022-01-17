@@ -1,14 +1,22 @@
 <template>
 	<div class="input-text">
+		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
+
 		<input
 			v-model="fieldsetModelItem[generalParams.model]"
 			type="text"
 			:placeholder="text.placeholder"
-			:required="required"
-			:class="{error: !valid.isValid}"
+			:required="validation.required"
+			:class="{error: valid.error}"
 			@blur="handleBlur"
 			@input="handleInput"
 		/>
+
+		<transition name="fade">
+			<div v-if="validation.errorText" v-show="valid.error" class="error-text">
+				{{ validation.errorText }}
+			</div>
+		</transition>
 	</div>
 </template>
 
@@ -36,12 +44,20 @@ export default {
 		validation: {
 			type: Object,
 			required: false,
-			default: () => {},
+			default: () => ({
+				required: false,
+				pattern: '',
+				errorText: '',
+			}),
 		},
+		// отображаем какие поля используем в этом объекте в коде
 		text: {
 			type: Object,
 			required: false,
-			default: () => {},
+			default: () => ({
+				placeholder: '',
+				hint: '',
+			}),
 		},
 	},
 
@@ -49,7 +65,7 @@ export default {
 		return {
 			valid: {
 				dirty: false,
-				isValid: true,
+				error: false,
 			},
 		};
 	},
@@ -58,26 +74,18 @@ export default {
 		...mapGetters({modelStructure: 'model/structure'}),
 		fieldsetModelItem() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
-			// если это поле находиться в date, происходит баг с ключами,
-			// воспроизводится путем нажатия на + и потом удаления первого элемента,
-			// а вместо него удаляется последний и не работает binding
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 		value() {
 			return this.fieldsetModelItem[this.generalParams.model];
-		},
-		required() {
-			if (!this.validation) return false;
-
-			return this.validation.required;
 		},
 	},
 
 	created() {
 		const defaultValue = '';
 		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
-		// Что бы структура всегда была подготовлена исходя из всех инпутов.
-		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[this.generalParams.model]"
+		// Что бы структура всегда была сгенерирована исходя из всех инпутов.
+		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[generalParams.model]"
 		const options = {
 			groupIndex: this.groupIndex,
 			fieldsetIndex: this.fieldsetIndex,
@@ -92,38 +100,26 @@ export default {
 	methods: {
 		...mapMutations({initField: 'model/initField'}),
 		handleBlur() {
-			const isValid = this.processValidation();
+			this.processValidation();
 
-			if (isValid) this.valid.dirty = false;
+			// поле становиться грязным, если в нем была ошибка
+			// или чистым, если нет ошибок
+			this.valid.dirty = this.valid.error;
 		},
 		handleInput() {
-			// use function when dirty === true
+			// use function when field dirty
 			if (!this.valid.dirty) return;
 
 			this.processValidation();
 		},
 		processValidation() {
-			if (!this.validation || !Object.keys(this.validation).length) {
-				return false;
-			}
-
-			let isValid;
+			if (!this.validation) return;
 
 			try {
-				isValid = FieldValidator.isValid(this.validation, this.value);
-				this.updateValidOptions(isValid);
+				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {
 				// eslint-disable-next-line no-console
 				console.error(e);
-			}
-
-			return isValid;
-		},
-		updateValidOptions(isValid) {
-			this.valid.isValid = isValid;
-
-			if (!isValid) {
-				this.valid.dirty = true;
 			}
 		},
 	},
