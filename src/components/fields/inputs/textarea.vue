@@ -37,12 +37,12 @@ export default {
 		text: {
 			type: Object,
 			required: false,
-			default: () => {},
+			default: () => ({}),
 		},
 		validation: {
 			type: Object,
 			required: false,
-			default: () => {},
+			default: () => ({}),
 		},
 	},
 
