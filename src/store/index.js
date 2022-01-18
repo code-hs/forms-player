@@ -7,6 +7,8 @@ import scheme from './scheme';
 // модель для инпутов, генерируется на основании схемы
 import model from './model';
 
+import validator from './validator';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -14,5 +16,5 @@ export default new Vuex.Store({
 	getters: {},
 	mutations: {},
 	actions: {},
-	modules: {scheme, model},
+	modules: {scheme, model, validator},
 });

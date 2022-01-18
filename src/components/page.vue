@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 import Group from '@/components/group';
 
 export default {
@@ -35,11 +35,26 @@ export default {
 	},
 
 	computed: {
-		...mapGetters({page: 'scheme/currentPage'}),
+		...mapGetters({
+			page: 'scheme/currentPage',
+			ifCheckDone: 'validator/ifCheckDone',
+			hasError: 'validator/hasError',
+		}),
 	},
+
+	watch: {
+		ifCheckDone(v) {
+			if (!v || this.hasError) return;
+
+			console.log('finished');
+		},
+	},
+
 	methods: {
+		...mapMutations({startCommandValidate: 'validator/startCommandValidate'}),
+
 		submit() {
-			console.log('submit handler');
+			this.startCommandValidate();
 		},
 	},
 };
