@@ -3,6 +3,7 @@
 		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
 
 		<input
+			ref="input"
 			v-model="fieldsetModelItem[generalParams.model]"
 			type="text"
 			:placeholder="text.placeholder"
@@ -71,13 +72,31 @@ export default {
 	},
 
 	computed: {
-		...mapGetters({modelStructure: 'model/structure'}),
+		...mapGetters({
+			modelStructure: 'model/structure',
+			commandValidateFields: 'validator/commandValidateFields',
+			focusActive: 'validator/focusActive',
+		}),
 		fieldsetModelItem() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 		value() {
 			return this.fieldsetModelItem[this.generalParams.model];
+		},
+	},
+
+	watch: {
+		commandValidateFields(commandFlag) {
+			if (!commandFlag) return;
+
+			this.handleBlur();
+			this.validatorSetValidateStatus(this.valid.error);
+
+			if (this.valid.error && !this.focusActive) {
+				this.focus();
+				this.setFocusActive();
+			}
 		},
 	},
 
@@ -95,10 +114,19 @@ export default {
 		this.initField(options);
 
 		this.handleInput = debounce(this.handleInput, 300);
+		this.validatorSubscribeInput();
 	},
 
 	methods: {
-		...mapMutations({initField: 'model/initField'}),
+		...mapMutations({
+			initField: 'model/initField',
+			validatorSetValidateStatus: 'validator/setValidateStatus',
+			validatorSubscribeInput: 'validator/subscribeInput',
+			setFocusActive: 'validator/setFocusActive',
+		}),
+		focus() {
+			this.$refs.input.focus();
+		},
 		handleBlur() {
 			this.processValidation();
 
