@@ -65,15 +65,23 @@ export default {
 		...mapMutations({
 			removeFieldsetItem: 'model/removeFieldsetItem',
 			copyFieldsetItem: 'model/copyFieldsetItem',
+			validatorRemoveFieldsetItem: 'validator/removeFieldsetItem',
+			validatorCopyFieldsetItem: 'validator/copyFieldsetItem',
 		}),
 		handleButRemove(fieldsetIndex) {
 			// remove by fieldset index
 			this.group.fieldsets.splice(fieldsetIndex, 1);
 			this.removeFieldsetItem({groupIndex: this.groupIndex, fieldsetIndex});
+
+			this.validatorRemoveFieldsetItem({
+				groupIndex: this.groupIndex,
+				fieldsetIndex,
+			});
 		},
 		handleButAdd() {
 			// add new item to inputs structure
 			this.copyFieldsetItem({groupIndex: this.groupIndex});
+			this.validatorCopyFieldsetItem({groupIndex: this.groupIndex});
 
 			// add new item to view
 			const exampleIndex = 0;
