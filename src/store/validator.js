@@ -42,6 +42,11 @@ const mutations = {
 		const newItem = JSON.parse(JSON.stringify(exampleItem));
 		s.structure[groupIndex].push(newItem);
 	},
+	setFieldStatus: (s, {groupIndex, fieldsetIndex, inputModelName, error}) => {
+		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
+		item.error = error;
+		console.log(item);
+	},
 };
 
 const actions = {};

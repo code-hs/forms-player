@@ -118,7 +118,6 @@ export default {
 		this.initField(options);
 		this.validatorInitField(options);
 
-		// this.validatorSubscribe(options);
 		this.handleInput = debounce(this.handleInput, 300);
 	},
 
@@ -126,6 +125,7 @@ export default {
 		...mapMutations({
 			initField: 'model/initField',
 			validatorInitField: 'validator/initField',
+			validatorSetFieldStatus: 'validator/setFieldStatus',
 		}),
 		...mapActions({}),
 
@@ -138,12 +138,23 @@ export default {
 			// поле становиться грязным, если в нем была ошибка
 			// или чистым, если нет ошибок
 			this.valid.dirty = this.valid.error;
+			this.updateValidationStore();
 		},
 		handleInput() {
 			// use function when field dirty
 			if (!this.valid.dirty) return;
 
 			this.processValidation();
+			this.updateValidationStore();
+		},
+		updateValidationStore() {
+			const options = {
+				groupIndex: this.groupIndex,
+				fieldsetIndex: this.fieldsetIndex,
+				inputModelName: this.generalParams.model,
+				error: this.valid.error,
+			};
+			this.validatorSetFieldStatus(options);
 		},
 		processValidation() {
 			if (!this.validation) return;
