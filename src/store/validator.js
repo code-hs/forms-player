@@ -1,50 +1,55 @@
+import Vue from 'vue';
+import ModelStructure from '../classes/scheme/ModelStructure';
+
 const state = () => ({
-	commandValidateFields: false,
-	hasError: false,
-	inputsCount: 0,
-	validatedInputsCount: 0,
-	focusActive: false,
+	structure: [],
 });
 
 const getters = {
-	commandValidateFields: s => s.commandValidateFields,
-	focusActive: s => s.focusActive,
-	hasError: s => s.hasError,
-	inputsCount: s => s.inputsCount,
-	ifCheckDone: s => {
-		if (s.validatedInputsCount === s.inputsCount) {
-			s.commandValidateFields = false;
-			return true;
-		}
-		return false;
-	},
+	structure: s => s.structure,
 };
 
 const mutations = {
-	startCommandValidate: s => {
-		s.hasError = false;
-		s.validatedInputsCount = 0;
-		s.commandValidateFields = true;
-		s.focusActive = false;
+	setStructure: (s, v) => {
+		s.structure = v;
+	},
+	generateStructure: (s, page) => {
+		s.structure = ModelStructure.generate(page);
+	},
+	initField: (s, {groupIndex, fieldsetIndex, inputModelName}) => {
+		const fieldset = s.structure[groupIndex][fieldsetIndex];
+		const template = {
+			error: false,
+		};
+
+		Vue.set(fieldset, inputModelName, template);
 	},
 
-	setValidateStatus: (s, v) => {
-		s.validatedInputsCount++;
+	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
+		// отправляемся в модель текущей группы, и удаляем из нее fieldset
+		s.structure[groupIndex].splice(fieldsetIndex, 1);
+	},
 
-		if (s.hasError) return;
-		s.hasError = v;
-	},
-	subscribeInput: s => {
-		s.inputsCount++;
-	},
-	setFocusActive: s => {
-		s.focusActive = true;
+	/**
+	 * Add new fieldset item to structure
+	 * @param s
+	 * @param {number} groupIndex
+	 */
+	copyFieldsetItem: (s, {groupIndex}) => {
+		const exampleIndex = 0;
+		const exampleItem = s.structure[groupIndex][exampleIndex];
+		// without reactivity
+		const newItem = JSON.parse(JSON.stringify(exampleItem));
+		s.structure[groupIndex].push(newItem);
 	},
 };
+
+const actions = {};
 
 export default {
 	namespaced: true,
 	state,
 	getters,
 	mutations,
+	actions,
 };

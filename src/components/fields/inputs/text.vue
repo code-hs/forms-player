@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex';
+import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/FieldValidator';
 
@@ -74,33 +74,37 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
-			commandValidateFields: 'validator/commandValidateFields',
-			focusActive: 'validator/focusActive',
+			validatorStructure: 'validator/structure',
 		}),
 		fieldsetModelItem() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
+		},
+		validatorItem() {
+			// Объект в котором хранятся значения инуптов в текущем fieldset
+			return this.validatorStructure[this.groupIndex][this.fieldsetIndex];
 		},
 		value() {
 			return this.fieldsetModelItem[this.generalParams.model];
 		},
 	},
 
-	watch: {
-		commandValidateFields(commandFlag) {
-			if (!commandFlag) return;
+	// watch: {
+	// 	commandValidateFields(commandFlag) {
+	// 		if (!commandFlag) return;
+	//
+	// 		this.handleBlur();
+	// 		this.validatorSetValidateStatus(this.valid.error);
+	//
+	// 		if (this.valid.error && !this.focusActive) {
+	// 			this.focus();
+	// 			this.setFocusActive();
+	// 		}
+	// 	},
+	// },
 
-			this.handleBlur();
-			this.validatorSetValidateStatus(this.valid.error);
-
-			if (this.valid.error && !this.focusActive) {
-				this.focus();
-				this.setFocusActive();
-			}
-		},
-	},
-
-	created() {
+	async created() {
+		// console.log(this.fieldsetIndex);
 		const defaultValue = '';
 		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
 		// Что бы структура всегда была сгенерирована исходя из всех инпутов.
@@ -112,18 +116,19 @@ export default {
 			inputValue: defaultValue,
 		};
 		this.initField(options);
+		this.validatorInitField(options);
 
+		// this.validatorSubscribe(options);
 		this.handleInput = debounce(this.handleInput, 300);
-		this.validatorSubscribeInput();
 	},
 
 	methods: {
 		...mapMutations({
 			initField: 'model/initField',
-			validatorSetValidateStatus: 'validator/setValidateStatus',
-			validatorSubscribeInput: 'validator/subscribeInput',
-			setFocusActive: 'validator/setFocusActive',
+			validatorInitField: 'validator/initField',
 		}),
+		...mapActions({}),
+
 		focus() {
 			this.$refs.input.focus();
 		},

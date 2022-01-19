@@ -37,25 +37,13 @@ export default {
 	computed: {
 		...mapGetters({
 			page: 'scheme/currentPage',
-			ifCheckDone: 'validator/ifCheckDone',
-			hasError: 'validator/hasError',
 		}),
 	},
 
-	watch: {
-		ifCheckDone(v) {
-			if (!v || this.hasError) return;
-
-			console.log('finished');
-		},
-	},
-
 	methods: {
-		...mapMutations({startCommandValidate: 'validator/startCommandValidate'}),
+		// ...mapMutations({startCommandValidate: 'validator/startCommandValidate'}),
 
-		submit() {
-			this.startCommandValidate();
-		},
+		submit() {},
 	},
 };
 </script>

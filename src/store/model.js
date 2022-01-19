@@ -2,7 +2,7 @@ import Vue from 'vue';
 import ModelStructure from '../classes/scheme/ModelStructure';
 
 const state = () => ({
-	structure: null,
+	structure: [],
 });
 
 const getters = {

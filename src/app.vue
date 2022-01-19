@@ -4,7 +4,8 @@
 			<Page />
 		</div>
 
-		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
+		<!--		<div v-if="showDump" class="dump">{{ modelStructure }}</div>-->
+		<div v-if="showDump" class="dump">{{ validatorStructure }}</div>
 	</div>
 </template>
 
@@ -43,6 +44,7 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
+			validatorStructure: 'validator/structure',
 		}),
 	},
 
@@ -50,6 +52,7 @@ export default {
 		this.loadScheme();
 		const currentPage = await this.initPage(this.urlHash);
 		this.generateModelStructure(currentPage);
+		this.generateValidatorStructure(currentPage);
 
 		// after all data loaded and valid
 		if (currentPage && this.modelStructure) this.showContent = true;
@@ -58,6 +61,7 @@ export default {
 	methods: {
 		...mapMutations({
 			generateModelStructure: 'model/generateStructure',
+			generateValidatorStructure: 'validator/generateStructure',
 		}),
 		...mapActions({
 			loadScheme: 'scheme/load',
