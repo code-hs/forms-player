@@ -42,9 +42,10 @@ export default {
 	},
 
 	methods: {
-		// ...mapMutations({startCommandValidate: 'validator/startCommandValidate'}),
+		...mapMutations({startValidation: 'validator/startValidation'}),
 
 		submit() {
+			this.startValidation();
 			// console.sh(this.validatorHasError);
 		},
 	},

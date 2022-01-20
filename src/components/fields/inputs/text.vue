@@ -22,9 +22,10 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations, mapActions} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 import {debounce} from '@/utils/debounce';
-import {FieldValidator} from '@/classes/FieldValidator';
+import {FieldValidator} from '@/classes/validator/FieldValidator';
+import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
 
 export default {
 	name: 'InputText',
@@ -75,6 +76,7 @@ export default {
 		...mapGetters({
 			modelStructure: 'model/structure',
 			validatorStructure: 'validator/structure',
+			validatorTask: 'validator/task',
 		}),
 		fieldsetModelItem() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
@@ -86,6 +88,17 @@ export default {
 		},
 		value() {
 			return this.fieldsetModelItem[this.generalParams.model];
+		},
+	},
+
+	watch: {
+		async validatorTask(taskName) {
+			if (taskName !== TASK_VALIDATION) return;
+
+			this.handleBlur();
+			// const setActiveFocus = await this.validatorSetStatus(this.valid.error);
+
+			// if (setActiveFocus) this.focus();
 		},
 	},
 
@@ -113,7 +126,6 @@ export default {
 			validatorInitField: 'validator/initField',
 			validatorSetFieldStatus: 'validator/setFieldStatus',
 		}),
-		...mapActions({}),
 
 		focus() {
 			this.$refs.input.focus();

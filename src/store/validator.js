@@ -1,12 +1,15 @@
 import Vue from 'vue';
 import ModelStructure from '../classes/scheme/ModelStructure';
+import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
 
 const state = () => ({
 	structure: [],
+	task: '',
 });
 
 const getters = {
 	structure: s => s.structure,
+	task: s => s.task,
 	hasError: s => {
 		// удаляем вложенность
 		const structure = s.structure.flat(9);
@@ -62,7 +65,20 @@ const mutations = {
 		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
 		item.error = error;
 	},
+	startValidation: s => {
+		s.task = TASK_VALIDATION;
+		// s.inputs.validatedCount = 0;
+	},
+	finishValidation: s => {
+		s.task = null;
+		// s.inputs.validatedCount = 0;
+	},
 };
+
+// if (isError && !getters.hasError) {
+// 	commit('setHasError', true);
+// 	setFocusActive = true;
+// }
 
 const actions = {};
 
