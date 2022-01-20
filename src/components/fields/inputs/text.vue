@@ -89,20 +89,6 @@ export default {
 		},
 	},
 
-	// watch: {
-	// 	commandValidateFields(commandFlag) {
-	// 		if (!commandFlag) return;
-	//
-	// 		this.handleBlur();
-	// 		this.validatorSetValidateStatus(this.valid.error);
-	//
-	// 		if (this.valid.error && !this.focusActive) {
-	// 			this.focus();
-	// 			this.setFocusActive();
-	// 		}
-	// 	},
-	// },
-
 	async created() {
 		// console.log(this.fieldsetIndex);
 		const defaultValue = '';
@@ -138,16 +124,16 @@ export default {
 			// поле становиться грязным, если в нем была ошибка
 			// или чистым, если нет ошибок
 			this.valid.dirty = this.valid.error;
-			this.updateValidationStore();
+			this.validatorUpdate();
 		},
 		handleInput() {
 			// use function when field dirty
 			if (!this.valid.dirty) return;
 
 			this.processValidation();
-			this.updateValidationStore();
+			this.validatorUpdate();
 		},
-		updateValidationStore() {
+		validatorUpdate() {
 			const options = {
 				groupIndex: this.groupIndex,
 				fieldsetIndex: this.fieldsetIndex,
