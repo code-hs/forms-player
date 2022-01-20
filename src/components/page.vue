@@ -37,13 +37,16 @@ export default {
 	computed: {
 		...mapGetters({
 			page: 'scheme/currentPage',
+			validatorHasError: 'validator/hasError',
 		}),
 	},
 
 	methods: {
 		// ...mapMutations({startCommandValidate: 'validator/startCommandValidate'}),
 
-		submit() {},
+		submit() {
+			// console.sh(this.validatorHasError);
+		},
 	},
 };
 </script>

@@ -7,6 +7,21 @@ const state = () => ({
 
 const getters = {
 	structure: s => s.structure,
+	hasError: s => {
+		// удаляем вложенность
+		const structure = s.structure.flat(9);
+
+		// fieldset из объекта превращаем в массив, и потом отдаем все данные по field
+		const fieldsDataInArray = structure.map(fieldset =>
+			Object.entries(fieldset).map(field => field[1])
+		);
+
+		// удаляем вложенность для групп
+		const fieldsFlatted = fieldsDataInArray.flat(9);
+
+		// если хотя бы в одном field имеется ошибка
+		return fieldsFlatted.some(field => field.error);
+	},
 };
 
 const mutations = {
@@ -19,6 +34,7 @@ const mutations = {
 	initField: (s, {groupIndex, fieldsetIndex, inputModelName}) => {
 		const fieldset = s.structure[groupIndex][fieldsetIndex];
 		const template = {
+			// objectType: 'inputValidation',
 			error: false,
 		};
 
@@ -45,7 +61,6 @@ const mutations = {
 	setFieldStatus: (s, {groupIndex, fieldsetIndex, inputModelName, error}) => {
 		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
 		item.error = error;
-		console.log(item);
 	},
 };
 
