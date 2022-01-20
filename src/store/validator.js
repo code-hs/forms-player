@@ -5,11 +5,13 @@ import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
 const state = () => ({
 	structure: [],
 	task: '',
+	focusInput: false,
 });
 
 const getters = {
 	structure: s => s.structure,
 	task: s => s.task,
+	focusInput: s => s.focusInput,
 	hasError: s => {
 		// удаляем вложенность
 		const structure = s.structure.flat(9);
@@ -67,11 +69,11 @@ const mutations = {
 	},
 	startValidation: s => {
 		s.task = TASK_VALIDATION;
+		s.focusInput = true;
 		// s.inputs.validatedCount = 0;
 	},
-	finishValidation: s => {
-		s.task = null;
-		// s.inputs.validatedCount = 0;
+	focusInputActivated: s => {
+		s.focusInput = false;
 	},
 };
 

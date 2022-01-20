@@ -77,6 +77,8 @@ export default {
 			modelStructure: 'model/structure',
 			validatorStructure: 'validator/structure',
 			validatorTask: 'validator/task',
+			validatorHasError: 'validator/hasError',
+			validatorFocus: 'validator/focusInput',
 		}),
 		fieldsetModelItem() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
@@ -96,9 +98,13 @@ export default {
 			if (taskName !== TASK_VALIDATION) return;
 
 			this.handleBlur();
-			// const setActiveFocus = await this.validatorSetStatus(this.valid.error);
+			if (this.valid.error && this.validatorFocus) {
+				console.log('set focus');
+				this.validatorFocusActivated();
+				this.focus();
+			}
 
-			// if (setActiveFocus) this.focus();
+			// task done
 		},
 	},
 
@@ -125,6 +131,7 @@ export default {
 			initField: 'model/initField',
 			validatorInitField: 'validator/initField',
 			validatorSetFieldStatus: 'validator/setFieldStatus',
+			validatorFocusActivated: 'validator/focusInputActivated',
 		}),
 
 		focus() {
