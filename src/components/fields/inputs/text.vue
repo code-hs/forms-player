@@ -98,7 +98,9 @@ export default {
 
 			this.handleBlur();
 			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorSetStatus(this.valid.error);
+			const setActiveFocus = await this.validatorResponseOnTask(
+				this.valid.error
+			);
 			console.log('setActiveFocus :>> ', setActiveFocus);
 
 			if (setActiveFocus) this.focus();
@@ -130,7 +132,7 @@ export default {
 			validatorUpdateFieldStatus: 'validator/updateFieldStatus',
 		}),
 		...mapActions({
-			validatorSetStatus: 'validator/setValidateStatus',
+			validatorResponseOnTask: 'validator/fieldResponseOnTask',
 		}),
 
 		focus() {

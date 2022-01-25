@@ -1,6 +1,7 @@
 import Vue from 'vue';
-import ModelStructure from '../classes/scheme/ModelStructure';
+import {ModelStructure} from '@/classes/scheme/ModelStructure';
 import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
+import {FieldValidator} from '@/classes/validator/FieldValidator';
 
 const state = () => ({
 	structure: [],
@@ -16,27 +17,14 @@ const state = () => ({
 
 const getters = {
 	structure: s => s.structure,
-	currentTask: s => s.task.current,
-	task: s => s.task,
 	inputs: s => s.inputs,
-	hasError: s => {
-		// удаляем вложенность
-		const structure = s.structure.flat(9);
-
-		// fieldset из объекта превращаем в массив, и потом отдаем все данные по field
-		const fieldsDataInArray = structure.map(fieldset =>
-			Object.entries(fieldset).map(field => field[1])
-		);
-
-		// удаляем вложенность для групп
-		const fieldsFlatted = fieldsDataInArray.flat(9);
-
-		// если хотя бы в одном field имеется ошибка
-		return fieldsFlatted.some(field => field.error);
-	},
+	task: s => s.task,
+	currentTask: s => s.task.current,
+	hasError: s => FieldValidator.hasStructureErrorInput(s.structure),
 };
 
 const mutations = {
+	// ######### STRUCTURE
 	setStructure: (s, v) => {
 		s.structure = v;
 	},
@@ -70,6 +58,8 @@ const mutations = {
 		const newItem = JSON.parse(JSON.stringify(exampleItem));
 		s.structure[groupIndex].push(newItem);
 	},
+	// ######### END STRUCTURE
+
 	updateFieldStatus: (
 		s,
 		{groupIndex, fieldsetIndex, inputModelName, error}
@@ -82,33 +72,33 @@ const mutations = {
 		s.inputs.focus = false;
 		s.task.answeredInputsCount = 0;
 	},
+	setTask: (s, v) => {
+		s.task.current = v;
+	},
 	setFocus: (s, v) => {
 		s.inputs.focus = v;
 	},
-	answeredInputsIncr: s => {
+	answeredInputsUpdate: s => {
 		s.task.answeredInputsCount++;
-	},
-	setTask: (s, v) => {
-		s.task.current = v;
 	},
 };
 
 const actions = {
-	setValidateStatus: ({commit, getters}, isError) => {
-		commit('answeredInputsIncr');
+	fieldResponseOnTask({commit, getters}, isError) {
+		commit('answeredInputsUpdate');
 		if (getters.task.answeredInputsCount === getters.inputs.count) {
 			commit('setTask', '');
 		}
 
 		// нет необходимости активировать валидное поле
-		if (!isError) return false;
+		// or if focus activated
+		// return focusActivate = false
+		if (!isError || getters.inputs.focus) return false;
 
-		// focus activated
-		if (getters.inputs.focus) return false;
-
+		// go to activate focus flag
 		commit('setFocus', true);
 
-		// go to activate focus
+		// activate focus in view
 		return true;
 	},
 };
