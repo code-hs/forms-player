@@ -6,16 +6,18 @@ const state = () => ({
 	structure: [],
 	inputs: {
 		count: 0,
-		validatedCount: 0,
+		focus: false,
 	},
-	task: '',
-	focusInput: false,
+	task: {
+		current: '',
+		answeredInputsCount: 0,
+	},
 });
 
 const getters = {
 	structure: s => s.structure,
+	currentTask: s => s.task.current,
 	task: s => s.task,
-	focusInput: s => s.focusInput,
 	inputs: s => s.inputs,
 	hasError: s => {
 		// удаляем вложенность
@@ -76,25 +78,25 @@ const mutations = {
 		item.error = error;
 	},
 	startValidation: s => {
-		s.task = TASK_VALIDATION;
-		s.focusInput = false;
-		s.inputs.validatedCount = 0;
+		s.task.current = TASK_VALIDATION;
+		s.inputs.focus = false;
+		s.task.answeredInputsCount = 0;
 	},
-	setFocusInput: (s, v) => {
-		s.focusInput = v;
+	setFocus: (s, v) => {
+		s.inputs.focus = v;
 	},
-	validatedCountInc: s => {
-		s.inputs.validatedCount++;
+	answeredInputsIncr: s => {
+		s.task.answeredInputsCount++;
 	},
 	setTask: (s, v) => {
-		s.task = v;
+		s.task.current = v;
 	},
 };
 
 const actions = {
 	setValidateStatus: ({commit, getters}, isError) => {
-		commit('validatedCountInc');
-		if (getters.inputs.validatedCount === getters.inputs.count) {
+		commit('answeredInputsIncr');
+		if (getters.task.answeredInputsCount === getters.inputs.count) {
 			commit('setTask', '');
 		}
 
@@ -102,9 +104,9 @@ const actions = {
 		if (!isError) return false;
 
 		// focus activated
-		if (getters.focusInput) return false;
+		if (getters.inputs.focus) return false;
 
-		commit('setFocusInput', true);
+		commit('setFocus', true);
 
 		// go to activate focus
 		return true;
