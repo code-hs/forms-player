@@ -76,9 +76,8 @@ export default {
 		...mapGetters({
 			modelStructure: 'model/structure',
 			validatorStructure: 'validator/structure',
-			validatorTask: 'validator/task',
+			validatorTask: 'validator/currentTask',
 			validatorHasError: 'validator/hasError',
-			validatorFocus: 'validator/focusInput',
 		}),
 		fieldsetModelItem() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
@@ -98,6 +97,7 @@ export default {
 			if (taskName !== TASK_VALIDATION) return;
 
 			this.handleBlur();
+			// noinspection ES6RedundantAwait
 			const setActiveFocus = await this.validatorSetStatus(this.valid.error);
 			console.log('setActiveFocus :>> ', setActiveFocus);
 
