@@ -1,10 +1,11 @@
 <template>
 	<div class="submit">
-		<button type="submit" :disabled="validatorHasError">Submit</button>
+		<button type="submit">Submit</button>
 	</div>
 </template>
 
 <script>
+// :disabled="validatorHasError"
 import {mapGetters} from 'vuex';
 
 export default {

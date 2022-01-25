@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex';
+import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
@@ -98,13 +98,10 @@ export default {
 			if (taskName !== TASK_VALIDATION) return;
 
 			this.handleBlur();
-			if (this.valid.error && this.validatorFocus) {
-				console.log('set focus');
-				this.validatorFocusActivated();
-				this.focus();
-			}
+			const setActiveFocus = await this.validatorSetStatus(this.valid.error);
+			console.log('setActiveFocus :>> ', setActiveFocus);
 
-			// task done
+			if (setActiveFocus) this.focus();
 		},
 	},
 
@@ -130,8 +127,10 @@ export default {
 		...mapMutations({
 			initField: 'model/initField',
 			validatorInitField: 'validator/initField',
-			validatorSetFieldStatus: 'validator/setFieldStatus',
-			validatorFocusActivated: 'validator/focusInputActivated',
+			validatorUpdateFieldStatus: 'validator/updateFieldStatus',
+		}),
+		...mapActions({
+			validatorSetStatus: 'validator/setValidateStatus',
 		}),
 
 		focus() {
@@ -159,7 +158,7 @@ export default {
 				inputModelName: this.generalParams.model,
 				error: this.valid.error,
 			};
-			this.validatorSetFieldStatus(options);
+			this.validatorUpdateFieldStatus(options);
 		},
 		processValidation() {
 			if (!this.validation) return;
