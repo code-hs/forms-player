@@ -60,11 +60,9 @@ const mutations = {
 	},
 	// ######### END STRUCTURE
 
-	updateFieldStatus: (
-		s,
-		{groupIndex, fieldsetIndex, inputModelName, error}
-	) => {
+	updateFieldInfo: (s, {groupIndex, fieldsetIndex, inputModelName, error}) => {
 		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
+
 		item.error = error;
 	},
 	startValidation: s => {
@@ -78,14 +76,31 @@ const mutations = {
 	setFocus: (s, v) => {
 		s.inputs.focus = v;
 	},
-	answeredInputsUpdate: s => {
+	answeredInputsPlus: s => {
 		s.task.answeredInputsCount++;
 	},
 };
 
 const actions = {
+	responseOnTask({commit, getters}, isError) {
+		commit('answeredInputsPlus');
+		if (getters.task.answeredInputsCount === getters.inputs.count) {
+			commit('setTask', '');
+		}
+
+		// нет необходимости активировать валидное поле
+		// or if focus activated
+		// return focusActivate = false
+		if (!isError || getters.inputs.focus) return false;
+
+		// go to activate focus flag
+		commit('setFocus', true);
+
+		// activate focus in view
+		return true;
+	},
 	fieldResponseOnTask({commit, getters}, isError) {
-		commit('answeredInputsUpdate');
+		commit('answeredInputsPlus');
 		if (getters.task.answeredInputsCount === getters.inputs.count) {
 			commit('setTask', '');
 		}

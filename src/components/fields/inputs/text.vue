@@ -75,17 +75,11 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
-			validatorStructure: 'validator/structure',
 			validatorTask: 'validator/currentTask',
-			validatorHasError: 'validator/hasError',
 		}),
 		fieldsetModelItem() {
 			// Объект в котором хранятся значения инуптов в текущем fieldset
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
-		},
-		validatorItem() {
-			// Объект в котором хранятся значения инуптов в текущем fieldset
-			return this.validatorStructure[this.groupIndex][this.fieldsetIndex];
 		},
 		value() {
 			return this.fieldsetModelItem[this.generalParams.model];
@@ -101,14 +95,12 @@ export default {
 			const setActiveFocus = await this.validatorResponseOnTask(
 				this.valid.error
 			);
-			console.log('setActiveFocus :>> ', setActiveFocus);
 
 			if (setActiveFocus) this.focus();
 		},
 	},
 
 	async created() {
-		// console.log(this.fieldsetIndex);
 		const defaultValue = '';
 		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
 		// Что бы структура всегда была сгенерирована исходя из всех инпутов.
@@ -129,40 +121,40 @@ export default {
 		...mapMutations({
 			initField: 'model/initField',
 			validatorInitField: 'validator/initField',
-			validatorUpdateFieldStatus: 'validator/updateFieldStatus',
+			validatorUpdateFieldInfo: 'validator/updateFieldInfo',
 		}),
 		...mapActions({
-			validatorResponseOnTask: 'validator/fieldResponseOnTask',
+			validatorResponseOnTask: 'validator/responseOnTask',
 		}),
 
 		focus() {
 			this.$refs.input.focus();
 		},
 		handleBlur() {
-			this.processValidation();
+			this.processValidationField();
 
 			// поле становиться грязным, если в нем была ошибка
 			// или чистым, если нет ошибок
 			this.valid.dirty = this.valid.error;
-			this.validatorUpdate();
+			this.validatorSaveInfo();
 		},
 		handleInput() {
 			// use function when field dirty
 			if (!this.valid.dirty) return;
 
-			this.processValidation();
-			this.validatorUpdate();
+			this.processValidationField();
+			this.validatorSaveInfo();
 		},
-		validatorUpdate() {
-			const options = {
+		validatorSaveInfo() {
+			const information = {
 				groupIndex: this.groupIndex,
 				fieldsetIndex: this.fieldsetIndex,
 				inputModelName: this.generalParams.model,
 				error: this.valid.error,
 			};
-			this.validatorUpdateFieldStatus(options);
+			this.validatorUpdateFieldInfo(information);
 		},
-		processValidation() {
+		processValidationField() {
 			if (!this.validation) return;
 
 			try {
