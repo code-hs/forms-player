@@ -4,6 +4,10 @@ import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
 
 const state = () => ({
 	structure: [],
+	inputs: {
+		count: 0,
+		validatedCount: 0,
+	},
 	task: '',
 	focusInput: false,
 });
@@ -12,6 +16,7 @@ const getters = {
 	structure: s => s.structure,
 	task: s => s.task,
 	focusInput: s => s.focusInput,
+	inputs: s => s.inputs,
 	hasError: s => {
 		// удаляем вложенность
 		const structure = s.structure.flat(9);
@@ -39,11 +44,11 @@ const mutations = {
 	initField: (s, {groupIndex, fieldsetIndex, inputModelName}) => {
 		const fieldset = s.structure[groupIndex][fieldsetIndex];
 		const template = {
-			// objectType: 'inputValidation',
 			error: false,
 		};
 
 		Vue.set(fieldset, inputModelName, template);
+		s.inputs.count++;
 	},
 
 	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
@@ -63,26 +68,48 @@ const mutations = {
 		const newItem = JSON.parse(JSON.stringify(exampleItem));
 		s.structure[groupIndex].push(newItem);
 	},
-	setFieldStatus: (s, {groupIndex, fieldsetIndex, inputModelName, error}) => {
+	updateFieldStatus: (
+		s,
+		{groupIndex, fieldsetIndex, inputModelName, error}
+	) => {
 		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
 		item.error = error;
 	},
 	startValidation: s => {
 		s.task = TASK_VALIDATION;
-		s.focusInput = true;
-		// s.inputs.validatedCount = 0;
-	},
-	focusInputActivated: s => {
 		s.focusInput = false;
+		s.inputs.validatedCount = 0;
+	},
+	setFocusInput: (s, v) => {
+		s.focusInput = v;
+	},
+	validatedCountInc: s => {
+		s.inputs.validatedCount++;
+	},
+	setTask: (s, v) => {
+		s.task = v;
 	},
 };
 
-// if (isError && !getters.hasError) {
-// 	commit('setHasError', true);
-// 	setFocusActive = true;
-// }
+const actions = {
+	setValidateStatus: ({commit, getters}, isError) => {
+		commit('validatedCountInc');
+		if (getters.inputs.validatedCount === getters.inputs.count) {
+			commit('setTask', '');
+		}
 
-const actions = {};
+		// нет необходимости активировать валидное поле
+		if (!isError) return false;
+
+		// focus activated
+		if (getters.focusInput) return false;
+
+		commit('setFocusInput', true);
+
+		// go to activate focus
+		return true;
+	},
+};
 
 export default {
 	namespaced: true,
