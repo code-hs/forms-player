@@ -1,4 +1,4 @@
-class ModelStructure {
+export class ModelStructure {
 	/**
 	 * Генерирует структуру для текущей страницы, исходя из расположения
 	 * инпутов в схеме
@@ -64,5 +64,3 @@ class ModelStructure {
 		return false;
 	}
 }
-
-export default ModelStructure;

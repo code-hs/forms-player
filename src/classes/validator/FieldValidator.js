@@ -42,4 +42,20 @@ export class FieldValidator {
 			throw new Error('bad validation pattern');
 		}
 	}
+
+	static hasStructureErrorInput(structure) {
+		// удаляем вложенность
+		const flattedStructure = structure.flat(9);
+
+		// fieldset из объекта превращаем в массив, и потом отдаем все данные по field
+		const fieldsDataInArray = flattedStructure.map(fieldset =>
+			Object.entries(fieldset).map(field => field[1])
+		);
+
+		// удаляем вложенность для групп
+		const fieldsFlatted = fieldsDataInArray.flat(9);
+
+		// если хотя бы в одном field имеется ошибка
+		return fieldsFlatted.some(field => field.error);
+	}
 }
