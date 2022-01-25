@@ -1,5 +1,5 @@
 <template>
-	<form class="page-item" novalidate @submit.prevent="submit">
+	<form class="page-item" novalidate @submit.prevent="handleSubmit">
 		<div class="groups-container">
 			<Group
 				v-for="(group, index) in page.groups"
@@ -38,15 +38,26 @@ export default {
 		...mapGetters({
 			page: 'scheme/currentPage',
 			validatorHasError: 'validator/hasError',
+			validatorTaskCompleted: 'validator/taskCompleted',
 		}),
+	},
+
+	watch: {
+		validatorTaskCompleted(status) {
+			if (!status) return;
+
+			this.submitAfterValidation();
+		},
 	},
 
 	methods: {
 		...mapMutations({startValidation: 'validator/startValidation'}),
 
-		submit() {
+		handleSubmit() {
 			this.startValidation();
-			// console.sh(this.validatorHasError);
+		},
+		submitAfterValidation() {
+			console.log('validatorHasError :>> ', this.validatorHasError);
 		},
 	},
 };

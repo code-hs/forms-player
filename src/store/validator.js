@@ -20,6 +20,7 @@ const getters = {
 	inputs: s => s.inputs,
 	task: s => s.task,
 	currentTask: s => s.task.current,
+	taskCompleted: s => s.task.answeredInputsCount === s.inputs.count,
 	hasError: s => FieldValidator.hasStructureErrorInput(s.structure),
 };
 
