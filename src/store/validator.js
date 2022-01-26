@@ -71,8 +71,8 @@ const mutations = {
 		s.inputs.focus = false;
 		s.task.answeredInputsCount = 0;
 	},
-	setTask: (s, v) => {
-		s.task.current = v;
+	completeTask: s => {
+		s.task.current = '';
 	},
 	setFocus: (s, v) => {
 		s.inputs.focus = v;
@@ -83,37 +83,19 @@ const mutations = {
 };
 
 const actions = {
-	responseOnTask({commit, getters}, isError) {
+	responseOnTask({commit, getters}, fieldError) {
 		commit('answeredInputsPlus');
 		if (getters.task.answeredInputsCount === getters.inputs.count) {
-			commit('setTask', '');
+			commit('completeTask');
 		}
 
 		// нет необходимости активировать валидное поле
 		// or if focus activated
 		// return focusActivate = false
-		if (!isError || getters.inputs.focus) return false;
+		if (!fieldError || getters.inputs.focus) return false;
 
 		// go to activate focus flag
 		commit('setFocus', true);
-
-		// activate focus in view
-		return true;
-	},
-	fieldResponseOnTask({commit, getters}, isError) {
-		commit('answeredInputsPlus');
-		if (getters.task.answeredInputsCount === getters.inputs.count) {
-			commit('setTask', '');
-		}
-
-		// нет необходимости активировать валидное поле
-		// or if focus activated
-		// return focusActivate = false
-		if (!isError || getters.inputs.focus) return false;
-
-		// go to activate focus flag
-		commit('setFocus', true);
-
 		// activate focus in view
 		return true;
 	},

@@ -4,8 +4,8 @@
 			<Page />
 		</div>
 
-		<!--		<div v-if="showDump" class="dump">{{ modelStructure }}</div>-->
-		<div v-if="showDump" class="dump">{{ validatorStructure }}</div>
+		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
+		<!--		<div v-if="showDump" class="dump">{{ validatorStructure }}</div>-->
 	</div>
 </template>
 
