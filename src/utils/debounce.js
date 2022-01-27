@@ -1,3 +1,4 @@
+/* eslint-disable */
 Object.defineProperty(exports, '__esModule', {value: true});
 exports.debounce = void 0;
 exports.debounce = function debounce(cb, delay) {
