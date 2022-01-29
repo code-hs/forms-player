@@ -46,6 +46,8 @@ export default {
 		validatorTaskCompleted(status) {
 			if (!status) return;
 
+			if (this.validatorHasError) return;
+
 			this.submitAfterValidation();
 		},
 	},
@@ -57,7 +59,7 @@ export default {
 			this.startValidation();
 		},
 		submitAfterValidation() {
-			console.log('validatorHasError :>> ', this.validatorHasError);
+			alert('success');
 		},
 	},
 };
