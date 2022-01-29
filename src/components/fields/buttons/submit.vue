@@ -8,7 +8,7 @@
 import {mapGetters} from 'vuex';
 
 export default {
-	name: 'Checkbox',
+	name: 'ButtonSubmit',
 	props: {
 		groupIndex: {
 			type: Number,

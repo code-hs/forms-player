@@ -40,6 +40,13 @@ const mutations = {
 
 		Vue.set(fieldset, inputModelName, template);
 		s.inputs.count++;
+		// как только происходит удаление элемента, очищаем какую либо инфу о прошлых задачах
+		s.task.answeredInputsCount = 0;
+	},
+	destroyField: s => {
+		s.inputs.count--;
+		// как только происходит удаление элемента, очищаем какую либо инфу о прошлых задачах
+		s.task.answeredInputsCount = 0;
 	},
 
 	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {

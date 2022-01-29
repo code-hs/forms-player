@@ -117,11 +117,16 @@ export default {
 		this.handleInput = debounce(this.handleInput, 300);
 	},
 
+	destroyed() {
+		this.validatorDestroyField();
+	},
+
 	methods: {
 		...mapMutations({
 			initField: 'model/initField',
 			validatorInitField: 'validator/initField',
 			validatorUpdateFieldInfo: 'validator/updateFieldInfo',
+			validatorDestroyField: 'validator/destroyField',
 		}),
 		...mapActions({
 			validatorResponseOnTask: 'validator/responseOnTask',
