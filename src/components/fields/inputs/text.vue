@@ -114,7 +114,7 @@ export default {
 		this.initField(options);
 		this.validatorInitField(options);
 
-		this.handleInput = debounce(this.handleInput, 300);
+		this.processInput = debounce(this.processInput, 300);
 	},
 
 	destroyed() {
@@ -143,7 +143,13 @@ export default {
 			this.valid.dirty = this.valid.error;
 			this.validatorSaveInfo();
 		},
-		handleInput() {
+		handleInput(e) {
+			// update v-model, fix for mobile gboard
+			this.fieldsetModelItem[this.generalParams.model] = e.target.value;
+
+			this.processInput();
+		},
+		processInput() {
 			// use function when field dirty
 			if (!this.valid.dirty) return;
 
