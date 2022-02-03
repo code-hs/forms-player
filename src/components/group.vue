@@ -5,7 +5,7 @@
 		<div class="fieldsets-container">
 			<Fieldset
 				v-for="(fieldset, index) in group.fieldsets"
-				:key="index"
+				:key="fieldset.key"
 				:fieldset="fieldset"
 				:group-index="groupIndex"
 				:fieldset-index="index"
@@ -32,6 +32,8 @@
 <script>
 import {mapGetters, mapMutations} from 'vuex';
 import Fieldset from '@/components/fieldset';
+import {generateKey} from '@/utils/numbers';
+import {GroupView} from '@/classes/group/GroupView';
 
 export default {
 	name: 'Group',
@@ -61,6 +63,10 @@ export default {
 		},
 	},
 
+	created() {
+		this.initFieldsetsKeys();
+	},
+
 	methods: {
 		...mapMutations({
 			removeFieldsetItem: 'model/removeFieldsetItem',
@@ -68,15 +74,20 @@ export default {
 			validatorRemoveFieldsetItem: 'validator/removeFieldsetItem',
 			validatorCopyFieldsetItem: 'validator/copyFieldsetItem',
 		}),
+		initFieldsetsKeys() {
+			// generate unique keys for each item, since we remove and add these items
+			// if this is not done, vue lazily updates the blocks
+			this.group.fieldsets.forEach(item => {
+				item.key = generateKey();
+			});
+		},
 		handleButRemove(fieldsetIndex) {
 			// remove by fieldset index
 			this.group.fieldsets.splice(fieldsetIndex, 1);
-			this.removeFieldsetItem({groupIndex: this.groupIndex, fieldsetIndex});
 
-			this.validatorRemoveFieldsetItem({
-				groupIndex: this.groupIndex,
-				fieldsetIndex,
-			});
+			const position = {groupIndex: this.groupIndex, fieldsetIndex};
+			this.removeFieldsetItem(position);
+			this.validatorRemoveFieldsetItem(position);
 		},
 		handleButAdd() {
 			// add new item to inputs structure
@@ -84,9 +95,8 @@ export default {
 			this.validatorCopyFieldsetItem({groupIndex: this.groupIndex});
 
 			// add new item to view
-			const exampleIndex = 0;
-			const exampleItem = this.group.fieldsets[exampleIndex];
-			this.group.fieldsets.push(exampleItem);
+			const newItem = GroupView.getNewItem(this.group.fieldsets);
+			this.group.fieldsets.push(newItem);
 		},
 	},
 };
