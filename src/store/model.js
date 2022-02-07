@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {ModelStructure} from '../classes/scheme/ModelStructure';
+import {ModelStructure} from '@/classes/scheme/ModelStructure';
 
 const state = () => ({
 	structure: [],

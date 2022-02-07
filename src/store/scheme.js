@@ -1,4 +1,4 @@
-import SchemeParser from '../classes/scheme/SchemeParser';
+import {SchemeParser} from '@/classes/scheme/SchemeParser';
 
 let schemeParser;
 
