@@ -26,16 +26,13 @@ const getters = {
 
 const mutations = {
 	// ----------------- STRUCTURE
-	setStructure: (s, v) => {
-		s.structure = v;
-	},
-	generateStructure: (s, page) => {
+	generateSkeleton: (s, page) => {
 		s.structure = ModelStructure.generate(page);
 	},
 
 	/**
 	 * Add file to model structure
-	 * @param s
+	 *
 	 * @param {number} groupIndex
 	 * @param {number} fieldsetIndex
 	 * @param {string} inputModelName
@@ -58,7 +55,6 @@ const mutations = {
 	/**
 	 * Remove fieldset from current group
 	 *
-	 * @param s
 	 * @param {number} groupIndex
 	 * @param {number} fieldsetIndex
 	 */
@@ -68,7 +64,7 @@ const mutations = {
 
 	/**
 	 * Add new fieldset item to structure
-	 * @param s
+	 *
 	 * @param {number} groupIndex
 	 */
 	copyFieldsetItem: (s, {groupIndex}) => {
@@ -81,9 +77,9 @@ const mutations = {
 		s.structure[groupIndex].push(newItem);
 	},
 	// ----------------- END STRUCTURE BLOCK
+
 	/**
 	 * after delete the field vue item
-	 * @param s
 	 */
 	destroyField: s => {
 		s.inputs.count--;
@@ -91,9 +87,16 @@ const mutations = {
 		s.task.answeredInputsCount = 0;
 	},
 
+	/**
+	 * update status  on each change in the input
+	 *
+	 * @param {number} groupIndex
+	 * @param {number} fieldsetIndex
+	 * @param {string} inputModelName
+	 * @param {boolean} error - field status from data.valid.error
+	 */
 	updateFieldInfo: (s, {groupIndex, fieldsetIndex, inputModelName, error}) => {
 		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
-
 		item.error = error;
 	},
 	startValidation: s => {
@@ -107,14 +110,22 @@ const mutations = {
 	setFocus: (s, v) => {
 		s.inputs.focus = v;
 	},
-	answeredInputsPlus: s => {
+	inputAnswered: s => {
 		s.task.answeredInputsCount++;
 	},
 };
 
 const actions = {
+	/**
+	 * input response to an incoming task
+	 *
+	 * @param commit
+	 * @param getters
+	 * @param fieldError
+	 * @returns {boolean} - update field focus
+	 */
 	responseOnTask({commit, getters}, fieldError) {
-		commit('answeredInputsPlus');
+		commit('inputAnswered');
 		if (getters.task.answeredInputsCount === getters.inputs.count) {
 			commit('clearTask');
 		}

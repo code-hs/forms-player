@@ -16,6 +16,13 @@ export class FieldValidator {
 		return regexp;
 	}
 
+	/**
+	 * is valid field value by rules
+	 *
+	 * @param {Object} validationRules
+	 * @param fieldValue
+	 * @returns {boolean}
+	 */
 	static isValid(validationRules, fieldValue) {
 		// if there are no rules in the schema ->  field becomes valid
 		if (!validationRules || !Object.keys(validationRules).length) {
@@ -41,7 +48,7 @@ export class FieldValidator {
 		return true;
 	}
 
-	static hasStructureErrorInput(structure) {
+	static flatStructure(structure) {
 		const flattedStructure = structure.flat(9);
 
 		// transform fieldset item from object to array
@@ -51,8 +58,11 @@ export class FieldValidator {
 		);
 
 		// flatting groups
-		const fieldsFlatted = fieldsDataInArray.flat(9);
+		return fieldsDataInArray.flat(9);
+	}
 
+	static hasStructureErrorInput(structure) {
+		const fieldsFlatted = this.flatStructure(structure);
 		// if at least one field has an error
 		return fieldsFlatted.some(field => field.error);
 	}
