@@ -12,7 +12,7 @@
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import Page from '@/components/page';
-import config from '@/config/index';
+import {Config} from '@/config/index';
 
 export default {
 	components: {Page},
@@ -37,7 +37,7 @@ export default {
 		return {
 			urlHash: this.getPageHash(),
 			showContent: false,
-			showDump: config.showDump,
+			showDump: Config.showDump,
 		};
 	},
 

@@ -38,4 +38,4 @@ class SchemeParser {
 	}
 }
 
-export default SchemeParser;
+export {SchemeParser};
