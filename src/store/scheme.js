@@ -21,6 +21,10 @@ const actions = {
 		schemeParser = new SchemeParser();
 		schemeParser.load();
 	},
+	/**
+	 * @param {string} urlHash - page url
+	 * @returns {Object} - scheme
+	 */
 	initPage({commit}, urlHash) {
 		const page = schemeParser.getPage(urlHash);
 		commit('setCurrentPage', page);

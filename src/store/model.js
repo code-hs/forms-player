@@ -10,16 +10,13 @@ const getters = {
 };
 
 const mutations = {
-	setStructure: (s, v) => {
-		s.structure = v;
-	},
-	generateStructure: (s, page) => {
+	generateSkeleton: (s, page) => {
 		s.structure = ModelStructure.generate(page);
 	},
 
 	/**
 	 * Add file to model structure
-	 * @param s
+	 *
 	 * @param {number} groupIndex
 	 * @param {number} fieldsetIndex
 	 * @param {string} inputModelName
@@ -34,7 +31,6 @@ const mutations = {
 	/**
 	 * Remove fieldset from current group
 	 *
-	 * @param s
 	 * @param {number} groupIndex
 	 * @param {number} fieldsetIndex
 	 */
@@ -44,7 +40,7 @@ const mutations = {
 
 	/**
 	 * Add new fieldset item to structure
-	 * @param s
+	 *
 	 * @param {number} groupIndex
 	 */
 	copyFieldsetItem: (s, {groupIndex}) => {

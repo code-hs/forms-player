@@ -51,8 +51,8 @@ export default {
 	async created() {
 		this.loadScheme();
 		const currentPage = await this.initPage(this.urlHash);
-		this.generateModelStructure(currentPage);
-		this.generateValidatorStructure(currentPage);
+		this.generateModelSkeleton(currentPage);
+		this.generateValidatorSkeleton(currentPage);
 
 		// after all data loaded and valid
 		if (currentPage && this.modelStructure) this.showContent = true;
@@ -60,8 +60,8 @@ export default {
 
 	methods: {
 		...mapMutations({
-			generateModelStructure: 'model/generateStructure',
-			generateValidatorStructure: 'validator/generateStructure',
+			generateModelSkeleton: 'model/generateSkeleton',
+			generateValidatorSkeleton: 'validator/generateSkeleton',
 		}),
 		...mapActions({
 			loadScheme: 'scheme/load',

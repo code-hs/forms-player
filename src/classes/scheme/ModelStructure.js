@@ -33,10 +33,18 @@ export class ModelStructure {
 		}, []);
 	}
 
-	static _isFieldInput(field) {
-		const notFieldsComponents = ['ButtonSubmit'];
+	/**
+	 * is field === input
+	 *
+	 * @param {Object} field
+	 * @returns {boolean}
+	 * @private
+	 */
+	static _isFieldInput(fieldOptions) {
+		const notInputComponents = ['ButtonSubmit'];
+		const fieldComponent = fieldOptions.generalParams.component;
 
-		return !notFieldsComponents.includes(field.generalParams.component);
+		return !notInputComponents.includes(fieldComponent);
 	}
 
 	static _filtrateFields(fields) {
