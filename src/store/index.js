@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-// схема, и все необходимое с ней
+// scheme functional
 import scheme from './scheme';
 
-// модель для инпутов, генерируется на основании схемы
+// model for inputs, generated structure based on the schema
 import model from './model';
 
+// validate inputs
 import validator from './validator';
 
 Vue.use(Vuex);

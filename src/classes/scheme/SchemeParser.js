@@ -5,16 +5,18 @@ class SchemeParser {
 
 	load() {
 		if (process.env.CUSTOM_RUN_COMMAND === 'serve') {
-			// при запуске через serve,
-			// схема берется из папки в апи
-			// так как нужен HRM, а для этого все должно быть подключено напрямую
-			// для прод билда, коментить эти блоки
+			// when run via SERVE
+			// schema is taken from folder in api project
+			// since HRM is needed, and for this everything must be connected directly
+
+			// !! for a prod build, comment these blocks
 			this.structure = require('../../../../api/classes/scheme/tempSource/mainSchemeStructure.json');
 			const SchemaFiltrator = require('../../../../api/classes/scheme/SchemeFiltrator');
 			this.structure = SchemaFiltrator.filtrateParamEnable(this.structure);
 		} else {
-			// loader сделал запрос по апи и получил схему
-			// loader и записал в localStorage
+			// Loader made api request and received a schema
+			// then Loader wrote to localStorage.
+			// And we are already reading the data here
 			const storageKey = 'WDFL:init:schemeStructure';
 			this.structure = localStorage.getItem(storageKey);
 			this.structure = JSON.parse(this.structure);

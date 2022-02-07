@@ -52,7 +52,7 @@ export default {
 			type: Number,
 			required: true,
 		},
-		// enable multiply in scheme for group
+		// enable multiply for group
 		enableMultiple: {
 			type: Boolean,
 			required: true,
@@ -61,12 +61,11 @@ export default {
 
 	computed: {
 		showButRemove() {
-			// отображаем кнопку удалить, ток при наличии двух и более fieldset item
+			// if fieldsets.length > 1 = show but remove
 			return this.fieldsetsCount > 1;
 		},
 		showMultipleSeparator() {
-			// отображаем только при включенном multiple в блоке, а так же при наличии
-			// двух и более блоков
+			// if multiply enable and fieldsets.length > 1
 
 			return this.enableMultiple && this.showButRemove;
 		},

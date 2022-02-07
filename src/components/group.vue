@@ -55,10 +55,8 @@ export default {
 	computed: {
 		...mapGetters({modelStructure: 'model/structure'}),
 		showButAdd() {
-			// кнопка отображается только при условии наличия в "fieldsets": [] элементов,
-			// а если их нет, то и смысла нет рисовать кнопку
-			// ибо exampleItem будет пустым
-
+			// show button + if we have at least one item.
+			// this item need for use as example for copy
 			return this.group.fieldsets?.length;
 		},
 	},

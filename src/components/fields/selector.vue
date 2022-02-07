@@ -34,7 +34,7 @@ export default {
 			type: Number,
 			required: true,
 		},
-		// ниже значения идут от, v-bind
+		// below params from v-bind
 		generalParams: {
 			type: Object,
 			required: true,

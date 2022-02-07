@@ -17,7 +17,7 @@ import config from '@/config/index';
 export default {
 	components: {Page},
 	props: {
-		// Необходим для grid system, что бы правильно обрабатывать для малого расширения формы
+		// Needed by the grid system to properly handle a small form resolution
 		dataLayout: {
 			type: String,
 			default: 'large', // | small

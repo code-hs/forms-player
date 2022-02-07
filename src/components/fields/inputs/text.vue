@@ -38,7 +38,7 @@ export default {
 			type: Number,
 			required: true,
 		},
-		// ниже значения идут от, v-bind
+		// below params from v-bind
 		generalParams: {
 			type: Object,
 			required: true,
@@ -52,7 +52,7 @@ export default {
 				errorText: '',
 			}),
 		},
-		// отображаем какие поля используем в этом объекте в коде
+		// inform about fields in this object (in this file)
 		text: {
 			type: Object,
 			required: false,
@@ -78,7 +78,7 @@ export default {
 			validatorTask: 'validator/currentTask',
 		}),
 		fieldsetModelItem() {
-			// Объект в котором хранятся значения инуптов в текущем fieldset
+			// current fieldset with inputs values
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
 		},
 		value() {
@@ -101,19 +101,7 @@ export default {
 	},
 
 	async created() {
-		const defaultValue = '';
-		// Как только отобразился текущий элемент, добавляем его реактивно в model/structure
-		// Что бы структура всегда была сгенерирована исходя из всех инпутов.
-		// И могла спокойно обрабатываться в <input v-model="fieldsetModelItem[generalParams.model]"
-		const options = {
-			groupIndex: this.groupIndex,
-			fieldsetIndex: this.fieldsetIndex,
-			inputModelName: this.generalParams.model,
-			inputValue: defaultValue,
-		};
-		this.initField(options);
-		this.validatorInitField(options);
-
+		this.initField();
 		this.processInput = debounce(this.processInput, 300);
 	},
 
@@ -123,7 +111,7 @@ export default {
 
 	methods: {
 		...mapMutations({
-			initField: 'model/initField',
+			modelInitField: 'model/initField',
 			validatorInitField: 'validator/initField',
 			validatorUpdateFieldInfo: 'validator/updateFieldInfo',
 			validatorDestroyField: 'validator/destroyField',
@@ -132,14 +120,28 @@ export default {
 			validatorResponseOnTask: 'validator/responseOnTask',
 		}),
 
+		initField() {
+			// init input
+			// for generate structure by inputs (model, validator);
+			// and we can use it in <input v-model="fieldsetModelItem[generalParams.model]"
+			const defaultValue = '';
+			const options = {
+				groupIndex: this.groupIndex,
+				fieldsetIndex: this.fieldsetIndex,
+				inputModelName: this.generalParams.model,
+				inputValue: defaultValue,
+			};
+			this.modelInitField(options);
+			this.validatorInitField(options);
+		},
+
 		focus() {
 			this.$refs.input.focus();
 		},
 		handleBlur() {
 			this.processValidationField();
 
-			// поле становиться грязным, если в нем была ошибка
-			// или чистым, если нет ошибок
+			// if field has error - becomes dirty, otherwise clear
 			this.valid.dirty = this.valid.error;
 			this.validatorSaveInfo();
 		},
@@ -150,20 +152,11 @@ export default {
 			this.processInput();
 		},
 		processInput() {
-			// use function when field dirty
+			// only for dirty state
 			if (!this.valid.dirty) return;
 
 			this.processValidationField();
 			this.validatorSaveInfo();
-		},
-		validatorSaveInfo() {
-			const information = {
-				groupIndex: this.groupIndex,
-				fieldsetIndex: this.fieldsetIndex,
-				inputModelName: this.generalParams.model,
-				error: this.valid.error,
-			};
-			this.validatorUpdateFieldInfo(information);
 		},
 		processValidationField() {
 			if (!this.validation) return;
@@ -174,6 +167,15 @@ export default {
 				// eslint-disable-next-line no-console
 				console.error(e);
 			}
+		},
+		validatorSaveInfo() {
+			const information = {
+				groupIndex: this.groupIndex,
+				fieldsetIndex: this.fieldsetIndex,
+				inputModelName: this.generalParams.model,
+				error: this.valid.error,
+			};
+			this.validatorUpdateFieldInfo(information);
 		},
 	},
 };
