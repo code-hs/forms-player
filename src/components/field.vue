@@ -35,7 +35,7 @@ export default {
 			type: Number,
 			required: true,
 		},
-		// все поля по текущему field
+		// field params from scheme
 		fieldParams: {
 			type: Object,
 			required: true,
@@ -43,8 +43,8 @@ export default {
 	},
 
 	methods: {
-		// for grid system
 		getFieldClasses() {
+			// for grid system
 			let classes = '';
 
 			// col-6, col-12,...

@@ -1,9 +1,8 @@
 export class ModelStructure {
 	/**
-	 * Генерирует структуру для текущей страницы, исходя из расположения
-	 * инпутов в схеме
+	 * Generate a structure for the current page, based on inputs in the schema
 	 *
-	 * @param page - page structure
+	 * @param {string} page - page structure
 	 * @returns {[]}
 	 *
 	 * return like
@@ -18,14 +17,15 @@ export class ModelStructure {
 	static generate(page) {
 		if (!page || !page.groups) return [];
 
-		// сначала проходим по группам
+		// the groups first
 		return page.groups.reduce((acc, group, groupId) => {
-			// если в группе нет полей, пропускаем
+			// if no fields in the group, skip
 			if (!this._isHasGroupAnyField(group)) return acc;
 
-			// каждую группу инициализируем как массив
+			// each group initialize as an array
+
 			acc.push([]);
-			// создаем store для будущих полей
+			// create a store for future fields
 			// {} = inputs store
 			acc[groupId].push({});
 

@@ -24,9 +24,7 @@ export default {
 	},
 
 	data() {
-		// В дальнейшем уже продумывать, как добавлять стили, то ли тут все - все
-		// прописать. А потом в элементах добавлять новые классы, или как кто
-		// захочет. Тут уж все доступно и открыто
+		// global custom styles string
 		// const customStyles = '.page-item {background: red}';
 
 		return {

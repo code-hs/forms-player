@@ -16,13 +16,29 @@ const mutations = {
 	generateStructure: (s, page) => {
 		s.structure = ModelStructure.generate(page);
 	},
+
+	/**
+	 * Add file to model structure
+	 * @param s
+	 * @param {number} groupIndex
+	 * @param {number} fieldsetIndex
+	 * @param {string} inputModelName
+	 * @param {string} inputValue
+	 */
 	initField: (s, {groupIndex, fieldsetIndex, inputModelName, inputValue}) => {
+		// clarification position
 		const fieldset = s.structure[groupIndex][fieldsetIndex];
 		Vue.set(fieldset, inputModelName, inputValue);
 	},
 
+	/**
+	 * Remove fieldset from current group
+	 *
+	 * @param s
+	 * @param {number} groupIndex
+	 * @param {number} fieldsetIndex
+	 */
 	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
-		// отправляемся в модель текущей группы, и удаляем из нее fieldset
 		s.structure[groupIndex].splice(fieldsetIndex, 1);
 	},
 
@@ -34,6 +50,8 @@ const mutations = {
 	copyFieldsetItem: (s, {groupIndex}) => {
 		const exampleIndex = 0;
 		const exampleItem = s.structure[groupIndex][exampleIndex];
+		if (!exampleItem) return;
+
 		// without reactivity
 		const newItem = JSON.parse(JSON.stringify(exampleItem));
 		s.structure[groupIndex].push(newItem);

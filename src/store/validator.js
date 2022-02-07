@@ -25,32 +25,44 @@ const getters = {
 };
 
 const mutations = {
-	// ######### STRUCTURE
+	// ----------------- STRUCTURE
 	setStructure: (s, v) => {
 		s.structure = v;
 	},
 	generateStructure: (s, page) => {
 		s.structure = ModelStructure.generate(page);
 	},
+
+	/**
+	 * Add file to model structure
+	 * @param s
+	 * @param {number} groupIndex
+	 * @param {number} fieldsetIndex
+	 * @param {string} inputModelName
+	 */
 	initField: (s, {groupIndex, fieldsetIndex, inputModelName}) => {
+		// clarification position
 		const fieldset = s.structure[groupIndex][fieldsetIndex];
 		const template = {
 			error: false,
 		};
 
 		Vue.set(fieldset, inputModelName, template);
+
+		// logic after add the item
 		s.inputs.count++;
-		// как только происходит удаление элемента, очищаем какую либо инфу о прошлых задачах
-		s.task.answeredInputsCount = 0;
-	},
-	destroyField: s => {
-		s.inputs.count--;
-		// как только происходит удаление элемента, очищаем какую либо инфу о прошлых задачах
+		// reset the information about any old task
 		s.task.answeredInputsCount = 0;
 	},
 
+	/**
+	 * Remove fieldset from current group
+	 *
+	 * @param s
+	 * @param {number} groupIndex
+	 * @param {number} fieldsetIndex
+	 */
 	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
-		// отправляемся в модель текущей группы, и удаляем из нее fieldset
 		s.structure[groupIndex].splice(fieldsetIndex, 1);
 	},
 
@@ -62,11 +74,22 @@ const mutations = {
 	copyFieldsetItem: (s, {groupIndex}) => {
 		const exampleIndex = 0;
 		const exampleItem = s.structure[groupIndex][exampleIndex];
+		if (!exampleItem) return;
+
 		// without reactivity
 		const newItem = JSON.parse(JSON.stringify(exampleItem));
 		s.structure[groupIndex].push(newItem);
 	},
-	// ######### END STRUCTURE
+	// ----------------- END STRUCTURE BLOCK
+	/**
+	 * after delete the field vue item
+	 * @param s
+	 */
+	destroyField: s => {
+		s.inputs.count--;
+		// reset the information about any old task
+		s.task.answeredInputsCount = 0;
+	},
 
 	updateFieldInfo: (s, {groupIndex, fieldsetIndex, inputModelName, error}) => {
 		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
@@ -78,7 +101,7 @@ const mutations = {
 		s.inputs.focus = false;
 		s.task.answeredInputsCount = 0;
 	},
-	completeTask: s => {
+	clearTask: s => {
 		s.task.current = '';
 	},
 	setFocus: (s, v) => {
@@ -93,16 +116,15 @@ const actions = {
 	responseOnTask({commit, getters}, fieldError) {
 		commit('answeredInputsPlus');
 		if (getters.task.answeredInputsCount === getters.inputs.count) {
-			commit('completeTask');
+			commit('clearTask');
 		}
 
-		// нет необходимости активировать валидное поле
-		// or if focus activated
-		// return focusActivate = false
+		// if no errors in the field or the focus is already activated
 		if (!fieldError || getters.inputs.focus) return false;
 
 		// go to activate focus flag
 		commit('setFocus', true);
+
 		// activate focus in view
 		return true;
 	},

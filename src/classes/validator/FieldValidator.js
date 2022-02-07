@@ -17,45 +17,43 @@ export class FieldValidator {
 	}
 
 	static isValid(validationRules, fieldValue) {
-		// если нет каких либо правил в схеме, то поле становиться валидным
+		// if there are no rules in the schema ->  field becomes valid
 		if (!validationRules || !Object.keys(validationRules).length) {
 			return true;
 		}
 
-		// если нет паттерна, и при этом есть required,
-		// то делаем по required проверку
-		if (!validationRules.pattern && 'required' in validationRules) {
-			// если required === true то делаем проверку поля
-			// иначе всегда true, так как required === false
-			// и значит никаких проверок для поля
+		if (validationRules.pattern) {
+			try {
+				const regexp = this.stringToRegex(validationRules.pattern);
+				return regexp.test(fieldValue);
+			} catch {
+				throw new Error('bad validation pattern');
+			}
+		} else if ('required' in validationRules) {
+			// if rules have only required
+			// if required === true -> check the field
+			// if required === false -> return true (valid)
 			return validationRules.required ? Boolean(fieldValue) : true;
 		}
 
-		// А если и вовсе нет паттерна,
-		// то в объекте валидации непонятно что находится
-		if (!validationRules.pattern) return true;
-
-		try {
-			const regexp = this.stringToRegex(validationRules.pattern);
-			return regexp.test(fieldValue);
-		} catch {
-			throw new Error('bad validation pattern');
-		}
+		// if no pattern and no required, rules have not useful options
+		// -> field valid
+		return true;
 	}
 
 	static hasStructureErrorInput(structure) {
-		// удаляем вложенность
 		const flattedStructure = structure.flat(9);
 
-		// fieldset из объекта превращаем в массив, и потом отдаем все данные по field
+		// transform fieldset item from object to array
+		// and give all data by field
 		const fieldsDataInArray = flattedStructure.map(fieldset =>
 			Object.entries(fieldset).map(field => field[1])
 		);
 
-		// удаляем вложенность для групп
+		// flatting groups
 		const fieldsFlatted = fieldsDataInArray.flat(9);
 
-		// если хотя бы в одном field имеется ошибка
+		// if at least one field has an error
 		return fieldsFlatted.some(field => field.error);
 	}
 }
