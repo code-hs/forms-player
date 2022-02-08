@@ -73,6 +73,8 @@ export default {
 			validatorCopyFieldsetItem: 'validator/copyFieldsetItem',
 		}),
 		initFieldsetsKeys() {
+			if (!this.group.fieldsets || !this.group.fieldsets.length) return;
+
 			// generate unique keys for each item, since we remove and add these items
 			// if this is not done, vue lazily updates the blocks
 			this.group.fieldsets.forEach(item => {
@@ -80,6 +82,10 @@ export default {
 			});
 		},
 		handleButRemove(fieldsetIndex) {
+			if (!this.group.fieldsets || !this.group.fieldsets.length) {
+				throw new Error('group.vue: handleButRemove: bad fieldsets');
+			}
+
 			// remove by fieldset index
 			this.group.fieldsets.splice(fieldsetIndex, 1);
 
@@ -89,8 +95,9 @@ export default {
 		},
 		handleButAdd() {
 			// add new item to inputs structure
-			this.copyFieldsetItem({groupIndex: this.groupIndex});
-			this.validatorCopyFieldsetItem({groupIndex: this.groupIndex});
+			const pos = {groupIndex: this.groupIndex};
+			this.copyFieldsetItem(pos);
+			this.validatorCopyFieldsetItem(pos);
 
 			// add new item to view
 			const newItem = GroupView.getNewItem(this.group.fieldsets);

@@ -20,7 +20,7 @@ export class FieldValidator {
 	 * is valid field value by rules
 	 *
 	 * @param {Object} validationRules
-	 * @param fieldValue
+	 * @param {string} fieldValue
 	 * @returns {boolean}
 	 */
 	static isValid(validationRules, fieldValue) {
@@ -48,7 +48,13 @@ export class FieldValidator {
 		return true;
 	}
 
+	/**
+	 * @param {Array} structure
+	 * @returns {Array}
+	 */
 	static flatStructure(structure) {
+		if (!structure) return [];
+
 		const flattedStructure = structure.flat(9);
 
 		// transform fieldset item from object to array
@@ -61,7 +67,13 @@ export class FieldValidator {
 		return fieldsDataInArray.flat(9);
 	}
 
+	/**
+	 * @param {Array} structure
+	 * @returns {boolean}
+	 */
 	static hasStructureErrorInput(structure) {
+		if (!structure) return false;
+
 		const fieldsFlatted = this.flatStructure(structure);
 		// if at least one field has an error
 		return fieldsFlatted.some(field => field.error);

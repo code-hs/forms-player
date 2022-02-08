@@ -39,7 +39,7 @@ export default {
 			const obj = {};
 
 			if (this.row.styles?.['justify-content']) {
-				obj['justify-content'] = this.row.styles?.['justify-content'];
+				obj['justify-content'] = this.row.styles['justify-content'];
 			}
 
 			return obj;
