@@ -26,6 +26,10 @@ const actions = {
 	 * @returns {Object} - scheme
 	 */
 	initPage({commit}, urlHash) {
+		if (!urlHash) {
+			throw new Error('scheme: initPage: bad urlHash');
+		}
+
 		const page = schemeParser.getPage(urlHash);
 		commit('setCurrentPage', page);
 

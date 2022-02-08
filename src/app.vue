@@ -51,10 +51,14 @@ export default {
 	async created() {
 		this.loadScheme();
 		const currentPage = await this.initPage(this.urlHash);
+		if (!currentPage) {
+			throw new Error('app: created: bad currentPage');
+		}
+
 		this.generateModelSkeleton(currentPage);
 		this.generateValidatorSkeleton(currentPage);
 
-		// after all data loaded and valid
+		// after structure generated, we can inject inputs
 		if (currentPage && this.modelStructure) this.showContent = true;
 	},
 

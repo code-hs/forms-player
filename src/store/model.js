@@ -11,6 +11,10 @@ const getters = {
 
 const mutations = {
 	generateSkeleton: (s, page) => {
+		if (!page) {
+			throw new Error('model: generateSkeleton: bad page');
+		}
+
 		s.structure = ModelStructure.generate(page);
 	},
 
@@ -23,6 +27,10 @@ const mutations = {
 	 * @param {string} inputValue
 	 */
 	initField: (s, {groupIndex, fieldsetIndex, inputModelName, inputValue}) => {
+		if (!inputModelName) {
+			throw new Error('model: initField: bad inputModelName');
+		}
+
 		// clarification position
 		const fieldset = s.structure[groupIndex][fieldsetIndex];
 		Vue.set(fieldset, inputModelName, inputValue);
@@ -44,12 +52,14 @@ const mutations = {
 	 * @param {number} groupIndex
 	 */
 	copyFieldsetItem: (s, {groupIndex}) => {
-		const exampleIndex = 0;
-		const exampleItem = s.structure[groupIndex][exampleIndex];
-		if (!exampleItem) return;
+		const index = 0;
+		const sourceItem = s.structure[groupIndex][index];
+		if (!sourceItem) {
+			throw new Error('model: copyFieldsetItem: bad sourceItem');
+		}
 
 		// without reactivity
-		const newItem = JSON.parse(JSON.stringify(exampleItem));
+		const newItem = JSON.parse(JSON.stringify(sourceItem));
 		s.structure[groupIndex].push(newItem);
 	},
 };

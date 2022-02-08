@@ -42,9 +42,7 @@ export default {
 
 	watch: {
 		validatorTaskCompleted(status) {
-			if (!status) return;
-
-			if (this.validatorHasError) return;
+			if (!status || this.validatorHasError) return;
 
 			this.submitAfterValidation();
 		},
@@ -52,11 +50,11 @@ export default {
 
 	methods: {
 		...mapMutations({startValidation: 'validator/startValidation'}),
-
 		handleSubmit() {
 			this.startValidation();
 		},
 		submitAfterValidation() {
+			// eslint-disable-next-line no-alert
 			alert('success');
 		},
 	},

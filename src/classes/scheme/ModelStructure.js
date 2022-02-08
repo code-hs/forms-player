@@ -3,7 +3,7 @@ export class ModelStructure {
 	 * Generate a structure for the current page, based on inputs in the schema
 	 *
 	 * @param {string} page - page structure
-	 * @returns {[]}
+	 * @returns {Array}
 	 *
 	 * return like
 	 * [ group items
@@ -41,13 +41,25 @@ export class ModelStructure {
 	 * @private
 	 */
 	static _isFieldInput(fieldOptions) {
+		if (!fieldOptions) {
+			throw new Error('ModelStructure: _isFieldInput: bad fieldOptions');
+		}
+
 		const notInputComponents = ['ButtonSubmit'];
 		const fieldComponent = fieldOptions.generalParams.component;
 
 		return !notInputComponents.includes(fieldComponent);
 	}
 
+	/**
+	 *
+	 * @param {Array} fields
+	 * @returns {Array}
+	 * @private
+	 */
 	static _filtrateFields(fields) {
+		if (!fields) return false;
+
 		return fields.filter(field => this._isFieldInput(field));
 	}
 

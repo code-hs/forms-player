@@ -27,6 +27,10 @@ const getters = {
 const mutations = {
 	// ----------------- STRUCTURE
 	generateSkeleton: (s, page) => {
+		if (!page) {
+			throw new Error('validator: generateSkeleton: bad page');
+		}
+
 		s.structure = ModelStructure.generate(page);
 	},
 
@@ -38,6 +42,10 @@ const mutations = {
 	 * @param {string} inputModelName
 	 */
 	initField: (s, {groupIndex, fieldsetIndex, inputModelName}) => {
+		if (!inputModelName) {
+			throw new Error('validator: initField: bad inputModelName');
+		}
+
 		// clarification position
 		const fieldset = s.structure[groupIndex][fieldsetIndex];
 		const template = {
@@ -68,12 +76,14 @@ const mutations = {
 	 * @param {number} groupIndex
 	 */
 	copyFieldsetItem: (s, {groupIndex}) => {
-		const exampleIndex = 0;
-		const exampleItem = s.structure[groupIndex][exampleIndex];
-		if (!exampleItem) return;
+		const index = 0;
+		const sourceItem = s.structure[groupIndex][index];
+		if (!sourceItem) {
+			throw new Error('validator: copyFieldsetItem: bad sourceItem');
+		}
 
 		// without reactivity
-		const newItem = JSON.parse(JSON.stringify(exampleItem));
+		const newItem = JSON.parse(JSON.stringify(sourceItem));
 		s.structure[groupIndex].push(newItem);
 	},
 	// ----------------- END STRUCTURE BLOCK
@@ -96,6 +106,10 @@ const mutations = {
 	 * @param {boolean} error - field status from data.valid.error
 	 */
 	updateFieldInfo: (s, {groupIndex, fieldsetIndex, inputModelName, error}) => {
+		if (!inputModelName) {
+			throw new Error('validator: updateFieldInfo: bad inputModelName');
+		}
+
 		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
 		item.error = error;
 	},
@@ -107,11 +121,11 @@ const mutations = {
 	clearTask: s => {
 		s.task.current = '';
 	},
-	setFocus: (s, v) => {
-		s.inputs.focus = v;
-	},
 	inputAnswered: s => {
 		s.task.answeredInputsCount++;
+	},
+	setFocus: (s, v) => {
+		s.inputs.focus = v;
 	},
 };
 
@@ -135,7 +149,6 @@ const actions = {
 
 		// go to activate focus flag
 		commit('setFocus', true);
-
 		// activate focus in view
 		return true;
 	},

@@ -3,7 +3,7 @@
 		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
 
 		<input
-			ref="input"
+			ref="self"
 			v-model="fieldsetModelItem[generalParams.model]"
 			type="text"
 			:placeholder="text.placeholder"
@@ -25,7 +25,10 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
+import {
+	TASK_VALIDATION,
+	debounceTime,
+} from '@/classes/validator/validatorUtils';
 
 export default {
 	name: 'InputText',
@@ -100,9 +103,9 @@ export default {
 		},
 	},
 
-	async created() {
+	created() {
 		this.initField();
-		this.processInput = debounce(this.processInput, 300);
+		this.processInput = debounce(this.processInput, debounceTime);
 	},
 
 	destroyed() {
@@ -134,10 +137,6 @@ export default {
 			this.modelInitField(options);
 			this.validatorInitField(options);
 		},
-
-		focus() {
-			this.$refs.input.focus();
-		},
 		handleBlur() {
 			this.processValidationField();
 
@@ -148,7 +147,6 @@ export default {
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
 			this.fieldsetModelItem[this.generalParams.model] = e.target.value;
-
 			this.processInput();
 		},
 		processInput() {
@@ -176,6 +174,9 @@ export default {
 				error: this.valid.error,
 			};
 			this.validatorUpdateFieldInfo(information);
+		},
+		focus() {
+			this.$refs.self.focus();
 		},
 	},
 };
