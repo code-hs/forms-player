@@ -4,13 +4,13 @@
 	"private": true,
 	"scripts": {
 		"serve": "cross-env CUSTOM_MODE=dev CUSTOM_RUN_COMMAND=serve vue-cli-service serve",
-		"analyze": "cross-env CUSTOM_MODE=analyze vue-cli-service build",
 		" ": "",
-		"build prod        (minimized, clear comments/logs)": "cross-env CUSTOM_MODE=prod vue-cli-service build",
-		"build dev          (full, with sourcemap, with comments, logs)": "cross-env CUSTOM_MODE=dev vue-cli-service build",
+		"build min        (clear comments/logs)": "cross-env CUSTOM_MODE=prod vue-cli-service build",
+		"build full         (with sourcemap, with comments, logs)": "cross-env CUSTOM_MODE=dev vue-cli-service build",
 		"  ": "",
 		"lint": "vue-cli-service lint",
-		"test": "jest"
+		"test": "jest",
+		"analyze": "cross-env CUSTOM_MODE=analyze vue-cli-service build"
 	},
 	"dependencies": {
 		"axios": "^0.21.4",
