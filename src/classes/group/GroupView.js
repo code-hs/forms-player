@@ -8,7 +8,7 @@ export class GroupView {
 	 * @returns {Object|boolean}
 	 */
 	static getNewItem(fieldsets) {
-		if (!fieldsets || fieldsets.length) {
+		if (!fieldsets || !fieldsets.length) {
 			throw new Error('GroupView: getNewItem: empty fieldsets');
 		}
 
