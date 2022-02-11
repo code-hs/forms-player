@@ -21,6 +21,9 @@
 		&:invalid {
 			color: $t-dark-selectorPlaceholder;
 		}
+		&.error {
+			border-color: $t-dark-formItemRed;
+		}
 	}
 }
 
