@@ -1,6 +1,14 @@
 <template>
 	<div class="input-selector">
-		<select v-model="fieldsetModelItem[generalParams.model]" required>
+		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
+
+		<select
+			ref="self"
+			v-model="fieldsetModelItem[generalParams.model]"
+			:required="validation.required"
+			:class="{error: valid.error}"
+			@change="handleChange"
+		>
 			<option
 				v-if="customParams.values && customParams.values.default"
 				value=""
@@ -17,11 +25,19 @@
 				{{ value }}
 			</option>
 		</select>
+
+		<transition name="fade">
+			<div v-if="validation.errorText" v-show="valid.error" class="error-text">
+				{{ validation.errorText }}
+			</div>
+		</transition>
 	</div>
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex';
+import {mapGetters, mapMutations, mapActions} from 'vuex';
+import {FieldValidator} from '@/classes/validator/FieldValidator';
+import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
 
 export default {
 	name: 'Selector',
@@ -42,34 +58,116 @@ export default {
 		customParams: {
 			type: Object,
 			required: true,
+			default: () => ({
+				values: {},
+			}),
+		},
+		validation: {
+			type: Object,
+			required: false,
+			default: () => ({
+				required: false,
+				pattern: '',
+				errorText: '',
+			}),
+		},
+		// inform about fields in this object (in this file)
+		text: {
+			type: Object,
+			required: false,
+			default: () => ({
+				placeholder: '',
+				hint: '',
+			}),
 		},
 	},
 
 	data() {
 		return {
-			value: '',
+			valid: {
+				error: false,
+			},
 		};
 	},
 
 	computed: {
-		...mapGetters({modelStructure: 'model/structure'}),
+		...mapGetters({
+			modelStructure: 'model/structure',
+			validatorTask: 'validator/currentTask',
+		}),
 		fieldsetModelItem() {
+			// current fieldset with inputs values
 			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
+		},
+		value() {
+			return this.fieldsetModelItem[this.generalParams.model];
+		},
+	},
+
+	watch: {
+		validatorTask(taskName) {
+			if (taskName !== TASK_VALIDATION) return;
+
+			this.handleChange();
+			this.validatorResponseOnTask(this.valid.error);
 		},
 	},
 
 	created() {
-		const options = {
-			groupIndex: this.groupIndex,
-			fieldsetIndex: this.fieldsetIndex,
-			inputModelName: this.generalParams.model,
-			inputValue: this.value,
-		};
-		this.initField(options);
+		this.initField();
+	},
+
+	destroyed() {
+		this.validatorDestroyField();
 	},
 
 	methods: {
-		...mapMutations({initField: 'model/initField'}),
+		...mapMutations({
+			modelInitField: 'model/initField',
+			validatorInitField: 'validator/initField',
+			validatorUpdateFieldInfo: 'validator/updateFieldInfo',
+			validatorDestroyField: 'validator/destroyField',
+		}),
+		...mapActions({
+			validatorResponseOnTask: 'validator/responseOnTask',
+		}),
+		initField() {
+			// init input
+			// for generate structure by inputs (model, validator);
+			// and we can use it in <input v-model="fieldsetModelItem[generalParams.model]"
+			const defaultValue = '';
+			const options = {
+				groupIndex: this.groupIndex,
+				fieldsetIndex: this.fieldsetIndex,
+				inputModelName: this.generalParams.model,
+				inputValue: defaultValue,
+			};
+			this.modelInitField(options);
+			this.validatorInitField(options);
+		},
+		handleChange() {
+			this.processValidationField();
+			this.validatorSaveInfo();
+		},
+		processValidationField() {
+			if (!this.validation) return;
+
+			try {
+				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
+			} catch (e) {
+				// eslint-disable-next-line no-console
+				console.error(e);
+			}
+		},
+		validatorSaveInfo() {
+			const information = {
+				groupIndex: this.groupIndex,
+				fieldsetIndex: this.fieldsetIndex,
+				inputModelName: this.generalParams.model,
+				error: this.valid.error,
+			};
+			this.validatorUpdateFieldInfo(information);
+		},
 	},
 };
 </script>
