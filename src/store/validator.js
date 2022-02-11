@@ -76,8 +76,16 @@ const mutations = {
 	 * @param {number} groupIndex
 	 */
 	copyFieldsetItem: (s, {groupIndex}) => {
+		if (!s.structure || !s.structure[groupIndex]) {
+			throw new Error(
+				'validator: copyFieldsetItem: bad structure or cant find' +
+					' group by groupIndex'
+			);
+		}
+
 		const index = 0;
 		const sourceItem = s.structure[groupIndex][index];
+
 		if (!sourceItem) {
 			throw new Error('validator: copyFieldsetItem: bad sourceItem');
 		}
