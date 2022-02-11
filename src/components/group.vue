@@ -16,7 +16,6 @@
 		</div>
 
 		<div class="buttons-container">
-			<!--suppress JSUnresolvedVariable -->
 			<div
 				v-show="showButAdd"
 				v-if="group.multiple"
