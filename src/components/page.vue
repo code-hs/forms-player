@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 import Group from '@/components/group';
 
 export default {
@@ -44,12 +44,16 @@ export default {
 		validatorTaskCompleted(status) {
 			if (!status || this.validatorHasError) return;
 
+			this.clearTaskStatus();
 			this.submitAfterValidation();
 		},
 	},
 
 	methods: {
-		...mapMutations({startValidation: 'validator/startValidation'}),
+		...mapActions({
+			startValidation: 'validator/startValidation',
+			clearTaskStatus: 'validator/clearTaskStatus',
+		}),
 		handleSubmit() {
 			this.startValidation();
 		},

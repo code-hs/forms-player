@@ -12,6 +12,7 @@ const state = () => ({
 	task: {
 		current: '',
 		answeredInputsCount: 0,
+		completed: false,
 	},
 });
 
@@ -20,10 +21,11 @@ const getters = {
 	inputs: s => s.inputs,
 	task: s => s.task,
 	currentTask: s => s.task.current,
-	taskCompleted: s => s.task.answeredInputsCount === s.inputs.count,
+	taskCompleted: s => s.task.completed,
 	hasError: s => FieldValidator.hasStructureErrorInput(s.structure),
 };
 
+// noinspection DuplicatedCode
 const mutations = {
 	// ----------------- STRUCTURE
 	generateSkeleton: (s, page) => {
@@ -121,23 +123,35 @@ const mutations = {
 		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
 		item.error = error;
 	},
-	startValidation: s => {
+	setFocus: (s, v) => {
+		s.inputs.focus = v;
+	},
+
+	// ----------------- TASKS
+	startTask: s => {
 		s.task.current = TASK_VALIDATION;
 		s.inputs.focus = false;
 		s.task.answeredInputsCount = 0;
+		// if count === 0, task completed!
+		s.task.completed = !s.inputs.count;
 	},
-	clearTask: s => {
+	completeTask: s => {
 		s.task.current = '';
+		s.task.completed = true;
+	},
+	clearTaskStatus: s => {
+		s.task.completed = false;
 	},
 	inputAnswered: s => {
 		s.task.answeredInputsCount++;
 	},
-	setFocus: (s, v) => {
-		s.inputs.focus = v;
-	},
+	// ----------------- TASKS END
 };
 
 const actions = {
+	startValidation({commit}) {
+		commit('startTask');
+	},
 	/**
 	 * input response to an incoming task
 	 *
@@ -149,7 +163,9 @@ const actions = {
 	responseOnTask({commit, getters}, fieldError) {
 		commit('inputAnswered');
 		if (getters.task.answeredInputsCount === getters.inputs.count) {
-			commit('clearTask');
+			commit('completeTask');
+			// dont update focus
+			return false;
 		}
 
 		// if no errors in the field or the focus is already activated
@@ -159,6 +175,12 @@ const actions = {
 		commit('setFocus', true);
 		// activate focus in view
 		return true;
+	},
+	/**
+	 * After form handle submit, clear task
+	 */
+	clearTaskStatus({commit}) {
+		commit('clearTaskStatus');
 	},
 };
 
