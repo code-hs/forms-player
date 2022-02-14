@@ -78,4 +78,14 @@ export class FieldValidator {
 		// if at least one field has an error
 		return fieldsFlatted.some(field => field.error);
 	}
+
+	static canValidation(validationRules, onlyRequired = false) {
+		if (!validationRules) return false;
+
+		if (onlyRequired) return validationRules.required;
+
+		// noinspection RedundantIfStatementJS
+		if (validationRules.pattern || validationRules.required) return true;
+		return false;
+	}
 }
