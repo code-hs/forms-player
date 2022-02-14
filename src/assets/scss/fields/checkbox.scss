@@ -34,6 +34,10 @@
 			border: 2px solid $t-dark-buttonsBorder;
 		}
 
+		&.error::before {
+			border-color: $t-dark-formItemRed;
+		}
+
 		a {
 			color: $t-dark-checkboxText;
 		}
