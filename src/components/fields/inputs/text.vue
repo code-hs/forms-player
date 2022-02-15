@@ -68,6 +68,7 @@ export default {
 			valid: {
 				dirty: false,
 				error: false,
+				connect: false,
 			},
 		};
 	},
@@ -88,7 +89,9 @@ export default {
 
 	watch: {
 		async validatorTaskStatus(status) {
-			if (status !== taskStatuses.process) return;
+			if (status !== taskStatuses.process || !this.valid.connect) {
+				return;
+			}
 
 			this.handleBlur();
 			// noinspection ES6RedundantAwait
@@ -134,10 +137,13 @@ export default {
 			this.modelInitField(options);
 
 			if (FieldValidator.canValidation(this.validation)) {
+				this.valid.connect = true;
 				this.validatorInitField(options);
 			}
 		},
 		handleBlur() {
+			if (!this.valid.connect) return;
+
 			this.processValidationField();
 
 			// if field has error - becomes dirty, otherwise clear
@@ -145,6 +151,8 @@ export default {
 			this.validatorSaveInfo();
 		},
 		handleInput(e) {
+			if (!this.valid.connect) return;
+
 			// update v-model, fix for mobile gboard
 			this.fieldsetModelItem[this.generalParams.model] = e.target.value;
 			this.processInput();
@@ -157,8 +165,6 @@ export default {
 			this.validatorSaveInfo();
 		},
 		processValidationField() {
-			if (!this.validation) return;
-
 			try {
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {

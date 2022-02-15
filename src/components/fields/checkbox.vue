@@ -56,6 +56,7 @@ export default {
 			valid: {
 				error: false,
 				errorForView: false,
+				connect: false,
 			},
 		};
 	},
@@ -76,10 +77,7 @@ export default {
 
 	watch: {
 		validatorTaskStatus(status) {
-			if (
-				status !== taskStatuses.process ||
-				!FieldValidator.canValidation(this.validation, true)
-			) {
+			if (status !== taskStatuses.process || !this.valid.connect) {
 				return;
 			}
 
@@ -123,11 +121,12 @@ export default {
 			this.modelInitField(options);
 
 			if (FieldValidator.canValidation(this.validation, true)) {
+				this.valid.connect = true;
 				this.validatorInitField(options);
 			}
 		},
 		handleChange() {
-			if (!FieldValidator.canValidation(this.validation, true)) return;
+			if (!this.valid.connect) return;
 
 			if (this.value) this.valid.errorForView = false;
 			this.valid.error = !this.value;

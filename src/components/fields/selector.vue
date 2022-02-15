@@ -86,6 +86,7 @@ export default {
 		return {
 			valid: {
 				error: false,
+				connect: false,
 			},
 		};
 	},
@@ -106,7 +107,9 @@ export default {
 
 	watch: {
 		async validatorTaskStatus(status) {
-			if (status !== taskStatuses.process) return;
+			if (status !== taskStatuses.process || !this.valid.connect) {
+				return;
+			}
 
 			this.handleChange();
 			this.validatorResponseOnTask(this.valid.error);
@@ -145,16 +148,17 @@ export default {
 			this.modelInitField(options);
 
 			if (FieldValidator.canValidation(this.validation)) {
+				this.valid.connect = true;
 				this.validatorInitField(options);
 			}
 		},
 		handleChange() {
+			if (!this.valid.connect) return;
+
 			this.processValidationField();
 			this.validatorSaveInfo();
 		},
 		processValidationField() {
-			if (!this.validation) return;
-
 			try {
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {
