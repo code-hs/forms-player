@@ -16,6 +16,7 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import Group from '@/components/group';
+import {taskStatuses} from '@/classes/validator/validatorUtils';
 
 export default {
 	name: 'Page',
@@ -36,15 +37,15 @@ export default {
 		...mapGetters({
 			page: 'scheme/currentPage',
 			validatorHasError: 'validator/hasError',
-			validatorTaskCompleted: 'validator/taskCompleted',
+			validatorTaskStatus: 'validator/taskStatus',
 		}),
 	},
 
 	watch: {
-		validatorTaskCompleted(status) {
-			if (!status || this.validatorHasError) return;
+		validatorTaskStatus(status) {
+			if (status !== taskStatuses.completed || this.validatorHasError) return;
 
-			this.clearTaskStatus();
+			this.finishTask();
 			this.submitAfterValidation();
 		},
 	},
@@ -52,7 +53,7 @@ export default {
 	methods: {
 		...mapActions({
 			startValidation: 'validator/startValidation',
-			clearTaskStatus: 'validator/clearTaskStatus',
+			finishTask: 'validator/finishTask',
 		}),
 		handleSubmit() {
 			this.startValidation();

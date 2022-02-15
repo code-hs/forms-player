@@ -25,10 +25,7 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {
-	TASK_VALIDATION,
-	debounceTime,
-} from '@/classes/validator/validatorUtils';
+import {taskStatuses, debounceTime} from '@/classes/validator/validatorUtils';
 
 export default {
 	name: 'InputPassword',
@@ -78,7 +75,7 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
-			validatorTask: 'validator/currentTask',
+			validatorTaskStatus: 'validator/taskStatus',
 		}),
 		fieldsetModelItem() {
 			// current fieldset with inputs values
@@ -90,8 +87,8 @@ export default {
 	},
 
 	watch: {
-		async validatorTask(taskName) {
-			if (taskName !== TASK_VALIDATION) return;
+		async validatorTaskStatus(status) {
+			if (status !== taskStatuses.process) return;
 
 			this.handleBlur();
 			// noinspection ES6RedundantAwait

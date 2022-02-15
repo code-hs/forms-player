@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {ModelStructure} from '@/classes/scheme/ModelStructure';
-import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
+import {taskStatuses} from '@/classes/validator/validatorUtils';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 
 const state = () => ({
@@ -10,19 +10,17 @@ const state = () => ({
 		focus: false,
 	},
 	task: {
-		current: '',
+		status: '',
 		answeredInputsCount: 0,
-		completed: false,
 	},
 });
 
 const getters = {
 	structure: s => s.structure,
+	hasError: s => FieldValidator.hasStructureErrorInput(s.structure),
 	inputs: s => s.inputs,
 	task: s => s.task,
-	currentTask: s => s.task.current,
-	taskCompleted: s => s.task.completed,
-	hasError: s => FieldValidator.hasStructureErrorInput(s.structure),
+	taskStatus: s => s.task.status,
 };
 
 // noinspection DuplicatedCode
@@ -129,18 +127,16 @@ const mutations = {
 
 	// ----------------- TASKS
 	startTask: s => {
-		s.task.current = TASK_VALIDATION;
-		s.inputs.focus = false;
-		s.task.answeredInputsCount = 0;
 		// if count === 0, task completed!
-		s.task.completed = !s.inputs.count;
+		s.task.status = s.inputs.count
+			? taskStatuses.process
+			: taskStatuses.completed;
+
+		s.task.answeredInputsCount = 0;
+		s.inputs.focus = false;
 	},
-	completeTask: s => {
-		s.task.current = '';
-		s.task.completed = true;
-	},
-	clearTaskStatus: s => {
-		s.task.completed = false;
+	setTaskStatus: (s, v) => {
+		s.task.status = v;
 	},
 	inputAnswered: s => {
 		s.task.answeredInputsCount++;
@@ -163,7 +159,7 @@ const actions = {
 	responseOnTask({commit, getters}, fieldError) {
 		commit('inputAnswered');
 		if (getters.task.answeredInputsCount === getters.inputs.count) {
-			commit('completeTask');
+			commit('setTaskStatus', taskStatuses.completed);
 			// dont update focus
 			return false;
 		}
@@ -179,8 +175,8 @@ const actions = {
 	/**
 	 * After form handle submit, clear task
 	 */
-	clearTaskStatus({commit}) {
-		commit('clearTaskStatus');
+	finishTask({commit}) {
+		commit('setTaskStatus', taskStatuses.finished);
 	},
 };
 
