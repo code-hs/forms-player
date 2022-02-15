@@ -140,7 +140,10 @@ export default {
 				inputValue: defaultValue,
 			};
 			this.modelInitField(options);
-			this.validatorInitField(options);
+
+			if (FieldValidator.canValidation(this.validation)) {
+				this.validatorInitField(options);
+			}
 		},
 		handleBlur() {
 			this.processValidationField();
