@@ -19,7 +19,7 @@
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-import {TASK_VALIDATION} from '@/classes/validator/validatorUtils';
+import {taskStatuses} from '@/classes/validator/validatorUtils';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 
 export default {
@@ -63,7 +63,7 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
-			validatorTask: 'validator/currentTask',
+			validatorTaskStatus: 'validator/taskStatus',
 		}),
 		fieldsetModelItem() {
 			// current fieldset with inputs values
@@ -75,9 +75,9 @@ export default {
 	},
 
 	watch: {
-		validatorTask(taskName) {
+		validatorTaskStatus(status) {
 			if (
-				taskName !== TASK_VALIDATION ||
+				status !== taskStatuses.process ||
 				!FieldValidator.canValidation(this.validation, true)
 			) {
 				return;

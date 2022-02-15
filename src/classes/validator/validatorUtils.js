@@ -1,2 +1,7 @@
-export const TASK_VALIDATION = 'TASK_VALIDATION';
+export const taskStatuses = {
+	process: 'PROCESS',
+	completed: 'COMPLETED',
+	finished: 'FINISHED',
+};
+
 export const debounceTime = 300;
