@@ -22,7 +22,7 @@
 			color: $t-dark-selectorPlaceholder;
 		}
 		&.error {
-			border-color: $t-dark-formItemRed;
+			border-color: $t-dark-formItemRed !important;
 		}
 	}
 }
