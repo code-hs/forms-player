@@ -46,9 +46,9 @@ export default {
 		},
 		customParams: {
 			type: Object,
-			required: true,
+			required: false,
 			default: () => ({
-				rows: '',
+				rows: 3,
 			}),
 		},
 		validation: {
@@ -60,7 +60,6 @@ export default {
 				errorText: '',
 			}),
 		},
-		// inform about fields in this object (in this file)
 		text: {
 			type: Object,
 			required: false,

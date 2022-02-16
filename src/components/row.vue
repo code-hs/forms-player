@@ -23,6 +23,9 @@ export default {
 		row: {
 			type: Object,
 			required: true,
+			default: () => ({
+				styles: {},
+			}),
 		},
 		groupIndex: {
 			type: Number,
