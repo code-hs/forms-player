@@ -41,6 +41,9 @@ export default {
 		customParams: {
 			type: Object,
 			required: true,
+			default: () => ({
+				bodyHTML: '',
+			}),
 		},
 		validation: {
 			type: Object,
@@ -82,7 +85,10 @@ export default {
 			}
 
 			// after click submit, if empty value -> show error border
-			if (!this.value) this.valid.errorForView = true;
+			if (!this.value) {
+				this.valid.errorForView = true;
+				this.focus();
+			}
 
 			this.handleChange();
 			this.validatorResponseOnTask(this.valid.error);
@@ -141,6 +147,9 @@ export default {
 				error: this.valid.error,
 			};
 			this.validatorUpdateFieldInfo(information);
+		},
+		focus() {
+			this.$refs.self.focus();
 		},
 	},
 };
