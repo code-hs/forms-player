@@ -41,8 +41,14 @@ export class ModelStructure {
 	 * @private
 	 */
 	static _isFieldInput(fieldOptions) {
+		// console.log(fieldOptions.generalParams?.component);
+
 		if (!fieldOptions) {
 			throw new Error('ModelStructure: _isFieldInput: bad fieldOptions');
+		}
+
+		if (!fieldOptions.generalParams || !fieldOptions.generalParams.component) {
+			throw new Error('ModelStructure: need component in generalParams');
 		}
 
 		const notInputComponents = ['ButtonSubmit'];
@@ -77,6 +83,7 @@ export class ModelStructure {
 				let fields = JSON.parse(JSON.stringify(row.fields));
 				fields = this._filtrateFields(fields);
 
+				// is group has eny field
 				if (fields && fields.length) return true;
 			}
 		}

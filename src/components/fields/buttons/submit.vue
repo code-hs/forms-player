@@ -23,10 +23,6 @@ export default {
 			type: Object,
 			required: true,
 		},
-		customParams: {
-			type: Object,
-			required: true,
-		},
 	},
 
 	data() {

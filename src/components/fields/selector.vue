@@ -71,7 +71,6 @@ export default {
 				errorText: '',
 			}),
 		},
-		// inform about fields in this object (in this file)
 		text: {
 			type: Object,
 			required: false,
