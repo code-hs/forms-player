@@ -5,7 +5,7 @@
 		<select
 			ref="self"
 			v-model="fieldsetModelItem[generalParams.model]"
-			:required="validation.required"
+			required
 			:class="{error: valid.error}"
 			@change="handleChange"
 		>
