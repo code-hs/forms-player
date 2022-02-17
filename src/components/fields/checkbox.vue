@@ -21,6 +21,7 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {taskStatuses} from '@/classes/validator/validatorUtils';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
+import {FieldHelper} from '@/classes/field/FieldHelper';
 
 export default {
 	name: 'Checkbox',
@@ -79,7 +80,7 @@ export default {
 	},
 
 	watch: {
-		validatorTaskStatus(status) {
+		async validatorTaskStatus(status) {
 			if (status !== taskStatuses.process || !this.valid.connect) {
 				return;
 			}
@@ -87,11 +88,14 @@ export default {
 			// after click submit, if empty value -> show error border
 			if (!this.value) {
 				this.valid.errorForView = true;
-				this.focus();
 			}
 
 			this.handleChange();
-			this.validatorResponseOnTask(this.valid.error);
+			// noinspection ES6RedundantAwait
+			const setActiveFocus = await this.validatorResponseOnTask(
+				this.valid.error
+			);
+			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},
 
@@ -147,9 +151,6 @@ export default {
 				error: this.valid.error,
 			};
 			this.validatorUpdateFieldInfo(information);
-		},
-		focus() {
-			this.$refs.self.focus();
 		},
 	},
 };

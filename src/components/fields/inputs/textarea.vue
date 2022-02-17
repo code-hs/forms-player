@@ -26,6 +26,7 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
+import {FieldHelper} from '@/classes/field/FieldHelper';
 import {taskStatuses, debounceTime} from '@/classes/validator/validatorUtils';
 
 export default {
@@ -106,7 +107,7 @@ export default {
 				this.valid.error
 			);
 
-			if (setActiveFocus) this.focus();
+			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},
 
@@ -187,9 +188,6 @@ export default {
 				error: this.valid.error,
 			};
 			this.validatorUpdateFieldInfo(information);
-		},
-		focus() {
-			this.$refs.self.focus();
 		},
 	},
 };
