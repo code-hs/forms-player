@@ -1,127 +1,79 @@
-import Vue from 'vue';
-import {ModelStructure} from '@/classes/scheme/ModelStructure';
-import {FieldValidator} from '@/classes/validator/FieldValidator';
+// ModelStructure.generate(page);
+// import {ModelStructure} from '@/classes/scheme/ModelStructure';
+// import {FieldValidator} from '@/classes/validator/FieldValidator';
+
 import {bus} from '@/utils/bus';
 
+function findIndexByFieldKey(stack, key) {
+	if (!key) throw new Error('validator: destroyField: bad fieldKey. 1');
+
+	const index = stack.findIndex(item => item.fieldKey === key);
+	if (index === -1) {
+		throw new Error('validator: destroyField: bad fieldKey. 2');
+	}
+	return index;
+}
+
 const state = () => ({
-	structure: [],
+	stack: [],
 	inputs: {
-		count: 0,
 		answeredCount: 0,
 		focus: false,
 	},
 });
 
 const getters = {
-	structure: s => s.structure,
-	hasError: s => FieldValidator.hasStructureErrorInput(s.structure),
+	hasError: s => s.stack.some(field => field.error),
 	inputs: s => s.inputs,
+	stack: s => s.stack,
 };
 
 // noinspection DuplicatedCode
 const mutations = {
-	// ----------------- STRUCTURE
-	generateSkeleton: (s, page) => {
-		if (!page) {
-			throw new Error('validator: generateSkeleton: bad page');
-		}
-
-		s.structure = ModelStructure.generate(page);
-	},
-
 	/**
-	 * Add file to model structure
-	 *
-	 * @param {number} groupIndex
-	 * @param {number} fieldsetIndex
-	 * @param {string} inputModelName
+	 * Add file to stack
+	 * @param {number} fieldKey
 	 */
-	initField: (s, {groupIndex, fieldsetIndex, inputModelName}) => {
-		if (!inputModelName) {
-			throw new Error('validator: initField: bad inputModelName');
-		}
-
-		// clarification position
-		const fieldset = s.structure[groupIndex][fieldsetIndex];
+	initField: (s, fieldKey) => {
 		const template = {
+			fieldKey,
 			error: false,
 		};
+		s.stack.push(template);
 
-		Vue.set(fieldset, inputModelName, template);
-
-		// logic after add the item
-		s.inputs.count++;
-		// reset the information about any old task
+		// reset the information about any old task ???????????
 		s.inputs.answeredCount = 0;
 	},
 
 	/**
-	 * Remove fieldset from current group
-	 *
-	 * @param {number} groupIndex
-	 * @param {number} fieldsetIndex
-	 */
-	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
-		s.structure[groupIndex].splice(fieldsetIndex, 1);
-	},
-
-	/**
-	 * Add new fieldset item to structure
-	 *
-	 * @param {number} groupIndex
-	 */
-	copyFieldsetItem: (s, {groupIndex}) => {
-		if (!s.structure || !s.structure[groupIndex]) {
-			throw new Error(
-				'validator: copyFieldsetItem: bad structure or cant find' +
-					' group by groupIndex'
-			);
-		}
-
-		const index = 0;
-		const sourceItem = s.structure[groupIndex][index];
-
-		if (!sourceItem) {
-			throw new Error('validator: copyFieldsetItem: bad sourceItem');
-		}
-
-		// without reactivity
-		const newItem = JSON.parse(JSON.stringify(sourceItem));
-		s.structure[groupIndex].push(newItem);
-	},
-	// ----------------- END STRUCTURE BLOCK
-
-	/**
 	 * after delete the field vue item
+	 * @param {number} fieldKey
 	 */
-	destroyField: s => {
-		s.inputs.count--;
+	destroyField: (s, fieldKey) => {
+		const index = findIndexByFieldKey(s.stack, fieldKey);
+		s.stack.splice(index, 1);
+
 		// reset the information about any old task
 		s.inputs.answeredCount = 0;
 	},
 
 	/**
 	 * update status  on each change in the input
-	 *
-	 * @param {number} groupIndex
-	 * @param {number} fieldsetIndex
-	 * @param {string} inputModelName
+	 * @param {number} fieldKey
 	 * @param {boolean} error - field status from data.valid.error
 	 */
-	updateFieldInfo: (s, {groupIndex, fieldsetIndex, inputModelName, error}) => {
-		if (!inputModelName) {
-			throw new Error('validator: updateFieldInfo: bad inputModelName');
-		}
+	updateFieldInfo: (s, {fieldKey, error}) => {
+		if (!fieldKey) throw new Error('validator:updateFieldInfo: bad fieldKey');
 
-		const item = s.structure[groupIndex][fieldsetIndex][inputModelName];
-		item.error = error;
+		const index = findIndexByFieldKey(s.stack, fieldKey);
+		s.stack[index].error = error;
 	},
 	setFocus: (s, v) => {
 		s.inputs.focus = v;
 	},
 
 	startTask: s => {
-		if (!s.inputs.count) {
+		if (!s.stack.length) {
 			// if count === 0, task completed!
 			bus.$emit('finish-validation', true);
 		}
@@ -139,16 +91,12 @@ const mutations = {
 const actions = {
 	/**
 	 * input response to an incoming task
-	 *
-	 * @param commit
-	 * @param getters
 	 * @param fieldError
 	 * @returns {boolean} - update field focus
 	 */
 	responseOnTask({commit, getters}, fieldError) {
 		commit('inputAnswered');
-		if (getters.inputs.answeredCount === getters.inputs.count) {
-			console.log('1');
+		if (getters.inputs.answeredCount === getters.stack.length) {
 			bus.$emit('finish-validation', !getters.hasError);
 			commit('finishTask');
 			// dont update focus

@@ -68,8 +68,6 @@ export default {
 		...mapMutations({
 			removeFieldsetItem: 'model/removeFieldsetItem',
 			copyFieldsetItem: 'model/copyFieldsetItem',
-			validatorRemoveFieldsetItem: 'validator/removeFieldsetItem',
-			validatorCopyFieldsetItem: 'validator/copyFieldsetItem',
 		}),
 		initFieldsetsKeys() {
 			if (!this.group.fieldsets || !this.group.fieldsets.length) return;
@@ -90,13 +88,11 @@ export default {
 
 			const position = {groupIndex: this.groupIndex, fieldsetIndex};
 			this.removeFieldsetItem(position);
-			this.validatorRemoveFieldsetItem(position);
 		},
 		handleButAdd() {
 			// add new item to inputs structure
 			const pos = {groupIndex: this.groupIndex};
 			this.copyFieldsetItem(pos);
-			this.validatorCopyFieldsetItem(pos);
 
 			// add new item to view
 			const newItem = GroupView.getNewItem(this.group.fieldsets);

@@ -40,6 +40,10 @@ export default {
 			type: Number,
 			required: true,
 		},
+		itemKey: {
+			type: Number,
+			required: true,
+		},
 		// below params from v-bind
 		generalParams: {
 			type: Object,
@@ -92,8 +96,9 @@ export default {
 		this.processInput = debounce(this.processInput, debounceTime);
 	},
 
-	destroyed() {
-		this.validatorDestroyField();
+	beforeDestroy() {
+		this.validatorDestroyField(this.itemKey);
+		bus.$off('start-validation', this.validatorTaskValidate);
 	},
 
 	methods: {
@@ -122,7 +127,8 @@ export default {
 
 			if (FieldValidator.canValidation(this.validation)) {
 				this.valid.connect = true;
-				this.validatorInitField(options);
+				this.validatorInitField(this.itemKey);
+
 				bus.$on('start-validation', this.validatorTaskValidate);
 			}
 		},
@@ -158,13 +164,10 @@ export default {
 			}
 		},
 		validatorSaveInfo() {
-			const information = {
-				groupIndex: this.groupIndex,
-				fieldsetIndex: this.fieldsetIndex,
-				inputModelName: this.generalParams.model,
+			this.validatorUpdateFieldInfo({
+				fieldKey: this.itemKey,
 				error: this.valid.error,
-			};
-			this.validatorUpdateFieldInfo(information);
+			});
 		},
 		async validatorTaskValidate() {
 			this.handleBlur();

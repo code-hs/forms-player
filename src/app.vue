@@ -4,8 +4,8 @@
 			<Page />
 		</div>
 
-		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
-		<!--		<div v-if="showDump" class="dump">{{ validatorStructure }}</div>-->
+		<!--		<div v-if="showDump" class="dump">{{ modelStructure }}</div>-->
+		<div v-if="showDump" class="dump">{{ validatorStack }}</div>
 	</div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
-			validatorStructure: 'validator/structure',
+			validatorStack: 'validator/stack',
 		}),
 	},
 
@@ -56,7 +56,6 @@ export default {
 		}
 
 		this.generateModelSkeleton(currentPage);
-		this.generateValidatorSkeleton(currentPage);
 
 		// after structure generated, we can inject inputs
 		if (currentPage && this.modelStructure) this.showContent = true;
@@ -65,7 +64,6 @@ export default {
 	methods: {
 		...mapMutations({
 			generateModelSkeleton: 'model/generateSkeleton',
-			generateValidatorSkeleton: 'validator/generateSkeleton',
 		}),
 		...mapActions({
 			loadScheme: 'scheme/load',
