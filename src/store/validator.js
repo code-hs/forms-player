@@ -1,17 +1,14 @@
 import Vue from 'vue';
 import {ModelStructure} from '@/classes/scheme/ModelStructure';
-import {taskStatuses} from '@/classes/validator/validatorUtils';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
+import {bus} from '@/utils/bus';
 
 const state = () => ({
 	structure: [],
 	inputs: {
 		count: 0,
+		answeredCount: 0,
 		focus: false,
-	},
-	task: {
-		status: '',
-		answeredInputsCount: 0,
 	},
 });
 
@@ -19,8 +16,6 @@ const getters = {
 	structure: s => s.structure,
 	hasError: s => FieldValidator.hasStructureErrorInput(s.structure),
 	inputs: s => s.inputs,
-	task: s => s.task,
-	taskStatus: s => s.task.status,
 };
 
 // noinspection DuplicatedCode
@@ -57,7 +52,7 @@ const mutations = {
 		// logic after add the item
 		s.inputs.count++;
 		// reset the information about any old task
-		s.task.answeredInputsCount = 0;
+		s.inputs.answeredCount = 0;
 	},
 
 	/**
@@ -102,7 +97,7 @@ const mutations = {
 	destroyField: s => {
 		s.inputs.count--;
 		// reset the information about any old task
-		s.task.answeredInputsCount = 0;
+		s.inputs.answeredCount = 0;
 	},
 
 	/**
@@ -125,29 +120,23 @@ const mutations = {
 		s.inputs.focus = v;
 	},
 
-	// ----------------- TASKS
 	startTask: s => {
-		// if count === 0, task completed!
-		s.task.status = s.inputs.count
-			? taskStatuses.process
-			: taskStatuses.completed;
-
-		s.task.answeredInputsCount = 0;
+		if (!s.inputs.count) {
+			// if count === 0, task completed!
+			bus.$emit('finish-validation', true);
+		}
+		s.inputs.answeredCount = 0;
 		s.inputs.focus = false;
 	},
-	setTaskStatus: (s, v) => {
-		s.task.status = v;
+	finishTask: s => {
+		s.inputs.answeredCount = 0;
 	},
 	inputAnswered: s => {
-		s.task.answeredInputsCount++;
+		s.inputs.answeredCount++;
 	},
-	// ----------------- TASKS END
 };
 
 const actions = {
-	startValidation({commit}) {
-		commit('startTask');
-	},
 	/**
 	 * input response to an incoming task
 	 *
@@ -158,8 +147,10 @@ const actions = {
 	 */
 	responseOnTask({commit, getters}, fieldError) {
 		commit('inputAnswered');
-		if (getters.task.answeredInputsCount === getters.inputs.count) {
-			commit('setTaskStatus', taskStatuses.completed);
+		if (getters.inputs.answeredCount === getters.inputs.count) {
+			console.log('1');
+			bus.$emit('finish-validation', !getters.hasError);
+			commit('finishTask');
 			// dont update focus
 			return false;
 		}
@@ -171,12 +162,6 @@ const actions = {
 		commit('setFocus', true);
 		// activate focus in view
 		return true;
-	},
-	/**
-	 * After form handle submit, clear task
-	 */
-	finishTask({commit}) {
-		commit('setTaskStatus', taskStatuses.finished);
 	},
 };
 

@@ -19,9 +19,9 @@
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-import {taskStatuses} from '@/classes/validator/validatorUtils';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {FieldHelper} from '@/classes/field/FieldHelper';
+import {bus} from '@/utils/bus';
 
 export default {
 	name: 'Checkbox',
@@ -68,7 +68,6 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
-			validatorTaskStatus: 'validator/taskStatus',
 		}),
 		fieldsetModelItem() {
 			// current fieldset with inputs values
@@ -76,26 +75,6 @@ export default {
 		},
 		value() {
 			return this.fieldsetModelItem[this.generalParams.model];
-		},
-	},
-
-	watch: {
-		async validatorTaskStatus(status) {
-			if (status !== taskStatuses.process || !this.valid.connect) {
-				return;
-			}
-
-			// after click submit, if empty value -> show error border
-			if (!this.value) {
-				this.valid.errorForView = true;
-			}
-
-			this.handleChange();
-			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorResponseOnTask(
-				this.valid.error
-			);
-			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},
 
@@ -133,6 +112,7 @@ export default {
 			if (FieldValidator.canValidation(this.validation, true)) {
 				this.valid.connect = true;
 				this.validatorInitField(options);
+				bus.$on('start-validation', this.validatorTaskValidate);
 			}
 		},
 		handleChange() {
@@ -151,6 +131,19 @@ export default {
 				error: this.valid.error,
 			};
 			this.validatorUpdateFieldInfo(information);
+		},
+		async validatorTaskValidate() {
+			// after click submit, if empty value -> show error border
+			if (!this.value) {
+				this.valid.errorForView = true;
+			}
+
+			this.handleChange();
+			// noinspection ES6RedundantAwait
+			const setActiveFocus = await this.validatorResponseOnTask(
+				this.valid.error
+			);
+			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},
 };
