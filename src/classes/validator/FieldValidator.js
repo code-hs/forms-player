@@ -79,6 +79,13 @@ export class FieldValidator {
 		return fieldsFlatted.some(field => field.error);
 	}
 
+	static hasStructureErrorInput2(stack) {
+		if (!stack || !stack.length) return false;
+
+		// if at least one field has an error
+		return stack.some(field => field.error);
+	}
+
 	static canValidation(validationRules, onlyRequired = false) {
 		if (!validationRules) return false;
 
