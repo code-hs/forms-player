@@ -5,7 +5,7 @@
 		<div class="fieldsets-container">
 			<Fieldset
 				v-for="(fieldset, index) in group.fieldsets"
-				:key="fieldset.key"
+				:key="fieldset.itemKey"
 				:fieldset="fieldset"
 				:group-index="groupIndex"
 				:fieldset-index="index"
@@ -77,7 +77,7 @@ export default {
 			// generate unique keys for each item, since we remove and add these items
 			// if this is not done, vue lazily updates the blocks
 			this.group.fieldsets.forEach(item => {
-				item.key = generateKey();
+				item.itemKey = generateKey();
 			});
 		},
 		handleButRemove(fieldsetIndex) {

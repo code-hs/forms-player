@@ -17,7 +17,7 @@ export class GroupView {
 		const item = JSON.parse(JSON.stringify(fieldsets[index]));
 		if (!item) throw new Error('GroupView: getNewItem: bad item');
 
-		item.key = generateKey();
+		item.itemKey = generateKey();
 
 		return item;
 	}
