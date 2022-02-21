@@ -1,8 +1,8 @@
 <template>
 	<div class="row row-item" :style="getStyleObj()">
 		<Field
-			v-for="(field, index) in row.fields"
-			:key="index"
+			v-for="field in row.fields"
+			:key="field.itemKey"
 			:group-index="groupIndex"
 			:fieldset-index="fieldsetIndex"
 			:field-params="field"
@@ -12,6 +12,7 @@
 
 <script>
 import Field from '@/components/field';
+import {generateKey} from '@/utils/numbers';
 
 export default {
 	name: 'Row',
@@ -37,7 +38,20 @@ export default {
 		},
 	},
 
+	created() {
+		this.initFieldsKeys();
+	},
+
 	methods: {
+		initFieldsKeys() {
+			if (!this.row.fields || !this.row.fields.length) return;
+
+			// generate unique keys for each item, since we remove and add these items
+			// if this is not done, vue lazily updates the blocks
+			this.row.fields.forEach(item => {
+				item.itemKey = generateKey();
+			});
+		},
 		getStyleObj() {
 			const obj = {};
 
