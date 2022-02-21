@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import {mapGetters} from 'vuex';
 import Group from '@/components/group';
-import {taskStatuses} from '@/classes/validator/validatorUtils';
+import {bus} from '@/utils/bus';
 
 export default {
 	name: 'Page',
@@ -36,29 +36,20 @@ export default {
 	computed: {
 		...mapGetters({
 			page: 'scheme/currentPage',
-			validatorHasError: 'validator/hasError',
-			validatorTaskStatus: 'validator/taskStatus',
 		}),
 	},
 
-	watch: {
-		validatorTaskStatus(status) {
-			if (status !== taskStatuses.completed || this.validatorHasError) return;
-
-			this.finishTask();
-			this.submitAfterValidation();
-		},
+	created() {
+		bus.$on('finish-validation', this.validationFinish);
 	},
 
 	methods: {
-		...mapActions({
-			startValidation: 'validator/startValidation',
-			finishTask: 'validator/finishTask',
-		}),
 		handleSubmit() {
-			this.startValidation();
+			bus.$emit('start-validation');
 		},
-		submitAfterValidation() {
+		validationFinish(isValidForm) {
+			if (!isValidForm) return;
+
 			// eslint-disable-next-line no-alert
 			alert('success');
 		},

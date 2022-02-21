@@ -26,7 +26,8 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {FieldHelper} from '@/classes/field/FieldHelper';
-import {taskStatuses, debounceTime} from '@/classes/validator/validatorUtils';
+import {debounceTime} from '@/classes/validator/validatorUtils';
+import {bus} from '@/utils/bus';
 
 export default {
 	name: 'InputPassword',
@@ -76,7 +77,6 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
-			validatorTaskStatus: 'validator/taskStatus',
 		}),
 		fieldsetModelItem() {
 			// current fieldset with inputs values
@@ -84,22 +84,6 @@ export default {
 		},
 		value() {
 			return this.fieldsetModelItem[this.generalParams.model];
-		},
-	},
-
-	watch: {
-		async validatorTaskStatus(status) {
-			if (status !== taskStatuses.process || !this.valid.connect) {
-				return;
-			}
-
-			this.handleBlur();
-			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorResponseOnTask(
-				this.valid.error
-			);
-
-			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},
 
@@ -139,6 +123,7 @@ export default {
 			if (FieldValidator.canValidation(this.validation)) {
 				this.valid.connect = true;
 				this.validatorInitField(options);
+				bus.$on('start-validation', this.validatorTaskValidate);
 			}
 		},
 		handleBlur() {
@@ -180,6 +165,15 @@ export default {
 				error: this.valid.error,
 			};
 			this.validatorUpdateFieldInfo(information);
+		},
+		async validatorTaskValidate() {
+			this.handleBlur();
+			// noinspection ES6RedundantAwait
+			const setActiveFocus = await this.validatorResponseOnTask(
+				this.valid.error
+			);
+
+			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},
 };
