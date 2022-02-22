@@ -1,4 +1,6 @@
 export class FieldValidator {
+	static debounceTime = 300;
+
 	static stringToRegex(str) {
 		if (!str) throw new Error('empty source string for create regexp');
 		// Main regex
@@ -18,7 +20,6 @@ export class FieldValidator {
 
 	/**
 	 * is valid field value by rules
-	 *
 	 * @param {Object} validationRules
 	 * @param {string} fieldValue
 	 * @returns {boolean}
@@ -46,44 +47,6 @@ export class FieldValidator {
 		// if no pattern and no required, rules have not useful options
 		// -> field valid
 		return true;
-	}
-
-	/**
-	 * @param {Array} structure
-	 * @returns {Array}
-	 */
-	static flatStructure(structure) {
-		if (!structure) return [];
-
-		const flattedStructure = structure.flat(9);
-
-		// transform fieldset item from object to array
-		// and give all data by field
-		const fieldsDataInArray = flattedStructure.map(fieldset =>
-			Object.entries(fieldset).map(field => field[1])
-		);
-
-		// flatting groups
-		return fieldsDataInArray.flat(9);
-	}
-
-	/**
-	 * @param {Array} structure
-	 * @returns {boolean}
-	 */
-	static hasStructureErrorInput(structure) {
-		if (!structure) return false;
-
-		const fieldsFlatted = this.flatStructure(structure);
-		// if at least one field has an error
-		return fieldsFlatted.some(field => field.error);
-	}
-
-	static hasStructureErrorInput2(stack) {
-		if (!stack || !stack.length) return false;
-
-		// if at least one field has an error
-		return stack.some(field => field.error);
 	}
 
 	static canValidation(validationRules, onlyRequired = false) {
