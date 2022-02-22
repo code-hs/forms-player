@@ -1,90 +1,66 @@
-// ModelStructure.generate(page);
-// import {ModelStructure} from '@/classes/scheme/ModelStructure';
-// import {FieldValidator} from '@/classes/validator/FieldValidator';
-
 import {bus} from '@/utils/bus';
-
-function findIndexByFieldKey(stack, key) {
-	if (!key) throw new Error('validator: destroyField: bad fieldKey. 1');
-
-	const index = stack.findIndex(item => item.fieldKey === key);
-	if (index === -1) {
-		throw new Error('validator: destroyField: bad fieldKey. 2');
-	}
-	return index;
-}
+import {StoreValidator} from '@/classes/validator/StoreValidator';
 
 const state = () => ({
-	stack: [],
-	inputs: {
-		answeredCount: 0,
-		focus: false,
-	},
+	fields: [],
+	focus: false,
 });
 
 const getters = {
-	hasError: s => s.stack.some(field => field.error),
-	inputs: s => s.inputs,
-	stack: s => s.stack,
+	fields: s => s.fields,
+	hasError: s => s.fields.some(field => field.error),
+	focus: s => s.focus,
 };
 
-// noinspection DuplicatedCode
 const mutations = {
 	/**
 	 * Add file to stack
 	 * @param {number} fieldKey
 	 */
-	initField: (s, fieldKey) => {
+	add: (s, key) => {
 		const template = {
-			fieldKey,
+			key,
 			error: false,
+			answered: false,
 		};
-		s.stack.push(template);
-
-		// reset the information about any old task ???????????
-		s.inputs.answeredCount = 0;
+		s.fields.push(template);
 	},
 
 	/**
 	 * after delete the field vue item
 	 * @param {number} fieldKey
 	 */
-	destroyField: (s, fieldKey) => {
-		const index = findIndexByFieldKey(s.stack, fieldKey);
-		s.stack.splice(index, 1);
-
-		// reset the information about any old task
-		s.inputs.answeredCount = 0;
+	destroy: (s, key) => {
+		const index = StoreValidator.findIndex(s.fields, key);
+		s.fields.splice(index, 1);
 	},
 
 	/**
 	 * update status  on each change in the input
-	 * @param {number} fieldKey
+	 * @param {number} key
 	 * @param {boolean} error - field status from data.valid.error
 	 */
-	updateFieldInfo: (s, {fieldKey, error}) => {
-		if (!fieldKey) throw new Error('validator:updateFieldInfo: bad fieldKey');
+	update: (s, {key, error, answered}) => {
+		if (!key) throw new Error('validator:updateFieldInfo: bad param key');
 
-		const index = findIndexByFieldKey(s.stack, fieldKey);
-		s.stack[index].error = error;
+		const index = StoreValidator.findIndex(s.fields, key);
+
+		if (error !== undefined) s.fields[index].error = error;
+		if (answered !== undefined) s.fields[index].answered = answered;
+	},
+	// if (!s.stack.length) {
+	// 	// if count === 0, task completed!
+	// 	bus.$emit('finish-validation', true);
+	// }
+	// s.focus = false;
+
+	clearAnsweredInfo: s => {
+		s.fields.forEach(field => {
+			field.answered = false;
+		});
 	},
 	setFocus: (s, v) => {
-		s.inputs.focus = v;
-	},
-
-	startTask: s => {
-		if (!s.stack.length) {
-			// if count === 0, task completed!
-			bus.$emit('finish-validation', true);
-		}
-		s.inputs.answeredCount = 0;
-		s.inputs.focus = false;
-	},
-	finishTask: s => {
-		s.inputs.answeredCount = 0;
-	},
-	inputAnswered: s => {
-		s.inputs.answeredCount++;
+		s.focus = v;
 	},
 };
 
@@ -94,17 +70,20 @@ const actions = {
 	 * @param fieldError
 	 * @returns {boolean} - update field focus
 	 */
-	responseOnTask({commit, getters}, fieldError) {
-		commit('inputAnswered');
-		if (getters.inputs.answeredCount === getters.stack.length) {
+	responseOnTask({commit, getters}, {key, error}) {
+		commit('update', {key, error, answered: true});
+		const isAllAnswered = getters.fields.every(item => item.answered);
+
+		if (isAllAnswered) {
 			bus.$emit('finish-validation', !getters.hasError);
-			commit('finishTask');
+			commit('clearAnsweredInfo');
+
 			// dont update focus
 			return false;
 		}
 
 		// if no errors in the field or the focus is already activated
-		if (!fieldError || getters.inputs.focus) return false;
+		if (!error || getters.focus) return false;
 
 		// go to activate focus flag
 		commit('setFocus', true);

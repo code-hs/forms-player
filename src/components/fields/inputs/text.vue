@@ -26,7 +26,6 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {FieldHelper} from '@/classes/field/FieldHelper';
-import {debounceTime} from '@/classes/validator/validatorUtils';
 import {bus} from '@/utils/bus';
 
 export default {
@@ -93,20 +92,23 @@ export default {
 
 	created() {
 		this.initField();
-		this.processInput = debounce(this.processInput, debounceTime);
+		this.processInput = debounce(
+			this.processInput,
+			FieldValidator.debounceTime
+		);
 	},
 
 	beforeDestroy() {
-		this.validatorDestroyField(this.itemKey);
+		this.validatorDestroy(this.itemKey);
 		bus.$off('start-validation', this.validatorTaskValidate);
 	},
 
 	methods: {
 		...mapMutations({
 			modelInitField: 'model/initField',
-			validatorInitField: 'validator/initField',
-			validatorUpdateFieldInfo: 'validator/updateFieldInfo',
-			validatorDestroyField: 'validator/destroyField',
+			validatorAdd: 'validator/add',
+			validatorUpdate: 'validator/update',
+			validatorDestroy: 'validator/destroy',
 		}),
 		...mapActions({
 			validatorResponseOnTask: 'validator/responseOnTask',
@@ -127,7 +129,7 @@ export default {
 
 			if (FieldValidator.canValidation(this.validation)) {
 				this.valid.connect = true;
-				this.validatorInitField(this.itemKey);
+				this.validatorAdd(this.itemKey);
 
 				bus.$on('start-validation', this.validatorTaskValidate);
 			}
@@ -164,17 +166,18 @@ export default {
 			}
 		},
 		validatorSaveInfo() {
-			this.validatorUpdateFieldInfo({
-				fieldKey: this.itemKey,
+			this.validatorUpdate({
+				key: this.itemKey,
 				error: this.valid.error,
 			});
 		},
 		async validatorTaskValidate() {
 			this.handleBlur();
 			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorResponseOnTask(
-				this.valid.error
-			);
+			const setActiveFocus = await this.validatorResponseOnTask({
+				key: this.itemKey,
+				error: this.valid.error,
+			});
 
 			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},

@@ -87,16 +87,16 @@ export default {
 	},
 
 	beforeDestroy() {
-		this.validatorDestroyField(this.itemKey);
+		this.validatorDestroy(this.itemKey);
 		bus.$off('start-validation', this.validatorTaskValidate);
 	},
 
 	methods: {
 		...mapMutations({
 			modelInitField: 'model/initField',
-			validatorInitField: 'validator/initField',
-			validatorUpdateFieldInfo: 'validator/updateFieldInfo',
-			validatorDestroyField: 'validator/destroyField',
+			validatorAdd: 'validator/add',
+			validatorUpdate: 'validator/update',
+			validatorDestroy: 'validator/destroy',
 		}),
 		...mapActions({
 			validatorResponseOnTask: 'validator/responseOnTask',
@@ -116,7 +116,7 @@ export default {
 
 			if (FieldValidator.canValidation(this.validation, true)) {
 				this.valid.connect = true;
-				this.validatorInitField(this.itemKey);
+				this.validatorAdd(this.itemKey);
 
 				bus.$on('start-validation', this.validatorTaskValidate);
 			}
@@ -130,8 +130,8 @@ export default {
 			this.validatorSaveInfo();
 		},
 		validatorSaveInfo() {
-			this.validatorUpdateFieldInfo({
-				fieldKey: this.itemKey,
+			this.validatorUpdate({
+				key: this.itemKey,
 				error: this.valid.error,
 			});
 		},
@@ -143,9 +143,10 @@ export default {
 
 			this.handleChange();
 			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorResponseOnTask(
-				this.valid.error
-			);
+			const setActiveFocus = await this.validatorResponseOnTask({
+				key: this.itemKey,
+				error: this.valid.error,
+			});
 			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},

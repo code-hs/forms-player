@@ -5,7 +5,7 @@
 		</div>
 
 		<!--		<div v-if="showDump" class="dump">{{ modelStructure }}</div>-->
-		<div v-if="showDump" class="dump">{{ validatorStack }}</div>
+		<div v-if="showDump" class="dump">{{ validatorFields }}</div>
 	</div>
 </template>
 
@@ -44,7 +44,7 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
-			validatorStack: 'validator/stack',
+			validatorFields: 'validator/fields',
 		}),
 	},
 
