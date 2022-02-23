@@ -108,3 +108,57 @@ describe('FieldValidator class -> isValid', () => {
 		expect(res).toBeTruthy();
 	});
 });
+
+describe('FieldValidator class -> canValidation', () => {
+	it('rules = null', () => {
+		const rules = null;
+
+		const res = FieldValidator.canValidation(rules);
+		expect(res).toBeFalsy();
+	});
+
+	it('rules = pattern', () => {
+		const rules = {pattern: /[A-Z]/};
+
+		const res = FieldValidator.canValidation(rules);
+		expect(res).toBeTruthy();
+	});
+
+	it('rules = {pattern, required}', () => {
+		const rules = {pattern: /[A-Z]/, required: true};
+
+		const res = FieldValidator.canValidation(rules);
+		expect(res).toBeTruthy();
+	});
+
+	it('rules = {required}', () => {
+		const rules = {required: true};
+
+		const res = FieldValidator.canValidation(rules);
+		expect(res).toBeTruthy();
+	});
+
+	it('rules = {required = false}', () => {
+		// if rules only required, and === false -> will not connect field
+		const rules = {required: false};
+
+		const res = FieldValidator.canValidation(rules);
+		expect(res).toBeFalsy();
+	});
+
+	it('rules = {required = false}, onlyRequired = true', () => {
+		// if rules only required, and === false -> will not connect field
+		const rules = {required: false};
+
+		const res = FieldValidator.canValidation(rules, true);
+		expect(res).toBeFalsy();
+	});
+
+	it('rules = {required = true}, onlyRequired = true', () => {
+		// if rules only required, and === false -> will not connect field
+		const rules = {required: true};
+
+		const res = FieldValidator.canValidation(rules, true);
+		expect(res).toBeTruthy();
+	});
+});
