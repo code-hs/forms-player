@@ -114,7 +114,7 @@ export default {
 
 	beforeDestroy() {
 		this.validatorDestroy(this.itemKey);
-		bus.$off('start-validation', this.validatorTaskValidate);
+		bus.$off('VALIDATION:start', this.validatorTaskValidate);
 	},
 
 	methods: {
@@ -125,7 +125,7 @@ export default {
 			validatorDestroy: 'validator/destroy',
 		}),
 		...mapActions({
-			validatorResponseOnTask: 'validator/responseOnTask',
+			validatorFieldResponse: 'validator/fieldResponse',
 		}),
 		initField() {
 			// init input
@@ -144,7 +144,7 @@ export default {
 				this.valid.connect = true;
 				this.validatorAdd(this.itemKey);
 
-				bus.$on('start-validation', this.validatorTaskValidate);
+				bus.$on('VALIDATION:start', this.validatorTaskValidate);
 			}
 		},
 		handleChange() {
@@ -170,7 +170,7 @@ export default {
 		async validatorTaskValidate() {
 			this.handleChange();
 			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorResponseOnTask({
+			const setActiveFocus = await this.validatorFieldResponse({
 				key: this.itemKey,
 				error: this.valid.error,
 			});
