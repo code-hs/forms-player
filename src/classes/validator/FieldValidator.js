@@ -49,6 +49,11 @@ export class FieldValidator {
 		return true;
 	}
 
+	/**
+	 * @param {object} validationRules - from scheme
+	 * @param {boolean} onlyRequired
+	 * @returns {boolean}
+	 */
 	static canValidation(validationRules, onlyRequired = false) {
 		if (!validationRules) return false;
 
