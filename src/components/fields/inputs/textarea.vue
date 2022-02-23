@@ -139,14 +139,14 @@ export default {
 				bus.$on('VALIDATION:start', this.validatorTaskValidate);
 			}
 		},
-		handleBlur() {
+		handleBlur(updateStore = true) {
 			if (!this.valid.connect) return;
 
 			this.processValidationField();
 
 			// if field has error - becomes dirty, otherwise clear
 			this.valid.dirty = this.valid.error;
-			this.validatorSaveInfo();
+			if (updateStore) this.validatorSaveInfo();
 		},
 		handleInput(e) {
 			if (!this.valid.connect) return;
@@ -177,7 +177,7 @@ export default {
 			});
 		},
 		async validatorTaskValidate() {
-			this.handleBlur();
+			this.handleBlur(false);
 			// noinspection ES6RedundantAwait
 			const setActiveFocus = await this.validatorFieldResponse({
 				key: this.itemKey,

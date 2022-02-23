@@ -1,6 +1,11 @@
 import {StoreValidator} from '@/classes/validator/StoreValidator';
 import {bus} from '@/utils/bus';
 
+const commands = {
+	start: () => bus.$emit('VALIDATION:start'),
+	finish: () => bus.$emit('VALIDATION:finish'),
+};
+
 const state = () => ({
 	fields: [],
 	focus: false,
@@ -44,7 +49,7 @@ const mutations = {
 	 * @param {boolean} answered - field answered on validation task
 	 * @param {boolean} error - field status from data.valid.error
 	 */
-	update: (s, {key, error, answered}) => {
+	update: (s, {key, error, answered = undefined}) => {
 		if (!key) throw new Error('validator:update: empty param "key"');
 
 		const index = StoreValidator.findIndex(s.fields, key);
@@ -75,14 +80,14 @@ const actions = {
 
 		commit('update', {key, error, answered: true});
 		const isAllAnswered = getters.fields.every(item => item.answered);
-		let toActivateFocus = false;
 
 		if (isAllAnswered) {
-			// event for form submit handler, in page.vue
-			bus.$emit('VALIDATION:finish', !getters.hasError);
 			commit('clearAnsweredInfo');
+			// event for form submit handler, in page.vue
+			if (!getters.hasError) commands.finish();
 		}
 
+		let toActivateFocus = false;
 		// has error and focus empty
 		if (error && !getters.focus) {
 			toActivateFocus = true;
@@ -97,11 +102,11 @@ const actions = {
 	start({getters}) {
 		if (!getters.fields.length) {
 			// if count === 0, validation finish!
-			bus.$emit('VALIDATION:finish', true);
+			commands.finish();
 			return;
 		}
 
-		bus.$emit('VALIDATION:start');
+		commands.start();
 	},
 };
 

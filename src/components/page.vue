@@ -1,5 +1,5 @@
 <template>
-	<form class="page-item" novalidate @submit.prevent="handleSubmit">
+	<form class="page-item" novalidate @submit.prevent="validatorStart">
 		<div class="groups-container">
 			<Group
 				v-for="(group, index) in page.groups"
@@ -40,6 +40,7 @@ export default {
 	},
 
 	created() {
+		// binding form
 		bus.$on('VALIDATION:finish', this.validationFinish);
 	},
 
@@ -47,14 +48,9 @@ export default {
 		...mapActions({
 			validatorStart: 'validator/start',
 		}),
-		handleSubmit() {
-			this.validatorStart();
-		},
-		validationFinish(isValidForm) {
-			if (!isValidForm) return;
-
+		validationFinish() {
 			// eslint-disable-next-line no-alert
-			alert('success');
+			console.warn('success');
 		},
 	},
 };

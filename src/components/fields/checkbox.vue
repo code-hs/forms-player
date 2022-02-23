@@ -121,13 +121,13 @@ export default {
 				bus.$on('VALIDATION:start', this.validatorTaskValidate);
 			}
 		},
-		handleChange() {
+		handleChange(updateStore = true) {
 			if (!this.valid.connect) return;
 
 			if (this.value) this.valid.errorForView = false;
 			this.valid.error = !this.value;
 
-			this.validatorSaveInfo();
+			if (updateStore) this.validatorSaveInfo();
 		},
 		validatorSaveInfo() {
 			this.validatorUpdate({
@@ -141,7 +141,7 @@ export default {
 				this.valid.errorForView = true;
 			}
 
-			this.handleChange();
+			this.handleChange(false);
 			// noinspection ES6RedundantAwait
 			const setActiveFocus = await this.validatorFieldResponse({
 				key: this.itemKey,
