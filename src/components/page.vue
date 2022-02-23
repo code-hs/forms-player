@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 import Group from '@/components/group';
 import {bus} from '@/utils/bus';
 
@@ -40,12 +40,15 @@ export default {
 	},
 
 	created() {
-		bus.$on('finish-validation', this.validationFinish);
+		bus.$on('VALIDATION:finish', this.validationFinish);
 	},
 
 	methods: {
+		...mapActions({
+			validatorStart: 'validator/start',
+		}),
 		handleSubmit() {
-			bus.$emit('start-validation');
+			this.validatorStart();
 		},
 		validationFinish(isValidForm) {
 			if (!isValidForm) return;

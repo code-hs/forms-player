@@ -48,11 +48,6 @@ const mutations = {
 		if (error !== undefined) s.fields[index].error = error;
 		if (answered !== undefined) s.fields[index].answered = answered;
 	},
-	// if (!s.stack.length) {
-	// 	// if count === 0, task completed!
-	// 	bus.$emit('finish-validation', true);
-	// }
-	// s.focus = false;
 
 	clearAnsweredInfo: s => {
 		s.fields.forEach(field => {
@@ -70,12 +65,12 @@ const actions = {
 	 * @param fieldError
 	 * @returns {boolean} - update field focus
 	 */
-	responseOnTask({commit, getters}, {key, error}) {
+	fieldResponse({commit, getters}, {key, error}) {
 		commit('update', {key, error, answered: true});
 		const isAllAnswered = getters.fields.every(item => item.answered);
 
 		if (isAllAnswered) {
-			bus.$emit('finish-validation', !getters.hasError);
+			bus.$emit('VALIDATION:finish', !getters.hasError);
 			commit('clearAnsweredInfo');
 
 			// dont update focus
@@ -89,6 +84,15 @@ const actions = {
 		commit('setFocus', true);
 		// activate focus in view
 		return true;
+	},
+	start({getters}) {
+		if (!getters.fields.length) {
+			// if count === 0, validation finish!
+			bus.$emit('VALIDATION:finish', true);
+			return;
+		}
+
+		bus.$emit('VALIDATION:start');
 	},
 };
 
