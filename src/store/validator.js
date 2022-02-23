@@ -1,10 +1,4 @@
 import {StoreValidator} from '@/classes/validator/StoreValidator';
-import {bus} from '@/utils/bus';
-
-const commands = {
-	start: () => bus.$emit('VALIDATION:start'),
-	finish: () => bus.$emit('VALIDATION:finish'),
-};
 
 const state = () => ({
 	fields: [],
@@ -84,7 +78,7 @@ const actions = {
 		if (isAllAnswered) {
 			commit('clearAnsweredInfo');
 			// event for form submit handler, in page.vue
-			if (!getters.hasError) commands.finish();
+			if (!getters.hasError) StoreValidator.commands.finish();
 		}
 
 		let toActivateFocus = false;
@@ -102,11 +96,11 @@ const actions = {
 	start({getters}) {
 		if (!getters.fields.length) {
 			// if count === 0, validation finish!
-			commands.finish();
+			StoreValidator.commands.finish();
 			return;
 		}
 
-		commands.start();
+		StoreValidator.commands.start();
 	},
 };
 

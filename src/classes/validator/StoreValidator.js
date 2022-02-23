@@ -1,4 +1,12 @@
+import {bus} from '@/utils/bus';
+
 export class StoreValidator {
+	// global bus commands
+	static commands = {
+		start: () => bus.$emit('VALIDATION:start'),
+		finish: () => bus.$emit('VALIDATION:finish'),
+	};
+
 	/**
 	 * @param {object[]} fields
 	 * @param {number} key
