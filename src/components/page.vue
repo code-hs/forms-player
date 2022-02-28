@@ -17,6 +17,7 @@
 import {mapGetters, mapActions} from 'vuex';
 import Group from '@/components/group';
 import {bus} from '@/utils/bus';
+import {Api} from '@/classes/api/Api';
 
 export default {
 	name: 'Page',
@@ -36,6 +37,7 @@ export default {
 	computed: {
 		...mapGetters({
 			page: 'scheme/currentPage',
+			modelStructure: 'model/structure',
 		}),
 	},
 
@@ -51,6 +53,8 @@ export default {
 		validationFinish() {
 			// eslint-disable-next-line no-alert
 			console.warn('success');
+			console.sh(JSON.stringify(this.modelStructure));
+			Api.send(this.page, this.modelStructure);
 		},
 	},
 };
