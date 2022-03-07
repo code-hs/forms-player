@@ -13,10 +13,17 @@
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import Page from '@/components/page';
 import {Config} from '@/config/index';
+import {Api} from '@/classes/api/Api';
 
 export default {
 	components: {Page},
 	props: {
+		// customer project id
+		dataProjectId: {
+			type: String,
+			default: '',
+			required: true,
+		},
 		// Needed by the grid system to properly handle a small form resolution
 		dataLayout: {
 			type: String,
@@ -30,6 +37,7 @@ export default {
 		dataPage: {
 			type: String,
 			default: '',
+			required: true,
 		},
 	},
 
@@ -49,6 +57,10 @@ export default {
 	},
 
 	async created() {
+		if (!this.dataPage || !this.dataProjectId) {
+			throw new Error('app: created: bad params');
+		}
+
 		this.loadScheme();
 		const currentPage = await this.initPage(this.urlHash);
 		if (!currentPage) {
@@ -59,6 +71,8 @@ export default {
 
 		// after structure generated, we can inject inputs
 		if (currentPage && this.modelStructure) this.showContent = true;
+
+		Api.install(this.dataProjectId);
 	},
 
 	methods: {

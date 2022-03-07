@@ -1,10 +1,10 @@
-let showDump = false;
+const Config = {
+	apiUrl: 'http://localhost:3033/api/v1/public/',
+	showDump: false,
+};
 
 if (process.env.CUSTOM_MODE === 'dev') {
-	showDump = true;
+	Config.showDump = true;
 }
 
-const Config = {
-	showDump,
-};
 export {Config};

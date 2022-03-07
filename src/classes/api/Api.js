@@ -1,16 +1,26 @@
 import axios from 'axios';
-
-const axiosObj = axios.create({
-	baseURL: 'http://localhost:3033/api/v1/public/',
-});
+import {Config} from '@/config/index';
 
 export class Api {
+	static projectId = '';
+	static axiosObj = {};
+
+	static install(projectId) {
+		if (!projectId) throw new Error('Api: install: bad prop "projectId');
+
+		this.projectId = projectId;
+		this.axiosObj = axios.create({
+			baseURL: Config.apiUrl,
+		});
+	}
+
 	static send(page, values) {
-		const url = 'form/save-form/';
+		const url = 'form/save-form';
 		const sendData = {
+			projectId: this.projectId,
 			pageKey: page.key,
 			values,
 		};
-		axiosObj.post(url, sendData);
+		this.axiosObj.post(url, sendData);
 	}
 }
