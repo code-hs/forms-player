@@ -11,8 +11,10 @@ class SchemeParser {
 
 			// !! for a prod build, comment these blocks
 			this._structure = require('../../../../api/classes/scheme/tempSource/mainSchemeStructure.json');
-			const SchemaFiltrator = require('../../../../api/classes/scheme/SchemeFiltrator');
-			this._structure = SchemaFiltrator.filtrateParamEnable(this._structure);
+			const {
+				SchemeFiltrator,
+			} = require('../../../../api/classes/scheme/SchemeFiltrator');
+			this._structure = SchemeFiltrator.filtrateParamEnable(this._structure);
 		} else {
 			// Loader made api request and received a schema
 			// then Loader wrote to localStorage.
