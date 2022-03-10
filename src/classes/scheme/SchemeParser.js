@@ -8,9 +8,9 @@ class SchemeParser {
 			// when run via SERVE
 			// schema is taken from folder in api project
 			// since HRM is needed, and for this everything must be connected directly
-
 			// !! for a prod build, comment these blocks
-			this._structure = require('../../../../api/classes/scheme/tempSource/mainSchemeStructure.json');
+			this._structure =
+				require('../../../../api/classes/scheme/tempSource/main.js').data;
 			const {
 				SchemeFiltrator,
 			} = require('../../../../api/classes/scheme/SchemeFiltrator');
