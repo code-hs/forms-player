@@ -3,16 +3,16 @@ import {SchemeParser} from '@/classes/scheme/SchemeParser';
 let schemeParser;
 
 const state = () => ({
-	currentPage: null,
+	pageStructure: null,
 });
 
 const getters = {
-	currentPage: s => s.currentPage,
+	pageStructure: s => s.pageStructure,
 };
 
 const mutations = {
-	setCurrentPage: (s, v) => {
-		s.currentPage = v;
+	setPageStructure: (s, v) => {
+		s.pageStructure = v;
 	},
 };
 
@@ -22,18 +22,18 @@ const actions = {
 		schemeParser.load();
 	},
 	/**
-	 * @param {string} urlHash - page url
+	 * @param {string} pageName - page url
 	 * @returns {Object} - scheme
 	 */
-	initPage({commit}, urlHash) {
-		if (!urlHash) {
+	initPage({commit}, pageName) {
+		if (!pageName) {
 			throw new Error('scheme: initPage: bad urlHash');
 		}
 
-		const page = schemeParser.getPage(urlHash);
-		commit('setCurrentPage', page);
+		const pageStructure = schemeParser.getPageStructure(pageName);
+		commit('setPageStructure', pageStructure);
 
-		return page;
+		return pageStructure;
 	},
 };
 

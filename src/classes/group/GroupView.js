@@ -2,8 +2,7 @@ import {generateKey} from '@/utils/numbers';
 
 export class GroupView {
 	/**
-	 * Get new item, when click button +
-	 *
+	 * Get new item, when click button
 	 * @param fieldsets
 	 * @returns {Object|boolean}
 	 */

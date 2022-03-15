@@ -10,17 +10,19 @@ const getters = {
 };
 
 const mutations = {
-	generateSkeleton: (s, page) => {
-		if (!page) {
-			throw new Error('model: generateSkeleton: bad page');
+	/*
+	 * @param {Object} pageStructure
+	 */
+	generateSkeleton: (s, pageStructure) => {
+		if (!pageStructure) {
+			throw new Error('model: generateSkeleton: bad pageStructure');
 		}
 
-		s.structure = ModelStructure.generate(page);
+		s.structure = ModelStructure.generate(pageStructure);
 	},
 
 	/**
 	 * Add file to model structure
-	 *
 	 * @param {number} groupIndex
 	 * @param {number} fieldsetIndex
 	 * @param {string} inputModelName
@@ -38,7 +40,6 @@ const mutations = {
 
 	/**
 	 * Remove fieldset from current group
-	 *
 	 * @param {number} groupIndex
 	 * @param {number} fieldsetIndex
 	 */
@@ -48,7 +49,6 @@ const mutations = {
 
 	/**
 	 * Add new fieldset item to structure
-	 *
 	 * @param {number} groupIndex
 	 */
 	copyFieldsetItem: (s, {groupIndex}) => {

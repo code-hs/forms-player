@@ -2,7 +2,7 @@
 	<form class="page-item" novalidate @submit.prevent="validatorStart">
 		<div class="groups-container">
 			<Group
-				v-for="(group, index) in page.groups"
+				v-for="(group, index) in pageStructure.groups"
 				:key="index"
 				:group="group"
 				:group-index="index"
@@ -36,7 +36,7 @@ export default {
 
 	computed: {
 		...mapGetters({
-			page: 'scheme/currentPage',
+			pageStructure: 'scheme/pageStructure',
 			modelStructure: 'model/structure',
 		}),
 	},
@@ -54,7 +54,7 @@ export default {
 			// eslint-disable-next-line no-alert
 			console.warn('success');
 			console.sh(JSON.stringify(this.modelStructure));
-			Api.send(this.page, this.modelStructure);
+			Api.send(this.pageStructure, this.modelStructure);
 		},
 	},
 };

@@ -43,7 +43,7 @@ export default {
 
 	data() {
 		return {
-			urlHash: this.getPageHash(),
+			pageName: this.getPageName(),
 			showContent: false,
 			showDump: Config.showDump,
 		};
@@ -62,15 +62,16 @@ export default {
 		}
 
 		this.loadScheme();
-		const currentPage = await this.initPage(this.urlHash);
-		if (!currentPage) {
-			throw new Error('app: created: bad currentPage');
+		const pageStructure = await this.initPage(this.pageName);
+
+		if (!pageStructure) {
+			throw new Error('app: created: bad pageStructure');
 		}
 
-		this.generateModelSkeleton(currentPage);
+		this.generateModelSkeleton(pageStructure);
 
-		// after structure generated, we can inject inputs
-		if (currentPage && this.modelStructure) this.showContent = true;
+		// after page structure generated, we can inject inputs
+		if (pageStructure && this.modelStructure) this.showContent = true;
 
 		Api.install(this.dataProjectId);
 	},
@@ -83,7 +84,7 @@ export default {
 			loadScheme: 'scheme/load',
 			initPage: 'scheme/initPage',
 		}),
-		getPageHash() {
+		getPageName() {
 			// can use hash url
 			// window.location.hash.slice(1)
 

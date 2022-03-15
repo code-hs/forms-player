@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 // scheme functional
 import scheme from './scheme';
 
-// model for inputs, generated structure based on the schema
+// model for inputs, generated structure based on the page structure
 import model from './model';
 
 // validate inputs
