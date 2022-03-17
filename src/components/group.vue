@@ -31,7 +31,7 @@
 <script>
 import {mapGetters, mapMutations} from 'vuex';
 import Fieldset from '@/components/fieldset';
-import {generateKey} from '@/utils/numbers';
+import {generateKey} from '@/utils/random';
 import {GroupView} from '@/classes/group/GroupView';
 
 export default {

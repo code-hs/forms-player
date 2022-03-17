@@ -1,4 +1,4 @@
-import {generateKey} from '@/utils/numbers';
+import {generateKey} from '@/utils/random';
 
 export class GroupView {
 	/**
