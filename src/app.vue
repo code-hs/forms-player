@@ -14,6 +14,7 @@ import {mapActions, mapGetters, mapMutations} from 'vuex';
 import Page from '@/components/page';
 import {Config} from '@/config/index';
 import {Api} from '@/classes/api/Api';
+import {generateHash} from '@/utils/random';
 
 export default {
 	components: {Page},
@@ -46,6 +47,7 @@ export default {
 			pageName: this.getPageName(),
 			showContent: false,
 			showDump: Config.showDump,
+			appId: generateHash(),
 		};
 	},
 
@@ -73,7 +75,7 @@ export default {
 		// after page structure generated, we can inject inputs
 		if (pageStructure && this.modelStructure) this.showContent = true;
 
-		Api.install(this.dataProjectId);
+		Api.install(this.dataProjectId, this.appId);
 	},
 
 	methods: {
