@@ -4,10 +4,9 @@ import {Config} from '@/config/index';
 export class Api {
 	static projectId = '';
 	static appId = '';
-	static axiosObj = {};
+	static axios = {};
 
 	/**
-	 *
 	 * @param {String} projectId
 	 * @param {String} appId - unique id for current client
 	 */
@@ -17,23 +16,19 @@ export class Api {
 		this.projectId = projectId;
 		this.appId = appId;
 
-		this.axiosObj = axios.create({
+		this.axios = axios.create({
 			baseURL: Config.apiUrl,
 		});
 	}
 
 	/**
-	 * @param {Object} pageStructure - current page structure
-	 * @param {Object} values - store model/structure
+	 *
+	 * @returns {{appId: string, projectId: string}}
 	 */
-	static send(pageStructure, values) {
-		const url = 'form/save-form';
-		const sendData = {
+	static getProjectInfo() {
+		return {
 			projectId: this.projectId,
 			appId: this.appId,
-			pageKey: pageStructure.key,
-			values,
 		};
-		this.axiosObj.post(url, sendData);
 	}
 }

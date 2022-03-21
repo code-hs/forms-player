@@ -10,6 +10,9 @@ import model from './model';
 // validate inputs
 import validator from './validator';
 
+// validate inputs
+import request from './request';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -17,5 +20,5 @@ export default new Vuex.Store({
 	getters: {},
 	mutations: {},
 	actions: {},
-	modules: {scheme, model, validator},
+	modules: {scheme, model, validator, request},
 });

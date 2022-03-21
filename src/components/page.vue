@@ -17,7 +17,7 @@
 import {mapGetters, mapActions} from 'vuex';
 import Group from '@/components/group';
 import {bus} from '@/utils/bus';
-import {Api} from '@/classes/api/Api';
+import {ApiResponser} from '@/classes/api/ApiResponser';
 
 export default {
 	name: 'Page',
@@ -49,12 +49,20 @@ export default {
 	methods: {
 		...mapActions({
 			validatorStart: 'validator/start',
+			saveForm: 'request/saveFormValues',
 		}),
-		validationFinish() {
-			// eslint-disable-next-line no-alert
-			console.warn('success');
-			console.sh(JSON.stringify(this.modelStructure));
-			Api.send(this.pageStructure, this.modelStructure);
+		async validationFinish() {
+			const res = await this.saveForm({
+				pageStructure: this.pageStructure,
+				values: this.modelStructure,
+			});
+			if (!ApiResponser.isSuccess(res)) {
+				console.log(ApiResponser.getError(res));
+				return;
+			}
+
+			const data = ApiResponser.getData(res);
+			alert('success');
 		},
 	},
 };
