@@ -1,6 +1,6 @@
 <template>
 	<div class="submit">
-		<button type="submit" :disabled="validatorHasError">Submit</button>
+		<button type="submit" :disabled="disabled">Submit</button>
 	</div>
 </template>
 
@@ -33,9 +33,12 @@ export default {
 
 	computed: {
 		...mapGetters({
-			modelStructure: 'model/structure',
 			validatorHasError: 'validator/hasError',
+			saveFormFinished: 'request/saveFormFinished',
 		}),
+		disabled() {
+			return this.validatorHasError || !this.saveFormFinished;
+		},
 	},
 };
 </script>
