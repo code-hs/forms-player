@@ -12,7 +12,7 @@
 
 <script>
 import Field from '@/components/field';
-import {generateKey} from '@/utils/numbers';
+import {generateKey} from '@/utils/random';
 
 export default {
 	name: 'Row',

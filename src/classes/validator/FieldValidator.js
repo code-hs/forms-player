@@ -25,7 +25,7 @@ export class FieldValidator {
 	 * @returns {boolean}
 	 */
 	static isValid(validationRules, fieldValue) {
-		// if there are no rules in the schema ->  field becomes valid
+		// if there are no rules in the scheme ->  field becomes valid
 		if (!validationRules || !Object.keys(validationRules).length) {
 			return true;
 		}

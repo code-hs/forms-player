@@ -98,7 +98,14 @@
 			"max-len": 0,
 			"padded-blocks": 0,
 			"operator-linebreak": 0,
-			"no-plusplus": 0
+			"no-plusplus": 0,
+			"lines-between-class-members": [
+				"error",
+				"always",
+				{
+					"exceptAfterSingleLine": true
+				}
+			]
 		},
 		"parserOptions": {
 			"parser": "babel-eslint"

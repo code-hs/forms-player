@@ -4,8 +4,8 @@
 			<Page />
 		</div>
 
-		<!--		<div v-if="showDump" class="dump">{{ modelStructure }}</div>-->
-		<div v-if="showDump" class="dump">{{ validatorFields }}</div>
+		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
+		<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
 	</div>
 </template>
 
@@ -13,10 +13,18 @@
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import Page from '@/components/page';
 import {Config} from '@/config/index';
+import {Api} from '@/classes/api/Api';
+import {generateHash} from '@/utils/random';
 
 export default {
 	components: {Page},
 	props: {
+		// customer project id
+		dataProjectId: {
+			type: String,
+			default: '',
+			required: true,
+		},
 		// Needed by the grid system to properly handle a small form resolution
 		dataLayout: {
 			type: String,
@@ -30,14 +38,16 @@ export default {
 		dataPage: {
 			type: String,
 			default: '',
+			required: true,
 		},
 	},
 
 	data() {
 		return {
-			urlHash: this.getPageHash(),
+			pageName: this.getPageName(),
 			showContent: false,
 			showDump: Config.showDump,
+			appId: generateHash(),
 		};
 	},
 
@@ -49,16 +59,23 @@ export default {
 	},
 
 	async created() {
-		this.loadScheme();
-		const currentPage = await this.initPage(this.urlHash);
-		if (!currentPage) {
-			throw new Error('app: created: bad currentPage');
+		if (!this.dataPage || !this.dataProjectId) {
+			throw new Error('app: created: bad params');
 		}
 
-		this.generateModelSkeleton(currentPage);
+		this.loadScheme();
+		const pageStructure = await this.initPage(this.pageName);
 
-		// after structure generated, we can inject inputs
-		if (currentPage && this.modelStructure) this.showContent = true;
+		if (!pageStructure) {
+			throw new Error('app: created: bad pageStructure');
+		}
+
+		this.generateModelSkeleton(pageStructure);
+
+		// after page structure generated, we can inject inputs
+		if (pageStructure && this.modelStructure) this.showContent = true;
+
+		Api.install(this.dataProjectId, this.appId);
 	},
 
 	methods: {
@@ -69,7 +86,7 @@ export default {
 			loadScheme: 'scheme/load',
 			initPage: 'scheme/initPage',
 		}),
-		getPageHash() {
+		getPageName() {
 			// can use hash url
 			// window.location.hash.slice(1)
 

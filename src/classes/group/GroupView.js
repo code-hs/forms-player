@@ -1,9 +1,8 @@
-import {generateKey} from '@/utils/numbers';
+import {generateKey} from '@/utils/random';
 
 export class GroupView {
 	/**
-	 * Get new item, when click button +
-	 *
+	 * Get new item, when click button
 	 * @param fieldsets
 	 * @returns {Object|boolean}
 	 */

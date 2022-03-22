@@ -1,9 +1,8 @@
 export class ModelStructure {
 	/**
-	 * Generate a structure for the current page, based on inputs in the schema
-	 *
-	 * @param {string} page - page structure
-	 * @returns {Array}
+	 * Generate a structure for the current page, based on the page structure
+	 * @param {Object} pageStructure
+	 * @returns {Array[]}
 	 *
 	 * return like
 	 * [ group items
@@ -14,11 +13,11 @@ export class ModelStructure {
 	 *  ]
 	 * ]
 	 */
-	static generate(page) {
-		if (!page || !page.groups) return [];
+	static generate(pageStructure) {
+		if (!pageStructure || !pageStructure.groups) return [];
 
 		// the groups first
-		return page.groups.reduce((acc, group, groupId) => {
+		return pageStructure.groups.reduce((acc, group, groupId) => {
 			// if no fields in the group, skip
 			if (!this._isHasGroupAnyField(group)) return acc;
 
@@ -35,7 +34,6 @@ export class ModelStructure {
 
 	/**
 	 * is field === input
-	 *
 	 * @param {Object} field
 	 * @returns {boolean}
 	 * @private
@@ -58,7 +56,6 @@ export class ModelStructure {
 	}
 
 	/**
-	 *
 	 * @param {Array} fields
 	 * @returns {Array}
 	 * @private
@@ -69,6 +66,11 @@ export class ModelStructure {
 		return fields.filter(field => this._isFieldInput(field));
 	}
 
+	/**
+	 * @param {Object} group
+	 * @returns {boolean}
+	 * @private
+	 */
 	static _isHasGroupAnyField(group) {
 		const {fieldsets} = group;
 		if (!fieldsets) return false;
