@@ -20,15 +20,11 @@ const actions = {
 	 * @param {Object} values - store model/structure
 	 */
 	async saveFormValues({commit}, {pageStructure, values}) {
-		const url = 'form/save-form';
-		const sendData = {
-			...Api.getProjectInfo(),
+		commit('setSaveFormFinished', false);
+		const res = await Api.post('form/save-form', {
 			pageKey: pageStructure.key,
 			values,
-		};
-
-		commit('setSaveFormFinished', false);
-		const res = await Api.axios.post(url, sendData);
+		});
 		commit('setSaveFormFinished', true);
 
 		return res;

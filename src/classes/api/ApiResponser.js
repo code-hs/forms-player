@@ -4,12 +4,7 @@ export class ApiResponser {
 	 * @returns {boolean}
 	 */
 	static isSuccess(response) {
-		return (
-			response &&
-			response.status === 200 &&
-			response.data &&
-			response.data.success === true
-		);
+		return response && response.success === true;
 	}
 
 	/**
@@ -19,7 +14,7 @@ export class ApiResponser {
 	static getError(response) {
 		if (!response) return false;
 
-		return response.data.error;
+		return response.error;
 	}
 
 	/**
@@ -27,8 +22,8 @@ export class ApiResponser {
 	 * @returns {Object|boolean}
 	 */
 	static getData(response) {
-		if (!response || !response.data.data) return false;
+		if (!response || !response.data) return false;
 
-		return response.data.data;
+		return response.data;
 	}
 }
