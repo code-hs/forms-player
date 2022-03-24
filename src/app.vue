@@ -1,5 +1,6 @@
 <template>
 	<div class="app" :data-layout="dataLayout" :data-theme="dataTheme">
+		<span>{{ $t('lead') }}</span>
 		<div v-if="showContent" class="page-container grid-container">
 			<Page />
 		</div>
@@ -59,6 +60,12 @@ export default {
 	},
 
 	async created() {
+		// console.dir(this);
+		setTimeout(() => {
+			console.log('update');
+			this.updateLang('fr');
+		}, 2000);
+
 		if (!this.dataPage || !this.dataProjectId) {
 			throw new Error('app: created: bad params');
 		}
