@@ -60,10 +60,9 @@ export default {
 	},
 
 	async created() {
-		// console.dir(this);
+		console.log('created');
 		setTimeout(() => {
-			console.log('update');
-			this.updateLang('fr');
+			this.i18n.changeLanguage('fr');
 		}, 2000);
 
 		if (!this.dataPage || !this.dataProjectId) {
