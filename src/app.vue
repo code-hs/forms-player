@@ -41,6 +41,11 @@ export default {
 			default: '',
 			required: true,
 		},
+		// current language
+		dataLanguage: {
+			type: String,
+			default: 'en',
+		},
 	},
 
 	data() {
@@ -59,12 +64,13 @@ export default {
 		}),
 	},
 
-	async created() {
-		console.log('created');
-		setTimeout(() => {
-			this.i18n.changeLanguage('fr');
-		}, 2000);
+	watch: {
+		dataLanguage(newValue) {
+			this.i18n.changeLanguage(newValue);
+		},
+	},
 
+	async created() {
 		if (!this.dataPage || !this.dataProjectId) {
 			throw new Error('app: created: bad params');
 		}

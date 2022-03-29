@@ -13,6 +13,9 @@ const dictionary = {
 
 export class i18n {
 	static changeLanguage(lang) {
+		// is allowed language
+		if (!Object.keys(dictionary).includes(lang)) return;
+
 		store.commit('localization/setCurrentLanguage', lang);
 	}
 
