@@ -18,7 +18,7 @@ export class SchemeParser {
 	}
 
 	/**
-	 * @param {String} pageName
+	 * @param {string} pageName
 	 * @returns {Object|false}
 	 */
 	getPageStructure(pageName) {

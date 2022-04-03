@@ -5,8 +5,8 @@ export class Api {
 	static appId = '';
 
 	/**
-	 * @param {String} projectId
-	 * @param {String} appId - unique id for current client
+	 * @param {string} projectId
+	 * @param {string} appId - unique id for current client
 	 */
 	static install(projectId, appId) {
 		if (!projectId) throw new Error('Api: install: bad prop "projectId');
@@ -27,7 +27,7 @@ export class Api {
 
 	/**
 	 *
-	 * @param {String} url
+	 * @param {string} url
 	 * @param {Object} data - inputs values
 	 * @param {Object} options
 	 * @returns {Promise<any>}

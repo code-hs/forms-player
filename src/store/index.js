@@ -13,6 +13,7 @@ import validator from './validator';
 // validate inputs
 import request from './request';
 
+// current lang
 import localization from './localization';
 
 Vue.use(Vuex);

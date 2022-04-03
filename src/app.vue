@@ -53,7 +53,7 @@ export default {
 			pageName: this.getPageName(),
 			showContent: false,
 			showDump: Config.showDump,
-			appId: generateHash(),
+			appId: generateHash(), // id for the app, for api ddos protection
 		};
 	},
 
@@ -65,8 +65,8 @@ export default {
 	},
 
 	watch: {
-		dataLanguage(newValue) {
-			this.i18n.changeLanguage(newValue);
+		dataLanguage(newLang) {
+			this.i18n.changeLanguage(newLang);
 		},
 	},
 
@@ -76,18 +76,17 @@ export default {
 		}
 
 		this.loadScheme();
-		const pageStructure = await this.initPage(this.pageName);
 
+		const pageStructure = await this.initPage(this.pageName);
 		if (!pageStructure) {
 			throw new Error('app: created: bad pageStructure');
 		}
 
 		this.generateModelSkeleton(pageStructure);
-
 		// after page structure generated, we can inject inputs
 		if (pageStructure && this.modelStructure) this.showContent = true;
 
-		Api.install(this.dataProjectId, this.appId);
+		this.installPlugins();
 	},
 
 	methods: {
@@ -98,10 +97,12 @@ export default {
 			loadScheme: 'scheme/load',
 			initPage: 'scheme/initPage',
 		}),
+		installPlugins() {
+			Api.install(this.dataProjectId, this.appId);
+		},
 		getPageName() {
 			// can use hash url
 			// window.location.hash.slice(1)
-
 			// from tag attribute
 			return this.dataPage;
 		},
