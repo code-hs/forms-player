@@ -3,6 +3,9 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
+// if (process.env.CUSTOM_RUN_COMMAND === 'serve') {
+// when run via SERVE (in each file)
+
 const plugins = [
 	new webpack.optimize.LimitChunkCountPlugin({
 		maxChunks: 1,

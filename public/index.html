@@ -3,11 +3,16 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>Form widget runtime</title>
+		<link
+			href="http://localhost:3033/p/client/widget-form-loader.js"
+			rel="preload"
+			as="script"
+		/>
 	</head>
 	<body>
-		<!--		этот файл очень важен, без него не запуститься serve-->
+		<!--	этот файл очень важен, без него не запуститься serve	-->
 		<form-widget-g
 			data-project-id="6228f24f02aede35780ea46f"
 			data-page="welcome"
@@ -27,6 +32,7 @@
 		<!--		</div>-->
 
 		<!--		<script src="dev/mobileConsole.js"></script>-->
+		<script src="http://localhost:3033/p/client/widget-form-loader.js"></script>
 	</body>
 
 	<style>
