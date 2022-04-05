@@ -4,24 +4,22 @@ export class i18n {
 	dictionary = {};
 	defaultLanguage = '';
 
-	/**
-	 * @param {Object} Vue - Vue instance
-	 */
 	static install(Vue) {
-		this.dictionary = {
-			en: {
-				'app-title': 'My Appy Apperson',
-				lead: 'Welcome to my little spot on the interwebs!',
-			},
-			fr: {
-				'app-title': 'Mon Appy Appy',
-				lead: 'Bienvenue dans mon petit coin sur les interwebs!',
-			},
-		};
-		this.defaultLanguage = 'en';
+		this.loadData();
 
 		Vue.prototype.$t = key => this.getText(key);
 		Vue.prototype.i18n = this;
+	}
+
+	static loadData() {
+		let data = localStorage.getItem('WDFL:init:localization');
+		if (!data) {
+			throw new Error('i18n: loadData: bad localization');
+		}
+
+		data = JSON.parse(data);
+		this.dictionary = data.dictionary;
+		this.defaultLanguage = data.defaultLanguage;
 	}
 
 	/**
