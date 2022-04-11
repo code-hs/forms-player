@@ -83,14 +83,25 @@ export class ModelStructure {
 			const {rows} = fieldset;
 			if (!rows) return false;
 
-			// eslint-disable-next-line no-restricted-syntax
-			for (const row of rows) {
-				let fields = JSON.parse(JSON.stringify(row.fields));
-				fields = this._filtrateFields(fields);
+			if (this._isHasRowsAnyField(rows)) return true;
+		}
 
-				// is group has eny field
-				if (fields && fields.length) return true;
-			}
+		return false;
+	}
+
+	/**
+	 * @param {Object} rows
+	 * @returns {boolean}
+	 * @private
+	 */
+	static _isHasRowsAnyField(rows) {
+		// eslint-disable-next-line no-restricted-syntax
+		for (const row of rows) {
+			let fields = JSON.parse(JSON.stringify(row.fields));
+			fields = this._filtrateFields(fields);
+
+			// is group has eny field
+			if (fields && fields.length) return true;
 		}
 
 		return false;
