@@ -1,5 +1,5 @@
 const state = () => ({
-	currentLanguage: 'en',
+	currentLanguage: '',
 });
 
 const getters = {

@@ -66,7 +66,7 @@ export default {
 
 	watch: {
 		dataLanguage(newLang) {
-			this.i18n.changeLanguage(newLang);
+			this.localization.changeLanguage(newLang);
 		},
 	},
 

@@ -3,7 +3,7 @@ import Vue from 'vue';
 import App from './app.vue';
 import store from './store';
 import {shadowRootInit} from './utils/initDom';
-import {i18n} from './plugins/i18n';
+import {Localization} from './plugins/localization';
 
 // add dev log functions
 require('./utils/console');
@@ -13,7 +13,7 @@ App.store = store;
 // import 'document-register-element/build/document-register-element';
 Vue.use(vueCustomElement);
 Vue.config.productionTip = false;
-Vue.use(i18n);
+Vue.use(Localization);
 
 const options = {
 	shadow: true,
