@@ -80,7 +80,9 @@ export default {
 		},
 		handleButRemove(fieldsetIndex) {
 			if (!this.group.fieldsets || !this.group.fieldsets.length) {
-				throw new Error('group.vue: handleButRemove: bad fieldsets');
+				throw new Error(
+					'group.vue.handleButRemove: variable fieldsets is empty'
+				);
 			}
 
 			// remove by fieldset index

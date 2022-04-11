@@ -17,7 +17,7 @@ const mutations = {
 	 * @param {number} key
 	 */
 	add: (s, key) => {
-		if (!key) throw new Error('validator:add: empty param "key"');
+		if (!key) throw new Error('validator.add: param "key" is empty');
 
 		const template = {
 			key,
@@ -31,7 +31,7 @@ const mutations = {
 	 * @param {number} fieldKey
 	 */
 	destroy: (s, key) => {
-		if (!key) throw new Error('validator:destroy: empty param "key"');
+		if (!key) throw new Error('validator.destroy: param "key" is empty');
 
 		const index = StoreValidator.findIndex(s.fields, key);
 		s.fields.splice(index, 1);
@@ -44,7 +44,7 @@ const mutations = {
 	 * @param {boolean} error - field status from data.valid.error
 	 */
 	update: (s, {key, error, answered = undefined}) => {
-		if (!key) throw new Error('validator:update: empty param "key"');
+		if (!key) throw new Error('validator.update: param "key" is empty');
 
 		const index = StoreValidator.findIndex(s.fields, key);
 
@@ -70,7 +70,7 @@ const actions = {
 	 * @returns {boolean} - update field focus
 	 */
 	fieldResponse({commit, getters}, {key, error}) {
-		if (!key) throw new Error('validator:fieldResponse: bad param "key"');
+		if (!key) throw new Error('validator.fieldResponse: param "key" is empty');
 
 		commit('update', {key, error, answered: true});
 		const isAllAnswered = getters.fields.every(item => item.answered);

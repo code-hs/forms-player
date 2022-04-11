@@ -9,7 +9,9 @@ export class Api {
 	 * @param {string} appId - unique id for current client
 	 */
 	static install(projectId, appId) {
-		if (!projectId) throw new Error('Api: install: bad prop "projectId');
+		if (!projectId || !appId) {
+			throw new Error('Api.install: prop "projectId" or "appId" is empty');
+		}
 
 		this.projectId = projectId;
 		this.appId = appId;

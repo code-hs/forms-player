@@ -47,12 +47,12 @@ export default {
 	created() {
 		if (!this.fieldParams.generalParams) {
 			throw new Error(
-				`Field.vue: need param generalParams [in groupIndex: ${this.groupIndex}, fieldsetIndex: ${this.fieldsetIndex}]`
+				`Field.vue.created: param generalParams is empty. [in groupIndex: ${this.groupIndex}, fieldsetIndex: ${this.fieldsetIndex}]`
 			);
 		}
 		if (!this.fieldParams.generalParams.component) {
 			throw new Error(
-				`Field.vue: need param component in generalParams [in groupIndex: ${this.groupIndex}, fieldsetIndex: ${this.fieldsetIndex}]`
+				`Field.vue.created: param component in generalParams is empty [in groupIndex: ${this.groupIndex}, fieldsetIndex: ${this.fieldsetIndex}]`
 			);
 		}
 	},

@@ -27,7 +27,7 @@ const actions = {
 	 */
 	initPage({commit}, pageName) {
 		if (!pageName) {
-			throw new Error('scheme: initPage: bad urlHash');
+			throw new Error('scheme.initPage: param pageName is empty');
 		}
 
 		const pageStructure = schemeParser.getPageStructure(pageName);

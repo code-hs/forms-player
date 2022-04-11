@@ -42,11 +42,14 @@ export class ModelStructure {
 		// console.log(fieldOptions.generalParams?.component);
 
 		if (!fieldOptions) {
-			throw new Error('ModelStructure: _isFieldInput: bad fieldOptions');
+			throw new Error('ModelStructure._isFieldInput: bad fieldOptions');
 		}
 
 		if (!fieldOptions.generalParams || !fieldOptions.generalParams.component) {
-			throw new Error('ModelStructure: need component in generalParams');
+			throw new Error(
+				"ModelStructure._isFieldInput: need field 'component' in" +
+					' generalParams object'
+			);
 		}
 
 		const notInputComponents = ['ButtonSubmit'];

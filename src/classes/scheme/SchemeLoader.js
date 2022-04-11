@@ -7,7 +7,7 @@ export class SchemeLoader {
 		// And we are already reading the data here
 		scheme = localStorage.getItem('WDFL:init:scheme');
 		if (!scheme) {
-			throw new Error('SchemeLoader: getData: bad scheme');
+			throw new Error('SchemeLoader.getData: scheme is empty');
 		}
 		scheme = JSON.parse(scheme);
 

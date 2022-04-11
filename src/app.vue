@@ -72,14 +72,14 @@ export default {
 
 	async created() {
 		if (!this.dataPage || !this.dataProjectId) {
-			throw new Error('app: created: bad params');
+			throw new Error('app.created: params is empty');
 		}
 
 		this.loadScheme();
 
 		const pageStructure = await this.initPage(this.pageName);
 		if (!pageStructure) {
-			throw new Error('app: created: bad pageStructure');
+			throw new Error('app.created: pageStructure is empty');
 		}
 
 		this.generateModelSkeleton(pageStructure);

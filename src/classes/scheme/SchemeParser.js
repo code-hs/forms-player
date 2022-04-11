@@ -7,7 +7,7 @@ export class SchemeParser {
 		this._scheme = SchemeLoader.getData();
 
 		if (!this.isValidStructure()) {
-			throw new Error('SchemeParser: load: not valid scheme');
+			throw new Error('SchemeParser.load: scheme is empty');
 		}
 
 		return this._scheme;
@@ -23,7 +23,7 @@ export class SchemeParser {
 	 */
 	getPageStructure(pageName) {
 		if (!pageName) {
-			throw new Error('SchemeParser: getPage: bad urlHash');
+			throw new Error('SchemeParser.getPageStructure: param pageName is empty');
 		}
 		if (!this._scheme || !this._scheme.pages) return false;
 

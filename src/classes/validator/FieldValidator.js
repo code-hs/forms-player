@@ -2,7 +2,12 @@ export class FieldValidator {
 	static debounceTime = 300;
 
 	static stringToRegex(str) {
-		if (!str) throw new Error('empty source string for create regexp');
+		if (!str) {
+			throw new Error(
+				'FieldValidator.stringToRegex: source' +
+					' string for create regexp is empty'
+			);
+		}
 		// Main regex
 		const main = str.match(/\/(.+)\/.*/)[1];
 		// Regex options
@@ -12,7 +17,10 @@ export class FieldValidator {
 		const regexp = new RegExp(main, options);
 
 		if (regexp.constructor.name !== 'RegExp') {
-			throw new Error('bad validation pattern (source)');
+			throw new Error(
+				'FieldValidator.stringToRegex: validation pattern (source) is not' +
+					' correct type'
+			);
 		}
 
 		return regexp;
@@ -35,7 +43,7 @@ export class FieldValidator {
 				const regexp = this.stringToRegex(validationRules.pattern);
 				return regexp.test(fieldValue);
 			} catch {
-				throw new Error('bad validation pattern');
+				throw new Error('FieldValidator.isValid: validation pattern is broken');
 			}
 		} else if ('required' in validationRules) {
 			// if rules have only required

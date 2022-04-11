@@ -15,7 +15,7 @@ const mutations = {
 	 */
 	generateSkeleton: (s, pageStructure) => {
 		if (!pageStructure) {
-			throw new Error('model: generateSkeleton: bad pageStructure');
+			throw new Error('model.generateSkeleton: param pageStructure is empty');
 		}
 
 		s.structure = ModelStructure.generate(pageStructure);
@@ -30,7 +30,7 @@ const mutations = {
 	 */
 	initField: (s, {groupIndex, fieldsetIndex, inputModelName, inputValue}) => {
 		if (!inputModelName) {
-			throw new Error('model: initField: bad inputModelName');
+			throw new Error('model.initField: param inputModelName is empty');
 		}
 
 		// clarification position
@@ -54,7 +54,7 @@ const mutations = {
 	copyFieldsetItem: (s, {groupIndex}) => {
 		if (!s.structure || !s.structure[groupIndex]) {
 			throw new Error(
-				'model: copyFieldsetItem: bad structure or cant find' +
+				'model.copyFieldsetItem: bad structure or cant find' +
 					' group by groupIndex'
 			);
 		}
@@ -63,7 +63,7 @@ const mutations = {
 		const sourceItem = s.structure[groupIndex][index];
 
 		if (!sourceItem) {
-			throw new Error('model: copyFieldsetItem: bad sourceItem');
+			throw new Error('model.copyFieldsetItem: sourceItem is empty');
 		}
 
 		// without reactivity
