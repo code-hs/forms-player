@@ -40,6 +40,17 @@ export class Localization {
 	}
 
 	/**
+	 * if client set language, we will use it.
+	 * or use default language (from scheme config)
+	 * @param {string} langFromAttribute
+	 */
+	static init(langFromAttribute) {
+		if (langFromAttribute) {
+			this.changeLanguage(langFromAttribute);
+		}
+	}
+
+	/**
 	 * Main process function
 	 * @param key - like 'foo.boo.bar'
 	 * @returns {string}
@@ -73,7 +84,12 @@ export class Localization {
 	 */
 	static changeLanguage(lang) {
 		lang = lang.toLowerCase();
-		if (!this.isAllowedLang(lang)) return;
+		if (!this.isAllowedLang(lang)) {
+			console.warn(
+				`Localization.changeLanguage: language '${lang}' is not allowed`
+			);
+			return;
+		}
 
 		// noinspection JSCheckFunctionSignatures
 		store.commit('localization/setCurrentLanguage', lang);

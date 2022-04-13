@@ -44,7 +44,7 @@ export default {
 		// current language
 		dataLanguage: {
 			type: String,
-			default: 'en',
+			default: '',
 		},
 	},
 
@@ -99,6 +99,7 @@ export default {
 		}),
 		installPlugins() {
 			Api.install(this.dataProjectId, this.appId);
+			this.localization.init(this.dataLanguage);
 		},
 		getPageName() {
 			// can use hash url

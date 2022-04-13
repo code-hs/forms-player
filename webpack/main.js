@@ -22,7 +22,7 @@ const plugins = [
 	}),
 ];
 
-let dropConsole = true;
+let dropConsole = false;
 
 if (process.env.CUSTOM_MODE === 'dev') {
 	dropConsole = false;
