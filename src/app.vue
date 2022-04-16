@@ -24,7 +24,6 @@ export default {
 		dataProjectId: {
 			type: String,
 			default: '',
-			required: true,
 		},
 		// Needed by the grid system to properly handle a small form resolution
 		dataLayout: {
@@ -38,7 +37,6 @@ export default {
 		// current opened page
 		dataPage: {
 			type: String,
-			default: '',
 			required: true,
 		},
 		// current language
@@ -71,8 +69,8 @@ export default {
 	},
 
 	async created() {
-		if (!this.dataPage || !this.dataProjectId) {
-			throw new Error('app.created: params is empty');
+		if (!this.dataPage) {
+			throw new Error('app.created: attr data-page is empty');
 		}
 
 		this.loadScheme();
@@ -98,7 +96,11 @@ export default {
 			initPage: 'scheme/initPage',
 		}),
 		installPlugins() {
-			Api.install(this.dataProjectId, this.appId);
+			if (this.dataProjectId) {
+				// API only for forms with project id, who registered on the server
+				Api.install(this.dataProjectId, this.appId);
+			}
+
 			this.localization.init(this.dataLanguage);
 		},
 		getPageName() {
