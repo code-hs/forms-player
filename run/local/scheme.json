@@ -1,0 +1,405 @@
+{
+	"config": {
+		"step_by_step": "strict",
+		"modules": {
+			"auth": false,
+			"sign": false,
+			"pay": false
+		},
+		"apiUrl": "test.com:3100/api/",
+		"localization": {
+			"defaultLang": "fr",
+			"availableLangs": ["en", "fr"]
+		}
+	},
+
+	"pages": [
+		{
+			"id": 1,
+			"key": "page_1_welcome",
+			"url": "welcome",
+			"type": "text_page",
+			"description": "Welcome",
+			"pos": 1,
+
+			"groups": [
+				{
+					"enable": true,
+					"description": "group 1",
+					"multiple": {
+						"enable": true,
+						"buttonText": "+"
+					},
+					"fieldsets": [
+						{
+							"description": "Fieldset login",
+							"rows": [
+								{
+									"enable": false,
+									"description": "row 1",
+									"fields": [
+										{
+											"enable": true,
+											"generalParams": {
+												"component": "InputText",
+												"model": "login"
+											},
+											"validation": {
+												"required": true,
+												"pattern": "/^[a-z0-9_-]{2,6}$/i",
+												"errorText": "Value must be a number 1"
+											},
+											"text": {
+												"placeholder": "Login",
+												"hint": ""
+											},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": 6,
+												"customCss": "",
+												"customCssClass": ""
+											}
+										},
+										{
+											"enable": false,
+											"generalParams": {
+												"component": "InputText",
+												"model": "surname"
+											},
+											"validation": {
+												"required": true,
+												"pattern": "/^[a-z0-9_-]{2,6}$/i",
+												"errorText": "Value must be a number 2"
+											},
+											"text": {
+												"placeholder": "Surname",
+												"hint": ""
+											},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": 6,
+												"customCss": "",
+												"customCssClass": ""
+											}
+										}
+									]
+								},
+								{
+									"description": "row 1.5",
+									"fields": [
+										{
+											"enable": false,
+											"generalParams": {
+												"component": "InputPassword",
+												"model": "password"
+											},
+											"validation": {
+												"required": true,
+												"pattern": "/^[a-z0-9_-]{2,6}$/i",
+												"errorText": "Value must be a number 1"
+											},
+											"text": {
+												"placeholder": "Password",
+												"hint": ""
+											},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": 12,
+												"customCss": "",
+												"customCssClass": ""
+											}
+										}
+									]
+								},
+								{
+									"enable": false,
+									"description": "row 2",
+									"fields": [
+										{
+											"enable": true,
+											"generalParams": {
+												"component": "Selector",
+												"model": "country"
+											},
+											"customParams": {
+												"values": {
+													"options": {
+														"ua": "Ukraine",
+														"ru": "Russian Federation",
+														"usa": "United States",
+														"me": "Montenegro"
+													},
+													"default": "Select country"
+												}
+											},
+											"validation": {
+												"required": true,
+												"errorText": "Value must be a number 2"
+											},
+											"text": {},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": 12,
+												"customCss": "",
+												"customCssClass": ""
+											}
+										}
+									]
+								},
+								{
+									"enable": false,
+									"description": "row 3",
+									"fields": [
+										{
+											"enable": true,
+											"generalParams": {
+												"component": "Textarea",
+												"model": "message"
+											},
+											"customParams": {
+												"rows": 3
+											},
+											"validation": {
+												"required": true,
+												"pattern": "/^[a-z0-9_-]{2,6}$/i",
+												"errorText": "Value must be a number textarea"
+											},
+											"text": {
+												"placeholder": "Message"
+											},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": 12,
+												"customCss": "",
+												"customCssClass": ""
+											}
+										}
+									]
+								},
+								{
+									"enable": true,
+									"description": "row 4",
+									"fields": [
+										{
+											"enable": true,
+											"generalParams": {
+												"component": "Checkbox",
+												"model": "agree"
+											},
+											"customParams": {
+												"bodyHTML": "I have read and agreed with <a href='123' target='_blank'>the terms and conditions.</a>"
+											},
+											"validation": {
+												"required": true
+											},
+											"text": {},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": "12",
+												"customCss": "",
+												"customCssClass": ""
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+
+				{
+					"enable": false,
+					"description": "group 3",
+					"multiple": {
+						"enable": true,
+						"buttonText": "+"
+					},
+					"fieldsets": [
+						{
+							"description": "user address",
+							"rows": [
+								{
+									"description": "row 1",
+									"fields": [
+										{
+											"enable": false,
+											"generalParams": {
+												"component": "InputText",
+												"model": "address_1"
+											},
+											"validation": {
+												"required": false,
+												"pattern": "/^[a-z0-9_-]{2,6}$/i",
+												"errorText": "Value must be a number 1"
+											},
+											"text": {
+												"placeholder": "address 1",
+												"hint": ""
+											},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": 6,
+												"customCss": "",
+												"customCssClass": ""
+											}
+										},
+										{
+											"enable": false,
+											"generalParams": {
+												"component": "InputText",
+												"model": "address_2"
+											},
+											"validation": {
+												"required": true,
+												"pattern": "/^[a-z0-9_-]{2,6}$/i",
+												"errorText": "Value must be a number 2"
+											},
+											"text": {
+												"placeholder": "address 2",
+												"hint": ""
+											},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": 6,
+												"customCss": "",
+												"customCssClass": ""
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+
+				{
+					"description": "group 2",
+					"fieldsets": [
+						{
+							"description": "Fieldset login submit",
+							"rows": [
+								{
+									"description": "row 1",
+									"styles": {
+										"justify-content": "flex-end"
+									},
+									"fields": [
+										{
+											"generalParams": {
+												"component": "ButtonSubmit"
+											},
+											"customParams": {},
+											"text": {},
+											"html": {
+												"custom_pre_html": "htmlBlock_1",
+												"custom_after_html": "htmlBlock_2"
+											},
+											"styles": {
+												"col": 4,
+												"customCss": "",
+												"customCssClass": ""
+											}
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+
+		{
+			"id": 2,
+			"key": "page_2_auth",
+			"url": "auth",
+			"type": "auth_module",
+			"description": "Auth",
+			"pos": 2,
+			"groups": [
+				{
+					"description": "group 1",
+					"multiple": {
+						"enable": true,
+						"buttonText": "+"
+					}
+				}
+			]
+		},
+
+		{
+			"id": 3,
+			"key": "page_3_rules",
+			"url": "rules",
+			"type": "text_page",
+			"description": "Rules",
+			"pos": 3,
+
+			"groups": [
+				{
+					"description": "group 1",
+					"multiple": {
+						"enable": true,
+						"buttonText": "+"
+					}
+				}
+			]
+		},
+
+		{
+			"id": 4,
+			"enable": false,
+			"key": "page_4_rules_agree",
+			"url": "agree",
+			"type": "text_page",
+			"description": "Agree",
+			"pos": 4,
+
+			"groups": [
+				{
+					"description": "group 1",
+					"multiple": {
+						"enable": true,
+						"buttonText": "+"
+					},
+					"fields": [
+						{
+							"input": true,
+							"input_type": "checkbox",
+							"default": "unchecked",
+							"required": true,
+							"custom_css": "",
+							"custom_css_class": "",
+							"custom_pre_html": "htmlBlock_1",
+							"custom_after_html": "htmlBlock_2"
+						}
+					]
+				}
+			]
+		}
+	]
+}
