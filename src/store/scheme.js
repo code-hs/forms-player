@@ -1,6 +1,6 @@
-import {SchemeParser} from '@/classes/scheme/SchemeParser';
+import {SchemeController} from '@/classes/scheme/SchemeController';
 
-let schemeParser;
+let schemeItem;
 
 const state = () => ({
 	pageStructure: null,
@@ -18,8 +18,8 @@ const mutations = {
 
 const actions = {
 	load() {
-		schemeParser = new SchemeParser();
-		schemeParser.load();
+		schemeItem = new SchemeController();
+		schemeItem.load();
 	},
 	/**
 	 * @param {string} pageName - page url
@@ -30,7 +30,7 @@ const actions = {
 			throw new Error('scheme.initPage: param pageName is empty');
 		}
 
-		const pageStructure = schemeParser.getPageStructure(pageName);
+		const pageStructure = schemeItem.getPageStructure(pageName);
 		commit('setPageStructure', pageStructure);
 
 		return pageStructure;
