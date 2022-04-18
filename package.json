@@ -3,15 +3,20 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"serve": "cross-env CUSTOM_MODE=dev CUSTOM_RUN_COMMAND=serve vue-cli-service serve",
+		"serve": "cross-env CUSTOM_MODE=dev vue-cli-service serve",
+		"serve local": "npm run _local:copy:bundle && npm run _local:copy:scheme && npm run _local:copy:dictionary && serve run",
 		" ": "",
-		"build min        (clear comments/logs)": "cross-env CUSTOM_MODE=prod vue-cli-service build",
-		"build full         (with sourcemap, with comments, logs)": "cross-env CUSTOM_MODE=dev vue-cli-service build",
-		"serve local": "serve run",
+		"build min        (clear comments,logs)": "cross-env CUSTOM_MODE=prod vue-cli-service build && npm run _copy:bundle:to-api-public-dir",
+		"build full         (with sourcemap, with comments, logs)": "cross-env CUSTOM_MODE=dev vue-cli-service build && npm run _copy:bundle:to-api-public-dir",
 		"  ": "",
 		"lint": "vue-cli-service lint",
 		"test": "jest",
-		"analyze": "cross-env CUSTOM_MODE=analyze vue-cli-service build"
+		"analyze": "cross-env CUSTOM_MODE=analyze vue-cli-service build",
+		" ": "",
+		"_local:copy:bundle": "copy dist\\form-widget-g.js run\\local\\form-widget-g.js",
+		"_local:copy:scheme": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\scheme.json run\\local\\scheme.json",
+		"_local:copy:dictionary": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\dictionaries.json run\\local\\dictionaries.json",
+		"_copy:bundle:to-api-public-dir": "copy dist\\form-widget-g.js ..\\api\\public\\bundles\\form-widget-g.bundle-1.js"
 	},
 	"dependencies": {
 		"document-register-element": "^1.11.0",
