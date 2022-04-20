@@ -24,6 +24,7 @@ export default {
 		dataProjectId: {
 			type: String,
 			default: '',
+			required: true,
 		},
 		// Needed by the grid system to properly handle a small form resolution
 		dataLayout: {
@@ -96,11 +97,7 @@ export default {
 			initPage: 'scheme/initPage',
 		}),
 		installPlugins() {
-			if (this.dataProjectId) {
-				// API only for forms with project id, who registered on the server
-				Api.install(this.dataProjectId, this.appId);
-			}
-
+			Api.install(this.dataProjectId, this.appId);
 			this.localization.init(this.dataLanguage);
 		},
 		getPageName() {
