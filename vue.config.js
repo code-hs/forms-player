@@ -1,5 +1,5 @@
-const {configureWebpack} = require('./webpack/main');
-const {enableShadowCss, css} = require('./webpack/styles');
+const {configureWebpack} = require('./settings/webpack/main');
+const {enableShadowCss, css} = require('./settings/webpack/styles');
 
 module.exports = {
 	configureWebpack,

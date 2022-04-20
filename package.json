@@ -12,7 +12,7 @@
 		"lint": "vue-cli-service lint",
 		"test": "jest",
 		"analyze": "cross-env CUSTOM_MODE=analyze vue-cli-service build",
-		" ": "",
+		"   ": "",
 		"_local:copy:bundle": "copy dist\\form-widget-g.js run\\local\\form-widget-g.js",
 		"_local:copy:scheme": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\scheme.json run\\local\\scheme.json",
 		"_local:copy:dictionary": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\dictionaries.json run\\local\\dictionaries.json",
