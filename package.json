@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"serve": "cross-env CUSTOM_MODE=dev vue-cli-service serve",
-		"serve local": "npm run _local:copy:bundle && npm run _local:copy:scheme && npm run _local:copy:dictionary && npm run _local:copy:WDFL && serve run",
+		"serve local": "npm run _local:copy:bundle && npm run _local:copy:scheme && npm run _local:copy:locales && npm run _local:copy:WDFL && serve run",
 		" ": "",
 		"build min        (clear comments,logs)": "cross-env CUSTOM_MODE=prod vue-cli-service build && npm run _copy:bundle:to-api-public-dir && npm run _local:copy:bundle",
 		"build full         (with sourcemap, with comments, logs)": "cross-env CUSTOM_MODE=dev vue-cli-service build && npm run _copy:bundle:to-api-public-dir  && npm run _local:copy:bundle",
@@ -15,7 +15,7 @@
 		"   ": "",
 		"_local:copy:bundle": "copy dist\\form-widget-g.js run\\local\\form-widget-g.js",
 		"_local:copy:scheme": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\scheme.json run\\local\\scheme.json",
-		"_local:copy:dictionary": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\dictionaries.json run\\local\\dictionaries.json",
+		"_local:copy:locales": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\locales.json run\\local\\locales.json",
 		"_local:copy:WDFL": "copy ..\\api\\public\\client\\widget-form-loader.js run\\local\\widget-form-loader.js",
 		"_copy:bundle:to-api-public-dir": "copy dist\\form-widget-g.js ..\\api\\public\\bundles\\form-widget-g.js"
 	},

@@ -5,7 +5,7 @@ export class LocalizationLoader {
 	static getData() {
 		return {
 			configuration: this.getConfiguration(),
-			dictionaries: this.getDictionaries(),
+			locales: this.getLocales(),
 		};
 	}
 
@@ -20,15 +20,13 @@ export class LocalizationLoader {
 	 *		}
 	 * }
 	 */
-	static getDictionaries() {
-		const dictionaries = localStorage.getItem('WDFL:init:dictionaries');
-		if (!dictionaries) {
-			throw new Error(
-				'LocalizationLoader.getDictionaries: no dictionaries found'
-			);
+	static getLocales() {
+		const locales = localStorage.getItem('WDFL:init:locales');
+		if (!locales) {
+			throw new Error('LocalizationLoader.getLocales: no locales found');
 		}
 
-		return JSON.parse(dictionaries);
+		return JSON.parse(locales);
 	}
 
 	/**

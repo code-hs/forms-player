@@ -6,7 +6,7 @@ export function isObject(item) {
  * Get value by string key in deep object
  * @param {string} key - like 'foo.boo.bar'
  * @param {Object} localesStore
- * @returns {string} text from dictionary
+ * @returns {string} text from locales
  */
 export function getValueByStringKey(key, localesStore) {
 	// ['foo', 'boo', 'bar']

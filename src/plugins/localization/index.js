@@ -3,7 +3,7 @@ import {getValueByStringKey} from '../../utils/objects';
 import {LocalizationLoader} from './LocalizationLoader';
 
 export class Localization {
-	dictionaries = {};
+	locales = {};
 	defaultLang = '';
 	/**
 	 * @type {[String, String]}
@@ -32,7 +32,7 @@ export class Localization {
 	static loadData() {
 		const data = LocalizationLoader.getData();
 		// setup fields
-		this.dictionaries = data.dictionaries;
+		this.locales = data.locales;
 		this.availableLangs = data.configuration.availableLangs.map(lang =>
 			lang.toLowerCase()
 		);
@@ -59,9 +59,9 @@ export class Localization {
 		if (!key) return '';
 
 		const currentLanguage = store.getters['localization/currentLanguage'];
-		const dictionaryByLang = this.dictionaries[currentLanguage];
+		const localesByLang = this.locales[currentLanguage];
 
-		return getValueByStringKey(key, dictionaryByLang);
+		return getValueByStringKey(key, localesByLang);
 	}
 
 	/**
@@ -70,13 +70,11 @@ export class Localization {
 	 */
 	static isAllowedLang(lang) {
 		lang = lang.toLowerCase();
-		const langsInDictionaries = Object.keys(this.dictionaries).map(lang =>
+		const langsInLocales = Object.keys(this.locales).map(lang =>
 			lang.toLowerCase()
 		);
 
-		return (
-			langsInDictionaries.includes(lang) && this.availableLangs.includes(lang)
-		);
+		return langsInLocales.includes(lang) && this.availableLangs.includes(lang);
 	}
 
 	/**
