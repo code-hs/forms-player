@@ -1,11 +1,11 @@
 <template>
 	<form class="page-item" novalidate @submit.prevent="validatorStart">
 		<div class="groups-container">
-			<Group
-				v-for="(group, index) in pageStructure.groups"
+			<VirtualComponent
+				v-for="(component, index) in pageStructure.components"
 				:key="index"
-				:group="group"
-				:group-index="index"
+				:component-data="component"
+				:component-index="index"
 			/>
 		</div>
 
@@ -15,14 +15,14 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex';
-import Group from '@/components/group';
+import VirtualComponent from '@/components/virtualComponent';
 import {bus} from '@/utils/bus';
 import {ApiResponser} from '@/classes/api/ApiResponser';
 
 export default {
 	name: 'Page',
 	components: {
-		Group,
+		VirtualComponent,
 	},
 
 	data() {
