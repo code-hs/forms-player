@@ -11,10 +11,14 @@
 <script>
 import InputText from '@/components/fields/inputs/text';
 
+// async import for the box components
+const LayoutColumns = () => import('@/components/layout/columns');
+
 export default {
 	name: 'VirtualComponent',
 	components: {
 		InputText,
+		LayoutColumns,
 	},
 	props: {
 		componentData: {
