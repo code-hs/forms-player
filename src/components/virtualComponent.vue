@@ -1,6 +1,5 @@
 <template>
 	<div>
-		{{ componentData.generalParams.model }}
 		<component
 			:is="componentData.generalParams.component"
 			v-bind="componentData"
@@ -31,7 +30,7 @@ export default {
 		return {};
 	},
 	created() {
-		console.sh(this.componentData);
+		// console.sh(this.componentData);
 	},
 };
 </script>

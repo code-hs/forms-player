@@ -1,22 +1,17 @@
 <template>
 	<div>
-		<div class="row">
-			<div
-				v-for="(column, index) in customParams.columns"
-				:key="index"
-				class="col-6"
-			>
-				<div class="title">{{ column.name }}</div>
+		<div class="columns-container row">
+			<template v-for="(column, columnIndex) in customParams.columns">
+				<div v-if="Object.keys(column).length" :key="columnIndex" class="col-6">
+					<div class="title">{{ column.customParams.name }}</div>
 
-				<div v-if="Object.keys(column).length">
 					<VirtualComponent
-						v-for="(component, indexx) in column.components"
-						:key="indexx"
+						v-for="(component, index) in column.components"
+						:key="index"
 						:component-data="component"
-						:component-index="indexx"
 					/>
 				</div>
-			</div>
+			</template>
 		</div>
 	</div>
 </template>
@@ -44,9 +39,10 @@ export default {
 </script>
 
 <style scoped>
-.row {
+.columns-container {
 	display: flex;
 }
+
 .col-6 {
 	width: 43%;
 	text-align: center;
