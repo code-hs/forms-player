@@ -1,4 +1,4 @@
 /* eslint-disable no-console */
-console.sh = data => {
+console.logp = data => {
 	console.log(JSON.parse(JSON.stringify(data)));
 };
