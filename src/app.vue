@@ -82,7 +82,7 @@ export default {
 		}
 
 		this.showContent = true;
-		// this.generateModelSkeleton(pageStructure);
+		this.generateModelSkeleton(pageStructure);
 		// after page structure generated, we can inject inputs
 		// if (pageStructure && this.modelStructure) this.showContent = true;
 

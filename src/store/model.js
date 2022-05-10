@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {ModelStructure} from '@/classes/scheme/ModelStructure';
 
 const state = () => ({
-	structure: [],
+	structure: {},
 });
 
 const getters = {
@@ -18,7 +18,7 @@ const mutations = {
 			throw new Error('model.generateSkeleton: param pageStructure is empty');
 		}
 
-		s.structure = ModelStructure.generate(pageStructure);
+		s.structure = ModelStructure.generate2(pageStructure);
 	},
 
 	/**
@@ -38,6 +38,23 @@ const mutations = {
 		Vue.set(fieldset, inputModelName, inputValue);
 	},
 
+	initField2: (s, {inputModelName, inputValue, multiBoxModel, groupIndex}) => {
+		if (!inputModelName) {
+			throw new Error('model.initField: param inputModelName is empty');
+		}
+
+		if (multiBoxModel) {
+			// Vue.set(
+			// 	s.structure[multiBoxModel][groupIndex],
+			// 	inputModelName,
+			// 	inputValue
+			// );
+		} else {
+			Vue.set(s.structure, inputModelName, inputValue);
+		}
+		// clarification position
+	},
+
 	/**
 	 * Remove fieldset from current group
 	 * @param {number} groupIndex
@@ -45,6 +62,24 @@ const mutations = {
 	 */
 	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
 		s.structure[groupIndex].splice(fieldsetIndex, 1);
+	},
+
+	removeGroupItem: (s, {groupName, groupItemIndex}) => {
+		s.structure[groupName].splice(groupItemIndex, 1);
+	},
+
+	// multibox model
+	copyGroupItem(s, {groupName}) {
+		const sourceItem =
+			s.structure[groupName][s.structure[groupName].length - 1];
+		const newItem = JSON.parse(JSON.stringify(sourceItem));
+
+		// clear values
+		Object.keys(newItem).forEach(key => {
+			newItem[key] = '';
+		});
+
+		s.structure[groupName].push(newItem);
 	},
 
 	/**

@@ -32,6 +32,41 @@ export class ModelStructure {
 		}, []);
 	}
 
+	static generate2(pageStructure) {
+		if (!pageStructure || !pageStructure.components) return [];
+
+		const output = this.getComponentStructure(pageStructure);
+
+		// console.logp(output);
+
+		return output;
+	}
+
+	static getComponentStructure(component) {
+		let output = {};
+
+		if (component?.generalParams?.component === 'MultiBox') {
+			const path = component.generalParams.model;
+			output[path] = [{}];
+		}
+
+		if (component?.components?.length) {
+			component.components.forEach(component => {
+				if (component.generalParams.component === 'layoutColumns') {
+					const {columns} = component.customParams;
+
+					columns.forEach(column => {
+						const r = this.getComponentStructure(column);
+
+						output = {...output, ...r};
+					});
+				}
+			});
+		}
+
+		return output;
+	}
+
 	/**
 	 * is field === input
 	 * @param {Object} field
