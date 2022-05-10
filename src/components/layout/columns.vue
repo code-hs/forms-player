@@ -5,11 +5,7 @@
 				<div v-if="Object.keys(column).length" :key="columnIndex" class="col-6">
 					<div class="title">{{ column.customParams.name }}</div>
 
-					<VirtualComponent
-						v-for="(component, index) in column.components"
-						:key="index"
-						:component-data="component"
-					/>
+					<VirtualComponent :component-data="column" />
 				</div>
 			</template>
 		</div>
