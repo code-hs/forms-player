@@ -94,8 +94,6 @@ export default {
 			});
 
 			this.groups.push(newFieldset);
-
-			console.log('---------');
 		},
 		handleButRemove(index) {
 			this.removeGroupItem({

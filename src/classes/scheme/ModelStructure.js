@@ -45,6 +45,8 @@ export class ModelStructure {
 	static getComponentStructure(component) {
 		let output = {};
 
+		// console.logp(component);
+
 		if (component?.generalParams?.component === 'MultiBox') {
 			const path = component.generalParams.model;
 			output[path] = [{}];
@@ -53,13 +55,16 @@ export class ModelStructure {
 		if (component?.components?.length) {
 			component.components.forEach(component => {
 				if (component.generalParams.component === 'layoutColumns') {
-					const {columns} = component.customParams;
+					const {components} = component;
 
-					columns.forEach(column => {
-						const r = this.getComponentStructure(column);
+					components.forEach(compItem => {
+						const r = this.getComponentStructure(compItem);
 
 						output = {...output, ...r};
 					});
+				} else {
+					const r = this.getComponentStructure(component);
+					output = {...output, ...r};
 				}
 			});
 		}
