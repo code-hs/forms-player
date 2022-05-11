@@ -18,7 +18,7 @@ const mutations = {
 			throw new Error('model.generateSkeleton: param pageStructure is empty');
 		}
 
-		s.structure = ModelStructure.generate2(pageStructure);
+		s.structure = ModelStructure.generate(pageStructure);
 	},
 
 	/**

@@ -2,74 +2,68 @@ export class ModelStructure {
 	/**
 	 * Generate a structure for the current page, based on the page structure
 	 * @param {Object} pageStructure
-	 * @returns {Array[]}
+	 * @returns {Object}
 	 *
 	 * return like
-	 * [ group items
-	 *  [ fieldset items
-	 *   {},
-	 *   {},
-	 *   {}
-	 *  ]
-	 * ]
+	 * {
+	 *	"multi_box_1": [
+	 * 		{}
+	 * 	],
+	 * 	"first": "",
+	 * 	"second": "",
+	 * 	"surname": ""
+	 * }
 	 */
 	static generate(pageStructure) {
-		if (!pageStructure || !pageStructure.groups) return [];
+		if (!pageStructure || !pageStructure.components) return {};
 
-		// the groups first
-		return pageStructure.groups.reduce((acc, group, groupId) => {
-			// if no fields in the group, skip
-			if (!this._isHasGroupAnyField(group)) return acc;
-
-			// each group initialize as an array
-
-			acc.push([]);
-			// create a store for future fields
-			// {} = inputs store
-			acc[groupId].push({});
-
-			return acc;
-		}, []);
+		return this._getComponentStructure(pageStructure);
 	}
 
-	static generate2(pageStructure) {
-		if (!pageStructure || !pageStructure.components) return [];
+	/**
+	 * @param {Object} component - from scheme (field or layout item)
+	 * @returns {{}}
+	 * @private
+	 */
+	static _getComponentStructure(component) {
+		const optionalStructure = this._getOptionalStructure(component);
+		const innerStructure = this._getInnerStructure(component);
 
-		const output = this.getComponentStructure(pageStructure);
-
-		// console.logp(output);
-
-		return output;
+		return {...optionalStructure, ...innerStructure};
 	}
 
-	static getComponentStructure(component) {
-		let output = {};
-
-		// console.logp(component);
+	/**
+	 * @param {Object} component - from scheme (field or layout item)
+	 * @returns {{}}
+	 * @private
+	 */
+	static _getOptionalStructure(component) {
+		const structure = {};
 
 		if (component?.generalParams?.component === 'MultiBox') {
-			const path = component.generalParams.model;
-			output[path] = [{}];
+			// create a store for future fields
+			const inputsStore = {};
+			const multiBoxModel = component.generalParams.model;
+
+			structure[multiBoxModel] = [inputsStore];
 		}
 
-		if (component?.components?.length) {
-			component.components.forEach(component => {
-				if (component.generalParams.component === 'layoutColumns') {
-					const {components} = component;
+		return structure;
+	}
 
-					components.forEach(compItem => {
-						const r = this.getComponentStructure(compItem);
+	/**
+	 * @param {Object} component - from scheme (field or layout item)
+	 * @returns {{}}
+	 * @private
+	 */
+	static _getInnerStructure(component) {
+		if (!component?.components?.length) return {};
 
-						output = {...output, ...r};
-					});
-				} else {
-					const r = this.getComponentStructure(component);
-					output = {...output, ...r};
-				}
-			});
-		}
+		return component.components.reduce((store, child) => {
+			const childStructure = this._getComponentStructure(child);
 
-		return output;
+			return {...store, ...childStructure};
+		}, {});
 	}
 
 	/**
@@ -107,43 +101,5 @@ export class ModelStructure {
 		if (!fields) return false;
 
 		return fields.filter(field => this._isFieldInput(field));
-	}
-
-	/**
-	 * @param {Object} group
-	 * @returns {boolean}
-	 * @private
-	 */
-	static _isHasGroupAnyField(group) {
-		const {fieldsets} = group;
-		if (!fieldsets) return false;
-
-		// eslint-disable-next-line no-restricted-syntax
-		for (const fieldset of fieldsets) {
-			const {rows} = fieldset;
-			if (!rows) return false;
-
-			if (this._isHasRowsAnyField(rows)) return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * @param {Object} rows
-	 * @returns {boolean}
-	 * @private
-	 */
-	static _isHasRowsAnyField(rows) {
-		// eslint-disable-next-line no-restricted-syntax
-		for (const row of rows) {
-			let fields = JSON.parse(JSON.stringify(row.fields));
-			fields = this._filtrateFields(fields);
-
-			// is group has eny field
-			if (fields && fields.length) return true;
-		}
-
-		return false;
 	}
 }
