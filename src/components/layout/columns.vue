@@ -1,24 +1,22 @@
 <template>
 	<div>
 		<div class="columns-container row">
-			<template v-for="(column, columnIndex) in customParams.columns">
-				<div v-if="Object.keys(column).length" :key="columnIndex" class="col-6">
-					<div class="title">{{ column.customParams.name }}</div>
-
-					<VirtualComponent :component-data="column" />
-				</div>
-			</template>
+			<LayoutColumn
+				v-for="(column, columnIndex) in components"
+				:key="columnIndex"
+				:column="column"
+			/>
 		</div>
 	</div>
 </template>
 
 <script>
-const VirtualComponent = () => import('@/components/virtualComponent');
+const LayoutColumn = () => import('@/components/layout/column');
 
 export default {
 	name: 'LayoutColumns',
 	components: {
-		VirtualComponent,
+		LayoutColumn,
 	},
 	props: {
 		// below params from v-bind
@@ -30,6 +28,10 @@ export default {
 			type: Object,
 			required: true,
 		},
+		components: {
+			type: Array,
+			required: true,
+		},
 	},
 };
 </script>
@@ -37,10 +39,5 @@ export default {
 <style scoped>
 .columns-container {
 	display: flex;
-}
-
-.col-6 {
-	width: 43%;
-	text-align: center;
 }
 </style>
