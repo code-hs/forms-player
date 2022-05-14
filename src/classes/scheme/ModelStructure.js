@@ -15,7 +15,7 @@ export class ModelStructure {
 	 * }
 	 */
 	static generate(pageStructure) {
-		if (!pageStructure || !pageStructure.components) return {};
+		if (!pageStructure || !pageStructure.components) return false;
 
 		return this._getComponentStructure(pageStructure);
 	}

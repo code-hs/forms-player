@@ -56,7 +56,7 @@ export default {
 				hint: '',
 			}),
 		},
-		groupIndex: {
+		multiboxIndex: {
 			type: Number,
 			required: false,
 			default: -1,
@@ -80,7 +80,7 @@ export default {
 		getModel() {
 			if (this.customParams?.multi?.boxModel) {
 				return this.modelStructure[this.customParams.multi.boxModel][
-					this.groupIndex
+					this.multiboxIndex
 				];
 			} else {
 				return this.modelStructure;
@@ -122,12 +122,9 @@ export default {
 		initField() {
 			const defaultValue = '';
 			const options = {
-				// groupIndex: this.groupIndex,
-				// fieldsetIndex: this.fieldsetIndex,
+				multiBoxName: this.customParams?.multi?.boxModel,
 				inputModelName: this.generalParams.model,
 				inputValue: defaultValue,
-				multiBoxName: this.customParams?.multi?.boxModel,
-				groupIndex: this.groupIndex,
 			};
 			this.modelInitField(options);
 			// 		// init input

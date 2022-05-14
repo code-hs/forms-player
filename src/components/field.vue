@@ -2,7 +2,7 @@
 	<div class="field-item" :class="getFieldClasses()">
 		<component
 			:is="fieldParams.generalParams.component"
-			:group-index="groupIndex"
+			:multibox-index="multiboxIndex"
 			:fieldset-index="fieldsetIndex"
 			v-bind="fieldParams"
 		/>
@@ -29,9 +29,10 @@ export default {
 	},
 
 	props: {
-		groupIndex: {
+		multiboxIndex: {
 			type: Number,
-			required: true,
+			required: false,
+			default: -1,
 		},
 		fieldsetIndex: {
 			type: Number,

@@ -3,7 +3,7 @@
 		<component
 			:is="componentData.generalParams.component"
 			v-bind="componentData"
-			:group-index="groupIndex"
+			:multibox-index="multiboxIndex"
 		/>
 	</div>
 </template>
@@ -13,7 +13,7 @@ import InputText from '@/components/fields/inputs/text';
 
 // async import for the box components
 const LayoutColumns = () => import('@/components/layout/columns');
-const MultiBox = () => import('@/components/layout/multiBox');
+const MultiBox = () => import('@/components/layout/multibox/multiBox');
 
 export default {
 	name: 'VirtualComponent',
@@ -27,15 +27,11 @@ export default {
 			type: Object,
 			required: true,
 		},
-		groupIndex: {
+		multiboxIndex: {
 			type: Number,
 			required: false,
 			default: -1,
 		},
-	},
-
-	data() {
-		return {};
 	},
 };
 </script>
