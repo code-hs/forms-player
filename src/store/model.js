@@ -22,56 +22,50 @@ const mutations = {
 	},
 
 	/**
-	 * Add file to model structure
-	 * @param {number} groupIndex
-	 * @param {number} fieldsetIndex
+	 * Add field to model structure
+	 * @param {string} multiBoxName - multibox component model value
 	 * @param {string} inputModelName
 	 * @param {string} inputValue
 	 */
-	initField: (s, {groupIndex, fieldsetIndex, inputModelName, inputValue}) => {
+	initField: (s, {multiBoxName, inputModelName, inputValue}) => {
 		if (!inputModelName) {
 			throw new Error('model.initField: param inputModelName is empty');
 		}
 
-		// clarification position
-		const fieldset = s.structure[groupIndex][fieldsetIndex];
-		Vue.set(fieldset, inputModelName, inputValue);
-	},
+		// skip initialize, fix bug, when add new group of fields,
+		// all groups rerender, and reinit, and clear values
+		if (multiBoxName) return;
 
-	initField2: (s, {inputModelName, inputValue, multiBoxModel, groupIndex}) => {
-		if (!inputModelName) {
-			throw new Error('model.initField: param inputModelName is empty');
-		}
-
-		if (multiBoxModel) {
-			// Vue.set(
-			// 	s.structure[multiBoxModel][groupIndex],
-			// 	inputModelName,
-			// 	inputValue
-			// );
-		} else {
-			Vue.set(s.structure, inputModelName, inputValue);
-		}
-		// clarification position
+		Vue.set(s.structure, inputModelName, inputValue);
 	},
 
 	/**
-	 * Remove fieldset from current group
-	 * @param {number} groupIndex
-	 * @param {number} fieldsetIndex
+	 * Remove block of fields from multiBox
+	 * @param {string} multiBoxName - multibox component model value
+	 * @param {number} itemIndex
 	 */
-	removeFieldsetItem: (s, {groupIndex, fieldsetIndex}) => {
-		s.structure[groupIndex].splice(fieldsetIndex, 1);
+	removeItemInMultiBox: (s, {multiBoxName, itemIndex}) => {
+		s.structure[multiBoxName].splice(itemIndex, 1);
 	},
 
-	removeGroupItem: (s, {groupName, groupItemIndex}) => {
-		s.structure[groupName].splice(groupItemIndex, 1);
-	},
+	/**
+	 * Add new item to multiBox
+	 * @param {string} multiBoxName
+	 */
+	addItemInMultiBox(s, {multiBoxName}) {
+		if (!s.structure || !s.structure[multiBoxName]) {
+			throw new Error(
+				'model.copyItemInMultiBox: bad structure or cant find' +
+					' that multiBoxName in structure'
+			);
+		}
 
-	// multibox model
-	copyGroupItem(s, {groupName}) {
-		const sourceItem =
-			s.structure[groupName][s.structure[groupName].length - 1];
+		// one object with fields
+		const sourceItem = s.structure[multiBoxName][0];
+		if (!sourceItem) {
+			throw new Error('model.copyItemInMultiBox: sourceItem is empty');
+		}
+		// without reactivity
 		const newItem = JSON.parse(JSON.stringify(sourceItem));
 
 		// clear values
@@ -79,40 +73,13 @@ const mutations = {
 			newItem[key] = '';
 		});
 
-		s.structure[groupName].push(newItem);
-	},
-
-	/**
-	 * Add new fieldset item to structure
-	 * @param {number} groupIndex
-	 */
-	copyFieldsetItem: (s, {groupIndex}) => {
-		if (!s.structure || !s.structure[groupIndex]) {
-			throw new Error(
-				'model.copyFieldsetItem: bad structure or cant find' +
-					' group by groupIndex'
-			);
-		}
-
-		const index = 0;
-		const sourceItem = s.structure[groupIndex][index];
-
-		if (!sourceItem) {
-			throw new Error('model.copyFieldsetItem: sourceItem is empty');
-		}
-
-		// without reactivity
-		const newItem = JSON.parse(JSON.stringify(sourceItem));
-		s.structure[groupIndex].push(newItem);
+		s.structure[multiBoxName].push(newItem);
 	},
 };
-
-const actions = {};
 
 export default {
 	namespaced: true,
 	state,
 	getters,
 	mutations,
-	actions,
 };

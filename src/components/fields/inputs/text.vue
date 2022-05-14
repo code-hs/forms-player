@@ -110,8 +110,7 @@ export default {
 
 	methods: {
 		...mapMutations({
-			// 		modelInitField: 'model/initField',
-			modelInitField2: 'model/initField2',
+			modelInitField: 'model/initField',
 			// 		validatorAdd: 'validator/add',
 			// 		validatorUpdate: 'validator/update',
 			// 		validatorDestroy: 'validator/destroy',
@@ -127,10 +126,10 @@ export default {
 				// fieldsetIndex: this.fieldsetIndex,
 				inputModelName: this.generalParams.model,
 				inputValue: defaultValue,
-				multiBoxModel: this.customParams?.multi?.boxModel,
+				multiBoxName: this.customParams?.multi?.boxModel,
 				groupIndex: this.groupIndex,
 			};
-			this.modelInitField2(options);
+			this.modelInitField(options);
 			// 		// init input
 			// 		// for generate structure by inputs (model, validator);
 			// 		// and we can use it in <input v-model="fieldsetModelItem[generalParams.model]"
