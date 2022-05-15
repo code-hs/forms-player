@@ -9,7 +9,7 @@ export class MultiBoxView {
 		// add info about multibox
 		fields.forEach(field => {
 			field.customParams.multi = {
-				boxModel: multiBoxName,
+				name: multiBoxName,
 				key: generateKey(),
 			};
 		});

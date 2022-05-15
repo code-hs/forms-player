@@ -81,10 +81,9 @@ export default {
 			throw new Error('app.created: pageStructure is empty');
 		}
 
-		this.showContent = true;
 		this.generateModelSkeleton(pageStructure);
 		// after page structure generated, we can inject inputs
-		// if (pageStructure && this.modelStructure) this.showContent = true;
+		if (pageStructure && this.modelStructure) this.showContent = true;
 
 		this.installPlugins();
 	},

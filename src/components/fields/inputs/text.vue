@@ -4,7 +4,7 @@
 
 		<input
 			ref="self"
-			v-model="getModel[generalParams.model]"
+			v-model="modelStore[generalParams.model]"
 			type="text"
 			:placeholder="text.placeholder"
 			:required="validation.required"
@@ -77,22 +77,16 @@ export default {
 		...mapGetters({
 			modelStructure: 'model/structure',
 		}),
-		getModel() {
-			if (this.customParams?.multi?.boxModel) {
-				return this.modelStructure[this.customParams.multi.boxModel][
-					this.multiboxIndex
-				];
-			} else {
-				return this.modelStructure;
-			}
+		multiBoxName() {
+			return this.customParams?.multi?.name ? this.customParams.multi.name : '';
 		},
-		// fieldsetModelItem() {
-		// current fieldset with inputs values
-		// return this.modelStructure[this.groupIndex][this.fieldsetIndex];
-		// },
-		// value() {
-		// 	return this.fieldsetModelItem[this.generalParams.model];
-		// },
+		modelStore() {
+			if (this.multiBoxName) {
+				// if multibox is parent of this field, use multibox name and index
+				return this.modelStructure[this.multiBoxName][this.multiboxIndex];
+			}
+			return this.modelStructure;
+		},
 	},
 
 	created() {
@@ -119,26 +113,9 @@ export default {
 		// 		validatorFieldResponse: 'validator/fieldResponse',
 		// 	}),
 		//
+
 		initField() {
-			const defaultValue = '';
-			const options = {
-				multiBoxName: this.customParams?.multi?.boxModel,
-				inputModelName: this.generalParams.model,
-				inputValue: defaultValue,
-			};
-			this.modelInitField(options);
-			// 		// init input
-			// 		// for generate structure by inputs (model, validator);
-			// 		// and we can use it in <input v-model="fieldsetModelItem[generalParams.model]"
-			// 		const defaultValue = '';
-			// 		const options = {
-			// 			groupIndex: this.groupIndex,
-			// 			fieldsetIndex: this.fieldsetIndex,
-			// 			inputModelName: this.generalParams.model,
-			// 			inputValue: defaultValue,
-			// 		};
-			// 		this.modelInitField(options);
-			//
+			this.initModel();
 			// 		if (FieldValidator.canValidation(this.validation)) {
 			// 			this.valid.connect = true;
 			// 			this.validatorAdd(this.itemKey);
@@ -146,6 +123,22 @@ export default {
 			// 			bus.$on('VALIDATION:start', this.validatorTaskValidate);
 			// 		}
 		},
+		initModel() {
+			// skip initialize, fix bug, when add new group of fields,
+			// all groups rerender, and reinit, and clear values
+			if (this.multiBoxName) return;
+
+			// init field
+			// for generate structure by inputs,
+			// and we can use it in <input v-model="modelStore[generalParams.model]"
+			const defaultValue = '';
+			const options = {
+				inputModelName: this.generalParams.model,
+				inputValue: defaultValue,
+			};
+			this.modelInitField(options);
+		},
+		initValidation() {},
 		// 	handleBlur(updateStore = true) {
 		// 		if (!this.valid.connect) return;
 		//

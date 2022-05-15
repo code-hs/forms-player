@@ -23,18 +23,13 @@ const mutations = {
 
 	/**
 	 * Add field to model structure
-	 * @param {string} multiBoxName - multibox component model value
 	 * @param {string} inputModelName
 	 * @param {string} inputValue
 	 */
-	initField: (s, {multiBoxName, inputModelName, inputValue}) => {
+	initField: (s, {inputModelName, inputValue}) => {
 		if (!inputModelName) {
 			throw new Error('model.initField: param inputModelName is empty');
 		}
-
-		// skip initialize, fix bug, when add new group of fields,
-		// all groups rerender, and reinit, and clear values
-		if (multiBoxName) return;
 
 		Vue.set(s.structure, inputModelName, inputValue);
 	},
