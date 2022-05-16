@@ -9,7 +9,7 @@
 </template>
 
 <script>
-const LayoutColumn = () => import('@/components/layout/column');
+const LayoutColumn = () => import('./column');
 
 export default {
 	name: 'LayoutColumns',
