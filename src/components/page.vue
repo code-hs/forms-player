@@ -4,7 +4,7 @@
 			<VirtualComponent
 				v-for="(component, index) in pageStructure.components"
 				:key="index"
-				:component-data="component"
+				:field-options="component"
 				:component-index="index"
 			/>
 		</div>

@@ -15,8 +15,8 @@
 			<VirtualComponent
 				v-for="field in group"
 				:key="field.customParams.multi.key"
+				:field-options="field"
 				:multibox-index="index"
-				:component-data="field"
 			/>
 		</div>
 

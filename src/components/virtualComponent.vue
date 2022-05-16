@@ -1,18 +1,24 @@
 <template>
 	<div>
 		<component
-			:is="componentData.generalParams.component"
-			v-bind="componentData"
+			:is="fieldOptions.generalParams.component"
+			v-bind="fieldOptions"
 			:multibox-index="multiboxIndex"
 		/>
 	</div>
 </template>
 
 <script>
+// import InputPassword from '@/components/fields/inputs/password';
+// import Selector from '@/components/fields/selector';
+// import Textarea from '@/components/fields/inputs/textarea';
+// import Checkbox from '@/components/fields/checkbox';
+// import ButtonSubmit from '@/components/fields/buttons/submit';
+
 import InputText from '@/components/fields/inputs/text';
 
 // async import for the box components
-const LayoutColumns = () => import('@/components/layout/columns');
+const LayoutColumns = () => import('@/components/layout/columns/columns');
 const MultiBox = () => import('@/components/layout/multibox/multiBox');
 
 export default {
@@ -23,7 +29,7 @@ export default {
 		MultiBox,
 	},
 	props: {
-		componentData: {
+		fieldOptions: {
 			type: Object,
 			required: true,
 		},
@@ -32,6 +38,18 @@ export default {
 			required: false,
 			default: -1,
 		},
+	},
+	created() {
+		// if (!this.fieldOptions?.generalParams) {
+		// throw new Error(
+		// 	`Field.vue.created: param generalParams is empty. [in groupIndex: ${this.groupIndex}, fieldsetIndex: ${this.fieldsetIndex}]`
+		// );
+		// }
+		// if (!this.fieldParams?.generalParams?.component) {
+		// throw new Error(
+		// 	`Field.vue.created: param component in generalParams is empty [in groupIndex: ${this.groupIndex}, fieldsetIndex: ${this.fieldsetIndex}]`
+		// );
+		// }
 	},
 };
 </script>

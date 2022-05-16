@@ -2,7 +2,7 @@
 	<div v-if="hasData" :class="getClasses()">
 		<div v-for="(component, index) in column.components" :key="index">
 			<template v-if="hasComponents">
-				<VirtualComponent :component-data="component" />
+				<VirtualComponent :field-options="component" />
 			</template>
 		</div>
 	</div>
