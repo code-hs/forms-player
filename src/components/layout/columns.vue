@@ -1,12 +1,10 @@
 <template>
-	<div>
-		<div class="columns-container row">
-			<LayoutColumn
-				v-for="(column, columnIndex) in components"
-				:key="columnIndex"
-				:column="column"
-			/>
-		</div>
+	<div class="columns-container row" :style="getStyleObj()">
+		<LayoutColumn
+			v-for="(column, columnIndex) in components"
+			:key="columnIndex"
+			:column="column"
+		/>
 	</div>
 </template>
 
@@ -19,7 +17,6 @@ export default {
 		LayoutColumn,
 	},
 	props: {
-		// below params from v-bind
 		generalParams: {
 			type: Object,
 			required: true,
@@ -31,6 +28,18 @@ export default {
 		components: {
 			type: Array,
 			required: true,
+		},
+	},
+
+	methods: {
+		getStyleObj() {
+			const obj = {};
+
+			if (this.customParams?.['justify-content']) {
+				obj['justify-content'] = this.customParams['justify-content'];
+			}
+
+			return obj;
 		},
 	},
 };

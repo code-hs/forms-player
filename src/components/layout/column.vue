@@ -1,12 +1,7 @@
 <template>
-	<div v-if="Object.keys(column).length" class="col-6">
-		<div class="title">{{ column.customParams.name }}</div>
-
-		<div
-			v-for="(component, componentIndex) in column.components"
-			:key="componentIndex"
-		>
-			<template v-if="Object.keys(column.components).length">
+	<div v-if="hasData" :class="getClasses()">
+		<div v-for="(component, index) in column.components" :key="index">
+			<template v-if="hasComponents">
 				<VirtualComponent :component-data="component" />
 			</template>
 		</div>
@@ -22,7 +17,6 @@ export default {
 		VirtualComponent,
 	},
 	props: {
-		// below params from v-bind
 		generalParams: {
 			type: Object,
 			required: false,
@@ -39,8 +33,29 @@ export default {
 		},
 	},
 
-	created() {
-		// console.logp(this.column);
+	computed: {
+		hasData() {
+			return Object.keys(this.column).length;
+		},
+		hasComponents() {
+			return Object.keys(this.column?.components).length;
+		},
+	},
+
+	methods: {
+		getClasses() {
+			let classes = '';
+
+			// col-6, col-12,...
+			if (this.customParams.col) {
+				classes += `col-${this.customParams.col}`;
+			} else {
+				// col size default value
+				classes += 'col-6';
+			}
+
+			return classes;
+		},
 	},
 };
 </script>
