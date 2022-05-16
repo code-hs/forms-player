@@ -8,6 +8,8 @@ export class MultiBoxView {
 
 		// add info about multibox
 		fields.forEach(field => {
+			// generate unique keys for each item, since we remove and add these items
+			// if this is not done, vue lazily updates the blocks
 			field.customParams.multi = {
 				name: multiBoxName,
 				key: generateKey(),
@@ -24,7 +26,7 @@ export class MultiBoxView {
 	 * @param {Object[]} groups - list of fieldsets
 	 * @returns {Object|boolean}
 	 */
-	static getNewItem(groups) {
+	static generateNewItem(groups) {
 		if (!groups || !groups.length) {
 			throw new Error('MultiBoxView.getNewItem: param groups is empty');
 		}
