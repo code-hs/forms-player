@@ -40,16 +40,14 @@ export default {
 		},
 	},
 	created() {
-		// if (!this.fieldOptions?.generalParams) {
-		// throw new Error(
-		// 	`Field.vue.created: param generalParams is empty. [in groupIndex: ${this.groupIndex}, fieldsetIndex: ${this.fieldsetIndex}]`
-		// );
-		// }
-		// if (!this.fieldParams?.generalParams?.component) {
-		// throw new Error(
-		// 	`Field.vue.created: param component in generalParams is empty [in groupIndex: ${this.groupIndex}, fieldsetIndex: ${this.fieldsetIndex}]`
-		// );
-		// }
+		if (!this.fieldOptions?.generalParams) {
+			throw new Error('virtualComponent.vue: param generalParams is empty');
+		}
+		if (!this.fieldOptions?.generalParams?.component) {
+			throw new Error(
+				'virtualComponent.vue: param component type in generalParams is empty'
+			);
+		}
 	},
 };
 </script>
