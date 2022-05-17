@@ -1,10 +1,10 @@
 <template>
-	<div v-if="groups.length" class="multi-box">
+	<div v-if="groups.length" class="multibox">
 		<div
 			v-for="(group, index) in groups"
 			:key="index"
 			:data-show-multiple-separator="showMultipleSeparator"
-			class="multi-box__item"
+			class="multibox-item"
 		>
 			<ButtonRemove
 				:groups-length="groups.length"
@@ -46,11 +46,13 @@ export default {
 		},
 		customParams: {
 			type: Object,
-			required: true,
+			required: false,
+			default: () => ({}),
 		},
 		components: {
 			type: Array,
-			required: true,
+			required: false,
+			default: () => [],
 		},
 	},
 

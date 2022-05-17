@@ -1,13 +1,11 @@
 <template>
-	<form class="page-item" novalidate @submit.prevent="validatorStart">
-		<div class="groups-container">
-			<VirtualComponent
-				v-for="(component, index) in pageStructure.components"
-				:key="index"
-				:field-options="component"
-				:component-index="index"
-			/>
-		</div>
+	<form class="page" novalidate @submit.prevent="validatorStart">
+		<VirtualComponent
+			v-for="(component, index) in pageStructure.components"
+			:key="index"
+			:field-options="component"
+			:component-index="index"
+		/>
 
 		<!--		<component :is="`style`" type="text/css" v-html="customStyles"></component>-->
 	</form>

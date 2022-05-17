@@ -1,5 +1,5 @@
 <template>
-	<div class="columns-container row" :style="getStyleObj()">
+	<div class="columns" :style="getStyleObj()">
 		<LayoutColumn
 			v-for="(column, columnIndex) in components"
 			:key="columnIndex"
@@ -23,11 +23,13 @@ export default {
 		},
 		customParams: {
 			type: Object,
-			required: true,
+			required: false,
+			default: () => ({}),
 		},
 		components: {
 			type: Array,
-			required: true,
+			required: false,
+			default: () => [],
 		},
 	},
 

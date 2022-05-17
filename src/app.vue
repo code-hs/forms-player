@@ -1,9 +1,9 @@
 <template>
 	<div class="app" :data-layout="dataLayout" :data-theme="dataTheme">
 		<span>{{ $t('app-title') }}</span>
-		<div v-if="showContent" class="page-container grid-container">
+		<template v-if="showContent">
 			<Page />
-		</div>
+		</template>
 
 		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
 		<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
@@ -20,7 +20,7 @@ import {generateHash} from '@/utils/random';
 export default {
 	components: {Page},
 	props: {
-		// customer project id
+		// project id
 		dataProjectId: {
 			type: String,
 			default: '',
@@ -85,7 +85,7 @@ export default {
 		// after page structure generated, we can inject inputs
 		if (pageStructure && this.modelStructure) this.showContent = true;
 
-		this.installPlugins();
+		this.initPlugins();
 	},
 
 	methods: {
@@ -96,8 +96,8 @@ export default {
 			loadScheme: 'scheme/load',
 			initPage: 'scheme/initPage',
 		}),
-		installPlugins() {
-			Api.install(this.dataProjectId, this.appId);
+		initPlugins() {
+			Api.init(this.dataProjectId, this.appId);
 			this.localization.init(this.dataLanguage);
 		},
 		getPageName() {

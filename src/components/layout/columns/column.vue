@@ -1,5 +1,5 @@
 <template>
-	<div v-if="hasData" :class="getClasses()">
+	<div v-if="hasData" class="column" :class="getClasses()">
 		<div v-for="(component, index) in column.components" :key="index">
 			<template v-if="hasComponents">
 				<VirtualComponent :field-options="component" />
@@ -29,7 +29,8 @@ export default {
 		},
 		column: {
 			type: Object,
-			required: true,
+			required: false,
+			default: () => ({}),
 		},
 	},
 

@@ -7,7 +7,6 @@
 <script>
 // show button + if we have at least one item.
 // this item need for use as example for copy
-
 export default {
 	props: {
 		groupsLength: {

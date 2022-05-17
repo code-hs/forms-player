@@ -31,6 +31,7 @@ export default {
 			type: Object,
 			required: true,
 		},
+		// this field used in multibox, and pass only in props, because use rerendering
 		multiboxIndex: {
 			type: Number,
 			required: false,
