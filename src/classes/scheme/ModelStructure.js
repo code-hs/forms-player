@@ -40,7 +40,7 @@ export class ModelStructure {
 	static _getOptionalStructure(component) {
 		const structure = {};
 
-		if (component?.generalParams?.component === 'MultiBox') {
+		if (component?.generalParams?.type === 'MultiBox') {
 			// create a store for future fields
 			const inputsStore = {};
 			const multiBoxModel = component.generalParams.model;
@@ -79,7 +79,7 @@ export class ModelStructure {
 			throw new Error('ModelStructure._isFieldInput: bad fieldOptions');
 		}
 
-		if (!fieldOptions.generalParams || !fieldOptions.generalParams.component) {
+		if (!fieldOptions.generalParams || !fieldOptions.generalParams.type) {
 			throw new Error(
 				"ModelStructure._isFieldInput: need field 'component' in" +
 					' generalParams object'
@@ -87,7 +87,7 @@ export class ModelStructure {
 		}
 
 		const notInputComponents = ['ButtonSubmit'];
-		const fieldComponent = fieldOptions.generalParams.component;
+		const fieldComponent = fieldOptions.generalParams.type;
 
 		return !notInputComponents.includes(fieldComponent);
 	}

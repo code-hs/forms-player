@@ -1,11 +1,9 @@
 <template>
-	<div>
-		<component
-			:is="fieldOptions.generalParams.component"
-			v-bind="fieldOptions"
-			:multibox-index="multiboxIndex"
-		/>
-	</div>
+	<component
+		:is="fieldOptions.generalParams.type"
+		v-bind="fieldOptions"
+		:multibox-index="multiboxIndex"
+	/>
 </template>
 
 <script>
@@ -43,9 +41,9 @@ export default {
 		if (!this.fieldOptions?.generalParams) {
 			throw new Error('virtualComponent.vue: param generalParams is empty');
 		}
-		if (!this.fieldOptions?.generalParams?.component) {
+		if (!this.fieldOptions?.generalParams?.type) {
 			throw new Error(
-				'virtualComponent.vue: param component type in generalParams is empty'
+				'virtualComponent.vue: param type in generalParams is empty'
 			);
 		}
 	},
