@@ -1,0 +1,94 @@
+.multibox {
+	.multibox-item {
+		position: relative;
+		margin-bottom: 10px;
+		padding-top: 22px;
+
+		&[data-show-multiple-separator='true']:not(:first-child) {
+			border-top: 2px solid $t-dark-fieldsetsSeparator;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.title {
+			width: 100%;
+			margin-top: 5px;
+			margin-bottom: 13px;
+			padding-bottom: 9px;
+			text-align: center;
+			letter-spacing: 1px;
+			color: $t-dark-text;
+		}
+	}
+
+	.button-remove {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		text-align: center;
+		color: $t-dark-buttonsBorder;
+		border-radius: 3px;
+		line-height: 20px;
+
+		&:hover {
+			background-color: $t-dark-formItemBgFocus;
+		}
+	}
+
+	.buttons-container {
+		display: flex;
+		justify-content: center;
+
+		.button-add {
+			width: 20px;
+			height: 20px;
+			cursor: pointer;
+			text-align: center;
+			border: 1px solid $t-dark-buttonsBorder;
+			border-radius: 3px;
+			font-family: serif;
+			font-size: 18px;
+			line-height: 19px;
+
+			&:hover {
+				background-color: $t-dark-formItemBgFocus;
+			}
+		}
+	}
+}
+
+//for light theme
+.app[data-theme='light'] .multibox {
+	.multibox-item {
+		&[data-show-multiple-separator='true']:not(:first-child) {
+			border-top-color: $t-light-fieldsetsSeparator;
+		}
+
+		.title {
+			color: $t-light-text;
+		}
+	}
+
+	.button-remove {
+		color: $t-light-buttonsBorder;
+
+		&:hover {
+			background-color: $t-light-formItemBgFocus;
+		}
+	}
+
+	.buttons-container {
+		.button-add {
+			border: 1px solid $t-light-buttonsBorder;
+
+			&:hover {
+				background-color: $t-light-formItemBgFocus;
+			}
+		}
+	}
+}

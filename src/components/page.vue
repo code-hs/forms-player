@@ -1,5 +1,5 @@
 <template>
-	<form class="page" novalidate @submit.prevent="validatorStart">
+	<form class="page grid-container" novalidate @submit.prevent="validatorStart">
 		<VirtualComponent
 			v-for="(component, index) in pageStructure.components"
 			:key="index"

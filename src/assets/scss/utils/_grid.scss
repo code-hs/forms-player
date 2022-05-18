@@ -27,18 +27,6 @@ $breakpoint-large: 60em; // 960px
 	}
 }
 
-.columns {
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-}
-
-.columns [class*='col'] {
-	min-height: 0.125em;
-	margin: 0.5em 2%;
-}
-
 .col-1,
 .col-2,
 .col-3,

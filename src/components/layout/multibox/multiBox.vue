@@ -20,7 +20,9 @@
 			/>
 		</div>
 
-		<ButtonAdd :groups-length="groups.length" @handleAdd="handleAdd" />
+		<div class="buttons-container">
+			<ButtonAdd :groups-length="groups.length" @handleAdd="handleAdd" />
+		</div>
 	</div>
 </template>
 

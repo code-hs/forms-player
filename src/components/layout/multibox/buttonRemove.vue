@@ -1,12 +1,10 @@
 <template>
-	<div class="buttons-container">
-		<div
-			v-show="groupsLength > 1"
-			class="button-remove"
-			@click="$emit('handleRemove', groupIndex)"
-		>
-			✖
-		</div>
+	<div
+		v-show="groupsLength > 1"
+		class="button-remove"
+		@click="$emit('handleRemove', groupIndex)"
+	>
+		✖
 	</div>
 </template>
 

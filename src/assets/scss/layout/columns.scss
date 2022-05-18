@@ -1,0 +1,11 @@
+.columns {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+
+	& [class*='col'] {
+		min-height: 0.125em;
+		margin: 0.5em 2%;
+	}
+}

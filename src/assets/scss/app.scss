@@ -9,10 +9,10 @@
 	width: 100%;
 	color: $t-dark-text;
 	background-color: $t-dark-appBackground;
-
-	.page-container {
-		width: 100%;
-	}
+	border: 2px solid $t-dark-groupItemBorder;
+	border-radius: 3px;
+	box-shadow: 6px 6px 15px 1px $t-dark-groupItemShadow;
+	padding: 10px;
 
 	.dump {
 		width: 300px;
@@ -24,10 +24,11 @@
 }
 
 //for light theme
-//noinspection SassScssResolvedByNameOnly
 .app[data-theme='light'] {
 	color: $t-light-text;
 	background-color: $t-light-appBackground;
+	border-color: $t-light-groupItemBorder;
+	box-shadow: 6px 6px 15px 1px $t-light-groupItemShadow;
 
 	.dump {
 		color: $t-light-dump;
