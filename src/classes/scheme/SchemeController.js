@@ -6,7 +6,7 @@ export class SchemeController {
 
 	load() {
 		this._scheme = SchemeLoader.getData();
-		// this._scheme = SchemeFiltrator.filtrateParamEnable(this._scheme);
+		this._scheme = SchemeFiltrator.filtrateParamEnable(this._scheme);
 
 		if (!this.isValidStructure()) {
 			throw new Error('SchemeParser.load: scheme is empty');
