@@ -1,6 +1,6 @@
 <template>
 	<div class="app" :data-layout="dataLayout" :data-theme="dataTheme">
-		<span>{{ $t('app-title') }}</span>
+		<!--		<span>{{ $t('app-title') }}</span>-->
 		<template v-if="showContent">
 			<Page />
 		</template>

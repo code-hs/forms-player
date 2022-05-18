@@ -27,14 +27,14 @@ $breakpoint-large: 60em; // 960px
 	}
 }
 
-.row {
+.columns {
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	width: 100%;
 }
 
-.row [class*='col'] {
+.columns [class*='col'] {
 	min-height: 0.125em;
 	margin: 0.5em 2%;
 }

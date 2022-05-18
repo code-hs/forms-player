@@ -63,7 +63,6 @@ export default {
 
 <style scoped>
 .col-6 {
-	width: 43%;
 	text-align: center;
 }
 </style>
