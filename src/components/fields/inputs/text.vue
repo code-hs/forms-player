@@ -78,7 +78,7 @@ export default {
 			modelStructure: 'model/structure',
 		}),
 		multiBoxName() {
-			return this.customParams?.multi?.name ? this.customParams.multi.name : '';
+			return this.customParams?.multi?.name || '';
 		},
 		modelStore() {
 			if (this.multiBoxName) {
