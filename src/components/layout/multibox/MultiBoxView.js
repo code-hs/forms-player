@@ -27,7 +27,7 @@ export class MultiBoxView {
 	 * @returns {Object|boolean}
 	 */
 	static generateNewItem(groups) {
-		if (!groups || !groups.length) {
+		if (!groups?.length) {
 			throw new Error('MultiBoxView.getNewItem: param groups is empty');
 		}
 

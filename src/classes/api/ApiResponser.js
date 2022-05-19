@@ -22,8 +22,6 @@ export class ApiResponser {
 	 * @returns {Object|boolean}
 	 */
 	static getData(response) {
-		if (!response || !response.data) return false;
-
-		return response.data;
+		return response?.data;
 	}
 }

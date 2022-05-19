@@ -94,7 +94,7 @@ const actions = {
 	 * form create command, start validation all fields
 	 */
 	start({getters}) {
-		if (!getters.fields.length) {
+		if (!getters?.fields?.length) {
 			// if count === 0, validation finish!
 			StoreValidator.commands.finish();
 			return;

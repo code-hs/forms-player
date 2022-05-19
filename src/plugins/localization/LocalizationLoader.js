@@ -44,7 +44,7 @@ export class LocalizationLoader {
 
 		// is configuration has in scheme
 		scheme = JSON.parse(scheme);
-		if (!scheme.config || !scheme.config.localization) {
+		if (!scheme.config?.localization) {
 			throw new Error(
 				'LocalizationLoader.getConfiguration: no localization config found in scheme'
 			);

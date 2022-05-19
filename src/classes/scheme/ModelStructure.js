@@ -15,7 +15,7 @@ export class ModelStructure {
 	 * }
 	 */
 	static generate(pageStructure) {
-		if (!pageStructure || !pageStructure.components) return false;
+		if (!pageStructure?.components) return false;
 
 		return this._getComponentStructure(pageStructure);
 	}
@@ -79,7 +79,7 @@ export class ModelStructure {
 			throw new Error('ModelStructure._isFieldInput: bad fieldOptions');
 		}
 
-		if (!fieldOptions.generalParams || !fieldOptions.generalParams.type) {
+		if (!fieldOptions.generalParams?.type) {
 			throw new Error(
 				"ModelStructure._isFieldInput: need field 'component' in" +
 					' generalParams object'

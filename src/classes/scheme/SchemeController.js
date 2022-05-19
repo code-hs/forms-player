@@ -27,7 +27,7 @@ export class SchemeController {
 		if (!pageName) {
 			throw new Error('SchemeParser.getPageStructure: param pageName is empty');
 		}
-		if (!this._scheme || !this._scheme.pages) return false;
+		if (!this._scheme?.pages) return false;
 
 		return this._scheme.pages.find(p => p.url === pageName);
 	}
