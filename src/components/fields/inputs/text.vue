@@ -99,7 +99,9 @@ export default {
 	},
 
 	created() {
-		this.initField();
+		this.initModel();
+		this.initValidation();
+
 		this.processInput = debounce(
 			this.processInput,
 			FieldValidator.debounceTime
@@ -120,19 +122,9 @@ export default {
 			validatorDestroy: 'validator/destroy',
 		}),
 		...mapActions({
-			validatorFieldResponse: 'validator/fieldResponse',
+			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
 
-		initField() {
-			this.initModel();
-			if (FieldValidator.canValidation(this.validation)) {
-				this.valid.connect = true;
-				this.validatorAdd(this.itemKey);
-
-				// noinspection JSUnresolvedFunction
-				bus.$on('VALIDATION:start', this.validatorTaskValidate);
-			}
-		},
 		initModel() {
 			// skip initialize, fix bug, when add new group of fields,
 			// all groups rerender, and reinit, and clear values
@@ -148,31 +140,42 @@ export default {
 			};
 			this.modelInitField(options);
 		},
-		initValidation() {},
-		handleBlur(updateStore = true) {
+		initValidation() {
+			if (FieldValidator.canValidation(this.validation)) {
+				this.valid.connect = true;
+				this.validatorAdd(this.itemKey);
+
+				// noinspection JSUnresolvedFunction
+				bus.$on('VALIDATION:start', this.validatorHandleTask);
+			}
+		},
+		handleBlur() {
+			this.validatorProcessAndUpdateDirty();
+		},
+		handleInput(e) {
+			// update v-model, fix for mobile gboard
+			this.modelStore[this.generalParams.model] = e.target.value;
+			this.validatorProcessDirty();
+		},
+		validatorProcessDirty() {
 			if (!this.valid.connect) return;
 
-			this.processValidationField();
+			// only for dirty state
+			if (!this.valid.dirty) return;
+
+			this.validatorUpdateError();
+			this.validatorSaveInfo();
+		},
+		validatorProcessAndUpdateDirty(updateStore = true) {
+			if (!this.valid.connect) return;
+
+			this.validatorUpdateError();
 			// if field has error - becomes dirty, otherwise clear
 			this.valid.dirty = this.valid.error;
 
 			if (updateStore) this.validatorSaveInfo();
 		},
-		handleInput(e) {
-			if (!this.valid.connect) return;
-
-			// update v-model, fix for mobile gboard
-			this.modelStore[this.generalParams.model] = e.target.value;
-			this.processInput();
-		},
-		processInput() {
-			// only for dirty state
-			if (!this.valid.dirty) return;
-
-			this.processValidationField();
-			this.validatorSaveInfo();
-		},
-		processValidationField() {
+		validatorUpdateError() {
 			try {
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {
@@ -180,16 +183,17 @@ export default {
 				console.error(e);
 			}
 		},
+
 		validatorSaveInfo() {
 			this.validatorUpdate({
 				key: this.itemKey,
 				error: this.valid.error,
 			});
 		},
-		async validatorTaskValidate() {
-			this.handleBlur(false);
+		async validatorHandleTask() {
+			this.validatorProcessAndUpdateDirty(false);
 			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorFieldResponse({
+			const setActiveFocus = await this.fieldResponseOnValidationEvent({
 				key: this.itemKey,
 				error: this.valid.error,
 			});
