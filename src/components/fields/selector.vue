@@ -4,7 +4,7 @@
 
 		<select
 			ref="self"
-			v-model="fieldsetModelItem[generalParams.model]"
+			v-model="modelStore[generalParams.model]"
 			required
 			:class="{error: valid.error}"
 			@change="handleChange"
@@ -43,13 +43,10 @@ import {bus} from '@/utils/bus';
 export default {
 	name: 'Selector',
 	props: {
-		groupIndex: {
+		multiboxIndex: {
 			type: Number,
-			required: true,
-		},
-		fieldsetIndex: {
-			type: Number,
-			required: true,
+			required: false,
+			default: -1,
 		},
 		itemKey: {
 			type: Number,
@@ -62,7 +59,7 @@ export default {
 		},
 		customParams: {
 			type: Object,
-			required: true,
+			required: false,
 			default: () => ({
 				values: {},
 			}),
@@ -99,22 +96,30 @@ export default {
 		...mapGetters({
 			modelStructure: 'model/structure',
 		}),
-		fieldsetModelItem() {
-			// current fieldset with inputs values
-			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
+		multiBoxName() {
+			return this.customParams?.multi?.name || '';
+		},
+		modelStore() {
+			if (this.multiBoxName) {
+				// if multibox is parent of this field, use multibox name and index
+				return this.modelStructure[this.multiBoxName][this.multiboxIndex];
+			}
+			return this.modelStructure;
 		},
 		value() {
-			return this.fieldsetModelItem[this.generalParams.model];
+			return this.modelStore[this.generalParams.model];
 		},
 	},
 
 	created() {
-		this.initField();
+		this.initModel();
+		this.initValidation();
 	},
 
 	beforeDestroy() {
 		this.validatorDestroy(this.itemKey);
-		bus.$off('VALIDATION:start', this.validatorTaskValidate);
+		// noinspection JSUnresolvedFunction
+		bus.$off('VALIDATION:start', this.validatorHandleTask);
 	},
 
 	methods: {
@@ -125,35 +130,43 @@ export default {
 			validatorDestroy: 'validator/destroy',
 		}),
 		...mapActions({
-			validatorFieldResponse: 'validator/fieldResponse',
+			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
-		initField() {
-			// init input
-			// for generate structure by inputs (model, validator);
-			// and we can use it in <input v-model="fieldsetModelItem[generalParams.model]"
+
+		initModel() {
+			// skip initialize, fix bug, when add new group of fields,
+			// all groups rerender, and reinit, and clear values
+			if (this.multiBoxName) return;
+
+			// init field
+			// for generate structure by inputs,
+			// and we can use it in <input v-model="modelStore[generalParams.model]"
 			const defaultValue = '';
 			const options = {
-				groupIndex: this.groupIndex,
-				fieldsetIndex: this.fieldsetIndex,
 				inputModelName: this.generalParams.model,
 				inputValue: defaultValue,
 			};
 			this.modelInitField(options);
-
+		},
+		initValidation() {
 			if (FieldValidator.canValidation(this.validation)) {
 				this.valid.connect = true;
 				this.validatorAdd(this.itemKey);
 
-				bus.$on('VALIDATION:start', this.validatorTaskValidate);
+				// noinspection JSUnresolvedFunction
+				bus.$on('VALIDATION:start', this.validatorHandleTask);
 			}
 		},
-		handleChange(updateStore = true) {
+		handleChange() {
+			this.validatorProcess(true);
+		},
+		validatorProcess(updateStore = true) {
 			if (!this.valid.connect) return;
 
-			this.processValidationField();
+			this.validatorUpdateError();
 			if (updateStore) this.validatorSaveInfo();
 		},
-		processValidationField() {
+		validatorUpdateError() {
 			try {
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {
@@ -167,13 +180,14 @@ export default {
 				error: this.valid.error,
 			});
 		},
-		async validatorTaskValidate() {
-			this.handleChange(false);
+		async validatorHandleTask() {
+			this.validatorProcess(false);
 			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorFieldResponse({
+			const setActiveFocus = await this.fieldResponseOnValidationEvent({
 				key: this.itemKey,
 				error: this.valid.error,
 			});
+
 			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},

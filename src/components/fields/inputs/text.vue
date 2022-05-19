@@ -31,6 +31,15 @@ import {bus} from '@/utils/bus';
 export default {
 	name: 'InputText',
 	props: {
+		multiboxIndex: {
+			type: Number,
+			required: false,
+			default: -1,
+		},
+		itemKey: {
+			type: Number,
+			required: true,
+		},
 		// below params from v-bind
 		generalParams: {
 			type: Object,
@@ -57,15 +66,6 @@ export default {
 				placeholder: '',
 				hint: '',
 			}),
-		},
-		multiboxIndex: {
-			type: Number,
-			required: false,
-			default: -1,
-		},
-		itemKey: {
-			type: Number,
-			required: true,
 		},
 	},
 
@@ -111,7 +111,7 @@ export default {
 	beforeDestroy() {
 		this.validatorDestroy(this.itemKey);
 		// noinspection JSUnresolvedFunction
-		bus.$off('VALIDATION:start', this.validatorTaskValidate);
+		bus.$off('VALIDATION:start', this.validatorHandleTask);
 	},
 
 	methods: {
@@ -183,7 +183,6 @@ export default {
 				console.error(e);
 			}
 		},
-
 		validatorSaveInfo() {
 			this.validatorUpdate({
 				key: this.itemKey,

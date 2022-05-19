@@ -4,7 +4,7 @@
 
 		<input
 			ref="self"
-			v-model="fieldsetModelItem[generalParams.model]"
+			v-model="modelStore[generalParams.model]"
 			type="password"
 			:placeholder="text.placeholder"
 			:required="validation.required"
@@ -31,13 +31,10 @@ import {bus} from '@/utils/bus';
 export default {
 	name: 'InputPassword',
 	props: {
-		groupIndex: {
+		multiboxIndex: {
 			type: Number,
-			required: true,
-		},
-		fieldsetIndex: {
-			type: Number,
-			required: true,
+			required: false,
+			default: -1,
 		},
 		itemKey: {
 			type: Number,
@@ -47,6 +44,11 @@ export default {
 		generalParams: {
 			type: Object,
 			required: true,
+		},
+		customParams: {
+			type: Object,
+			required: false,
+			default: () => ({}),
 		},
 		validation: {
 			type: Object,
@@ -81,17 +83,25 @@ export default {
 		...mapGetters({
 			modelStructure: 'model/structure',
 		}),
-		fieldsetModelItem() {
-			// current fieldset with inputs values
-			return this.modelStructure[this.groupIndex][this.fieldsetIndex];
+		multiBoxName() {
+			return this.customParams?.multi?.name || '';
+		},
+		modelStore() {
+			if (this.multiBoxName) {
+				// if multibox is parent of this field, use multibox name and index
+				return this.modelStructure[this.multiBoxName][this.multiboxIndex];
+			}
+			return this.modelStructure;
 		},
 		value() {
-			return this.fieldsetModelItem[this.generalParams.model];
+			return this.modelStore[this.generalParams.model];
 		},
 	},
 
 	created() {
-		this.initField();
+		this.initModel();
+		this.initValidation();
+
 		this.processInput = debounce(
 			this.processInput,
 			FieldValidator.debounceTime
@@ -100,7 +110,8 @@ export default {
 
 	beforeDestroy() {
 		this.validatorDestroy(this.itemKey);
-		bus.$off('VALIDATION:start', this.validatorTaskValidate);
+		// noinspection JSUnresolvedFunction
+		bus.$off('VALIDATION:start', this.validatorHandleTask);
 	},
 
 	methods: {
@@ -111,53 +122,60 @@ export default {
 			validatorDestroy: 'validator/destroy',
 		}),
 		...mapActions({
-			validatorFieldResponse: 'validator/fieldResponse',
+			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
 
-		initField() {
-			// init input
-			// for generate structure by inputs (model, validator);
-			// and we can use it in <input v-model="fieldsetModelItem[generalParams.model]"
+		initModel() {
+			// skip initialize, fix bug, when add new group of fields,
+			// all groups rerender, and reinit, and clear values
+			if (this.multiBoxName) return;
+
+			// init field
+			// for generate structure by inputs,
+			// and we can use it in <input v-model="modelStore[generalParams.model]"
 			const defaultValue = '';
 			const options = {
-				groupIndex: this.groupIndex,
-				fieldsetIndex: this.fieldsetIndex,
 				inputModelName: this.generalParams.model,
 				inputValue: defaultValue,
 			};
 			this.modelInitField(options);
-
+		},
+		initValidation() {
 			if (FieldValidator.canValidation(this.validation)) {
 				this.valid.connect = true;
 				this.validatorAdd(this.itemKey);
 
-				bus.$on('VALIDATION:start', this.validatorTaskValidate);
+				// noinspection JSUnresolvedFunction
+				bus.$on('VALIDATION:start', this.validatorHandleTask);
 			}
 		},
-		handleBlur(updateStore = true) {
+		handleBlur() {
+			this.validatorProcessAndUpdateDirty();
+		},
+		handleInput(e) {
+			// update v-model, fix for mobile gboard
+			this.modelStore[this.generalParams.model] = e.target.value;
+			this.validatorProcessDirty();
+		},
+		validatorProcessDirty() {
 			if (!this.valid.connect) return;
 
-			this.processValidationField();
+			// only for dirty state
+			if (!this.valid.dirty) return;
+
+			this.validatorUpdateError();
+			this.validatorSaveInfo();
+		},
+		validatorProcessAndUpdateDirty(updateStore = true) {
+			if (!this.valid.connect) return;
+
+			this.validatorUpdateError();
 			// if field has error - becomes dirty, otherwise clear
 			this.valid.dirty = this.valid.error;
 
 			if (updateStore) this.validatorSaveInfo();
 		},
-		handleInput(e) {
-			if (!this.valid.connect) return;
-
-			// update v-model, fix for mobile gboard
-			this.fieldsetModelItem[this.generalParams.model] = e.target.value;
-			this.processInput();
-		},
-		processInput() {
-			// only for dirty state
-			if (!this.valid.dirty) return;
-
-			this.processValidationField();
-			this.validatorSaveInfo();
-		},
-		processValidationField() {
+		validatorUpdateError() {
 			try {
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {
@@ -165,16 +183,17 @@ export default {
 				console.error(e);
 			}
 		},
+
 		validatorSaveInfo() {
 			this.validatorUpdate({
 				key: this.itemKey,
 				error: this.valid.error,
 			});
 		},
-		async validatorTaskValidate() {
-			this.handleBlur(false);
+		async validatorHandleTask() {
+			this.validatorProcessAndUpdateDirty(false);
 			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.validatorFieldResponse({
+			const setActiveFocus = await this.fieldResponseOnValidationEvent({
 				key: this.itemKey,
 				error: this.valid.error,
 			});
