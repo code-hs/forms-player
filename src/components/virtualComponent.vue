@@ -1,6 +1,8 @@
 <template>
 	<component
 		:is="fieldOptions.generalParams.type"
+		:key="key"
+		:item-key="key"
 		v-bind="fieldOptions"
 		:multibox-index="multiboxIndex"
 	/>
@@ -13,6 +15,7 @@
 // import Checkbox from '@/components/fields/checkbox';
 // import ButtonSubmit from '@/components/fields/buttons/submit';
 
+import {generateKey} from '@/utils/random';
 import InputText from '@/components/fields/inputs/text';
 
 // async import for the box components
@@ -38,6 +41,14 @@ export default {
 			default: -1,
 		},
 	},
+
+	data() {
+		// set unique key for each field
+		return {
+			key: generateKey(),
+		};
+	},
+
 	created() {
 		if (!this.fieldOptions?.generalParams) {
 			throw new Error('virtualComponent.vue: param generalParams is empty');

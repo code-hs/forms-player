@@ -9,6 +9,8 @@
 			:placeholder="text.placeholder"
 			:required="validation.required"
 			:class="{error: valid.error}"
+			@blur="handleBlur"
+			@input="handleInput"
 		/>
 
 		<transition name="fade">
@@ -21,10 +23,10 @@
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-// import {debounce} from '@/utils/debounce';
-// import {FieldValidator} from '@/classes/validator/FieldValidator';
-// import {FieldHelper} from '@/classes/field/FieldHelper';
-// import {bus} from '@/utils/bus';
+import {debounce} from '@/utils/debounce';
+import {FieldValidator} from '@/classes/validator/FieldValidator';
+import {FieldHelper} from '@/classes/field/FieldHelper';
+import {bus} from '@/utils/bus';
 
 export default {
 	name: 'InputText',
@@ -61,6 +63,10 @@ export default {
 			required: false,
 			default: -1,
 		},
+		itemKey: {
+			type: Number,
+			required: true,
+		},
 	},
 
 	data() {
@@ -87,41 +93,45 @@ export default {
 			}
 			return this.modelStructure;
 		},
+		value() {
+			return this.modelStore[this.generalParams.model];
+		},
 	},
 
 	created() {
 		this.initField();
-		// this.processInput = debounce(
-		// 	this.processInput,
-		// 	FieldValidator.debounceTime
-		// );
+		this.processInput = debounce(
+			this.processInput,
+			FieldValidator.debounceTime
+		);
 	},
 
 	beforeDestroy() {
-		// this.validatorDestroy(this.itemKey);
-		// bus.$off('VALIDATION:start', this.validatorTaskValidate);
+		this.validatorDestroy(this.itemKey);
+		// noinspection JSUnresolvedFunction
+		bus.$off('VALIDATION:start', this.validatorTaskValidate);
 	},
 
 	methods: {
 		...mapMutations({
 			modelInitField: 'model/initField',
-			// 		validatorAdd: 'validator/add',
-			// 		validatorUpdate: 'validator/update',
-			// 		validatorDestroy: 'validator/destroy',
+			validatorAdd: 'validator/add',
+			validatorUpdate: 'validator/update',
+			validatorDestroy: 'validator/destroy',
 		}),
-		// 	...mapActions({
-		// 		validatorFieldResponse: 'validator/fieldResponse',
-		// 	}),
-		//
+		...mapActions({
+			validatorFieldResponse: 'validator/fieldResponse',
+		}),
 
 		initField() {
 			this.initModel();
-			// 		if (FieldValidator.canValidation(this.validation)) {
-			// 			this.valid.connect = true;
-			// 			this.validatorAdd(this.itemKey);
-			//
-			// 			bus.$on('VALIDATION:start', this.validatorTaskValidate);
-			// 		}
+			if (FieldValidator.canValidation(this.validation)) {
+				this.valid.connect = true;
+				this.validatorAdd(this.itemKey);
+
+				// noinspection JSUnresolvedFunction
+				bus.$on('VALIDATION:start', this.validatorTaskValidate);
+			}
 		},
 		initModel() {
 			// skip initialize, fix bug, when add new group of fields,
@@ -139,53 +149,53 @@ export default {
 			this.modelInitField(options);
 		},
 		initValidation() {},
-		// 	handleBlur(updateStore = true) {
-		// 		if (!this.valid.connect) return;
-		//
-		// 		this.processValidationField();
-		// 		// if field has error - becomes dirty, otherwise clear
-		// 		this.valid.dirty = this.valid.error;
-		//
-		// 		if (updateStore) this.validatorSaveInfo();
-		// 	},
-		// 	handleInput(e) {
-		// 		if (!this.valid.connect) return;
-		//
-		// 		// update v-model, fix for mobile gboard
-		// 		this.fieldsetModelItem[this.generalParams.model] = e.target.value;
-		// 		this.processInput();
-		// 	},
-		// 	processInput() {
-		// 		// only for dirty state
-		// 		if (!this.valid.dirty) return;
-		//
-		// 		this.processValidationField();
-		// 		this.validatorSaveInfo();
-		// 	},
-		// 	processValidationField() {
-		// 		try {
-		// 			this.valid.error = !FieldValidator.isValid(this.validation, this.value);
-		// 		} catch (e) {
-		// 			// eslint-disable-next-line no-console
-		// 			console.error(e);
-		// 		}
-		// 	},
-		// 	validatorSaveInfo() {
-		// 		this.validatorUpdate({
-		// 			key: this.itemKey,
-		// 			error: this.valid.error,
-		// 		});
-		// 	},
-		// 	async validatorTaskValidate() {
-		// 		this.handleBlur(false);
-		// 		// noinspection ES6RedundantAwait
-		// 		const setActiveFocus = await this.validatorFieldResponse({
-		// 			key: this.itemKey,
-		// 			error: this.valid.error,
-		// 		});
-		//
-		// 		if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
-		// 	},
+		handleBlur(updateStore = true) {
+			if (!this.valid.connect) return;
+
+			this.processValidationField();
+			// if field has error - becomes dirty, otherwise clear
+			this.valid.dirty = this.valid.error;
+
+			if (updateStore) this.validatorSaveInfo();
+		},
+		handleInput(e) {
+			if (!this.valid.connect) return;
+
+			// update v-model, fix for mobile gboard
+			this.modelStore[this.generalParams.model] = e.target.value;
+			this.processInput();
+		},
+		processInput() {
+			// only for dirty state
+			if (!this.valid.dirty) return;
+
+			this.processValidationField();
+			this.validatorSaveInfo();
+		},
+		processValidationField() {
+			try {
+				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
+			} catch (e) {
+				// eslint-disable-next-line no-console
+				console.error(e);
+			}
+		},
+		validatorSaveInfo() {
+			this.validatorUpdate({
+				key: this.itemKey,
+				error: this.valid.error,
+			});
+		},
+		async validatorTaskValidate() {
+			this.handleBlur(false);
+			// noinspection ES6RedundantAwait
+			const setActiveFocus = await this.validatorFieldResponse({
+				key: this.itemKey,
+				error: this.valid.error,
+			});
+
+			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
+		},
 	},
 };
 </script>
