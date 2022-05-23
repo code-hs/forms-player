@@ -60,9 +60,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-.col-6 {
-	text-align: center;
-}
-</style>
