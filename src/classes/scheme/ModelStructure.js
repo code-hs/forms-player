@@ -65,41 +65,4 @@ export class ModelStructure {
 			return {...store, ...childStructure};
 		}, {});
 	}
-
-	/**
-	 * is field === input
-	 * @param {Object} field
-	 * @returns {boolean}
-	 * @private
-	 */
-	static _isFieldInput(fieldOptions) {
-		// console.log(fieldOptions.generalParams?.component);
-
-		if (!fieldOptions) {
-			throw new Error('ModelStructure._isFieldInput: bad fieldOptions');
-		}
-
-		if (!fieldOptions.generalParams?.type) {
-			throw new Error(
-				"ModelStructure._isFieldInput: need field 'component' in" +
-					' generalParams object'
-			);
-		}
-
-		const notInputComponents = ['ButtonSubmit'];
-		const fieldComponent = fieldOptions.generalParams.type;
-
-		return !notInputComponents.includes(fieldComponent);
-	}
-
-	/**
-	 * @param {Array} fields
-	 * @returns {Array}
-	 * @private
-	 */
-	static _filtrateFields(fields) {
-		if (!fields) return false;
-
-		return fields.filter(field => this._isFieldInput(field));
-	}
 }
