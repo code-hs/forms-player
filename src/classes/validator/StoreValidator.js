@@ -1,10 +1,10 @@
-import {bus} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/utils/bus';
 
 export class StoreValidator {
 	// global bus commands
 	static commands = {
-		start: () => bus.$emit('VALIDATION:start'),
-		finish: () => bus.$emit('VALIDATION:finish'),
+		start: () => bus.$emit(busBroadcasts.VALIDATION_START),
+		finish: () => bus.$emit(busBroadcasts.VALIDATION_END),
 	};
 
 	/**
