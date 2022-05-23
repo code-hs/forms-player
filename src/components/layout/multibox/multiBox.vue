@@ -28,7 +28,7 @@
 
 <script>
 import {mapMutations} from 'vuex';
-import {MultiBoxView} from './MultiBoxView';
+import {MultiBoxView} from '@/classes/components/layout/multibox/MultiBoxView';
 import ButtonAdd from './buttonAdd';
 import ButtonRemove from './buttonRemove';
 

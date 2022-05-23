@@ -20,8 +20,8 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {FieldHelper} from '@/classes/field/FieldHelper';
-import {FieldPropser} from '@/classes/field/FieldPropser';
+import {FieldHelper} from '@/classes/components/field/FieldHelper';
+import {FieldPropser} from '@/classes/components/field/FieldPropser';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
