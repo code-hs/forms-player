@@ -1,5 +1,5 @@
-import store from '../../store';
-import {getValueByStringKey} from '../../utils/objects';
+import store from '@/store';
+import {getValueByStringKey} from '@/utils/objects';
 import {LocalizationLoader} from './LocalizationLoader';
 
 export class Localization {

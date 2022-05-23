@@ -1,4 +1,4 @@
-import {Api} from '../classes/api/Api';
+import {Api} from '@/classes/api/Api';
 
 const state = () => ({
 	saveFormFinished: true,

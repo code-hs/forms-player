@@ -1,4 +1,4 @@
-import {SchemeLoader} from '../../classes/scheme/SchemeLoader';
+import {SchemeLoader} from '@/classes/scheme/SchemeLoader';
 
 export class LocalizationLoader {
 	/**
