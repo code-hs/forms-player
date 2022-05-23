@@ -1,5 +1,5 @@
 <template>
-	<div class="input-textarea">
+	<div class="field input-textarea">
 		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
 
 		<textarea

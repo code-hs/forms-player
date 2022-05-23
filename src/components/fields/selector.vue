@@ -1,5 +1,5 @@
 <template>
-	<div class="input-selector">
+	<div class="field input-selector">
 		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
 
 		<select

@@ -1,5 +1,5 @@
 <template>
-	<div class="checkbox">
+	<div class="field checkbox">
 		<label>
 			<input
 				ref="self"
