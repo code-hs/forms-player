@@ -10,25 +10,10 @@ import {mapGetters} from 'vuex';
 export default {
 	name: 'ButtonSubmit',
 	props: {
-		groupIndex: {
-			type: Number,
-			required: true,
-		},
-		fieldsetIndex: {
-			type: Number,
-			required: true,
-		},
-		// below params from v-bind
 		generalParams: {
 			type: Object,
 			required: true,
 		},
-	},
-
-	data() {
-		return {
-			value: '',
-		};
 	},
 
 	computed: {
