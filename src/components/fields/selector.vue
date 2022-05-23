@@ -38,7 +38,7 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {FieldHelper} from '@/classes/field/FieldHelper';
-import {bus} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
 	name: 'Selector',
@@ -119,7 +119,7 @@ export default {
 	beforeDestroy() {
 		this.validatorDestroy(this.itemKey);
 		// noinspection JSUnresolvedFunction
-		bus.$off('VALIDATION:start', this.validatorHandleTask);
+		bus.$off(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
 	},
 
 	methods: {
@@ -154,7 +154,7 @@ export default {
 				this.validatorAdd(this.itemKey);
 
 				// noinspection JSUnresolvedFunction
-				bus.$on('VALIDATION:start', this.validatorHandleTask);
+				bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
 			}
 		},
 		handleChange() {

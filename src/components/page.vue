@@ -14,9 +14,10 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import VirtualComponent from '@/components/virtualComponent';
-import {bus} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/utils/bus';
 import {ApiResponser} from '@/classes/api/ApiResponser';
 
+// noinspection JSUnresolvedFunction
 export default {
 	name: 'Page',
 	components: {
@@ -40,8 +41,7 @@ export default {
 	},
 
 	created() {
-		// binding form
-		bus.$on('VALIDATION:finish', this.validationFinish);
+		this.initValidation();
 	},
 
 	methods: {
@@ -49,6 +49,11 @@ export default {
 			validatorStart: 'validator/start',
 			saveForm: 'request/saveFormValues',
 		}),
+		initValidation() {
+			// binding form
+			// noinspection JSUnresolvedFunction
+			bus.$on(busBroadcasts.VALIDATION_END, this.validationFinish);
+		},
 		async validationFinish() {
 			const res = await this.saveForm({
 				pageStructure: this.pageStructure,
