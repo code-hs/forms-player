@@ -2,7 +2,7 @@ import vueCustomElement from 'vue-custom-element';
 import Vue from 'vue';
 import App from './app.vue';
 import store from './store';
-import {shadowRootInit} from './utils/initDom';
+import {shadowRootInit} from '../settings/initDom';
 import {Localization} from './plugins/localization';
 
 // add dev log functions
