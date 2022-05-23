@@ -1,3 +1,5 @@
+import {SchemeLoader} from '../../classes/scheme/SchemeLoader';
+
 export class LocalizationLoader {
 	/**
 	 * @returns {Object}
@@ -37,13 +39,9 @@ export class LocalizationLoader {
 	 * }
 	 */
 	static getConfiguration() {
-		let scheme = localStorage.getItem('WDFL:init:scheme');
-		if (!scheme) {
-			throw new Error('LocalizationLoader.getConfiguration: no scheme found');
-		}
+		const scheme = SchemeLoader.getData();
 
 		// is configuration has in scheme
-		scheme = JSON.parse(scheme);
 		if (!scheme.config?.localization) {
 			throw new Error(
 				'LocalizationLoader.getConfiguration: no localization config found in scheme'
