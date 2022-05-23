@@ -38,25 +38,16 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {FieldHelper} from '@/classes/field/FieldHelper';
+import {FieldPropser} from '@/classes/field/FieldPropser';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
 	name: 'Selector',
 	props: {
-		multiboxIndex: {
-			type: Number,
-			required: false,
-			default: -1,
-		},
-		itemKey: {
-			type: Number,
-			required: true,
-		},
+		multiboxIndex: FieldPropser.multiboxIndex(),
+		itemKey: FieldPropser.itemKey(),
+		generalParams: FieldPropser.generalParams(),
 		// below params from v-bind
-		generalParams: {
-			type: Object,
-			required: true,
-		},
 		customParams: {
 			type: Object,
 			required: false,
@@ -69,7 +60,6 @@ export default {
 			required: false,
 			default: () => ({
 				required: false,
-				pattern: '',
 				errorText: '',
 			}),
 		},
@@ -77,7 +67,6 @@ export default {
 			type: Object,
 			required: false,
 			default: () => ({
-				placeholder: '',
 				hint: '',
 			}),
 		},
