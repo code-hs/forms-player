@@ -2,7 +2,7 @@
 	<div class="app" :data-layout="dataLayout" :data-theme="dataTheme">
 		<!--		<span>{{ $t('app-title') }}</span>-->
 		<template v-if="showContent">
-			<Page />
+			<FormC />
 		</template>
 
 		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
@@ -12,13 +12,13 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex';
-import Page from '@/components/page';
+import FormC from '@/components/form';
 import {Config} from '@/config/index';
 import {Api} from '@/classes/api/Api';
 import {generateHash} from '@/utils/random';
 
 export default {
-	components: {Page},
+	components: {FormC},
 	props: {
 		// project id
 		dataProjectId: {
