@@ -1,10 +1,10 @@
 <template>
 	<component
-		:is="fieldOptions.generalParams.type"
+		:is="schemeOptions.generalParams.type"
 		:key="key"
 		:item-key="key"
-		v-bind="fieldOptions"
 		:multibox-index="multiboxIndex"
+		v-bind="schemeOptions"
 	/>
 </template>
 
@@ -36,7 +36,7 @@ export default {
 		MultiBox,
 	},
 	props: {
-		fieldOptions: {
+		schemeOptions: {
 			type: Object,
 			required: true,
 		},
@@ -56,10 +56,10 @@ export default {
 	},
 
 	created() {
-		if (!this.fieldOptions?.generalParams) {
+		if (!this.schemeOptions?.generalParams) {
 			throw new Error('virtualComponent.vue: param generalParams is empty');
 		}
-		if (!this.fieldOptions?.generalParams?.type) {
+		if (!this.schemeOptions?.generalParams?.type) {
 			throw new Error(
 				'virtualComponent.vue: param type in generalParams is empty'
 			);

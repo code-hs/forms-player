@@ -1,9 +1,9 @@
 <template>
-	<form class="page grid-container" novalidate @submit.prevent="validatorStart">
+	<form class="form grid-container" novalidate @submit.prevent="validatorStart">
 		<VirtualComponent
 			v-for="(component, index) in pageStructure.components"
 			:key="index"
-			:field-options="component"
+			:scheme-options="component"
 			:component-index="index"
 		/>
 
@@ -19,7 +19,7 @@ import {ApiResponser} from '@/classes/api/ApiResponser';
 
 // noinspection JSUnresolvedFunction
 export default {
-	name: 'Page',
+	name: 'Form',
 	components: {
 		VirtualComponent,
 	},

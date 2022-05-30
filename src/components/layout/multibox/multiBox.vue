@@ -3,8 +3,8 @@
 		<div
 			v-for="(group, index) in groups"
 			:key="index"
-			:data-show-multiple-separator="showMultipleSeparator"
 			class="multibox-item"
+			:data-show-multiple-separator="showMultipleSeparator"
 		>
 			<ButtonRemove
 				:groups-length="groups.length"
@@ -15,7 +15,7 @@
 			<VirtualComponent
 				v-for="field in group"
 				:key="field.customParams.multi.key"
-				:field-options="field"
+				:scheme-options="field"
 				:multibox-index="index"
 			/>
 		</div>
@@ -29,6 +29,7 @@
 <script>
 import {mapMutations} from 'vuex';
 import {MultiBoxView} from '@/classes/components/layout/multibox/MultiBoxView';
+import {FieldPropser} from '@/classes/components/field/FieldPropser';
 import ButtonAdd from './buttonAdd';
 import ButtonRemove from './buttonRemove';
 
@@ -42,10 +43,7 @@ export default {
 		ButtonRemove,
 	},
 	props: {
-		generalParams: {
-			type: Object,
-			required: true,
-		},
+		generalParams: FieldPropser.generalParams(),
 		customParams: {
 			type: Object,
 			required: false,
