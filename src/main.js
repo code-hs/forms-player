@@ -6,7 +6,7 @@ import {shadowRootInit} from '../settings/initDom';
 import {Localization} from './plugins/localization';
 
 // add dev log functions
-require('./utils/console');
+import('./utils/console');
 
 App.store = store;
 // (optional) 'Custom elements polyfill'
