@@ -2,6 +2,7 @@ import {bus, busBroadcasts} from '@/utils/bus';
 
 export class StoreValidator {
 	// global bus commands
+	// noinspection JSUnresolvedFunction
 	static commands = {
 		start: () => bus.$emit(busBroadcasts.VALIDATION_START),
 		finish: () => bus.$emit(busBroadcasts.VALIDATION_END),

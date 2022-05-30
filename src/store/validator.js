@@ -7,6 +7,7 @@ const state = () => ({
 
 const getters = {
 	fields: s => s.fields,
+	isAllAnswered: s => s.fields.every(field => field.answered),
 	hasError: s => s.fields.some(field => field.error),
 	focus: s => s.focus,
 };
@@ -64,8 +65,8 @@ const mutations = {
 
 const actions = {
 	/**
-	 * input response to start validation
-	 * @param {number} key
+	 * field response on event "start validation"
+	 * @param {number} key - field key
 	 * @param {boolean} error - field error status
 	 * @returns {boolean} - update field focus
 	 */
@@ -73,9 +74,8 @@ const actions = {
 		if (!key) throw new Error('validator.fieldResponse: param "key" is empty');
 
 		commit('update', {key, error, answered: true});
-		const isAllAnswered = getters.fields.every(item => item.answered);
 
-		if (isAllAnswered) {
+		if (getters.isAllAnswered) {
 			commit('clearAnsweredInfo');
 			// event for form submit handler, in page.vue
 			if (!getters.hasError) StoreValidator.commands.finish();
@@ -88,7 +88,7 @@ const actions = {
 			commit('setFocus', true);
 		}
 
-		return toActivateFocus; // in view
+		return toActivateFocus; // use in field view
 	},
 	/**
 	 * form create command, start validation all fields
