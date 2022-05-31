@@ -4,7 +4,6 @@
 			v-for="(component, index) in pageStructure.components"
 			:key="index"
 			:scheme-options="component"
-			:component-index="index"
 		/>
 
 		<!--		<component :is="`style`" type="text/css" v-html="customStyles"></component>-->

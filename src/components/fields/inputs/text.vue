@@ -26,37 +26,23 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {FieldHelper} from '@/classes/components/field/FieldHelper';
-import {FieldPropser} from '@/classes/components/field/FieldPropser';
+import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
 	name: 'InputText',
 	props: {
-		multiboxIndex: FieldPropser.multiboxIndex(),
-		itemKey: FieldPropser.itemKey(),
-		generalParams: FieldPropser.generalParams(),
-		// below params from v-bind
+		generalParams: FP.generalParams,
+		validation: FP.validation,
+		itemKey: FP.itemKey,
+		multiboxIndex: FP.multiboxIndex,
+		text: FP.text,
+		html: FP.html,
+		styles: FP.styles,
 		customParams: {
 			type: Object,
 			required: false,
 			default: () => ({}),
-		},
-		validation: {
-			type: Object,
-			required: false,
-			default: () => ({
-				required: false,
-				pattern: '',
-				errorText: '',
-			}),
-		},
-		text: {
-			type: Object,
-			required: false,
-			default: () => ({
-				placeholder: '',
-				hint: '',
-			}),
 		},
 	},
 

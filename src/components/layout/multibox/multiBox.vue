@@ -29,7 +29,7 @@
 <script>
 import {mapMutations} from 'vuex';
 import {MultiBoxView} from '@/classes/components/layout/multibox/MultiBoxView';
-import {FieldPropser} from '@/classes/components/field/FieldPropser';
+import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
 import ButtonAdd from './buttonAdd';
 import ButtonRemove from './buttonRemove';
 
@@ -43,17 +43,15 @@ export default {
 		ButtonRemove,
 	},
 	props: {
-		generalParams: FieldPropser.generalParams(),
+		generalParams: FP.generalParams,
+		components: FP.components,
 		customParams: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		components: {
-			type: Array,
-			required: false,
-			default: () => [],
-		},
+		itemKey: FP.plugN,
+		multiboxIndex: FP.plugN,
 	},
 
 	data() {

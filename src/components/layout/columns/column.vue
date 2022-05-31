@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
+
 const VirtualComponent = () => import('@/components/virtualComponent');
 
 export default {
@@ -17,11 +19,7 @@ export default {
 		VirtualComponent,
 	},
 	props: {
-		generalParams: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
+		generalParams: FP.generalParams,
 		customParams: {
 			type: Object,
 			required: false,

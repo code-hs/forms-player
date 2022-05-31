@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
+
 const LayoutColumn = () => import('./column');
 
 export default {
@@ -17,19 +19,12 @@ export default {
 		LayoutColumn,
 	},
 	props: {
-		generalParams: {
-			type: Object,
-			required: true,
-		},
+		generalParams: FP.generalParams,
+		components: FP.components,
 		customParams: {
 			type: Object,
 			required: false,
 			default: () => ({}),
-		},
-		components: {
-			type: Array,
-			required: false,
-			default: () => [],
 		},
 	},
 
