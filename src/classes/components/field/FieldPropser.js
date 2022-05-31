@@ -5,7 +5,7 @@ export class FieldPropser {
 		default: -1,
 	};
 
-	static itemKey = {
+	static virtualKey = {
 		type: Number,
 		required: true,
 	};

@@ -18,7 +18,7 @@ export default {
 			default: () => ({}),
 		},
 		validation: FP.plugO,
-		itemKey: FP.plugN,
+		virtualKey: FP.plugN,
 		multiboxIndex: FP.plugN,
 		text: FP.plugO,
 		html: FP.plugO,

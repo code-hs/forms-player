@@ -50,7 +50,7 @@ export default {
 			required: false,
 			default: () => ({}),
 		},
-		itemKey: FP.plugN,
+		virtualKey: FP.plugN,
 		multiboxIndex: FP.plugN,
 	},
 

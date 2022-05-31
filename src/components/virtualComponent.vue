@@ -2,7 +2,7 @@
 	<component
 		:is="schemeOptions.generalParams.type"
 		:key="key"
-		:item-key="key"
+		:virtual-key="key"
 		:multibox-index="multiboxIndex"
 		v-bind="schemeOptions"
 	/>

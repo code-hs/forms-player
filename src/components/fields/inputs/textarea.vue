@@ -35,7 +35,7 @@ export default {
 	props: {
 		generalParams: FP.generalParams,
 		validation: FP.validation,
-		itemKey: FP.itemKey,
+		virtualKey: FP.virtualKey,
 		multiboxIndex: FP.multiboxIndex,
 		text: FP.text,
 		html: FP.html,
@@ -87,7 +87,7 @@ export default {
 	},
 
 	beforeDestroy() {
-		this.validatorDestroy(this.itemKey);
+		this.validatorDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
 	},
@@ -121,7 +121,7 @@ export default {
 		initValidation() {
 			if (FieldValidator.canValidation(this.validation)) {
 				this.valid.connect = true;
-				this.validatorAdd(this.itemKey);
+				this.validatorAdd(this.virtualKey);
 
 				// noinspection JSUnresolvedFunction
 				bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
@@ -164,7 +164,7 @@ export default {
 
 		validatorSaveInfo() {
 			this.validatorUpdate({
-				key: this.itemKey,
+				key: this.virtualKey,
 				error: this.valid.error,
 			});
 		},
@@ -172,7 +172,7 @@ export default {
 			this.validatorProcessAndUpdateDirty(false);
 			// noinspection ES6RedundantAwait
 			const setActiveFocus = await this.fieldResponseOnValidationEvent({
-				key: this.itemKey,
+				key: this.virtualKey,
 				error: this.valid.error,
 			});
 
