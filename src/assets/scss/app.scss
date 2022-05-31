@@ -23,8 +23,7 @@
 	}
 }
 
-//for light theme
-.app[data-theme='light'] {
+@include light-theme() {
 	color: $t-light-text;
 	background-color: $t-light-appBackground;
 	border-color: $t-light-groupItemBorder;

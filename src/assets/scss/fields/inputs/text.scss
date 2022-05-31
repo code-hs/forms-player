@@ -1,4 +1,16 @@
 .input-text {
+	@extend %error-text;
+	@extend %hint;
+
 	input {
+		@extend %field-default;
+		@extend %validation-arrow;
+		@extend %error-field;
+	}
+}
+
+@include light-theme() {
+	.input-text input {
+		@extend %field-default-light-theme;
 	}
 }

@@ -1,9 +1,22 @@
 .input-textarea {
+	@extend %error-text;
+	@extend %hint;
+
 	textarea {
+		@extend %field-default;
+		@extend %validation-arrow;
+		@extend %error-field;
+
 		resize: none;
 
 		&:required {
 			background-position: top 12px right 12px;
 		}
+	}
+}
+
+@include light-theme() {
+	.input-textarea textarea {
+		@extend %field-default-light-theme;
 	}
 }

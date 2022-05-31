@@ -44,7 +44,7 @@
 	}
 }
 
-.app[data-theme='light'] {
+@include light-theme() {
 	.checkbox {
 		input {
 			&:checked + .text::after {

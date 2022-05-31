@@ -64,32 +64,33 @@
 	}
 }
 
-//for light theme
-.app[data-theme='light'] .multibox {
-	.multibox-item {
-		&[data-show-multiple-separator='true']:not(:first-child) {
-			border-top-color: $t-light-fieldsetsSeparator;
+@include light-theme() {
+	.multibox {
+		.multibox-item {
+			&[data-show-multiple-separator='true']:not(:first-child) {
+				border-top-color: $t-light-fieldsetsSeparator;
+			}
+
+			.title {
+				color: $t-light-text;
+			}
 		}
 
-		.title {
-			color: $t-light-text;
-		}
-	}
-
-	.button-remove {
-		color: $t-light-buttonsBorder;
-
-		&:hover {
-			background-color: $t-light-formItemBgFocus;
-		}
-	}
-
-	.buttons-container {
-		.button-add {
-			border: 1px solid $t-light-buttonsBorder;
+		.button-remove {
+			color: $t-light-buttonsBorder;
 
 			&:hover {
 				background-color: $t-light-formItemBgFocus;
+			}
+		}
+
+		.buttons-container {
+			.button-add {
+				border: 1px solid $t-light-buttonsBorder;
+
+				&:hover {
+					background-color: $t-light-formItemBgFocus;
+				}
 			}
 		}
 	}

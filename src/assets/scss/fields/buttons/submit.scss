@@ -1,5 +1,7 @@
 .submit {
 	button {
+		@extend %field-default;
+
 		display: block;
 		padding: 13px 40px;
 		cursor: pointer;
@@ -20,9 +22,10 @@
 	}
 }
 
-.app[data-theme='light'] {
+@include light-theme() {
 	.submit {
 		button {
+			border: 1px solid $t-light-formItemBorder;
 			color: $t-light-submitText;
 			background: $t-light-submitBackground;
 
