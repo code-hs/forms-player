@@ -1,9 +1,7 @@
 <template>
-	<div v-if="hasData" class="column" :class="getClasses()">
-		<div v-for="(component, index) in column.components" :key="index">
-			<template v-if="hasComponents">
-				<VirtualComponent :scheme-options="component" />
-			</template>
+	<div v-if="hasContent" class="column" :class="getClasses()">
+		<div v-for="(component, index) in components" :key="index">
+			<VirtualComponent :scheme-options="component" />
 		</div>
 	</div>
 </template>
@@ -20,24 +18,13 @@ export default {
 	},
 	props: {
 		generalParams: FP.generalParams,
-		customParams: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
-		column: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
+		customParams: FP.customParams,
+		components: FP.components,
 	},
 
 	computed: {
-		hasData() {
-			return Object.keys(this.column).length;
-		},
-		hasComponents() {
-			return Object.keys(this.column?.components).length;
+		hasContent() {
+			return this.generalParams && this.components.length;
 		},
 	},
 

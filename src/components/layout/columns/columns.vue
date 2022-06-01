@@ -3,7 +3,7 @@
 		<LayoutColumn
 			v-for="(column, columnIndex) in components"
 			:key="columnIndex"
-			:column="column"
+			v-bind="column"
 		/>
 	</div>
 </template>
