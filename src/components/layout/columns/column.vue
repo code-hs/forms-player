@@ -1,8 +1,10 @@
 <template>
 	<div v-if="hasContent" class="column" :class="getClasses()">
-		<div v-for="(component, index) in components" :key="index">
-			<VirtualComponent :scheme-options="component" />
-		</div>
+		<VirtualComponent
+			v-for="(component, index) in components"
+			:key="index"
+			:scheme-options="component"
+		/>
 	</div>
 </template>
 
