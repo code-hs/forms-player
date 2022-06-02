@@ -27,6 +27,8 @@ export default {
 			default: () => ({}),
 		},
 		styles: FP.styles,
+		virtualKey: FP.plugN,
+		multiboxIndex: FP.plugN,
 	},
 
 	methods: {
