@@ -26,14 +26,21 @@ export default {
 			required: false,
 			default: () => ({}),
 		},
+		styles: FP.styles,
 	},
 
 	methods: {
 		getStyleObj() {
 			const obj = {};
 
-			if (this.customParams?.['justify-content']) {
-				obj['justify-content'] = this.customParams['justify-content'];
+			const paramJC = 'justify-content';
+			if (this.styles?.[paramJC]) {
+				obj[paramJC] = this.styles[paramJC];
+			}
+
+			const paramAI = 'align-items';
+			if (this.styles?.[paramAI]) {
+				obj[paramAI] = this.styles[paramAI];
 			}
 
 			return obj;
