@@ -9,16 +9,12 @@
 			:class="{error: valid.error}"
 			@change="handleChange"
 		>
-			<option
-				v-if="customParams.values && customParams.values.default"
-				value=""
-				disabled
-			>
-				{{ customParams.values.default }}
+			<option v-if="customParams.defaultText" value="" disabled>
+				{{ customParams.defaultText }}
 			</option>
 
 			<option
-				v-for="(value, key) in customParams.values.options"
+				v-for="(value, key) in customParams.options"
 				:key="key"
 				:value="key"
 			>
@@ -55,7 +51,8 @@ export default {
 			type: Object,
 			required: false,
 			default: () => ({
-				values: {},
+				options: {},
+				defaultText: '',
 			}),
 		},
 	},
