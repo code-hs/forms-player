@@ -55,6 +55,7 @@ export class FieldPropser {
 	static plugO = {
 		type: Object,
 	};
+
 	static plugN = {
 		type: Number,
 	};

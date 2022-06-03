@@ -5,6 +5,8 @@
 			<FormC />
 		</template>
 
+		<ValidationFocus />
+
 		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
 		<div v-if="showDump" class="dump">{{ validatorFields }}</div>
 	</div>
@@ -16,9 +18,10 @@ import FormC from '@/components/form';
 import {Config} from '@/config/index';
 import {Api} from '@/classes/api/Api';
 import {generateHash} from '@/utils/random';
+import ValidationFocus from '@/components/utils/validation/focus';
 
 export default {
-	components: {FormC},
+	components: {FormC, ValidationFocus},
 	props: {
 		// project id
 		dataProjectId: {

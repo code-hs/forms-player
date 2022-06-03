@@ -5,7 +5,8 @@ export class StoreValidator {
 	// noinspection JSUnresolvedFunction
 	static commands = {
 		start: () => bus.$emit(busBroadcasts.VALIDATION_START),
-		finish: () => bus.$emit(busBroadcasts.VALIDATION_END),
+		finishSuccess: () => bus.$emit(busBroadcasts.VALIDATION_FINISH_SUCCESS),
+		formHasError: () => bus.$emit(busBroadcasts.VALIDATION_FORM_HAS_ERROR),
 	};
 
 	/**

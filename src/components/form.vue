@@ -51,9 +51,12 @@ export default {
 		initValidation() {
 			// binding form
 			// noinspection JSUnresolvedFunction
-			bus.$on(busBroadcasts.VALIDATION_END, this.validationFinish);
+			bus.$on(
+				busBroadcasts.VALIDATION_FINISH_SUCCESS,
+				this.validationFinishSuccess
+			);
 		},
-		async validationFinish() {
+		async validationFinishSuccess() {
 			const res = await this.saveForm({
 				pageStructure: this.pageStructure,
 				values: this.modelStructure,

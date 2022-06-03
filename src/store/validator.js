@@ -2,14 +2,12 @@ import {StoreValidator} from '@/classes/validator/StoreValidator';
 
 const state = () => ({
 	fields: [],
-	focus: false,
 });
 
 const getters = {
 	fields: s => s.fields,
 	isAllAnswered: s => s.fields.every(field => field.answered),
 	hasError: s => s.fields.some(field => field.error),
-	focus: s => s.focus,
 };
 
 const mutations = {
@@ -58,9 +56,6 @@ const mutations = {
 			field.answered = false;
 		});
 	},
-	setFocus: (s, v) => {
-		s.focus = v;
-	},
 };
 
 const actions = {
@@ -68,35 +63,30 @@ const actions = {
 	 * field response on event "start validation"
 	 * @param {number} key - field key
 	 * @param {boolean} error - field error status
-	 * @returns {boolean} - update field focus
 	 */
 	fieldResponse({commit, getters}, {key, error}) {
 		if (!key) throw new Error('validator.fieldResponse: param "key" is empty');
 
 		commit('update', {key, error, answered: true});
+		if (!getters.isAllAnswered) return;
+		commit('clearAnsweredInfo');
 
-		if (getters.isAllAnswered) {
-			commit('clearAnsweredInfo');
-			// event for form submit handler, in page.vue
-			if (!getters.hasError) StoreValidator.commands.finish();
+		if (getters.hasError) {
+			// event for validation>focus for set focus to first error field
+			StoreValidator.commands.formHasError();
+			return;
 		}
 
-		let toActivateFocus = false;
-		// has error and focus empty
-		if (error && !getters.focus) {
-			toActivateFocus = true;
-			commit('setFocus', true);
-		}
-
-		return toActivateFocus; // use in field view
+		// event for form submit handler, in form.vue
+		StoreValidator.commands.finishSuccess();
 	},
 	/**
 	 * form create command, start validation all fields
 	 */
 	start({getters}) {
-		if (!getters?.fields?.length) {
+		if (getters.fields.length === 0) {
 			// if count === 0, validation finish!
-			StoreValidator.commands.finish();
+			StoreValidator.commands.finishSuccess();
 			return;
 		}
 

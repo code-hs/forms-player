@@ -33,7 +33,6 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {FieldHelper} from '@/classes/components/field/FieldHelper';
 import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
 import {bus, busBroadcasts} from '@/utils/bus';
 
@@ -156,13 +155,10 @@ export default {
 		},
 		async validatorHandleTask() {
 			this.validatorProcess(false);
-			// noinspection ES6RedundantAwait
-			const setActiveFocus = await this.fieldResponseOnValidationEvent({
+			this.fieldResponseOnValidationEvent({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
-
-			if (setActiveFocus) FieldHelper.scrollAndFocusElement(this.$refs.self);
 		},
 	},
 };
