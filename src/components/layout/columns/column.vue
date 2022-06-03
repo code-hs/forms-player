@@ -35,7 +35,8 @@ export default {
 			let classes = '';
 
 			// col-6, col-12,...
-			if (this.customParams.col) {
+			// noinspection JSUnresolvedVariable
+			if (this.customParams?.col) {
 				classes += `col-${this.customParams.col}`;
 			} else {
 				// col size default value

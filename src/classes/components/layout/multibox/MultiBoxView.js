@@ -1,6 +1,11 @@
 import {generateKey} from '@/utils/random';
 
 export class MultiBoxView {
+	/**
+	 * @param {Object[]} fields - list of fields
+	 * @param {String} multiBoxName - model of multiBox
+	 * @returns {Object[]}
+	 */
 	static initGroups(fields, multiBoxName) {
 		const groups = [];
 
@@ -8,6 +13,7 @@ export class MultiBoxView {
 
 		// add info about multibox
 		fields.forEach(field => {
+			if (!field.customParams) field.customParams = {};
 			// generate unique keys for each item, since we remove and add these items
 			// if this is not done, vue lazily updates the blocks
 			field.customParams.multi = {
