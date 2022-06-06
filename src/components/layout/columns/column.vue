@@ -4,6 +4,7 @@
 			v-for="(component, index) in components"
 			:key="index"
 			:scheme-options="component"
+			:multibox-index="multiboxIndex"
 		/>
 	</div>
 </template>
@@ -22,6 +23,7 @@ export default {
 		generalParams: FP.generalParams,
 		customParams: FP.customParams,
 		components: FP.components,
+		multiboxIndex: FP.multiboxIndex,
 	},
 
 	computed: {

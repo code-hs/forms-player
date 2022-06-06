@@ -4,6 +4,7 @@
 			v-for="(column, columnIndex) in components"
 			:key="columnIndex"
 			v-bind="column"
+			:multibox-index="multiboxIndex"
 		/>
 	</div>
 </template>
@@ -28,7 +29,7 @@ export default {
 		},
 		styles: FP.styles,
 		virtualKey: FP.plugN,
-		multiboxIndex: FP.plugN,
+		multiboxIndex: FP.multiboxIndex,
 	},
 
 	methods: {
