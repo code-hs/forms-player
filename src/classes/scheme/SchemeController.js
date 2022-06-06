@@ -20,15 +20,15 @@ export class SchemeController {
 	}
 
 	/**
-	 * @param {string} pageName
+	 * @param {string} pageKey
 	 * @returns {Object|false}
 	 */
-	getPageStructure(pageName) {
-		if (!pageName) {
+	getPageStructure(pageKey) {
+		if (!pageKey) {
 			throw new Error('SchemeParser.getPageStructure: param pageName is empty');
 		}
 		if (!this._scheme?.pages) return false;
 
-		return this._scheme.pages.find(p => p.url === pageName);
+		return this._scheme.pages.find(p => p.key === pageKey);
 	}
 }

@@ -22,15 +22,15 @@ const actions = {
 		schemeItem.load();
 	},
 	/**
-	 * @param {string} pageName - page url
+	 * @param {string} pageKey
 	 * @returns {Object} - scheme
 	 */
-	initPage({commit}, pageName) {
-		if (!pageName) {
+	initPage({commit}, pageKey) {
+		if (!pageKey) {
 			throw new Error('scheme.initPage: param pageName is empty');
 		}
 
-		const pageStructure = schemeItem.getPageStructure(pageName);
+		const pageStructure = schemeItem.getPageStructure(pageKey);
 		commit('setPageStructure', pageStructure);
 
 		return pageStructure;

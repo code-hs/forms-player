@@ -52,7 +52,7 @@ export default {
 
 	data() {
 		return {
-			pageName: this.getPageName(),
+			pageKey: this.getPageKey(),
 			showContent: false,
 			showDump: Config.showDump,
 			appId: generateHash(), // id for the app, for api ddos protection
@@ -79,7 +79,7 @@ export default {
 
 		this.loadScheme();
 
-		const pageStructure = await this.initPage(this.pageName);
+		const pageStructure = await this.initPage(this.pageKey);
 		if (!pageStructure) {
 			throw new Error('app.created: pageStructure is empty');
 		}
@@ -103,7 +103,7 @@ export default {
 			Api.init(this.dataProjectId, this.appId);
 			this.localization.init(this.dataLanguage);
 		},
-		getPageName() {
+		getPageKey() {
 			// can use hash url
 			// window.location.hash.slice(1)
 			// from tag attribute
