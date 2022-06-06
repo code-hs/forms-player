@@ -20,6 +20,10 @@ export class MultiBoxView {
 				name: multiBoxName,
 				key: generateKey(),
 			};
+
+			if (field.components) {
+				MultiBoxView.initGroups(field.components, multiBoxName);
+			}
 		});
 
 		groups.push(fields);
