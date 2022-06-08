@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 
 const LayoutColumn = () => import('./column');
 
@@ -20,16 +20,16 @@ export default {
 		LayoutColumn,
 	},
 	props: {
-		generalParams: FP.generalParams,
-		components: FP.components,
+		generalParams: FH.generalParams,
+		components: FH.components,
 		customParams: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		styles: FP.styles,
-		virtualKey: FP.plugN,
-		multiboxIndex: FP.multiboxIndex,
+		styles: FH.styles,
+		virtualKey: FH.plugN,
+		multiboxIndex: FH.multiboxIndex,
 	},
 
 	methods: {

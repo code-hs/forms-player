@@ -6,23 +6,23 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 
 export default {
 	name: 'ButtonSubmit',
 	props: {
-		generalParams: FP.generalParams,
+		generalParams: FH.generalParams,
 		customParams: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		validation: FP.plugO,
-		virtualKey: FP.plugN,
-		multiboxIndex: FP.plugN,
-		text: FP.plugO,
-		html: FP.plugO,
-		styles: FP.plugO,
+		validation: FH.plugO,
+		virtualKey: FH.plugN,
+		multiboxIndex: FH.plugN,
+		text: FH.plugO,
+		html: FH.plugO,
+		styles: FH.plugO,
 	},
 
 	computed: {

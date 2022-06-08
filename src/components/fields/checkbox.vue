@@ -20,19 +20,19 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
 	name: 'Checkbox',
 	props: {
-		generalParams: FP.generalParams,
-		validation: FP.validation,
-		virtualKey: FP.virtualKey,
-		multiboxIndex: FP.multiboxIndex,
-		text: FP.text,
-		html: FP.html,
-		styles: FP.styles,
+		generalParams: FH.generalParams,
+		validation: FH.validation,
+		virtualKey: FH.virtualKey,
+		multiboxIndex: FH.multiboxIndex,
+		text: FH.text,
+		html: FH.html,
+		styles: FH.styles,
 		customParams: {
 			type: Object,
 			required: false,
@@ -44,6 +44,7 @@ export default {
 
 	data() {
 		return {
+			multiBoxName: FH.getMultiName(this),
 			valid: {
 				error: false,
 				errorForView: false,
@@ -56,9 +57,6 @@ export default {
 		...mapGetters({
 			modelStructure: 'model/structure',
 		}),
-		multiBoxName() {
-			return this.customParams?.multi?.name || '';
-		},
 		modelStore() {
 			if (this.multiBoxName) {
 				// if multibox is parent of this field, use multibox name and index

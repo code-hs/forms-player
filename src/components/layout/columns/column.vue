@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {FieldPropser as FP} from '@/classes/components/field/FieldPropser';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 
 const VirtualComponent = () => import('@/components/virtualComponent');
 
@@ -20,10 +20,10 @@ export default {
 		VirtualComponent,
 	},
 	props: {
-		generalParams: FP.generalParams,
-		customParams: FP.customParams,
-		components: FP.components,
-		multiboxIndex: FP.multiboxIndex,
+		generalParams: FH.generalParams,
+		customParams: FH.customParams,
+		components: FH.components,
+		multiboxIndex: FH.multiboxIndex,
 	},
 
 	computed: {

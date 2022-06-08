@@ -1,4 +1,4 @@
-export class FieldPropser {
+export class FieldHelper {
 	static multiboxIndex = {
 		type: Number,
 		required: false,
@@ -59,4 +59,8 @@ export class FieldPropser {
 	static plugN = {
 		type: Number,
 	};
+
+	static getMultiName(componentContext) {
+		return componentContext?.customParams?.multi?.name || '';
+	}
 }

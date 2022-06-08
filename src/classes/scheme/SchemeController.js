@@ -2,7 +2,7 @@ import {SchemeLoader} from './SchemeLoader';
 import {SchemeFiltrator} from './SchemeFiltrator';
 
 export class SchemeController {
-	_scheme;
+	_scheme = {};
 
 	load() {
 		this._scheme = SchemeLoader.getData();
