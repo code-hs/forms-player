@@ -22,15 +22,17 @@
 		></form-widget-g>
 		<!--		<div class="form-widget-g-container" style="width:380px">-->
 		<!--			<form-widget-g-->
-		<!--				data-project-id="62508e2544f0831be0b66a0b"-->
-		<!--				data-page="welcome"-->
-		<!--				data-language="en"-->
 		<!--				data-theme="light"-->
 		<!--				data-layout="small"-->
 		<!--			></form-widget-g>-->
 		<!--		</div>-->
 
 		<script src="http://localhost:3033/p/client/widget-form-loader.js"></script>
+		<script>
+			// data-path="local"
+			// нужен всегда, ибо бандлы мы никогда не закачиваем с сервера, это слишком большая нагрузка на сервер
+			// поэтому только с локального пути, его можно как угодно прописать
+		</script>
 	</body>
 
 	<style>
@@ -47,7 +49,7 @@
 		body,
 		html {
 			background: #323232;
-			max-width: 350px;
+			max-width: 600px;
 		}
 	</style>
 </html>
