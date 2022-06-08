@@ -21,9 +21,6 @@ export class Localization {
 				`Localization.install: defaultLang '${this.defaultLang}' is not correct, or is not available`
 			);
 		}
-		// set the started language, that customer set in scheme
-		// noinspection JSCheckFunctionSignatures
-		store.commit('localization/setCurrentLanguage', this.defaultLang);
 
 		Vue.prototype.$t = key => this.getText(key);
 		Vue.prototype.localization = this;
@@ -40,13 +37,14 @@ export class Localization {
 	}
 
 	/**
-	 * if client set language, we will use it.
+	 * init language from app.vue
 	 * or use default language (from scheme config)
 	 * @param {string} langFromAttribute
 	 */
 	static init(langFromAttribute) {
-		if (langFromAttribute) {
-			this.changeLanguage(langFromAttribute);
+		const lang = langFromAttribute || this.defaultLang;
+		if (lang) {
+			this.changeLanguage(lang);
 		}
 	}
 
@@ -56,11 +54,11 @@ export class Localization {
 	 * @returns {string}
 	 */
 	static getText(key) {
-		if (!key) return '';
-
 		const currentLanguage = store.getters['localization/currentLanguage'];
-		const localesByLang = this.locales[currentLanguage];
 
+		if (!key || !currentLanguage) return '';
+
+		const localesByLang = this.locales[currentLanguage];
 		return getValueByStringKey(key, localesByLang);
 	}
 
