@@ -55,11 +55,17 @@ export class Localization {
 	 */
 	static getText(key) {
 		const currentLanguage = store.getters['localization/currentLanguage'];
-
 		if (!key || !currentLanguage) return '';
 
 		const localesByLang = this.locales[currentLanguage];
-		return getValueByStringKey(key, localesByLang);
+		const text = getValueByStringKey(key, localesByLang);
+
+		// if locale not found, and key starts from '!', show this text
+		if (!text && key.startsWith('!')) {
+			return key.substr(1);
+		}
+
+		return text;
 	}
 
 	/**
