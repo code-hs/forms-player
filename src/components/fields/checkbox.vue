@@ -11,7 +11,7 @@
 			<span
 				class="text"
 				:class="{error: valid.errorForView}"
-				v-html="customParams.bodyHTML"
+				v-html="$t(customParams.bodyHTML)"
 			/>
 		</label>
 	</div>

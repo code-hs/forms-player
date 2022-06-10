@@ -1,6 +1,5 @@
 <template>
 	<div class="app" :data-layout="dataLayout" :data-theme="dataTheme">
-		<span>{{ $t('app-title') }}</span>
 		<template v-if="showContent">
 			<FormC />
 		</template>
@@ -8,7 +7,7 @@
 		<ValidationFocus />
 
 		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
-		<div v-if="showDump" class="dump">{{ validatorFields }}</div>
+		<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
 	</div>
 </template>
 

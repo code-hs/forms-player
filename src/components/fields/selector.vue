@@ -1,6 +1,6 @@
 <template>
 	<div class="field input-selector">
-		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
+		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
 		<select
 			ref="self"
@@ -10,7 +10,7 @@
 			@change="handleChange"
 		>
 			<option v-if="customParams.defaultText" value="" disabled>
-				{{ customParams.defaultText }}
+				{{ $t(customParams.defaultText) }}
 			</option>
 
 			<option
@@ -18,13 +18,13 @@
 				:key="key"
 				:value="key"
 			>
-				{{ value }}
+				{{ $t(value) }}
 			</option>
 		</select>
 
 		<transition name="fade">
 			<div v-if="validation.errorText" v-show="valid.error" class="error-text">
-				{{ validation.errorText }}
+				{{ $t(validation.errorText) }}
 			</div>
 		</transition>
 	</div>

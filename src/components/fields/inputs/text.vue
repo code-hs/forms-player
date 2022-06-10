@@ -1,12 +1,12 @@
 <template>
 	<div class="field input-text">
-		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
+		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
 		<input
 			ref="self"
 			v-model="modelStore[generalParams.model]"
 			type="text"
-			:placeholder="text.placeholder"
+			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
 			:class="{error: valid.error}"
 			@blur="handleBlur"
@@ -15,7 +15,7 @@
 
 		<transition name="fade">
 			<div v-if="validation.errorText" v-show="valid.error" class="error-text">
-				{{ validation.errorText }}
+				{{ $t(validation.errorText) }}
 			</div>
 		</transition>
 	</div>

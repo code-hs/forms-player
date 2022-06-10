@@ -1,11 +1,11 @@
 <template>
 	<div class="field input-textarea">
-		<div v-if="text.hint" class="hint">{{ text.hint }}</div>
+		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
 		<textarea
 			ref="self"
 			v-model="modelStore[generalParams.model]"
-			:placeholder="text.placeholder"
+			:placeholder="$t(text.placeholder)"
 			:rows="customParams.rows"
 			:required="validation.required"
 			:class="{error: valid.error}"
@@ -16,7 +16,7 @@
 
 		<transition name="fade">
 			<div v-if="validation.errorText" v-show="valid.error" class="error-text">
-				{{ validation.errorText }}
+				{{ $t(validation.errorText) }}
 			</div>
 		</transition>
 	</div>
