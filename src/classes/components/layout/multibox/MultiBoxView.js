@@ -2,17 +2,28 @@ import {generateKey} from '@/utils/random';
 
 export class MultiBoxView {
 	/**
-	 * @param {Object[]} fields - list of fields
-	 * @param {String} multiBoxName - model of multiBox
-	 * @returns {Object[]}
+	 * Edit out data
+	 * @param {Object[]} components - stack of fields
+	 * @param {string} multiBoxName - model of multiBox
+	 * @returns {[[]]}
 	 */
-	static initGroups(fields, multiBoxName) {
-		const groups = [];
+	static generateGroups(components, multiBoxName) {
+		const firstGroup = components;
+		this._addMultiBoxInfo(firstGroup, multiBoxName);
 
-		if (!fields.length) return groups;
+		return [firstGroup];
+	}
+
+	/**
+	 * Edit out data
+	 * @param {Object[]} components - list of fields
+	 * @param {string} multiBoxName - model of multiBox
+	 */
+	static _addMultiBoxInfo(components, multiBoxName) {
+		if (!components.length) return;
 
 		// add info about multibox
-		fields.forEach(field => {
+		components.forEach(field => {
 			if (!field.customParams) field.customParams = {};
 			// generate unique keys for each item, since we remove and add these items
 			// if this is not done, vue lazily updates the blocks
@@ -22,33 +33,29 @@ export class MultiBoxView {
 			};
 
 			if (field.components) {
-				MultiBoxView.initGroups(field.components, multiBoxName);
+				this._addMultiBoxInfo(field.components, multiBoxName);
 			}
 		});
-
-		groups.push(fields);
-
-		return groups;
 	}
 
 	/**
 	 * Get new item, when click button ADD
-	 * @param {Object[]} groups - list of fieldsets
-	 * @returns {Object|boolean}
+	 * @param {Object[][]} groups - list of fieldsets
+	 * @returns {Object[]}
 	 */
-	static generateNewItem(groups) {
+	static generateNewGroup(groups) {
 		if (!groups?.length) {
 			throw new Error('MultiBoxView.getNewItem: param groups is empty');
 		}
 
-		const sourceItem = groups[0];
-		const newItem = JSON.parse(JSON.stringify(sourceItem));
+		const source = groups[0];
+		const group = JSON.parse(JSON.stringify(source));
 
-		// set new key
-		newItem.forEach(field => {
+		group.forEach(field => {
+			// update only key
 			field.customParams.multi.key = generateKey();
 		});
 
-		return newItem;
+		return group;
 	}
 }

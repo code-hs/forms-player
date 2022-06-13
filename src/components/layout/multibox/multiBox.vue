@@ -53,13 +53,14 @@ export default {
 		virtualKey: FH.plugN,
 		multiboxIndex: FH.plugN,
 	},
-
 	data() {
+		const groups = MultiBoxView.generateGroups(
+			this.components,
+			this.generalParams.model
+		);
+
 		return {
-			groups: MultiBoxView.initGroups(
-				this.components,
-				this.generalParams.model
-			),
+			groups,
 		};
 	},
 
@@ -85,8 +86,8 @@ export default {
 			});
 
 			// add item to view
-			const newItem = MultiBoxView.generateNewItem(this.groups);
-			this.groups.push(newItem);
+			const group = MultiBoxView.generateNewGroup(this.groups);
+			this.groups.push(group);
 		},
 		handleRemove(index) {
 			// delete from model
