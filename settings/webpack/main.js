@@ -43,12 +43,19 @@ const configureWebpack = {
 		path: path.resolve(__dirname, '../../dist'),
 		filename: 'form-widget-g.js',
 	},
+	resolve: {extensions: ['.js', '.ts', '.vue']},
 	plugins,
 	optimization: {
 		minimizer,
 	},
 	module: {
-		rules: [],
+		rules: [
+			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+			},
+		],
 	},
 };
 
