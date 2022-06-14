@@ -16,7 +16,7 @@ export class SchemeController {
 	}
 
 	isValidStructure() {
-		return this._scheme && Object.keys(this._scheme).length;
+		return this._scheme && !!Object.keys(this._scheme).length;
 	}
 
 	/**
@@ -25,7 +25,7 @@ export class SchemeController {
 	 */
 	getPageStructure(pageKey) {
 		if (!pageKey) {
-			throw new Error('SchemeParser.getPageStructure: param pageName is empty');
+			throw new Error('SchemeParser.getPageStructure: param pageKey is empty');
 		}
 		if (!this._scheme?.pages) return false;
 
