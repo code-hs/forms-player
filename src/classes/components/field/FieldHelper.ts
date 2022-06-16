@@ -1,4 +1,10 @@
-import {validationExample, ComponentParams} from './params';
+import {
+	validationExample,
+	textExample,
+	stylesExample,
+	htmlExample,
+	ComponentParams,
+} from './params';
 
 export class FieldHelper {
 	static multiboxIndex = {
@@ -12,6 +18,7 @@ export class FieldHelper {
 		required: true,
 	};
 
+	// like GeneralParams (from file params.ts)
 	static generalParams = {
 		type: Object,
 		required: true,
@@ -26,22 +33,19 @@ export class FieldHelper {
 	static text = {
 		type: Object,
 		required: false,
-		default: () => ({
-			placeholder: '',
-			hint: '',
-		}),
+		default: () => textExample,
 	};
 
 	static styles = {
 		type: Object,
 		required: false,
-		default: () => ({}),
+		default: () => stylesExample,
 	};
 
 	static html = {
 		type: Object,
 		required: false,
-		default: () => ({}),
+		default: () => htmlExample,
 	};
 
 	static components = {
