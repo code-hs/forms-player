@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
 
 const LayoutColumn = () => import('./column');
 

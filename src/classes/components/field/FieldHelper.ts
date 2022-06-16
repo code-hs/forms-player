@@ -1,3 +1,5 @@
+import {validationExample, ComponentParams} from './params';
+
 export class FieldHelper {
 	static multiboxIndex = {
 		type: Number,
@@ -18,11 +20,7 @@ export class FieldHelper {
 	static validation = {
 		type: Object,
 		required: false,
-		default: () => ({
-			required: false,
-			pattern: '',
-			errorText: '',
-		}),
+		default: () => validationExample,
 	};
 
 	static text = {
@@ -60,7 +58,7 @@ export class FieldHelper {
 		type: Number,
 	};
 
-	static getMultiName(componentContext) {
-		return componentContext?.customParams?.multi?.name || '';
+	static getMultiName(params: ComponentParams) {
+		return params?.customParams?.multi?.name || '';
 	}
 }
