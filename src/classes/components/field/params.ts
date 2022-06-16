@@ -16,6 +16,7 @@ export interface CustomParams {
 	};
 	[key: string]: any;
 }
+export const customParamsExample: CustomParams = {};
 
 export interface GeneralParams {
 	type: string;
@@ -45,5 +46,5 @@ export interface ComponentParams {
 	text?: TextParams;
 	styles?: StylesParams;
 	html?: HtmlParams;
-	components?: [];
+	components?: ComponentParams[];
 }

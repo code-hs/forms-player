@@ -1,14 +1,14 @@
-function generateInt(min = 0, max = 9) {
+function generateInt(min: number = 0, max: number = 9): number {
 	// Generate number from min to max
 	// Example: 3
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function generateKey() {
+function generateKey(): number {
 	return generateInt(1, 999999999999);
 }
 
-function generateStr(minLetters = 3, maxLetters = 8) {
+function generateStr(minLetters: number = 3, maxLetters: number = 8): string {
 	// Generate string from min to max count letters
 	// Example: 0VfE0SaA
 	const n = generateInt(minLetters, maxLetters);
@@ -21,7 +21,7 @@ function generateStr(minLetters = 3, maxLetters = 8) {
 	return s;
 }
 
-function generateHash() {
+function generateHash(): string {
 	return (generateStr(20, 20) + Date.now().toString(36)).toLowerCase();
 }
 
