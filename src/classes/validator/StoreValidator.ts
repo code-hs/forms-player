@@ -1,5 +1,11 @@
 import {bus, busBroadcasts} from '@/utils/bus';
 
+export interface ValidatorField {
+	key: number;
+	error: boolean;
+	answered: boolean;
+}
+
 export class StoreValidator {
 	// global bus commands
 	// noinspection JSUnresolvedFunction
@@ -9,15 +15,12 @@ export class StoreValidator {
 		formHasError: () => bus.$emit(busBroadcasts.VALIDATION_FORM_HAS_ERROR),
 	};
 
-	/**
-	 * @param {object[]} fields
-	 * @param {number} key
-	 * @returns {number} index
-	 */
-	static findIndex(fields, key) {
+	static findIndex(fields: ValidatorField[], key: number): number {
 		if (!key) throw new Error('StoreValidator.findIndex: param key is empty');
 
-		const index = fields.findIndex(item => item.key === key);
+		const index: number = fields.findIndex(
+			(field: ValidatorField) => field.key === key
+		);
 		if (index === -1) {
 			throw new Error("StoreValidator.findIndex: can't find index");
 		}

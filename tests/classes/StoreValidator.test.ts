@@ -1,8 +1,11 @@
 import {describe, it, expect} from '@jest/globals';
-import {StoreValidator} from '@/classes/validator/StoreValidator';
+import {
+	StoreValidator,
+	ValidatorField,
+} from '@/classes/validator/StoreValidator';
 
 describe('StoreValidator class -> findIndex', () => {
-	const fields = [
+	const fields: ValidatorField[] = [
 		{
 			key: 741032728838,
 			error: false,
@@ -32,7 +35,6 @@ describe('StoreValidator class -> findIndex', () => {
 
 	it('correct work', () => {
 		const key = 917049390237;
-
 		const index = StoreValidator.findIndex(fields, key);
 		expect(index).toBe(4);
 	});
