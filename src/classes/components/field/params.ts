@@ -39,12 +39,12 @@ export const stylesExample: StylesParams = {};
 export interface HtmlParams {}
 export const htmlExample: HtmlParams = {};
 
-export interface ComponentParams {
+export interface Field {
 	generalParams: GeneralParams;
 	customParams?: CustomParams;
 	validation?: ValidationParams;
 	text?: TextParams;
 	styles?: StylesParams;
 	html?: HtmlParams;
-	components?: ComponentParams[];
+	components?: Field[];
 }

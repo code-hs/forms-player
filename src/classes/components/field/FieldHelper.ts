@@ -3,7 +3,7 @@ import {
 	textExample,
 	stylesExample,
 	htmlExample,
-	ComponentParams,
+	Field,
 } from './params';
 
 export class FieldHelper {
@@ -62,7 +62,7 @@ export class FieldHelper {
 		type: Number,
 	};
 
-	static getMultiName(params: ComponentParams) {
-		return params?.customParams?.multi?.name || '';
+	static getMultiName(field: Field) {
+		return field?.customParams?.multi?.name || '';
 	}
 }
