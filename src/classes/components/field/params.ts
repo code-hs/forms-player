@@ -40,7 +40,7 @@ export interface HtmlParams {}
 export const htmlExample: HtmlParams = {};
 
 export interface ComponentParams {
-	generalParams?: GeneralParams;
+	generalParams: GeneralParams;
 	customParams?: CustomParams;
 	validation?: ValidationParams;
 	text?: TextParams;
