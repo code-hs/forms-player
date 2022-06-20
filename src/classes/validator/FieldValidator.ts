@@ -3,7 +3,7 @@ import {ValidationParams} from '@/classes/scheme/Structure';
 export class FieldValidator {
 	static debounceTime: number = 300;
 
-	static stringToRegex(str: string) {
+	static stringToRegex(str: string): RegExp {
 		if (!str) {
 			throw new Error(
 				'FieldValidator.stringToRegex: source' +
