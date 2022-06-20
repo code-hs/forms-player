@@ -11,14 +11,14 @@ const getters = {
 
 const mutations = {
 	/*
-	 * @param {Object} pageStructure
+	 * @param {Object} page
 	 */
-	generateSkeleton: (s, pageStructure) => {
-		if (!pageStructure) {
-			throw new Error('model.generateSkeleton: param pageStructure is empty');
+	generateSkeleton: (s, page) => {
+		if (!page) {
+			throw new Error('model.generateSkeleton: param page is empty');
 		}
 
-		s.structure = ModelStructure.generate(pageStructure);
+		s.structure = ModelStructure.generate(page);
 	},
 
 	/**

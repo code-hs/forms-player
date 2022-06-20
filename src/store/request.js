@@ -16,13 +16,13 @@ const mutations = {
 
 const actions = {
 	/**
-	 * @param {Object} pageStructure - current page structure
+	 * @param {Object} page - current page structure
 	 * @param {Object} values - store model/structure
 	 */
-	async saveFormValues({commit}, {pageStructure, values}) {
+	async saveFormValues({commit}, {page, values}) {
 		commit('setSaveFormFinished', false);
 		const res = await Api.post('form/save-form', {
-			pageKey: pageStructure.key,
+			pageKey: page.key,
 			values,
 		});
 		commit('setSaveFormFinished', true);

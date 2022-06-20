@@ -34,7 +34,7 @@ export default {
 
 	computed: {
 		...mapGetters({
-			pageStructure: 'scheme/pageStructure',
+			pageStructure: 'scheme/page',
 			modelStructure: 'model/structure',
 		}),
 	},
@@ -58,7 +58,7 @@ export default {
 		},
 		async validationFinishSuccess() {
 			const res = await this.saveForm({
-				pageStructure: this.pageStructure,
+				page: this.pageStructure,
 				values: this.modelStructure,
 			});
 

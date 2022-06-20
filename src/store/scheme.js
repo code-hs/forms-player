@@ -3,16 +3,16 @@ import {SchemeController} from '@/classes/scheme/SchemeController';
 let schemeItem;
 
 const state = () => ({
-	pageStructure: null,
+	page: null,
 });
 
 const getters = {
-	pageStructure: s => s.pageStructure,
+	page: s => s.page,
 };
 
 const mutations = {
-	setPageStructure: (s, v) => {
-		s.pageStructure = v;
+	setPage: (s, v) => {
+		s.page = v;
 	},
 };
 
@@ -30,10 +30,10 @@ const actions = {
 			throw new Error('scheme.initPage: param pageName is empty');
 		}
 
-		const pageStructure = schemeItem.getPage(pageKey);
-		commit('setPageStructure', pageStructure);
+		const page = schemeItem.getPage(pageKey);
+		commit('setPage', page);
 
-		return pageStructure;
+		return page;
 	},
 };
 
