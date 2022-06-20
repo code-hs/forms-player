@@ -20,7 +20,7 @@ export const customParamsExample: CustomParams = {};
 
 export interface GeneralParams {
 	type: string;
-	model: string;
+	model?: string;
 	enable?: boolean;
 }
 
@@ -46,5 +46,14 @@ export interface Field {
 	text?: TextParams;
 	styles?: StylesParams;
 	html?: HtmlParams;
+	components?: Field[];
+}
+
+export interface Page {
+	id?: number;
+	key?: string;
+	type?: string;
+	description?: string;
+	position?: number;
 	components?: Field[];
 }

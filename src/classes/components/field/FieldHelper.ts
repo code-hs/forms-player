@@ -4,7 +4,7 @@ import {
 	stylesExample,
 	htmlExample,
 	Field,
-} from './params';
+} from '@/classes/scheme/Structure';
 
 export class FieldHelper {
 	static multiboxIndex = {
