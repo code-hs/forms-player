@@ -57,3 +57,8 @@ export interface Page {
 	position?: number;
 	components?: Field[];
 }
+
+export interface Scheme {
+	config: object;
+	pages: Page[];
+}

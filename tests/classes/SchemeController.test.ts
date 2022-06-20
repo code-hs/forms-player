@@ -1,9 +1,11 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeController} from '@/classes/scheme/SchemeController';
+import {Scheme, Page} from '@/classes/scheme/Structure';
 
 describe('SchemeController class -> isValidStructure', () => {
 	it('correct work', () => {
-		const scheme = {
+		const scheme: Scheme = {
+			config: {},
 			pages: [
 				{
 					key: 'welcome_1',
@@ -43,12 +45,12 @@ describe('SchemeController class -> isValidStructure', () => {
 		};
 
 		const SC = new SchemeController();
-		expect(SC.isValidStructure()).toBeFalsy();
-		SC._scheme = scheme;
+		expect(SC.isValid()).toBeFalsy();
+		// @ts-ignore
+		SC.scheme = scheme;
+		expect(SC.isValid()).toBeTruthy();
 
-		expect(SC.isValidStructure()).toBeTruthy();
-
-		const page = SC.getPageStructure('welcome_1');
+		const page: Page = SC.getPage('welcome_1');
 		expect(page.key).toBe('welcome_1');
 	});
 });

@@ -30,7 +30,7 @@ const actions = {
 			throw new Error('scheme.initPage: param pageName is empty');
 		}
 
-		const pageStructure = schemeItem.getPageStructure(pageKey);
+		const pageStructure = schemeItem.getPage(pageKey);
 		commit('setPageStructure', pageStructure);
 
 		return pageStructure;
