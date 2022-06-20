@@ -1,9 +1,11 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeFiltrator} from '@/classes/scheme/SchemeFiltrator';
+import {Field, Page, Scheme} from '@/classes/scheme/Structure';
 
 describe('SchemeFiltrator class -> filtrateParamEnable', () => {
 	it('correct work', () => {
-		const scheme = {
+		const scheme: Scheme = {
+			config: {},
 			pages: [
 				{
 					components: [
@@ -41,13 +43,17 @@ describe('SchemeFiltrator class -> filtrateParamEnable', () => {
 			],
 		};
 
-		const filteredComponents = SchemeFiltrator.filtrateParamEnable(scheme);
-		const pageComponents = filteredComponents.pages[0].components;
+		const filteredComponents: Scheme =
+			SchemeFiltrator.filtrateParamEnable(scheme);
+		const page: Page = filteredComponents.pages[0];
 
-		expect(pageComponents.length).toBe(2);
-		expect(pageComponents[0].generalParams.model).toBe('address_1');
-		expect(pageComponents[1].generalParams.model).toBe('address_2');
+		// @ts-ignore
+		const pageFields: Field[] = page.components;
 
-		expect(pageComponents[1].components.length).toBe(0);
+		expect(pageFields.length).toBe(2);
+		expect(pageFields[0].generalParams.model).toBe('address_1');
+		expect(pageFields[1].generalParams.model).toBe('address_2');
+		// @ts-ignore
+		expect(pageFields[1].components.length).toBe(0);
 	});
 });
