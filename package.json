@@ -9,7 +9,7 @@
 		"build min        (clear comments,logs)": "cross-env CUSTOM_MODE=prod vue-cli-service build && npm run _copy:bundle:to-api-public-dir && npm run _local:copy:bundle",
 		"build full         (with sourcemap, with comments, logs)": "cross-env CUSTOM_MODE=dev vue-cli-service build && npm run _copy:bundle:to-api-public-dir  && npm run _local:copy:bundle",
 		"  ": "",
-		"lint": "vue-cli-service lint",
+		"lint": "vue-cli-service lint ./src/",
 		"test": "jest",
 		"analyze": "cross-env CUSTOM_MODE=analyze vue-cli-service build",
 		"   ": "",
