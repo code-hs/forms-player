@@ -1,45 +1,27 @@
+import {Scheme, LocalizationConfig} from '@/classes/scheme/Structure';
 import {SchemeLoader} from '@/classes/scheme/SchemeLoader';
+import {Locales, LocalizationInformation} from './Structure';
 
 export class LocalizationLoader {
-	/**
-	 * @returns {Object}
-	 */
-	static getData() {
+	static getData(): LocalizationInformation {
 		return {
 			configuration: this.getConfiguration(),
 			locales: this.getLocales(),
 		};
 	}
 
-	/**
-	 * @returns {Object}
-	 * {
-	 *		en: {
-	 *			"app-title": "text en",
-	 *		},
-	 *		fr: {
-	 *			"app-title": "text fr",
-	 *		}
-	 * }
-	 */
-	static getLocales() {
-		const locales = localStorage.getItem('WDFL:init:locales');
-		if (!locales) {
+	private static getLocales(): Locales {
+		const localesJSON: string | null =
+			localStorage.getItem('WDFL:init:locales');
+		if (!localesJSON) {
 			throw new Error('LocalizationLoader.getLocales: no locales found');
 		}
 
-		return JSON.parse(locales);
+		return JSON.parse(localesJSON);
 	}
 
-	/**
-	 * @returns {Object}
-	 * {
-	 *		defaultLang: "en"
-	 *		availableLangs: ["en", "fr"]
-	 * }
-	 */
-	static getConfiguration() {
-		const scheme = SchemeLoader.getData();
+	private static getConfiguration(): LocalizationConfig {
+		const scheme: Scheme = SchemeLoader.getData();
 
 		// is configuration has in scheme
 		if (!scheme.config?.localization) {
@@ -49,7 +31,8 @@ export class LocalizationLoader {
 		}
 
 		// is configuration has correct structure
-		const configuration = scheme.config.localization;
+		const configuration: LocalizationConfig = scheme.config.localization;
+
 		if (!configuration.defaultLang || !configuration.availableLangs) {
 			throw new Error(
 				'LocalizationLoader.getConfiguration: incorrect localization config structure'

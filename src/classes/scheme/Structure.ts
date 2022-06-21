@@ -58,7 +58,20 @@ export interface Page {
 	components?: Field[];
 }
 
+export interface LocalizationConfig {
+	defaultLang?: string;
+	availableLangs?: string[];
+}
+/**
+ * {
+ *		defaultLang: "en"
+ *		availableLangs: ["en", "fr"]
+ * }
+ */
+
 export interface Scheme {
-	config: object;
+	config: {
+		localization?: LocalizationConfig;
+	};
 	pages: Page[];
 }
