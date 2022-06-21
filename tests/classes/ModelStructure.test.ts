@@ -2,7 +2,7 @@ import {describe, it, expect} from '@jest/globals';
 import {
 	ModelStructure,
 	ModelStructureStore,
-} from '@/classes/scheme/ModelStructure';
+} from '@/classes/model/ModelStructure';
 import {Field, Page} from '@/classes/scheme/Structure';
 
 describe('ModelStructure class -> generate', () => {

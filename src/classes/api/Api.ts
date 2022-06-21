@@ -1,5 +1,5 @@
 import {Config} from '@/config';
-import {ModelStructure} from '@/classes/scheme/ModelStructure';
+import {ModelStructure} from '@/classes/model/ModelStructure';
 
 interface ProjectInfo {
 	projectId: string;
