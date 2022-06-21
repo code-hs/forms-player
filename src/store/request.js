@@ -1,4 +1,8 @@
 import {Api} from '@/classes/api/Api';
+// eslint-disable-next-line no-unused-vars
+import {ModelStructure} from '@/classes/model/ModelStructure';
+// eslint-disable-next-line no-unused-vars
+import {Page} from '@/classes/scheme/Structure';
 
 const state = () => ({
 	saveFormFinished: true,
@@ -16,8 +20,8 @@ const mutations = {
 
 const actions = {
 	/**
-	 * @param {Object} page - current page structure
-	 * @param {Object} values - store model/structure
+	 * @param {Page} page - current page structure
+	 * @param {ModelStructure} values - store model/structure
 	 */
 	async saveFormValues({commit}, {page, values}) {
 		commit('setSaveFormFinished', false);

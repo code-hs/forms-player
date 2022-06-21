@@ -1,7 +1,12 @@
 import {SchemeController} from '@/classes/scheme/SchemeController';
+// eslint-disable-next-line no-unused-vars
+import {Page} from '@/classes/scheme/Structure';
 
 let schemeItem;
 
+/**
+ * @param {Page} page
+ */
 const state = () => ({
 	page: null,
 });
@@ -11,6 +16,9 @@ const getters = {
 };
 
 const mutations = {
+	/**
+	 * @param {Page} v
+	 */
 	setPage: (s, v) => {
 		s.page = v;
 	},
@@ -23,11 +31,11 @@ const actions = {
 	},
 	/**
 	 * @param {string} pageKey
-	 * @returns {Object} - scheme
+	 * @returns {Page} page
 	 */
 	initPage({commit}, pageKey) {
 		if (!pageKey) {
-			throw new Error('scheme.initPage: param pageName is empty');
+			throw new Error('scheme.initPage: param pageKey is empty');
 		}
 
 		const page = schemeItem.getPage(pageKey);

@@ -13,7 +13,7 @@ const getters = {
 const mutations = {
 	/**
 	 * Add field to stack
-	 * @param {number} key
+	 * @param {number} key (example 21345454)
 	 */
 	add: (s, key) => {
 		if (!key) throw new Error('validator.add: param "key" is empty');

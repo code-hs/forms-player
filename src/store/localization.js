@@ -7,6 +7,9 @@ const getters = {
 };
 
 const mutations = {
+	/**
+	 * @param {string} v - language code
+	 */
 	setCurrentLanguage: (s, v) => {
 		s.currentLanguage = v;
 	},

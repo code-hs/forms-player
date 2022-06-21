@@ -1,6 +1,15 @@
 import Vue from 'vue';
-import {ModelStructure} from '@/classes/scheme/ModelStructure.ts';
+import {
+	ModelStructure,
+	// eslint-disable-next-line no-unused-vars
+	ModelStructureStore,
+} from '@/classes/model/ModelStructure.ts';
+// eslint-disable-next-line no-unused-vars
+import {Page} from '@/classes/scheme/Structure';
 
+/**
+ * @param {ModelStructureStore} structure
+ */
 const state = () => ({
 	structure: {},
 });
@@ -11,7 +20,7 @@ const getters = {
 
 const mutations = {
 	/*
-	 * @param {Object} page
+	 * @param {Page} page
 	 */
 	generateSkeleton: (s, page) => {
 		if (!page) {

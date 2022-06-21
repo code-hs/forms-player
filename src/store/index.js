@@ -19,9 +19,5 @@ import localization from './localization';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-	state: {},
-	getters: {},
-	mutations: {},
-	actions: {},
 	modules: {scheme, model, validator, request, localization},
 });
