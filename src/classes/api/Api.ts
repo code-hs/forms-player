@@ -1,26 +1,28 @@
-import {Config} from '@/config/index';
+import {Config} from '@/config';
+import {ModelStructure} from '@/classes/scheme/ModelStructure';
+
+interface ProjectInfo {
+	projectId: string;
+	appId: string;
+}
 
 export class Api {
 	static projectId = '';
 	static appId = '';
 
 	/**
-	 * @param {string} projectId
 	 * @param {string} appId - unique id for current client
 	 */
-	static init(projectId, appId) {
+	static init(projectId: string, appId: string): void {
 		if (!projectId || !appId) {
-			throw new Error('Api.install: prop "projectId" or "appId" is empty');
+			throw new Error('Api.init: prop "projectId" or "appId" is empty');
 		}
 
 		this.projectId = projectId;
 		this.appId = appId;
 	}
 
-	/**
-	 * @returns {{appId: string, projectId: string}}
-	 */
-	static getProjectInfo() {
+	static getProjectInfo(): ProjectInfo {
 		return {
 			projectId: this.projectId,
 			appId: this.appId,
@@ -28,19 +30,20 @@ export class Api {
 	}
 
 	/**
-	 *
-	 * @param {string} url
 	 * @param {Object} data - inputs values
-	 * @param {Object} options
-	 * @returns {Promise<any>}
 	 */
-	static async post(url, data, options = {}) {
+	static async post(
+		url: string,
+		data: ModelStructure,
+		options: object = {}
+	): Promise<any> {
 		const sendData = {
 			...this.getProjectInfo(),
 			...data,
 		};
+		const fullLink: string = Config.apiUrl + url;
 
-		return fetch(Config.apiUrl + url, {
+		return fetch(fullLink, {
 			method: 'POST',
 			body: JSON.stringify(sendData),
 			headers: {

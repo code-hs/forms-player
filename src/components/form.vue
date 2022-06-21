@@ -14,7 +14,7 @@
 import {mapGetters, mapActions} from 'vuex';
 import VirtualComponent from '@/components/virtualComponent';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {ApiResponser} from '@/classes/api/ApiResponser';
+import {ApiResponser} from '@/classes/api/ApiResponser.ts';
 
 // noinspection JSUnresolvedFunction
 export default {

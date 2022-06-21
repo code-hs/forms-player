@@ -1,4 +1,4 @@
-const Config = {
+const Config: any = {
 	apiUrl: 'http://localhost:3033/api/v1/public/',
 	showDump: false,
 };
