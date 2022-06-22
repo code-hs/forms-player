@@ -9,13 +9,18 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex';
+
 import InputText from '@/components/fields/inputs/text';
 import InputPassword from '@/components/fields/inputs/password';
+import InputEmail from '@/components/fields/inputs/email';
+
 import Selector from '@/components/fields/selector';
 import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
 import ButtonSubmit from '@/components/fields/buttons/submit';
 
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
 import {generateKey} from '@/utils/random';
 
 // async import for the box components
@@ -27,6 +32,8 @@ export default {
 	components: {
 		InputText,
 		InputPassword,
+		InputEmail,
+
 		Selector,
 		Textarea,
 		Checkbox,
@@ -64,6 +71,41 @@ export default {
 				'virtualComponent.vue: param type in generalParams is empty'
 			);
 		}
+
+		this.initModel();
+	},
+
+	methods: {
+		...mapMutations({
+			modelInitField: 'model/initField',
+		}),
+		initModel() {
+			const fieldType = this.schemeOptions?.generalParams?.type;
+			const allowedTypes = [
+				'InputText',
+				'InputPassword',
+				'InputEmail',
+				'Selector',
+				'Textarea',
+				'Checkbox',
+			];
+			if (!allowedTypes.includes(fieldType)) return;
+
+			const multiBoxName = FH.getMultiName(this.schemeOptions);
+			// skip initialize, fix bug, when add new group of fields,
+			// all groups rerender, and reinit, and clear values
+			if (multiBoxName) return;
+
+			// init field
+			// for generate structure by inputs,
+			// and we can use it in <input v-model="modelStore[generalParams.model]"
+			const defaultValue = '';
+			const options = {
+				inputModelName: this.schemeOptions.generalParams.model,
+				inputValue: defaultValue,
+			};
+			this.modelInitField(options);
+		},
 	},
 };
 </script>

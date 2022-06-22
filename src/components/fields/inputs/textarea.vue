@@ -74,7 +74,6 @@ export default {
 	},
 
 	created() {
-		this.initModel();
 		this.initValidation();
 
 		this.processInput = debounce(
@@ -91,7 +90,6 @@ export default {
 
 	methods: {
 		...mapMutations({
-			modelInitField: 'model/initField',
 			validatorAdd: 'validator/add',
 			validatorUpdate: 'validator/update',
 			validatorDestroy: 'validator/destroy',
@@ -99,22 +97,6 @@ export default {
 		...mapActions({
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
-
-		initModel() {
-			// skip initialize, fix bug, when add new group of fields,
-			// all groups rerender, and reinit, and clear values
-			if (this.multiBoxName) return;
-
-			// init field
-			// for generate structure by inputs,
-			// and we can use it in <input v-model="modelStore[generalParams.model]"
-			const defaultValue = '';
-			const options = {
-				inputModelName: this.generalParams.model,
-				inputValue: defaultValue,
-			};
-			this.modelInitField(options);
-		},
 		initValidation() {
 			if (FieldValidator.canValidation(this.validation)) {
 				this.valid.connect = true;
