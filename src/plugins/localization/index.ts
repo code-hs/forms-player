@@ -64,12 +64,13 @@ export class Localization {
 		const currentLanguage: string =
 			store.getters['localization/currentLanguage'];
 
+		if (!key || !currentLanguage) return '';
+
 		// if key starts from '!', return this text
 		if (key.startsWith('!')) {
 			return key.substr(1);
 		}
 
-		if (!key || !currentLanguage) return '';
 		const localesByLang = this.locales[currentLanguage];
 
 		return getValueByStringKey(key, localesByLang);
