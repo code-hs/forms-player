@@ -11,6 +11,7 @@
 
 <script>
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
+import {LayoutColumns} from '@/classes/components/layout/columns/LayoutColumns.ts';
 
 const VirtualComponent = () => import('@/components/virtualComponent');
 
@@ -21,7 +22,14 @@ export default {
 	},
 	props: {
 		generalParams: FH.generalParams,
-		customParams: FH.customParams,
+		customParams: {
+			type: Object,
+			required: false,
+			default: () => ({
+				col: '',
+				childCount: 0,
+			}),
+		},
 		components: FH.components,
 		multiboxIndex: FH.multiboxIndex,
 	},
@@ -34,18 +42,7 @@ export default {
 
 	methods: {
 		getClasses() {
-			let classes = '';
-
-			// col-6, col-12,...
-			// noinspection JSUnresolvedVariable
-			if (this.customParams?.col) {
-				classes += `col-${this.customParams.col}`;
-			} else {
-				// col size default value
-				classes += 'col-6';
-			}
-
-			return classes;
+			return LayoutColumns.getColumnClasses(this);
 		},
 	},
 };

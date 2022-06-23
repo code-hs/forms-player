@@ -32,7 +32,20 @@ export default {
 		multiboxIndex: FH.multiboxIndex,
 	},
 
+	created() {
+		this.initChildCount();
+	},
+
 	methods: {
+		initChildCount() {
+			if (!this.components || !this.components.length) return;
+
+			this.components.forEach(component => {
+				if (!component.customParams) component.customParams = {};
+
+				component.customParams.childCount = this.components.length;
+			});
+		},
 		getStyleObj() {
 			const obj = {};
 
