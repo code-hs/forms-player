@@ -75,3 +75,7 @@ export interface Scheme {
 	};
 	pages: Page[];
 }
+
+export interface FieldThis {
+	[key: string]: any;
+}

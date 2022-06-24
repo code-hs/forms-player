@@ -26,6 +26,7 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator.ts';
+import {InputHelper} from '@/classes/components/field/inputs/InputHelper.ts';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
 import {bus, busBroadcasts} from '@/utils/bus';
 
@@ -42,12 +43,15 @@ export default {
 		customParams: {
 			type: Object,
 			required: false,
-			default: () => ({}),
+			default: () => ({
+				pattern: '',
+			}),
 		},
 	},
 
 	data() {
 		return {
+			prevValue: '',
 			multiBoxName: FH.getMultiName(this),
 			valid: {
 				dirty: false,
@@ -114,6 +118,9 @@ export default {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.generalParams.model] = e.target.value;
 			this.validatorProcessDirty();
+
+			// dirty function, update this.prevValue, current value !
+			InputHelper.processTextPattern(this, e);
 		},
 		validatorProcessDirty() {
 			if (!this.valid.connect) return;
