@@ -6,6 +6,7 @@
 		<input
 			ref="self"
 			v-model="modelStore[generalParams.model]"
+			v-mask="mask"
 			type="text"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
@@ -44,6 +45,7 @@ export default {
 			type: Object,
 			required: false,
 			default: () => ({
+				mask: '',
 				pattern: '',
 			}),
 		},
@@ -51,6 +53,7 @@ export default {
 
 	data() {
 		return {
+			mask: '',
 			prevValue: '',
 			multiBoxName: FH.getMultiName(this),
 			valid: {
@@ -78,6 +81,7 @@ export default {
 	},
 
 	created() {
+		InputHelper.initMaskDirty(this);
 		this.initValidation();
 
 		this.processInput = debounce(
@@ -119,8 +123,7 @@ export default {
 			this.modelStore[this.generalParams.model] = e.target.value;
 			this.validatorProcessDirty();
 
-			// dirty function, update this.prevValue, current value !
-			InputHelper.processTextPattern(this, e);
+			InputHelper.processTextPatternDirty(this, e);
 		},
 		validatorProcessDirty() {
 			if (!this.valid.connect) return;

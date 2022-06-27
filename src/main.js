@@ -1,5 +1,6 @@
 import vueCustomElement from 'vue-custom-element';
 import Vue from 'vue';
+import VueMask from 'v-mask';
 import App from './app.vue';
 import store from './store';
 import {shadowRootInit} from '../settings/initDom';
@@ -14,6 +15,7 @@ App.store = store;
 Vue.use(vueCustomElement);
 Vue.config.productionTip = false;
 Vue.use(Localization);
+Vue.use(VueMask);
 
 const options = {
 	shadow: true,

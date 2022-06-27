@@ -6,8 +6,9 @@ interface OnInputEvent {
 }
 
 export class InputHelper {
-	static processTextPattern(fieldThis: FieldThis, e: OnInputEvent): void {
+	static processTextPatternDirty(fieldThis: FieldThis, e: OnInputEvent): void {
 		if (!fieldThis?.customParams?.pattern || !e) return;
+		if (fieldThis.mask) return; // if mask is set, pattern is not used
 
 		const regexp = FieldValidator.stringToRegex(fieldThis.customParams.pattern);
 
@@ -17,5 +18,16 @@ export class InputHelper {
 		}
 
 		fieldThis.prevValue = fieldThis.modelStore[fieldThis.generalParams.model];
+	}
+
+	static initMaskDirty(fieldThis: FieldThis): void {
+		fieldThis.mask = fieldThis.customParams.mask || '';
+
+		if (fieldThis.customParams.pattern && fieldThis.mask) {
+			throw new Error(
+				'InputHelper.initMask: mask and pattern are both set,' +
+					' use only one of them'
+			);
+		}
 	}
 }
