@@ -2,6 +2,7 @@
 	<div class="field input-password">
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
+		<!--suppress JSUnresolvedFunction -->
 		<input
 			ref="self"
 			v-model="modelStore[generalParams.model]"

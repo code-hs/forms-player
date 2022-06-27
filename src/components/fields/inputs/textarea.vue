@@ -2,6 +2,7 @@
 	<div class="field input-textarea">
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
+		<!--suppress JSUnresolvedFunction -->
 		<textarea
 			ref="self"
 			v-model="modelStore[generalParams.model]"

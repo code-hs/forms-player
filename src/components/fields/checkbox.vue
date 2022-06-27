@@ -8,6 +8,7 @@
 				:required="validation.required"
 				@change="handleChange"
 			/>
+			<!--suppress JSUnresolvedFunction -->
 			<span
 				class="text"
 				:class="{error: valid.errorForView}"
