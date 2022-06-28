@@ -16,7 +16,11 @@
 		</textarea>
 
 		<transition name="fade">
-			<div v-if="validation.errorText" v-show="valid.error" class="error-text">
+			<div
+				v-if="validation.errorText"
+				:class="{showContent: valid.error}"
+				class="error-text"
+			>
 				{{ $t(validation.errorText) }}
 			</div>
 		</transition>
