@@ -121,8 +121,8 @@ export default {
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.generalParams.model] = e.target.value;
-			this.validatorProcessDirty();
 
+			this.validatorProcessDirty();
 			InputHelper.processTextPatternDirty(this, e);
 		},
 		validatorProcessDirty() {
