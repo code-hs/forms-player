@@ -1,6 +1,6 @@
 <template>
-	<div class="text-container">
-		<component :is="customParams.tag" v-if="text.value">
+	<div v-if="show" class="text-container">
+		<component :is="customParams.tag">
 			{{ $t(text.value) }}
 		</component>
 	</div>
@@ -35,10 +35,10 @@ export default {
 		},
 	},
 
-	created() {
-		if (!TextContainerHelper.isAllowedTag(this.customParams.tag)) {
-			throw new Error(`Tag ${this.customParams.tag} is not allowed.`);
-		}
+	data() {
+		return {
+			show: TextContainerHelper.isShow(this),
+		};
 	},
 };
 </script>

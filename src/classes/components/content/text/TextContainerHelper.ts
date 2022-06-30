@@ -1,3 +1,5 @@
+import {FieldThis} from '@/classes/scheme/Structure';
+
 export class TextContainerHelper {
 	static allowedTags: string[] = [
 		'h1',
@@ -12,5 +14,15 @@ export class TextContainerHelper {
 
 	static isAllowedTag(tag: string): boolean {
 		return this.allowedTags.includes(tag);
+	}
+
+	static isShow(fieldThis: FieldThis): boolean {
+		const isAllowedTag: boolean = this.isAllowedTag(fieldThis.customParams.tag);
+
+		if (!isAllowedTag) {
+			throw new Error(`Tag ${fieldThis.customParams.tag} is not allowed.`);
+		}
+
+		return isAllowedTag && fieldThis.text.value;
 	}
 }
