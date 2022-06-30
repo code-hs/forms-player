@@ -24,7 +24,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 		// 				type: 'InputText',
 		// 				model: 'address_1',
 		//			},
-		// 			customParams: {
+		// 			custom: {
 		// 				multi: {
 		// 					name: 'box-1',
 		// 					key: 'random key',
@@ -37,7 +37,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 		const group1: Group = groups[0];
 		const field1: Field = group1[0];
 		// @ts-ignore
-		expect(field1.customParams.multi.name).toBe(multiBoxName);
+		expect(field1.custom.multi.name).toBe(multiBoxName);
 	});
 
 	it('MultiBoxView class -> generateNewItem', () => {
@@ -46,7 +46,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 				type: 'InputText',
 				model: 'address_1',
 			},
-			customParams: {
+			custom: {
 				multi: {
 					name: 'box-1',
 					key: 1238435724,
@@ -61,6 +61,6 @@ describe('MultiBoxView class -> generateGroups', () => {
 
 		expect(fieldInGroup.common.model).toBe('address_1');
 		// @ts-ignore
-		expect(fieldInGroup.customParams.multi.name).toBe('box-1');
+		expect(fieldInGroup.custom.multi.name).toBe('box-1');
 	});
 });

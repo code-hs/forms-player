@@ -7,7 +7,7 @@
 			ref="self"
 			v-model="modelStore[common.model]"
 			:placeholder="$t(text.placeholder)"
-			:rows="customParams.rows"
+			:rows="custom.rows"
 			:required="validation.required"
 			:class="{error: valid.error}"
 			@blur="handleBlur"
@@ -45,7 +45,7 @@ export default {
 		text: FH.text,
 		html: FH.html,
 		styles: FH.styles,
-		customParams: {
+		custom: {
 			type: Object,
 			required: false,
 			default: () => ({

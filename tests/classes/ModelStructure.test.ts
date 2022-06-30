@@ -31,7 +31,7 @@ describe('ModelStructure class -> generate', () => {
 				type: 'LayoutColumn',
 				model: 'col-1',
 			},
-			customParams: {
+			custom: {
 				col: 6,
 			},
 			components: [field311],

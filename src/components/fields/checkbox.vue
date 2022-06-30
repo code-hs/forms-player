@@ -12,7 +12,7 @@
 			<span
 				class="text"
 				:class="{error: valid.errorForView}"
-				v-html="$t(customParams.bodyHTML)"
+				v-html="$t(custom.bodyHTML)"
 			/>
 		</label>
 	</div>
@@ -34,7 +34,7 @@ export default {
 		text: FH.text,
 		html: FH.html,
 		styles: FH.styles,
-		customParams: {
+		custom: {
 			type: Object,
 			required: false,
 			default: () => ({

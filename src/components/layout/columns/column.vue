@@ -22,7 +22,7 @@ export default {
 	},
 	props: {
 		common: FH.common,
-		customParams: {
+		custom: {
 			type: Object,
 			required: false,
 			default: () => ({

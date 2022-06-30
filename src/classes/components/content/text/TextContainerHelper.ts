@@ -17,10 +17,10 @@ export class TextContainerHelper {
 	}
 
 	static isShow(fieldThis: FieldThis): boolean {
-		const isAllowedTag: boolean = this.isAllowedTag(fieldThis.customParams.tag);
+		const isAllowedTag: boolean = this.isAllowedTag(fieldThis.custom.tag);
 
 		if (!isAllowedTag) {
-			throw new Error(`Tag ${fieldThis.customParams.tag} is not allowed.`);
+			throw new Error(`Tag ${fieldThis.custom.tag} is not allowed.`);
 		}
 
 		return isAllowedTag && fieldThis.text.value;

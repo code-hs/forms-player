@@ -16,7 +16,7 @@ export interface CustomParams {
 	};
 	[key: string]: any;
 }
-export const customParamsExample: CustomParams = {};
+export const customExample: CustomParams = {};
 
 export interface CommonParams {
 	type: string;
@@ -41,7 +41,7 @@ export const htmlExample: HtmlParams = {};
 
 export interface Field {
 	common: CommonParams;
-	customParams?: CustomParams;
+	custom?: CustomParams;
 	validation?: ValidationParams;
 	text?: TextParams;
 	styles?: StylesParams;

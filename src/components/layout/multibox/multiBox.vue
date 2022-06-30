@@ -14,7 +14,7 @@
 
 			<VirtualComponent
 				v-for="field in group"
-				:key="field.customParams.multi.key"
+				:key="field.custom.multi.key"
 				:scheme-options="field"
 				:multibox-index="index"
 			/>
@@ -45,7 +45,7 @@ export default {
 	props: {
 		common: FH.common,
 		components: FH.components,
-		customParams: {
+		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),

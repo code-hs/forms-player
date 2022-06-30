@@ -64,6 +64,6 @@ export class FieldHelper {
 	};
 
 	static getMultiName(field: Field): string {
-		return field?.customParams?.multi?.name || '';
+		return field?.custom?.multi?.name || '';
 	}
 }

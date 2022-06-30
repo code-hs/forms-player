@@ -44,7 +44,7 @@ export default {
 		text: FH.text,
 		html: FH.html,
 		styles: FH.styles,
-		customParams: {
+		custom: {
 			type: Object,
 			required: false,
 			default: () => ({

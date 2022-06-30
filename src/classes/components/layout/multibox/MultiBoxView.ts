@@ -1,5 +1,5 @@
 import {generateKey} from '@/utils/random';
-import {Field, customParamsExample} from '@/classes/scheme/structure';
+import {Field, customExample} from '@/classes/scheme/structure';
 
 // stack of components
 export type Group = Field[];
@@ -24,11 +24,11 @@ export class MultiBoxView {
 		if (!group.length) return;
 
 		group.forEach((field: Field) => {
-			if (!field.customParams) field.customParams = customParamsExample;
+			if (!field.custom) field.custom = customExample;
 
 			// generate unique keys for each item, since we remove and add these items
 			// if this is not done, vue lazily updates the blocks
-			field.customParams.multi = {
+			field.custom.multi = {
 				name: multiBoxName,
 				key: generateKey(),
 			};
@@ -53,12 +53,12 @@ export class MultiBoxView {
 
 		newGroup.forEach((field: Field) => {
 			// update only key
-			if (!field?.customParams?.multi) {
+			if (!field?.custom?.multi) {
 				throw new Error(
-					'MultiBoxView.generateNewGroup: field.customParams.multi is empty'
+					'MultiBoxView.generateNewGroup: field.custom.multi is empty'
 				);
 			}
-			field.customParams.multi.key = generateKey();
+			field.custom.multi.key = generateKey();
 		});
 
 		return newGroup;

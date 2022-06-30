@@ -12,7 +12,7 @@ export default {
 	name: 'ButtonSubmit',
 	props: {
 		common: FH.common,
-		customParams: {
+		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),

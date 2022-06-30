@@ -22,7 +22,7 @@ export default {
 	props: {
 		common: FH.common,
 		components: FH.components,
-		customParams: {
+		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),
@@ -41,9 +41,9 @@ export default {
 			if (!this.components || !this.components.length) return;
 
 			this.components.forEach(component => {
-				if (!component.customParams) component.customParams = {};
+				if (!component.custom) component.custom = {};
 
-				component.customParams.childCount = this.components.length;
+				component.custom.childCount = this.components.length;
 			});
 		},
 		getStyleObj() {

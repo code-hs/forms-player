@@ -1,6 +1,6 @@
 <template>
 	<div v-if="show" class="text-container">
-		<component :is="customParams.tag">
+		<component :is="custom.tag">
 			{{ $t(text.value) }}
 		</component>
 	</div>
@@ -26,7 +26,7 @@ export default {
 		},
 		html: FH.html,
 		styles: FH.styles,
-		customParams: {
+		custom: {
 			type: Object,
 			required: false,
 			default: () => ({
