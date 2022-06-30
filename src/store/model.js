@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {unreactively} from '@/utils/objects';
 import {
 	ModelStructure,
 	// eslint-disable-next-line no-unused-vars
@@ -74,7 +75,7 @@ const mutations = {
 			throw new Error('model.copyItemInMultiBox: sourceItem is empty');
 		}
 		// without reactivity
-		const newItem = JSON.parse(JSON.stringify(sourceItem));
+		const newItem = unreactively(sourceItem);
 
 		// clear values
 		Object.keys(newItem).forEach(key => {

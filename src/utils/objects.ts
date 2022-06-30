@@ -15,3 +15,7 @@ export function getValueByStringKey(key: string, localesStore: object) {
 		localesStore
 	);
 }
+
+export function unreactively(subject: object): object {
+	return JSON.parse(JSON.stringify(subject));
+}

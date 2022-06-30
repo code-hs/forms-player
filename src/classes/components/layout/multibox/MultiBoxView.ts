@@ -1,4 +1,5 @@
 import {generateKey} from '@/utils/random';
+import {unreactively} from '@/utils/objects';
 import {Field, customExample} from '@/classes/scheme/structure';
 
 // stack of components
@@ -49,7 +50,7 @@ export class MultiBoxView {
 		}
 
 		const source: Group = groups[0];
-		const newGroup: Group = JSON.parse(JSON.stringify(source));
+		const newGroup: Group = unreactively(source) as Group;
 
 		newGroup.forEach((field: Field) => {
 			// update only key
