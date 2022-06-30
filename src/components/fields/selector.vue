@@ -1,5 +1,5 @@
 <template>
-	<div class="field input-selector">
+	<div class="field input-selector" :class="common.class">
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
 		<select

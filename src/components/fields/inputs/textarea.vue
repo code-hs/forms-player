@@ -1,5 +1,5 @@
 <template>
-	<div class="field input-textarea">
+	<div class="field input-textarea" :class="common.class">
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
 		<!--suppress JSUnresolvedFunction -->

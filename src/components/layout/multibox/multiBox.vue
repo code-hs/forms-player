@@ -1,5 +1,5 @@
 <template>
-	<div v-if="groups.length" class="multibox">
+	<div v-if="groups.length" class="multibox" :class="common.class">
 		<div
 			v-for="(group, index) in groups"
 			:key="index"

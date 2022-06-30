@@ -1,5 +1,5 @@
 <template>
-	<div class="submit">
+	<div class="submit" :class="common.class">
 		<button type="submit" :disabled="disabled">{{ $t(text.text) }}</button>
 	</div>
 </template>

@@ -22,6 +22,7 @@ export interface CommonParams {
 	type: string;
 	model?: string;
 	enable?: boolean;
+	class?: string;
 }
 
 export interface TextParams {

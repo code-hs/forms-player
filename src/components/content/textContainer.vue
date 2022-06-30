@@ -1,5 +1,5 @@
 <template>
-	<div v-if="show" class="text-container">
+	<div v-if="show" class="text-container" :class="common.class">
 		<component :is="custom.tag">
 			{{ $t(text.value) }}
 		</component>

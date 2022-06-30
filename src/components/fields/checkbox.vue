@@ -1,5 +1,5 @@
 <template>
-	<div class="field checkbox">
+	<div class="field checkbox" :class="common.class">
 		<label>
 			<input
 				ref="self"

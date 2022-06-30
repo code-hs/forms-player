@@ -1,5 +1,5 @@
 <template>
-	<div class="columns" :style="getStyleObj()">
+	<div class="columns" :class="common.class" :style="getStyleObj()">
 		<LayoutColumn
 			v-for="(column, columnIndex) in components"
 			:key="columnIndex"
