@@ -6,63 +6,64 @@ import {
 	Field,
 } from '@/classes/scheme/structure';
 
+type VueComponentParams = Object;
+
 export class FieldHelper {
-	static multiboxIndex = {
+	static multiboxIndex: VueComponentParams = {
 		type: Number,
 		required: false,
 		default: -1,
 	};
 
-	static virtualKey = {
+	static virtualKey: VueComponentParams = {
 		type: Number,
 		required: true,
 	};
 
-	// like CommonParams (from file scheme/structure.ts)
-	static common = {
+	static common: VueComponentParams = {
 		type: Object,
 		required: true,
 	};
 
-	static validation = {
+	static validation: VueComponentParams = {
 		type: Object,
 		required: false,
 		default: () => validationExample,
 	};
 
-	static text = {
+	static text: VueComponentParams = {
 		type: Object,
 		required: false,
 		default: () => textExample,
 	};
 
-	static styles = {
+	static styles: VueComponentParams = {
 		type: Object,
 		required: false,
 		default: () => stylesExample,
 	};
 
-	static html = {
+	static html: VueComponentParams = {
 		type: Object,
 		required: false,
 		default: () => htmlExample,
 	};
 
-	static components = {
+	static components: VueComponentParams = {
 		type: Array,
 		required: false,
 		default: () => [],
 	};
 
-	static plugO = {
+	static plugO: VueComponentParams = {
 		type: Object,
 	};
 
-	static plugN = {
+	static plugN: VueComponentParams = {
 		type: Number,
 	};
 
-	static getMultiName(field: Field) {
+	static getMultiName(field: Field): string {
 		return field?.customParams?.multi?.name || '';
 	}
 }
