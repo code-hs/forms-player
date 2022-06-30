@@ -4,7 +4,7 @@
 
 		<select
 			ref="self"
-			v-model="modelStore[generalParams.model]"
+			v-model="modelStore[common.model]"
 			required
 			:class="{error: valid.error}"
 			@change="handleChange"
@@ -39,7 +39,7 @@ import {bus, busBroadcasts} from '@/utils/bus';
 export default {
 	name: 'Selector',
 	props: {
-		generalParams: FH.generalParams,
+		common: FH.common,
 		validation: FH.validation,
 		virtualKey: FH.virtualKey,
 		multiboxIndex: FH.multiboxIndex,
@@ -78,7 +78,7 @@ export default {
 			return this.modelStructure;
 		},
 		value() {
-			return this.modelStore[this.generalParams.model];
+			return this.modelStore[this.common.model];
 		},
 	},
 

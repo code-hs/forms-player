@@ -21,7 +21,7 @@ export default {
 		VirtualComponent,
 	},
 	props: {
-		generalParams: FH.generalParams,
+		common: FH.common,
 		customParams: {
 			type: Object,
 			required: false,
@@ -36,7 +36,7 @@ export default {
 
 	computed: {
 		hasContent() {
-			return this.generalParams && this.components.length;
+			return this.common && this.components.length;
 		},
 	},
 

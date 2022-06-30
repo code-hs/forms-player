@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeController} from '@/classes/scheme/SchemeController';
-import {Scheme, Page} from '@/classes/scheme/Structure';
+import {Scheme, Page} from '@/classes/scheme/structure';
 
 describe('SchemeController class -> isValidStructure', () => {
 	it('correct work', () => {
@@ -11,20 +11,20 @@ describe('SchemeController class -> isValidStructure', () => {
 					key: 'welcome_1',
 					components: [
 						{
-							generalParams: {
+							common: {
 								type: 'InputText',
 								model: 'address_1',
 							},
 						},
 						{
-							generalParams: {
+							common: {
 								type: 'InputText',
 								model: 'address_2',
 								enable: true,
 							},
 							components: [
 								{
-									generalParams: {
+									common: {
 										type: 'InputText',
 										model: 'address_4',
 										enable: false,
@@ -33,7 +33,7 @@ describe('SchemeController class -> isValidStructure', () => {
 							],
 						},
 						{
-							generalParams: {
+							common: {
 								type: 'InputText',
 								model: 'address_3',
 								enable: false,

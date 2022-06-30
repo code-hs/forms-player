@@ -3,31 +3,31 @@ import {
 	ModelStructure,
 	ModelStructureStore,
 } from '@/classes/model/ModelStructure';
-import {Field, Page} from '@/classes/scheme/Structure';
+import {Field, Page} from '@/classes/scheme/structure';
 
 describe('ModelStructure class -> generate', () => {
 	it('correct work', () => {
 		const field1: Field = {
-			generalParams: {
+			common: {
 				type: 'InputText',
 				model: 'address_1',
 			},
 		};
 		const field2: Field = {
-			generalParams: {
+			common: {
 				type: 'InputText',
 				model: 'address_2',
 			},
 		};
 
 		const field311: Field = {
-			generalParams: {
+			common: {
 				type: 'InputText',
 				model: 'col-1',
 			},
 		};
 		const field31: Field = {
-			generalParams: {
+			common: {
 				type: 'LayoutColumn',
 				model: 'col-1',
 			},
@@ -38,13 +38,13 @@ describe('ModelStructure class -> generate', () => {
 		};
 
 		const field321: Field = {
-			generalParams: {
+			common: {
 				type: 'InputText',
 				model: 'col-2',
 			},
 		};
 		const field32: Field = {
-			generalParams: {
+			common: {
 				type: 'column',
 			},
 			components: [field321],
@@ -56,26 +56,26 @@ describe('ModelStructure class -> generate', () => {
 				field1,
 				field2,
 				{
-					generalParams: {
+					common: {
 						type: 'layoutColumns',
 					},
 					components: [field31, field32],
 				},
 				{
-					generalParams: {
+					common: {
 						type: 'MultiBox',
 						model: 'multi_box_1',
 						enable: true,
 					},
 					components: [
 						{
-							generalParams: {
+							common: {
 								type: 'InputText',
 								model: 'address_1',
 							},
 						},
 						{
-							generalParams: {
+							common: {
 								type: 'InputText',
 								model: 'address_2',
 							},

@@ -1,6 +1,6 @@
 import {SchemeLoader} from './SchemeLoader';
 import {SchemeFiltrator} from './SchemeFiltrator';
-import {Scheme, Page} from '@/classes/scheme/Structure';
+import {Scheme, Page} from '@/classes/scheme/structure';
 
 export class SchemeController {
 	// @ts-ignore

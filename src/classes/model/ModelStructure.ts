@@ -1,4 +1,4 @@
-import {Field, Page} from '@/classes/scheme/Structure';
+import {Field, Page} from '@/classes/scheme/structure';
 
 /*
  * {
@@ -35,10 +35,7 @@ export class ModelStructure {
 	}
 
 	private static getOptionalStructure(field: Field): ModelStructureStore {
-		if (
-			field?.generalParams?.type !== 'MultiBox' ||
-			!field.generalParams.model
-		) {
+		if (field?.common?.type !== 'MultiBox' || !field.common.model) {
 			return {};
 		}
 
@@ -46,7 +43,7 @@ export class ModelStructure {
 		// create a store for future fields
 		const inputsStore: ModelStructureStore = {};
 		// @ts-ignore
-		const multiBoxModel: string = field.generalParams.model;
+		const multiBoxModel: string = field.common.model;
 
 		structure[multiBoxModel] = [inputsStore];
 

@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeFiltrator} from '@/classes/scheme/SchemeFiltrator';
-import {Field, Page, Scheme} from '@/classes/scheme/Structure';
+import {Field, Page, Scheme} from '@/classes/scheme/structure';
 
 describe('SchemeFiltrator class -> filtrateParamEnable', () => {
 	it('correct work', () => {
@@ -10,20 +10,20 @@ describe('SchemeFiltrator class -> filtrateParamEnable', () => {
 				{
 					components: [
 						{
-							generalParams: {
+							common: {
 								type: 'InputText',
 								model: 'address_1',
 							},
 						},
 						{
-							generalParams: {
+							common: {
 								type: 'InputText',
 								model: 'address_2',
 								enable: true,
 							},
 							components: [
 								{
-									generalParams: {
+									common: {
 										type: 'InputText',
 										model: 'address_4',
 										enable: false,
@@ -32,7 +32,7 @@ describe('SchemeFiltrator class -> filtrateParamEnable', () => {
 							],
 						},
 						{
-							generalParams: {
+							common: {
 								type: 'InputText',
 								model: 'address_3',
 								enable: false,
@@ -51,8 +51,8 @@ describe('SchemeFiltrator class -> filtrateParamEnable', () => {
 		const pageFields: Field[] = page.components;
 
 		expect(pageFields.length).toBe(2);
-		expect(pageFields[0].generalParams.model).toBe('address_1');
-		expect(pageFields[1].generalParams.model).toBe('address_2');
+		expect(pageFields[0].common.model).toBe('address_1');
+		expect(pageFields[1].common.model).toBe('address_2');
 		// @ts-ignore
 		expect(pageFields[1].components.length).toBe(0);
 	});

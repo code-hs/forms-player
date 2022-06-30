@@ -1,4 +1,4 @@
-import {Scheme, Page, Field} from '@/classes/scheme/Structure';
+import {Scheme, Page, Field} from '@/classes/scheme/structure';
 
 export class SchemeFiltrator {
 	static filtrateParamEnable(scheme: Scheme): Scheme {
@@ -14,7 +14,7 @@ export class SchemeFiltrator {
 	private static isEnable(component: Page | Field): boolean {
 		if (!component) return false;
 		// @ts-ignore
-		if (component?.generalParams?.enable === false) return false;
+		if (component?.common?.enable === false) return false;
 		if (!component.components) return true;
 
 		// if component has children

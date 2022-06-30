@@ -13,7 +13,7 @@ import {TextContainerHelper} from '@/classes/components/content/text/TextContain
 export default {
 	name: 'TextContainer',
 	props: {
-		generalParams: FH.generalParams,
+		common: FH.common,
 		validation: FH.plugO,
 		virtualKey: FH.virtualKey,
 		multiboxIndex: FH.multiboxIndex,

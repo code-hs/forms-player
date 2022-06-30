@@ -18,7 +18,7 @@ export interface CustomParams {
 }
 export const customParamsExample: CustomParams = {};
 
-export interface GeneralParams {
+export interface CommonParams {
 	type: string;
 	model?: string;
 	enable?: boolean;
@@ -40,7 +40,7 @@ export interface HtmlParams {}
 export const htmlExample: HtmlParams = {};
 
 export interface Field {
-	generalParams: GeneralParams;
+	common: CommonParams;
 	customParams?: CustomParams;
 	validation?: ValidationParams;
 	text?: TextParams;

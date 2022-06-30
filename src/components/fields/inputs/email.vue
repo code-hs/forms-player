@@ -5,7 +5,7 @@
 		<!--suppress JSUnresolvedFunction -->
 		<input
 			ref="self"
-			v-model="modelStore[generalParams.model]"
+			v-model="modelStore[common.model]"
 			type="email"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
@@ -37,7 +37,7 @@ import {bus, busBroadcasts} from '@/utils/bus';
 export default {
 	name: 'InputEmail',
 	props: {
-		generalParams: FH.generalParams,
+		common: FH.common,
 		validation: FH.validation,
 		virtualKey: FH.virtualKey,
 		multiboxIndex: FH.multiboxIndex,
@@ -77,7 +77,7 @@ export default {
 			return this.modelStructure;
 		},
 		value() {
-			return this.modelStore[this.generalParams.model];
+			return this.modelStore[this.common.model];
 		},
 	},
 
@@ -119,7 +119,7 @@ export default {
 		},
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
-			this.modelStore[this.generalParams.model] = e.target.value;
+			this.modelStore[this.common.model] = e.target.value;
 
 			this.validatorProcessDirty();
 			InputHelper.processTextPatternDirty(this, e);

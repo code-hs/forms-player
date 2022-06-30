@@ -11,7 +11,7 @@ import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
 export default {
 	name: 'ButtonSubmit',
 	props: {
-		generalParams: FH.generalParams,
+		common: FH.common,
 		customParams: {
 			type: Object,
 			required: false,

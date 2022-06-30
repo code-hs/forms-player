@@ -1,6 +1,6 @@
 <template>
 	<component
-		:is="schemeOptions.generalParams.type"
+		:is="schemeOptions.common.type"
 		:key="key"
 		:virtual-key="key"
 		:multibox-index="multiboxIndex"
@@ -67,13 +67,11 @@ export default {
 	},
 
 	created() {
-		if (!this.schemeOptions?.generalParams) {
-			throw new Error('virtualComponent.vue: param generalParams is empty');
+		if (!this.schemeOptions?.common) {
+			throw new Error('virtualComponent.vue: param common is empty');
 		}
-		if (!this.schemeOptions?.generalParams?.type) {
-			throw new Error(
-				'virtualComponent.vue: param type in generalParams is empty'
-			);
+		if (!this.schemeOptions?.common?.type) {
+			throw new Error('virtualComponent.vue: param type in common is empty');
 		}
 
 		this.initModel();
@@ -84,7 +82,7 @@ export default {
 			modelInitField: 'model/initField',
 		}),
 		initModel() {
-			const fieldType = this.schemeOptions?.generalParams?.type;
+			const fieldType = this.schemeOptions?.common?.type;
 			const allowedTypes = [
 				'InputText',
 				'InputPassword',
@@ -102,10 +100,10 @@ export default {
 
 			// init field
 			// for generate structure by inputs,
-			// and we can use it in <input v-model="modelStore[generalParams.model]"
+			// and we can use it in <input v-model="modelStore[common.model]"
 			const defaultValue = '';
 			const options = {
-				inputModelName: this.schemeOptions.generalParams.model,
+				inputModelName: this.schemeOptions.common.model,
 				inputValue: defaultValue,
 			};
 			this.modelInitField(options);

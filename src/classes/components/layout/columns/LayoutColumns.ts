@@ -1,4 +1,4 @@
-import {Field} from '@/classes/scheme/Structure';
+import {Field} from '@/classes/scheme/structure';
 
 export class LayoutColumns {
 	static getColumnClasses(field: Field): string {

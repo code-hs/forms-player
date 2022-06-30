@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {ValidationParams} from '@/classes/scheme/Structure';
+import {ValidationParams} from '@/classes/scheme/structure';
 
 describe('FieldValidator class -> isValid', () => {
 	it('full rules, empty value', () => {

@@ -4,7 +4,7 @@ import {
 	stylesExample,
 	htmlExample,
 	Field,
-} from '@/classes/scheme/Structure';
+} from '@/classes/scheme/structure';
 
 export class FieldHelper {
 	static multiboxIndex = {
@@ -18,8 +18,8 @@ export class FieldHelper {
 		required: true,
 	};
 
-	// like GeneralParams (from file params.ts)
-	static generalParams = {
+	// like CommonParams (from file scheme/structure.ts)
+	static common = {
 		type: Object,
 		required: true,
 	};

@@ -43,7 +43,7 @@ export default {
 		ButtonRemove,
 	},
 	props: {
-		generalParams: FH.generalParams,
+		common: FH.common,
 		components: FH.components,
 		customParams: {
 			type: Object,
@@ -56,7 +56,7 @@ export default {
 	data() {
 		const groups = MultiBoxView.generateGroups(
 			this.components,
-			this.generalParams.model
+			this.common.model
 		);
 
 		return {
@@ -82,7 +82,7 @@ export default {
 
 			// add store object in model
 			this.addItemInMultiBox({
-				multiBoxName: this.generalParams.model,
+				multiBoxName: this.common.model,
 			});
 
 			// add item to view
@@ -92,7 +92,7 @@ export default {
 		handleRemove(index) {
 			// delete from model
 			this.removeItemInMultiBox({
-				multiBoxName: this.generalParams.model,
+				multiBoxName: this.common.model,
 				itemIndex: index,
 			});
 

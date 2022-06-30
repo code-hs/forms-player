@@ -1,5 +1,5 @@
 import {generateKey} from '@/utils/random';
-import {Field, customParamsExample} from '@/classes/scheme/Structure';
+import {Field, customParamsExample} from '@/classes/scheme/structure';
 
 // stack of components
 export type Group = Field[];

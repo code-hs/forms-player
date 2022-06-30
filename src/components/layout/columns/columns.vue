@@ -20,7 +20,7 @@ export default {
 		LayoutColumn,
 	},
 	props: {
-		generalParams: FH.generalParams,
+		common: FH.common,
 		components: FH.components,
 		customParams: {
 			type: Object,

@@ -3,13 +3,13 @@ import {
 	MultiBoxView,
 	Group,
 } from '@/classes/components/layout/multibox/MultiBoxView';
-import {Field} from '@/classes/scheme/Structure';
+import {Field} from '@/classes/scheme/structure';
 
 describe('MultiBoxView class -> generateGroups', () => {
 	it('correct work', () => {
 		const multiBoxName: string = 'box-1';
 		const field: Field = {
-			generalParams: {
+			common: {
 				type: 'InputText',
 				model: 'address_1',
 			},
@@ -20,7 +20,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 		// [
 		// 	[
 		// 		{
-		// 			generalParams: {
+		// 			common: {
 		// 				type: 'InputText',
 		// 				model: 'address_1',
 		//			},
@@ -42,7 +42,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 
 	it('MultiBoxView class -> generateNewItem', () => {
 		const field: Field = {
-			generalParams: {
+			common: {
 				type: 'InputText',
 				model: 'address_1',
 			},
@@ -59,7 +59,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 		const newGroup: Group = MultiBoxView.generateNewGroup(groups);
 		const fieldInGroup: Field = newGroup[0];
 
-		expect(fieldInGroup.generalParams.model).toBe('address_1');
+		expect(fieldInGroup.common.model).toBe('address_1');
 		// @ts-ignore
 		expect(fieldInGroup.customParams.multi.name).toBe('box-1');
 	});

@@ -1,4 +1,4 @@
-import {Scheme} from '@/classes/scheme/Structure';
+import {Scheme} from '@/classes/scheme/structure';
 
 export class SchemeLoader {
 	static getData(): Scheme {
