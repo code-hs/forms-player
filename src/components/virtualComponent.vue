@@ -1,11 +1,14 @@
 <template>
-	<component
-		:is="schemeOptions.common.type"
-		:key="key"
-		:virtual-key="key"
-		:multibox-index="multiboxIndex"
-		v-bind="schemeOptions"
-	/>
+	<div :class="'vrc-' + fieldType">
+		<component
+			:is="schemeOptions.common.type"
+			:key="key"
+			:virtual-key="key"
+			:multibox-index="multiboxIndex"
+			v-bind="schemeOptions"
+		/>
+		<StyleIncluder v-if="hasStyles" :styles="schemeOptions.styles.value" />
+	</div>
 </template>
 
 <script>
@@ -24,6 +27,7 @@ import TextContainer from '@/components/content/textContainer';
 
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
 import {generateKey} from '@/utils/random';
+import StyleIncluder from '@/components/utils/styleIncluder';
 
 // async import for the box components
 const LayoutColumns = () => import('@/components/layout/columns/columns');
@@ -45,6 +49,8 @@ export default {
 
 		LayoutColumns,
 		MultiBox,
+
+		StyleIncluder,
 	},
 	props: {
 		schemeOptions: {
@@ -62,7 +68,11 @@ export default {
 	data() {
 		// set unique key for each field
 		return {
+			fieldType: this.schemeOptions?.common?.type,
 			key: generateKey(),
+			hasStyles: !!(
+				this.schemeOptions.styles && this.schemeOptions.styles.value
+			),
 		};
 	},
 
@@ -82,7 +92,6 @@ export default {
 			modelInitField: 'model/initField',
 		}),
 		initModel() {
-			const fieldType = this.schemeOptions?.common?.type;
 			const allowedTypes = [
 				'InputText',
 				'InputPassword',
@@ -91,8 +100,9 @@ export default {
 				'Textarea',
 				'Checkbox',
 			];
-			if (!allowedTypes.includes(fieldType)) return;
+			if (!allowedTypes.includes(this.fieldType)) return;
 
+			// noinspection JSCheckFunctionSignatures
 			const multiBoxName = FH.getMultiName(this.schemeOptions);
 			// skip initialize, fix bug, when add new group of fields,
 			// all groups rerender, and reinit, and clear values
