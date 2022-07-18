@@ -22,9 +22,7 @@ import Selector from '@/components/fields/selector';
 import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
 import ButtonSubmit from '@/components/fields/buttons/submit';
-
 import TextContainer from '@/components/content/textContainer';
-
 import StyleIncluder from '@/components/utils/styleIncluder';
 
 import {generateKey} from '@/utils/random';
@@ -41,19 +39,15 @@ export default {
 		InputText,
 		InputPassword,
 		InputEmail,
-
 		Selector,
 		Textarea,
 		Checkbox,
 		ButtonSubmit,
-
 		TextContainer,
-
-		LayoutColumns,
-		LayoutContainer,
-		MultiBox,
-
 		StyleIncluder,
+		LayoutColumns,
+		MultiBox,
+		LayoutContainer,
 	},
 	props: {
 		schemeOptions: {

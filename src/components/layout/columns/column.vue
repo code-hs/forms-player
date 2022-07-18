@@ -1,5 +1,5 @@
 <template>
-	<div v-if="hasContent" class="column" :class="getClasses()">
+	<div v-if="hasContent" class="column" :class="classes">
 		<VirtualComponent
 			v-for="(component, index) in components"
 			:key="index"
@@ -34,16 +34,11 @@ export default {
 		components: FH.components,
 	},
 
-	computed: {
-		hasContent() {
-			return this.components && this.components.length;
-		},
-	},
-
-	methods: {
-		getClasses() {
-			return LayoutColumns.getColumnClasses(this);
-		},
+	data() {
+		return {
+			classes: LayoutColumns.getColumnClasses(this),
+			hasContent: this.components && this.components.length,
+		};
 	},
 };
 </script>
