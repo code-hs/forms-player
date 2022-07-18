@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {unreactively} from '@/utils/objects';
+import {deepCopy} from '@/utils/objects';
 import {
 	ModelStructure,
 	// eslint-disable-next-line no-unused-vars
@@ -76,7 +76,7 @@ const mutations = {
 			throw new Error('model.copyItemInMultiBox: sourceItem is empty');
 		}
 		// without reactivity
-		const newItem = unreactively(sourceItem);
+		const newItem = deepCopy(sourceItem);
 
 		// clear values
 		Object.keys(newItem).forEach(key => {
