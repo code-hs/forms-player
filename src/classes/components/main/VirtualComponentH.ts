@@ -1,7 +1,7 @@
 import {Field} from '@/classes/scheme/structure';
-import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 
-export class VirtualComponent {
+export class VirtualComponentH {
 	static isAllowInitModel(
 		allowedComponents: string[],
 		fieldType: string,

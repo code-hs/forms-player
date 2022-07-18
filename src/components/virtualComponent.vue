@@ -13,7 +13,7 @@
 
 <script>
 import {mapMutations} from 'vuex';
-import {VirtualComponent} from '@/classes/components/main/VirtualComponent';
+import {VirtualComponentH} from '@/classes/components/main/VirtualComponentH';
 
 import InputText from '@/components/fields/inputs/text';
 import InputPassword from '@/components/fields/inputs/password';
@@ -107,7 +107,7 @@ export default {
 			];
 			// noinspection JSCheckFunctionSignatures
 			if (
-				!VirtualComponent.isAllowInitModel(
+				!VirtualComponentH.isAllowInitModel(
 					allowedComponents,
 					this.fieldType,
 					this.schemeOptions
