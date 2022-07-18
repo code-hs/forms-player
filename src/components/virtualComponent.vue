@@ -7,17 +7,17 @@
 			:multibox-index="multiboxIndex"
 			v-bind="schemeOptions"
 		/>
-		<StyleIncluder v-if="hasStyles" :styles="schemeOptions.styles.value" />
+		<StyleIncluder v-if="isHasStyles()" :styles="schemeOptions.styles.value" />
 	</div>
 </template>
 
 <script>
 import {mapMutations} from 'vuex';
+import {VirtualComponent} from '@/classes/components/main/VirtualComponent';
 
 import InputText from '@/components/fields/inputs/text';
 import InputPassword from '@/components/fields/inputs/password';
 import InputEmail from '@/components/fields/inputs/email';
-
 import Selector from '@/components/fields/selector';
 import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
@@ -26,14 +26,14 @@ import ButtonSubmit from '@/components/fields/buttons/submit';
 import TextContainer from '@/components/content/textContainer';
 
 import StyleIncluder from '@/components/utils/styleIncluder';
-import LayoutContainer from '@/components/layout/containers/layoutContainer';
 
-import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
 import {generateKey} from '@/utils/random';
 
 // async import for the box components
 const LayoutColumns = () => import('@/components/layout/columns/columns');
 const MultiBox = () => import('@/components/layout/multibox/multiBox');
+const LayoutContainer = () =>
+	import('@/components/layout/containers/layoutContainer');
 
 export default {
 	name: 'VirtualComponent',
@@ -71,22 +71,13 @@ export default {
 	data() {
 		// set unique key for each field
 		return {
-			fieldType: this.schemeOptions?.common?.type,
 			key: generateKey(),
-			hasStyles: !!(
-				this.schemeOptions.styles && this.schemeOptions.styles.value
-			),
+			fieldType: this.schemeOptions?.common?.type,
 		};
 	},
 
 	created() {
-		if (!this.schemeOptions?.common) {
-			throw new Error('virtualComponent.vue: param common is empty');
-		}
-		if (!this.schemeOptions?.common?.type) {
-			throw new Error('virtualComponent.vue: param type in common is empty');
-		}
-
+		this.checkComponent();
 		this.initModel();
 	},
 
@@ -94,8 +85,19 @@ export default {
 		...mapMutations({
 			modelInitField: 'model/initField',
 		}),
+		checkComponent() {
+			if (!this.schemeOptions?.common) {
+				throw new Error('virtualComponent.vue: param common is empty');
+			}
+			if (!this.schemeOptions?.common?.type) {
+				throw new Error('virtualComponent.vue: param type in common is empty');
+			}
+		},
+		isHasStyles() {
+			return !!(this.schemeOptions.styles && this.schemeOptions.styles.value);
+		},
 		initModel() {
-			const allowedTypes = [
+			const allowedComponents = [
 				'InputText',
 				'InputPassword',
 				'InputEmail',
@@ -103,13 +105,16 @@ export default {
 				'Textarea',
 				'Checkbox',
 			];
-			if (!allowedTypes.includes(this.fieldType)) return;
-
 			// noinspection JSCheckFunctionSignatures
-			const multiBoxName = FH.getMultiName(this.schemeOptions);
-			// skip initialize, fix bug, when add new group of fields,
-			// all groups rerender, and reinit, and clear values
-			if (multiBoxName) return;
+			if (
+				!VirtualComponent.isAllowInitModel(
+					allowedComponents,
+					this.fieldType,
+					this.schemeOptions
+				)
+			) {
+				return;
+			}
 
 			// init field
 			// for generate structure by inputs,
