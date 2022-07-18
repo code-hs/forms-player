@@ -30,13 +30,13 @@ export default {
 				childCount: 0,
 			}),
 		},
-		components: FH.components,
 		multiboxIndex: FH.multiboxIndex,
+		components: FH.components,
 	},
 
 	computed: {
 		hasContent() {
-			return this.common && this.components.length;
+			return this.components && this.components.length;
 		},
 	},
 

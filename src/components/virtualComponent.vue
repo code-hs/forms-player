@@ -25,9 +25,11 @@ import ButtonSubmit from '@/components/fields/buttons/submit';
 
 import TextContainer from '@/components/content/textContainer';
 
+import StyleIncluder from '@/components/utils/styleIncluder';
+import LayoutContainer from '@/components/layout/containers/layoutContainer';
+
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
 import {generateKey} from '@/utils/random';
-import StyleIncluder from '@/components/utils/styleIncluder';
 
 // async import for the box components
 const LayoutColumns = () => import('@/components/layout/columns/columns');
@@ -48,6 +50,7 @@ export default {
 		TextContainer,
 
 		LayoutColumns,
+		LayoutContainer,
 		MultiBox,
 
 		StyleIncluder,
