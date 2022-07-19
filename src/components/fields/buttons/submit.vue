@@ -6,7 +6,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 
 export default {
 	name: 'ButtonSubmit',

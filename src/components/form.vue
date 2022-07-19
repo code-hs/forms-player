@@ -14,7 +14,7 @@
 import {mapGetters, mapActions} from 'vuex';
 import VirtualComponent from '@/components/virtualComponent';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {ApiResponser} from '@/classes/api/ApiResponser.ts';
+import {ApiResponser} from '@/classes/api/ApiResponser';
 // import StyleIncluder from '@/components/utils/styleIncluder';
 
 // noinspection JSUnresolvedFunction
@@ -67,11 +67,10 @@ export default {
 
 			if (!ApiResponser.isSuccess(res)) {
 				console.log(ApiResponser.getError(res));
-				return;
 			}
 
-			const data = ApiResponser.getData(res);
-			alert('success');
+			// const data = ApiResponser.getData(res);
+			// alert('success');
 		},
 	},
 };

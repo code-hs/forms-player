@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
-import {TextContainerHelper} from '@/classes/components/content/text/TextContainerHelper.ts';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
+import {TextContainerHelper} from '@/classes/components/content/text/TextContainerHelper';
 
 export default {
 	name: 'TextContainer',

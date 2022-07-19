@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import {FieldHelper as FH} from '@/classes/components/field/FieldHelper.ts';
-import {LayoutColumns} from '@/classes/components/layout/columns/LayoutColumns.ts';
+import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
+import {LayoutColumns} from '@/classes/components/layout/columns/LayoutColumns';
 
 const VirtualComponent = () => import('@/components/virtualComponent');
 

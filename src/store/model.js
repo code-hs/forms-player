@@ -4,7 +4,7 @@ import {
 	ModelStructure,
 	// eslint-disable-next-line no-unused-vars
 	ModelStructureStore,
-} from '@/classes/model/ModelStructure.ts';
+} from '@/classes/model/ModelStructure';
 
 // eslint-disable-next-line no-unused-vars
 import {Page} from '@/classes/scheme/structure';

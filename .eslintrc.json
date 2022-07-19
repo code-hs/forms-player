@@ -8,7 +8,11 @@
 	"rules": {
 		"no-tabs": 0,
 		"indent": 0,
-		"import/extensions": 0,
+		"import/extensions": [
+			"error",
+			"always",
+			{"ts": "never", "vue": "never", "js": "never"}
+		],
 		"linebreak-style": 0,
 		"arraysInObjects": 0,
 		"object-curly-spacing": ["error", "never"],

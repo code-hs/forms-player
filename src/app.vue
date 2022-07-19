@@ -14,8 +14,8 @@
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import FormC from '@/components/form';
-import {Config} from '@/config/index.ts';
-import {Api} from '@/classes/api/Api.ts';
+import {Config} from '@/config/index';
+import {Api} from '@/classes/api/Api';
 import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
 
