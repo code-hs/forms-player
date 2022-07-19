@@ -16,6 +16,6 @@ export function getValueByStringKey(key: string, localesStore: object) {
 	);
 }
 
-export function deepCopy(subject: object): object {
+export function deepCopy<T>(subject: T): T {
 	return JSON.parse(JSON.stringify(subject));
 }
