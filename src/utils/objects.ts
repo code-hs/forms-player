@@ -11,7 +11,8 @@ export function getValueByStringKey(key: string, localesStore: object) {
 	const keysParts: string[] = key.split('.');
 
 	return keysParts.reduce(
-		(accObject: any, key: string) => (accObject[key] ? accObject[key] : ''),
+		(accObject: any, keyPart: string) =>
+			accObject[keyPart] ? accObject[keyPart] : '',
 		localesStore
 	);
 }

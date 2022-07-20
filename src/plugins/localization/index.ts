@@ -77,6 +77,7 @@ export class Localization {
 	}
 
 	static isAllowedLang(lang: string): boolean {
+		// eslint-disable-next-line no-param-reassign
 		lang = lang.toLowerCase();
 
 		return (
@@ -85,6 +86,7 @@ export class Localization {
 	}
 
 	static changeLanguage(lang: string): void {
+		// eslint-disable-next-line no-param-reassign
 		lang = lang.toLowerCase();
 
 		if (!this.isAllowedLang(lang)) {

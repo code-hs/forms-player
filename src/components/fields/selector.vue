@@ -13,8 +13,12 @@
 				{{ $t(custom.defaultText) }}
 			</option>
 
-			<option v-for="(value, key) in custom.options" :key="key" :value="key">
-				{{ $t(value) }}
+			<option
+				v-for="(optionsValue, key) in custom.options"
+				:key="key"
+				:value="key"
+			>
+				{{ $t(optionsValue) }}
 			</option>
 		</select>
 
