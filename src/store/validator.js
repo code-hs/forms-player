@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import {StoreValidator} from '@/classes/validator/StoreValidator';
 
 const state = () => ({
