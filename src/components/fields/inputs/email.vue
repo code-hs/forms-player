@@ -156,7 +156,7 @@ export default {
 				error: this.valid.error,
 			});
 		},
-		async validatorHandleTask() {
+		validatorHandleTask() {
 			this.validatorProcessAndUpdateDirty(false);
 			this.fieldResponseOnValidationEvent({
 				key: this.virtualKey,

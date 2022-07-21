@@ -112,7 +112,7 @@ export default {
 				error: this.valid.error,
 			});
 		},
-		async validatorHandleTask() {
+		validatorHandleTask() {
 			// after click submit, if empty value -> show error border
 			if (!this.value) {
 				this.valid.errorForView = true;

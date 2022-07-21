@@ -8,6 +8,7 @@
 	"rules": {
 		"no-tabs": 0,
 		"indent": 0,
+		"no-multi-spaces": "warn",
 		"no-multiple-empty-lines": 0,
 		"no-trailing-spaces": 0,
 		"object-curly-spacing": ["error", "never"],
@@ -47,7 +48,12 @@
 				"exceptAfterSingleLine": true
 			}
 		],
-		"no-console": 0
+		"no-console": 0,
+		"no-return-await": "warn",
+		"keyword-spacing": [2, {"before": true, "after": true}],
+		"eqeqeq": "warn",
+		"require-await": "warn",
+		"curly": "warn"
 	},
 	"parserOptions": {
 		"parser": "@typescript-eslint/parser"

@@ -32,6 +32,7 @@ export class Api {
 	/**
 	 * @param {Object} data - inputs values
 	 */
+	// eslint-disable-next-line require-await
 	static async post(
 		url: string,
 		data: ModelStructure,

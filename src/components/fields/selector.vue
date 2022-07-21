@@ -134,7 +134,7 @@ export default {
 				error: this.valid.error,
 			});
 		},
-		async validatorHandleTask() {
+		validatorHandleTask() {
 			this.validatorProcess(false);
 			this.fieldResponseOnValidationEvent({
 				key: this.virtualKey,

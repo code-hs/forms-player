@@ -14,6 +14,7 @@
 <script>
 import {mapMutations} from 'vuex';
 import {VirtualComponentH} from '@/classes/components/main/VirtualComponentH';
+import {generateKey} from '@/utils/random';
 
 import InputText from '@/components/fields/inputs/text';
 import InputPassword from '@/components/fields/inputs/password';
@@ -24,8 +25,6 @@ import Checkbox from '@/components/fields/checkbox';
 import ButtonSubmit from '@/components/fields/buttons/submit';
 import TextContainer from '@/components/content/textContainer';
 import StyleIncluder from '@/components/utils/styleIncluder';
-
-import {generateKey} from '@/utils/random';
 
 // async import for the box components
 const LayoutColumns = () => import('@/components/layout/columns/columns');
