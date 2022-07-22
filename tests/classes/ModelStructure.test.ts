@@ -87,7 +87,7 @@ describe('ModelStructure class -> generate', () => {
 
 		const model: ModelStructureStore = ModelStructure.generate(page);
 
-		expect(typeof model).toEqual('object');
+		expect(typeof model).toBe('object');
 		expect('multi_box_1' in model).toBeTruthy();
 		expect(Array.isArray(model.multi_box_1)).toBeTruthy();
 	});
