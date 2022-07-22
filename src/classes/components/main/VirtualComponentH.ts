@@ -14,6 +14,7 @@ export class VirtualComponentH {
 		// all groups rerender, and reinit, and clear values
 		if (multiBoxName) return false;
 
+		// noinspection RedundantIfStatementJS
 		if (!field.common.model) return false;
 
 		return true;
