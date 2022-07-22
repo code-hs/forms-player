@@ -2,7 +2,7 @@ import {Field} from '@/classes/scheme/structure';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 
 export class VirtualComponentH {
-	static isAllowInitModel(
+	static canInitModel(
 		allowedComponents: string[],
 		fieldType: string,
 		field: Field

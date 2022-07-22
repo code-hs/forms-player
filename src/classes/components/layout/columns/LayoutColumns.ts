@@ -2,6 +2,8 @@ import {Field} from '@/classes/scheme/structure';
 
 export class LayoutColumns {
 	static getColumnClasses(field: Field): string {
+		if (!field) return '';
+
 		let classes: string = '';
 
 		// custom.childLength;
@@ -15,7 +17,8 @@ export class LayoutColumns {
 		}
 
 		classes += `col-${col} `;
-		classes += `${field.common.class} `;
+
+		if (field.common?.class) classes += `${field.common.class} `;
 
 		return classes;
 	}

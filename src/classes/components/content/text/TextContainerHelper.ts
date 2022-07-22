@@ -12,7 +12,7 @@ export class TextContainerHelper {
 		'p',
 	];
 
-	static isAllowedTag(tag: string): boolean {
+	private static isAllowedTag(tag: string): boolean {
 		return this.allowedTags.includes(tag);
 	}
 

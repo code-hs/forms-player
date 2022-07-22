@@ -1,7 +1,7 @@
 import {Config} from '@/config';
 import {ModelStructure} from '@/classes/model/ModelStructure';
 
-interface ProjectInfo {
+export interface ProjectInfo {
 	projectId: string;
 	appId: string;
 }
@@ -22,7 +22,7 @@ export class Api {
 		this.appId = appId;
 	}
 
-	static getProjectInfo(): ProjectInfo {
+	private static getProjectInfo(): ProjectInfo {
 		return {
 			projectId: this.projectId,
 			appId: this.appId,

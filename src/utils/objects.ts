@@ -6,14 +6,14 @@ export function isObject(item: any): boolean {
  * Get value by string key in deep object
  * @param {string} key - like 'foo.boo.bar'
  */
-export function getValueByStringKey(key: string, localesStore: object) {
+export function getValueByStringKey(key: string, store: object) {
 	// ['foo', 'boo', 'bar']
 	const keysParts: string[] = key.split('.');
 
 	return keysParts.reduce(
 		(accObject: any, keyPart: string) =>
 			accObject[keyPart] ? accObject[keyPart] : '',
-		localesStore
+		store
 	);
 }
 

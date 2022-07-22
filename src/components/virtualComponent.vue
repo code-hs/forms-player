@@ -100,7 +100,7 @@ export default {
 			];
 			// noinspection JSCheckFunctionSignatures
 			if (
-				!VirtualComponentH.isAllowInitModel(
+				!VirtualComponentH.canInitModel(
 					allowedComponents,
 					this.fieldType,
 					this.schemeOptions
