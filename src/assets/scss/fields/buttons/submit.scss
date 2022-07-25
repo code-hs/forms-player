@@ -18,6 +18,7 @@
 		&:focus {
 			transform: none;
 			background: $t-dark-submitFocusBackground;
+			animation: jelly 0.5s;
 		}
 	}
 }
