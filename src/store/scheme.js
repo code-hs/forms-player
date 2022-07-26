@@ -28,6 +28,8 @@ const actions = {
 	load() {
 		schemeItem = new SchemeController();
 		schemeItem.load();
+
+		return schemeItem.getScheme();
 	},
 	/**
 	 * @param {string} pageKey

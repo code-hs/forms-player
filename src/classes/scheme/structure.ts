@@ -34,7 +34,9 @@ export const textExample: TextParams = {
 	hint: '',
 };
 
-export interface StylesParams {}
+export interface StylesParams {
+	value?: string;
+}
 export const stylesExample: StylesParams = {};
 
 export interface HtmlParams {}
@@ -74,6 +76,7 @@ export interface Scheme {
 	config: {
 		localization?: LocalizationConfig;
 	};
+	styles?: StylesParams;
 	pages: Page[];
 }
 

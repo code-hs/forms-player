@@ -19,6 +19,10 @@ export class SchemeController {
 		return !!(this.scheme && this.scheme.pages && this.scheme.pages.length);
 	}
 
+	getScheme(): Scheme {
+		return this.scheme;
+	}
+
 	getPage(pageKey: string): Page {
 		if (!pageKey) {
 			throw new Error('SchemeParser.getPage: param pageKey is empty');

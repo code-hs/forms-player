@@ -4,6 +4,7 @@
 			<FormC />
 		</template>
 
+		<StyleIncluder v-if="styles" :styles="styles" />
 		<ValidationFocus />
 
 		<div v-if="showDump" class="dump">{{ modelStructure }}</div>
@@ -18,9 +19,11 @@ import {Config} from '@/config/index';
 import {Api} from '@/classes/api/Api';
 import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
+import {StylesH} from '@/classes/utils/StylesH';
+import StyleIncluder from '@/components/utils/styleIncluder';
 
 export default {
-	components: {FormC, ValidationFocus},
+	components: {FormC, ValidationFocus, StyleIncluder},
 	props: {
 		// project id
 		dataProjectId: {
@@ -55,6 +58,7 @@ export default {
 			showContent: false,
 			showDump: Config.showDump,
 			appId: generateHash(), // id for the app, for api ddos protection
+			styles: '',
 		};
 	},
 
@@ -76,8 +80,7 @@ export default {
 			throw new Error('app.created: attr data-page is empty');
 		}
 
-		this.loadScheme();
-
+		const scheme = await this.loadScheme();
 		const pageStructure = await this.initPage(this.pageKey);
 		if (!pageStructure) {
 			throw new Error('app.created: pageStructure is empty');
@@ -88,6 +91,7 @@ export default {
 		if (pageStructure && this.modelStructure) this.showContent = true;
 
 		this.initPlugins();
+		this.initStyles(scheme);
 	},
 
 	methods: {
@@ -107,6 +111,9 @@ export default {
 			// window.location.hash.slice(1)
 			// from tag attribute
 			return this.dataPage;
+		},
+		initStyles(scheme) {
+			this.styles = StylesH.getStyles(scheme);
 		},
 	},
 };

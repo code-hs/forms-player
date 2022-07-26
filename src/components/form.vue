@@ -15,7 +15,7 @@ import {mapGetters, mapActions} from 'vuex';
 import VirtualComponent from '@/components/virtualComponent';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {ApiResponser} from '@/classes/api/ApiResponser';
-import {StylesH} from '../classes/utils/StylesH';
+import {StylesH} from '@/classes/utils/StylesH';
 import StyleIncluder from '@/components/utils/styleIncluder';
 
 // noinspection JSUnresolvedFunction
