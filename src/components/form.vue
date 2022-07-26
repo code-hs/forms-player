@@ -6,7 +6,7 @@
 			:scheme-options="component"
 		/>
 
-		<!--		<StyleIncluder :styles="customStyles" />-->
+		<StyleIncluder v-if="styles" :styles="styles" />
 	</form>
 </template>
 
@@ -15,23 +15,20 @@ import {mapGetters, mapActions} from 'vuex';
 import VirtualComponent from '@/components/virtualComponent';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {ApiResponser} from '@/classes/api/ApiResponser';
-// import StyleIncluder from '@/components/utils/styleIncluder';
+import {StylesH} from '../classes/utils/StylesH';
+import StyleIncluder from '@/components/utils/styleIncluder';
 
 // noinspection JSUnresolvedFunction
 export default {
 	name: 'Form',
-
 	components: {
 		VirtualComponent,
-		// StyleIncluder,
+		StyleIncluder,
 	},
 
 	data() {
-		// global custom styles string
-		// const customStyles = '.page-item {background: red}';
-
 		return {
-			// customStyles,
+			styles: '',
 		};
 	},
 
@@ -43,6 +40,7 @@ export default {
 	},
 
 	created() {
+		this.styles = StylesH.getStyles(this.pageStructure);
 		this.initValidation();
 	},
 
