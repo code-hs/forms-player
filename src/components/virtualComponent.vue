@@ -7,14 +7,16 @@
 			:multibox-index="multiboxIndex"
 			v-bind="schemeOptions"
 		/>
-		<StyleIncluder v-if="isHasStyles()" :styles="schemeOptions.styles.value" />
+		<StyleIncluder v-if="styles" :styles="styles" />
 	</div>
 </template>
 
+<!--suppress JSCheckFunctionSignatures -->
 <script>
 import {mapMutations} from 'vuex';
 import {VirtualComponentH} from '@/classes/components/main/VirtualComponentH';
 import {generateKey} from '@/utils/random';
+import {StylesH} from '@/classes/utils/StylesH';
 
 import InputText from '@/components/fields/inputs/text';
 import InputPassword from '@/components/fields/inputs/password';
@@ -66,6 +68,7 @@ export default {
 		return {
 			key: generateKey(),
 			fieldType: this.schemeOptions?.common?.type,
+			styles: StylesH.getStyles(this.schemeOptions),
 		};
 	},
 
@@ -85,9 +88,6 @@ export default {
 			if (!this.schemeOptions?.common?.type) {
 				throw new Error('virtualComponent.vue: param type in common is empty');
 			}
-		},
-		isHasStyles() {
-			return !!(this.schemeOptions.styles && this.schemeOptions.styles.value);
 		},
 		initModel() {
 			const allowedComponents = [
