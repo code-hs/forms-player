@@ -7,29 +7,18 @@
 	align-items: center;
 	flex-direction: column;
 	width: 100%;
-	color: $t-dark-text;
-	background-color: $t-dark-appBackground;
-	border: 2px solid $t-dark-groupItemBorder;
+	color: var(--text);
+	background-color: var(--appBackground);
+	border: 2px solid var(--groupItemBorder);
 	border-radius: 3px;
-	box-shadow: 6px 6px 15px 1px $t-dark-groupItemShadow;
+	box-shadow: 6px 6px 15px 1px var(--groupItemShadow);
 	padding: 10px;
 
 	.dump {
 		width: 300px;
 		margin-top: 50px;
 		white-space: pre;
-		color: $t-dark-dump;
+		color: var(--dump);
 		border-top: 1px dashed;
-	}
-}
-
-@include light-theme() {
-	color: $t-light-text;
-	background-color: $t-light-appBackground;
-	border-color: $t-light-groupItemBorder;
-	box-shadow: 6px 6px 15px 1px $t-light-groupItemShadow;
-
-	.dump {
-		color: $t-light-dump;
 	}
 }

@@ -4,10 +4,10 @@
 
 	transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
 		transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
-	color: $t-dark-text;
-	border: 1px solid $t-dark-formItemBorder;
+	color: var(--text);
+	border: 1px solid var(--formItemBorder);
 	border-radius: 2px;
-	background-color: $t-dark-formItemBg;
+	background-color: var(--formItemBg);
 
 	font-family: inherit;
 	font-size: 1em;
@@ -15,7 +15,7 @@
 
 	&:focus {
 		transform: scale(1.02);
-		background-color: $t-dark-formItemBgFocus;
+		background-color: var(--formItemBgFocus);
 	}
 }
 
@@ -30,7 +30,7 @@
 
 %error-field {
 	&.error {
-		border-color: $t-dark-formItemRed !important;
+		border-color: var(--formItemRed) !important;
 	}
 }
 
@@ -41,7 +41,7 @@
 		opacity: 0;
 
 		text-align: justify;
-		color: $t-dark-formItemRed;
+		color: var(--formItemRed);
 		font-size: 0.8em;
 
 		//animation-name: shakeError;
@@ -62,15 +62,5 @@
 
 		text-align: justify;
 		font-size: 0.8em;
-	}
-}
-
-%field-default-light-theme {
-	color: $t-light-text;
-	border: 1px solid $t-light-formItemBorder;
-	background-color: $t-light-formItemBg;
-
-	&:focus {
-		background-color: $t-light-formItemBgFocus;
 	}
 }

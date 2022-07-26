@@ -7,7 +7,7 @@
 		padding-top: 22px;
 
 		&[data-show-multiple-separator='true']:not(:first-child) {
-			border-top: 2px solid $t-dark-fieldsetsSeparator;
+			border-top: 2px solid var(--fieldsetsSeparator);
 		}
 
 		&:last-child {
@@ -21,7 +21,7 @@
 			padding-bottom: 9px;
 			text-align: center;
 			letter-spacing: 1px;
-			color: $t-dark-text;
+			color: var(--text);
 		}
 	}
 
@@ -33,12 +33,12 @@
 		height: 20px;
 		cursor: pointer;
 		text-align: center;
-		color: $t-dark-buttonsBorder;
+		color: var(--buttonsBorder);
 		border-radius: 3px;
 		line-height: 20px;
 
 		&:hover {
-			background-color: $t-dark-formItemBgFocus;
+			background-color: var(--formItemBgFocus);
 		}
 	}
 
@@ -51,46 +51,14 @@
 			height: 20px;
 			cursor: pointer;
 			text-align: center;
-			border: 1px solid $t-dark-buttonsBorder;
+			border: 1px solid var(--buttonsBorder);
 			border-radius: 3px;
 			font-family: serif;
 			font-size: 18px;
 			line-height: 19px;
 
 			&:hover {
-				background-color: $t-dark-formItemBgFocus;
-			}
-		}
-	}
-}
-
-@include light-theme() {
-	.multibox {
-		.multibox-item {
-			&[data-show-multiple-separator='true']:not(:first-child) {
-				border-top-color: $t-light-fieldsetsSeparator;
-			}
-
-			.title {
-				color: $t-light-text;
-			}
-		}
-
-		.button-remove {
-			color: $t-light-buttonsBorder;
-
-			&:hover {
-				background-color: $t-light-formItemBgFocus;
-			}
-		}
-
-		.buttons-container {
-			.button-add {
-				border: 1px solid $t-light-buttonsBorder;
-
-				&:hover {
-					background-color: $t-light-formItemBgFocus;
-				}
+				background-color: var(--formItemBgFocus);
 			}
 		}
 	}

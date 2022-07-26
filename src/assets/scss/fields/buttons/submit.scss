@@ -6,8 +6,8 @@
 		padding: 13px 40px;
 		cursor: pointer;
 		letter-spacing: 2px;
-		color: $t-dark-submitText;
-		background: $t-dark-submitBackground;
+		color: var(--submitText);
+		background: var(--submitBackground);
 
 		&:disabled {
 			cursor: default;
@@ -17,23 +17,8 @@
 		&:enabled:hover,
 		&:focus {
 			transform: none;
-			background: $t-dark-submitFocusBackground;
+			background: var(--submitFocusBackground);
 			animation: jelly 0.5s;
-		}
-	}
-}
-
-@include light-theme() {
-	.submit {
-		button {
-			border: 1px solid $t-light-formItemBorder;
-			color: $t-light-submitText;
-			background: $t-light-submitBackground;
-
-			&:enabled:hover,
-			&:focus {
-				background: $t-light-submitFocusBackground;
-			}
 		}
 	}
 }

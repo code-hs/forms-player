@@ -1,5 +1,0 @@
-@mixin light-theme() {
-	.app[data-theme='light'] {
-		@content;
-	}
-}

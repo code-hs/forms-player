@@ -8,9 +8,3 @@
 		@extend %error-field;
 	}
 }
-
-@include light-theme() {
-	.input-text input {
-		@extend %field-default-light-theme;
-	}
-}

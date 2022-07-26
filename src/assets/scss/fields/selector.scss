@@ -20,36 +20,14 @@
 
 		&:-moz-focusring {
 			color: transparent !important;
-			text-shadow: 0 0 0 $t-dark-text;
+			text-shadow: 0 0 0 var(--text);
 		}
 
 		&:invalid {
-			color: $t-dark-selectorPlaceholder;
+			color: var(--selectorPlaceholder);
 		}
 		&.error {
-			border-color: $t-dark-formItemRed !important;
-		}
-	}
-}
-
-@include light-theme() {
-	.input-selector {
-		select {
-			color: $t-light-text;
-			border: 1px solid $t-light-formItemBorder;
-			background-color: $t-light-formItemBg;
-
-			&:focus {
-				background-color: $t-light-formItemBgFocus;
-			}
-
-			&:-moz-focusring {
-				text-shadow: 0 0 0 $t-light-text;
-			}
-
-			&:invalid {
-				color: $t-light-selectorPlaceholder;
-			}
+			border-color: var(--formItemRed) !important;
 		}
 	}
 }

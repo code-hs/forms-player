@@ -1,29 +1,32 @@
-//layout
-$t-dark-appBackground: hsl(210, 2%, 16%);
-$t-dark-dump: hsl(238, 92%, 86%);
+.app {
+	//layout
+	--appBackground: hsl(210, 2%, 16%);
+	//--dump: hsl(238, 92%, 86%);
+	--dump: hsl(238, 92%, 86%);
 
-// group item layout
-$t-dark-groupItemShadow: hsl(0, 0%, 0%, 68%);
-$t-dark-groupItemBorder: hsl(0, 0%, 15%);
+	// group item layout
+	--groupItemShadow: hsl(0, 0%, 0%, 68%);
+	--groupItemBorder: hsl(0, 0%, 15%);
 
-// fieldset
-$t-dark-fieldsetsSeparator: hsl(0, 0%, 14%);
+	// fieldset
+	--fieldsetsSeparator: hsl(0, 0%, 14%);
 
-// text
-$t-dark-text: hsl(0, 0%, 69%);
+	// text
+	--text: hsl(0, 0%, 69%);
 
-// inputs
-$t-dark-formItemBorder: hsl(0, 0%, 10%);
-$t-dark-formItemBg: hsl(0, 0%, 14%);
-$t-dark-formItemBgFocus: hsl(0, 7%, 20%);
-$t-dark-formItemRed: hsl(0, 100%, 50%);
+	// inputs
+	--formItemBorder: hsl(0, 0%, 10%);
+	--formItemBg: hsl(0, 0%, 14%);
+	--formItemBgFocus: hsl(0, 7%, 20%);
+	--formItemRed: hsl(0, 100%, 50%);
 
-$t-dark-checkboxBorderInto: hsl(0, 0%, 69%);
-$t-dark-checkboxText: hsl(0, 0%, 50%);
+	--checkboxBorderInto: hsl(0, 0%, 69%);
+	--checkboxText: hsl(0, 0%, 50%);
 
-$t-dark-buttonsBorder: hsl(0, 0%, 29%);
-$t-dark-selectorPlaceholder: hsl(0, 0%, 39%);
+	--buttonsBorder: hsl(0, 0%, 29%);
+	--selectorPlaceholder: hsl(0, 0%, 39%);
 
-$t-dark-submitText: hsl(0, 0%, 90%);
-$t-dark-submitBackground: hsl(116, 68%, 21%);
-$t-dark-submitFocusBackground: hsl(116, 68%, 26%);
+	--submitText: hsl(0, 0%, 90%);
+	--submitBackground: hsl(116, 68%, 21%);
+	--submitFocusBackground: hsl(116, 68%, 26%);
+}
