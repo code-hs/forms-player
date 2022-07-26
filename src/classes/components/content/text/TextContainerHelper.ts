@@ -12,17 +12,17 @@ export class TextContainerHelper {
 		'p',
 	];
 
-	private static isAllowedTag(tag: string): boolean {
+	private static canTag(tag: string): boolean {
 		return this.allowedTags.includes(tag);
 	}
 
 	static isShow(fieldThis: FieldThis): boolean {
-		const isAllowedTag: boolean = this.isAllowedTag(fieldThis.custom.tag);
+		const canTag: boolean = this.canTag(fieldThis.custom.tag);
 
-		if (!isAllowedTag) {
+		if (!canTag) {
 			throw new Error(`Tag ${fieldThis.custom.tag} is not allowed.`);
 		}
 
-		return isAllowedTag && fieldThis.text.value;
+		return canTag && fieldThis.text.value;
 	}
 }

@@ -3,15 +3,15 @@ import {TextContainerHelper} from '@/classes/components/content/text/TextContain
 import {FieldThis} from '@/classes/scheme/structure';
 
 describe('TextContainerHelper class', () => {
-	it('.isAllowedTag', () => {
+	it('.canTag', () => {
 		// @ts-ignore
-		const r: boolean = TextContainerHelper.isAllowedTag('h1');
+		const r: boolean = TextContainerHelper.canTag('h1');
 		expect(r).toBeTruthy();
 	});
 
-	it('.isAllowedTag, bad tag', () => {
+	it('.canTag, bad tag', () => {
 		// @ts-ignore
-		const r: boolean = TextContainerHelper.isAllowedTag('h123');
+		const r: boolean = TextContainerHelper.canTag('h123');
 		expect(r).toBeFalsy();
 	});
 

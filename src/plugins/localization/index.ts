@@ -16,7 +16,7 @@ export class Localization {
 	static install(Vue: any): void {
 		this.loadData();
 
-		if (!this.isAllowedLang(this.defaultLang)) {
+		if (!this.canUseLang(this.defaultLang)) {
 			throw new Error(
 				`Localization.install: defaultLang '${this.defaultLang}' is not correct, or is not available`
 			);
@@ -76,7 +76,7 @@ export class Localization {
 		return getValueByStringKey(key, localesByLang);
 	}
 
-	static isAllowedLang(lang: string): boolean {
+	static canUseLang(lang: string): boolean {
 		// eslint-disable-next-line no-param-reassign
 		lang = lang.toLowerCase();
 
@@ -89,7 +89,7 @@ export class Localization {
 		// eslint-disable-next-line no-param-reassign
 		lang = lang.toLowerCase();
 
-		if (!this.isAllowedLang(lang)) {
+		if (!this.canUseLang(lang)) {
 			console.warn(
 				`Localization.changeLanguage: language '${lang}' is not allowed`
 			);
