@@ -2,8 +2,7 @@
 	width: 100%;
 	padding: 15px 10px;
 
-	transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25),
-		transform 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
+	transition: background-color 0.3s cubic-bezier(0.57, 0.21, 0.69, 1.25);
 	color: var(--text);
 	border: 1px solid var(--formItemBorder);
 	border-radius: 2px;
@@ -14,7 +13,8 @@
 	line-height: 1.5;
 
 	&:focus {
-		transform: scale(1.02);
+		// fix opacity for error label
+		transform: scale(1);
 		background-color: var(--formItemBgFocus);
 	}
 }
@@ -42,7 +42,7 @@
 
 		text-align: justify;
 		color: var(--formItemRed);
-		font-size: 0.8em;
+		font-size: 0.9em;
 
 		//animation-name: shakeError;
 		//animation-fill-mode: forwards;
@@ -61,6 +61,6 @@
 		padding: 0 2px;
 
 		text-align: justify;
-		font-size: 0.8em;
+		font-size: 0.9em;
 	}
 }
