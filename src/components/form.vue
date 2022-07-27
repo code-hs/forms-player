@@ -1,12 +1,17 @@
 <template>
-	<form class="form grid-container" novalidate @submit.prevent="validatorStart">
+	<form
+		class="form grid-container"
+		:class="pageClass"
+		novalidate
+		@submit.prevent="validatorStart"
+	>
 		<VirtualComponent
 			v-for="(component, index) in pageStructure.components"
 			:key="index"
 			:scheme-options="component"
 		/>
 
-		<StyleIncluder v-if="styles" :styles="styles" />
+		<StyleIncluder v-if="pageStructure.styles" :styles="pageStructure.styles" />
 	</form>
 </template>
 
@@ -15,7 +20,6 @@ import {mapGetters, mapActions} from 'vuex';
 import VirtualComponent from '@/components/virtualComponent';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {ApiResponser} from '@/classes/api/ApiResponser';
-import {StylesH} from '@/classes/utils/StylesH';
 import StyleIncluder from '@/components/utils/styleIncluder';
 
 // noinspection JSUnresolvedFunction
@@ -28,7 +32,7 @@ export default {
 
 	data() {
 		return {
-			styles: '',
+			pageClass: '',
 		};
 	},
 
@@ -40,7 +44,7 @@ export default {
 	},
 
 	created() {
-		this.styles = StylesH.getStyles(this.pageStructure);
+		this.initClass();
 		this.initValidation();
 	},
 
@@ -49,6 +53,9 @@ export default {
 			validatorStart: 'validator/start',
 			saveForm: 'request/saveFormValues',
 		}),
+		initClass() {
+			this.pageClass = this.pageStructure?.common?.class || '';
+		},
 		initValidation() {
 			// binding form
 			// noinspection JSUnresolvedFunction

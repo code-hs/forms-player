@@ -7,7 +7,7 @@
 			:multibox-index="multiboxIndex"
 			v-bind="schemeOptions"
 		/>
-		<StyleIncluder v-if="styles" :styles="styles" />
+		<StyleIncluder v-if="schemeOptions.styles" :styles="schemeOptions.styles" />
 	</div>
 </template>
 
@@ -16,7 +16,6 @@
 import {mapMutations} from 'vuex';
 import {VirtualComponentH} from '@/classes/components/main/VirtualComponentH';
 import {generateKey} from '@/utils/random';
-import {StylesH} from '@/classes/utils/StylesH';
 
 import InputText from '@/components/fields/inputs/text';
 import InputPassword from '@/components/fields/inputs/password';
@@ -68,7 +67,6 @@ export default {
 		return {
 			key: generateKey(),
 			fieldType: this.schemeOptions?.common?.type,
-			styles: StylesH.getStyles(this.schemeOptions),
 		};
 	},
 
