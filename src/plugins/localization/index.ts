@@ -66,8 +66,8 @@ export class Localization {
 
 		if (!key || !currentLanguage) return '';
 
-		// if key starts from '!', return this text
-		if (key.startsWith('!')) {
+		// if key starts from '#', return this text
+		if (key.startsWith('#')) {
 			return key.substr(1);
 		}
 
