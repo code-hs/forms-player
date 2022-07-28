@@ -20,6 +20,7 @@ import {generateKey} from '@/utils/random';
 import InputText from '@/components/fields/inputs/text';
 import InputPassword from '@/components/fields/inputs/password';
 import InputEmail from '@/components/fields/inputs/email';
+import InputDate from '@/components/fields/inputs/date';
 import Selector from '@/components/fields/selector';
 import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
@@ -39,6 +40,7 @@ export default {
 		InputText,
 		InputPassword,
 		InputEmail,
+		InputDate,
 		Selector,
 		Textarea,
 		Checkbox,
@@ -92,6 +94,7 @@ export default {
 				'InputText',
 				'InputPassword',
 				'InputEmail',
+				'InputDate',
 				'Selector',
 				'Textarea',
 				'Checkbox',
