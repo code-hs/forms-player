@@ -16,7 +16,7 @@
 		"_local:copy:bundle": "copy dist\\form-widget-g.js run\\local\\form-widget-g.js",
 		"_local:copy:scheme": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\scheme.json run\\local\\scheme.json",
 		"_local:copy:locales": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\locales.json run\\local\\locales.json",
-		"_local:copy:WDFL": "copy ..\\api\\public\\client\\widget-form-loader.js run\\local\\widget-form-loader.js",
+		"_local:copy:WDFL": "copy ..\\api\\public\\client\\widget-form-loader.min.js run\\local\\widget-form-loader.min.js",
 		"_copy:bundle:to-api-public-dir": "copy dist\\form-widget-g.js ..\\api\\public\\bundles\\form-widget-g.js"
 	},
 	"dependencies": {
