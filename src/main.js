@@ -18,7 +18,7 @@ Vue.use(Localization);
 Vue.use(VueMask);
 
 const options = {
-	shadow: true,
+	shadow: false,
 	beforeCreateVueInstance: root => {
 		shadowRootInit(root);
 	},
