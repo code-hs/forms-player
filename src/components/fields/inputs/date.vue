@@ -1,38 +1,17 @@
 <template>
-	<div class="field input-text" :class="common.class">
-		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
-
-		<!--suppress JSUnresolvedFunction -->
-		<input
-			ref="self"
-			v-model="modelStore[common.model]"
-			v-mask="mask"
-			type="text"
-			:placeholder="$t(text.placeholder)"
-			:required="validation.required"
-			:class="{error: valid.error}"
-			@blur="handleBlur"
-			@input="handleInput"
-		/>
-
-		<transition name="fade">
-			<div
-				v-if="validation.errorText"
-				:class="{showContent: valid.error}"
-				class="error-text"
-			>
-				{{ $t(validation.errorText) }}
-			</div>
-		</transition>
+	<div>
+		<div class="my-date">
+			<input ref="self" class="datepicker-1" />
+		</div>
 	</div>
 </template>
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
+import {InitModule} from '@/classes/modules/InitModule';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
@@ -49,8 +28,7 @@ export default {
 			type: Object,
 			required: false,
 			default: () => ({
-				mask: '',
-				pattern: '',
+				format: '',
 			}),
 		},
 	},
@@ -84,13 +62,11 @@ export default {
 		},
 	},
 
-	created() {
-		InputHelper.initMaskDirty(this);
-		this.initValidation();
-
-		this.processInput = debounce(
-			this.processInput,
-			FieldValidator.debounceTime
+	mounted() {
+		InitModule.init(
+			() => window.Datepicker,
+			this.initDatepicker,
+			this.initWithoutModule
 		);
 	},
 
@@ -109,6 +85,27 @@ export default {
 		...mapActions({
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
+
+		initDatepicker() {
+			const {self} = this.$refs;
+
+			// eslint-disable-next-line no-new
+			new window.Datepicker(self, {
+				format: this.custom.format,
+				autohide: true,
+			});
+
+			self.addEventListener('changeDate', this.updateValue);
+
+			return true;
+		},
+		initWithoutModule() {
+			console.log('initWithoutModule');
+		},
+
+		updateValue() {
+			this.modelStore[this.common.model] = this.$refs.self.value;
+		},
 
 		initValidation() {
 			if (FieldValidator.canValidation(this.validation)) {

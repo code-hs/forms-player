@@ -53,7 +53,8 @@
 		"keyword-spacing": [2, {"before": true, "after": true}],
 		"eqeqeq": "warn",
 		"require-await": "warn",
-		"curly": "warn"
+		"curly": "warn",
+		"no-plusplus": 0
 	},
 	"parserOptions": {
 		"parser": "@typescript-eslint/parser"
