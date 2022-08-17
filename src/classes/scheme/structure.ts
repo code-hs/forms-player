@@ -72,10 +72,22 @@ export interface LocalizationConfig {
  * }
  */
 
-export interface Scheme {
-	config: {
-		localization?: LocalizationConfig;
+export interface Module {
+	name: string;
+	enable: boolean;
+	options?: {
+		global?: object;
+		forEachField?: object;
 	};
+}
+
+export interface Configurations {
+	modules?: Module[];
+	localization?: LocalizationConfig;
+}
+
+export interface Scheme {
+	config: Configurations;
 	styles?: StylesParams;
 	pages: Page[];
 }

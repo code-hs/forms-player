@@ -62,12 +62,12 @@ export default {
 		},
 	},
 
+	created() {
+		InitModule.getModuleOptions('datepicker');
+	},
+
 	mounted() {
-		InitModule.init(
-			() => window.Datepicker,
-			this.initDatepicker,
-			this.initWithoutModule
-		);
+		InitModule.init(() => window.Datepicker, this.init, this.initWithoutModule);
 	},
 
 	beforeDestroy() {
@@ -86,9 +86,8 @@ export default {
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
 
-		initDatepicker() {
+		init() {
 			const {self} = this.$refs;
-
 			// eslint-disable-next-line no-new
 			new window.Datepicker(self, {
 				format: this.custom.format,
@@ -96,8 +95,6 @@ export default {
 			});
 
 			self.addEventListener('changeDate', this.updateValue);
-
-			return true;
 		},
 		initWithoutModule() {
 			console.log('initWithoutModule');

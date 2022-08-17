@@ -1,29 +1,35 @@
 import {SchemeLoader} from './SchemeLoader';
 import {SchemeFiltrator} from './SchemeFiltrator';
-import {Scheme, Page} from '@/classes/scheme/structure';
+import {Scheme, Page, Configurations} from '@/classes/scheme/structure';
 
 export class SchemeController {
 	// @ts-ignore
-	private scheme: Scheme;
+	private static scheme: Scheme;
 
-	load(): void {
+	static load(): Scheme {
 		this.scheme = SchemeLoader.getData();
 		SchemeFiltrator.filtrateParamEnable(this.scheme);
 
 		if (!this.isValid()) {
 			throw new Error('SchemeParser.load: scheme is empty');
 		}
-	}
 
-	isValid(): boolean {
-		return !!(this.scheme && this.scheme.pages && this.scheme.pages.length);
-	}
-
-	getScheme(): Scheme {
 		return this.scheme;
 	}
 
-	getPage(pageKey: string): Page {
+	static isValid(): boolean {
+		return !!(this.scheme && this.scheme.pages && this.scheme.pages.length);
+	}
+
+	static getScheme(): Scheme {
+		return this.scheme;
+	}
+
+	static getConfig(): Configurations {
+		return this.scheme.config;
+	}
+
+	static getPage(pageKey: string): Page {
 		if (!pageKey) {
 			throw new Error('SchemeParser.getPage: param pageKey is empty');
 		}
