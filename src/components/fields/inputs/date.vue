@@ -1,14 +1,25 @@
 <template>
 	<div>
 		<div class="my-date">
-			<input ref="self" class="datepicker-1" />
+			<input
+				ref="self"
+				v-model="modelStore[common.model]"
+				v-mask="mask"
+				type="text"
+				:placeholder="$t(text.placeholder)"
+				:required="validation.required"
+				class="datepicker-1"
+				:class="{error: valid.error}"
+				@blur="handleBlur"
+				@input="handleInput"
+			/>
 		</div>
 	</div>
 </template>
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-import {FieldValidator} from '@/classes/validator/FieldValidator';
+// import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 import {ModuleController} from '@/classes/modules/ModuleController';
@@ -29,6 +40,7 @@ export default {
 			required: false,
 			default: () => ({
 				format: '',
+				mask: '',
 			}),
 		},
 	},
@@ -63,8 +75,8 @@ export default {
 	},
 
 	created() {
-		const options = ModuleController.getModuleOptions('datepicker');
-		console.log(options);
+		// const options = ModuleController.getModuleOptions('datepicker');
+		// console.log(options);
 	},
 
 	mounted() {
@@ -102,71 +114,71 @@ export default {
 			self.addEventListener('changeDate', this.updateValue);
 		},
 		initWithoutModule() {
-			console.log('initWithoutModule');
+			InputHelper.initMaskDirty(this);
 		},
 
 		updateValue() {
 			this.modelStore[this.common.model] = this.$refs.self.value;
 		},
-
-		initValidation() {
-			if (FieldValidator.canValidation(this.validation)) {
-				this.valid.connect = true;
-				this.validatorAdd(this.virtualKey);
-
-				// noinspection JSUnresolvedFunction
-				bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
-			}
-		},
+		//
+		// initValidation() {
+		// 	if (FieldValidator.canValidation(this.validation)) {
+		// 		this.valid.connect = true;
+		// 		this.validatorAdd(this.virtualKey);
+		//
+		// 		// noinspection JSUnresolvedFunction
+		// 		bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+		// 	}
+		// },
 		handleBlur() {
-			this.validatorProcessAndUpdateDirty();
+			// this.validatorProcessAndUpdateDirty();
 		},
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.common.model] = e.target.value;
 
-			this.validatorProcessDirty();
-			InputHelper.processTextPatternDirty(this, e);
+			// this.validatorProcessDirty();
+			// InputHelper.processTextPatternDirty(this, e);
 		},
-		validatorProcessDirty() {
-			if (!this.valid.connect) return;
-
-			// only for dirty state
-			if (!this.valid.dirty) return;
-
-			this.validatorUpdateError();
-			this.validatorSaveInfo();
-		},
-		validatorProcessAndUpdateDirty(updateStore = true) {
-			if (!this.valid.connect) return;
-
-			this.validatorUpdateError();
-			// if field has error - becomes dirty, otherwise clear
-			this.valid.dirty = this.valid.error;
-
-			if (updateStore) this.validatorSaveInfo();
-		},
-		validatorUpdateError() {
-			try {
-				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
-			} catch (e) {
-				// eslint-disable-next-line no-console
-				console.error(e);
-			}
-		},
-		validatorSaveInfo() {
-			this.validatorUpdate({
-				key: this.virtualKey,
-				error: this.valid.error,
-			});
-		},
-		validatorHandleTask() {
-			this.validatorProcessAndUpdateDirty(false);
-			this.fieldResponseOnValidationEvent({
-				key: this.virtualKey,
-				error: this.valid.error,
-			});
-		},
+		// validatorProcessDirty() {
+		// 	if (!this.valid.connect) return;
+		//
+		// 	// only for dirty state
+		// 	if (!this.valid.dirty) return;
+		//
+		// 	this.validatorUpdateError();
+		// 	this.validatorSaveInfo();
+		// },
+		// validatorProcessAndUpdateDirty(updateStore = true) {
+		// 	if (!this.valid.connect) return;
+		//
+		// 	this.validatorUpdateError();
+		// 	// if field has error - becomes dirty, otherwise clear
+		// 	this.valid.dirty = this.valid.error;
+		//
+		// 	if (updateStore) this.validatorSaveInfo();
+		// },
+		// validatorUpdateError() {
+		// 	try {
+		// 		this.valid.error = !FieldValidator.isValid(this.validation, this.value);
+		// 	} catch (e) {
+		// 		// eslint-disable-next-line no-console
+		// 		console.error(e);
+		// 	}
+		// },
+		// validatorSaveInfo() {
+		// 	this.validatorUpdate({
+		// 		key: this.virtualKey,
+		// 		error: this.valid.error,
+		// 	});
+		// },
+		// validatorHandleTask() {
+		// 	this.validatorProcessAndUpdateDirty(false);
+		// 	this.fieldResponseOnValidationEvent({
+		// 		key: this.virtualKey,
+		// 		error: this.valid.error,
+		// 	});
+		// },
 	},
 };
 </script>
