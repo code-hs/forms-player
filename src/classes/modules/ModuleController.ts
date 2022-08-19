@@ -5,7 +5,7 @@ export class ModuleController {
 	static init(
 		checker: Function,
 		successLoad: Function,
-		failLoad: Function,
+		failLoad: Function = null,
 		failLoadCount = 5
 	) {
 		if (!checker()) {
@@ -15,7 +15,8 @@ export class ModuleController {
 			failLoadCount--;
 			if (failLoadCount === 0) {
 				// after 5 tries, 1500ms, module are not loaded, call failLoad function
-				failLoad();
+				if (failLoad) failLoad();
+
 				return;
 			}
 

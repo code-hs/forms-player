@@ -30,8 +30,6 @@ export class InputHelper {
 			return;
 		}
 
-		// todo: как это себя поведен, при multiply блоках
-		// что будет находиться в поле fieldThis.modelStore[model]
 		// if new value - correct, then set it to prev value
 		fieldThis.prevValue = fieldThis.modelStore[model];
 	}

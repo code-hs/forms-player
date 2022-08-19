@@ -48,24 +48,29 @@ export default {
 		styles: FH.styles,
 		custom: {
 			type: Object,
-			required: false,
+			required: true,
 			default: () => ({
-				format: '',
-				mask: '',
+				mask: '', // required
 			}),
+		},
+		module: {
+			type: Object,
+			required: false,
+			default: () => ({}),
 		},
 	},
 
 	data() {
 		return {
 			mask: '',
-			prevValue: '',
+			// prevValue: '',
 			multiBoxName: FH.getMultiName(this),
 			valid: {
 				dirty: false,
 				error: false,
 				connect: false,
 			},
+			moduleConfig: ModuleController.getModuleOptions('datepicker'),
 		};
 	},
 
@@ -86,16 +91,11 @@ export default {
 	},
 
 	created() {
-		// const options = ModuleController.getModuleOptions('datepicker');
-		// console.log(options);
+		InputHelper.initMaskDirty(this);
 	},
 
 	mounted() {
-		ModuleController.init(
-			() => window.Datepicker,
-			this.init,
-			this.initWithoutModule
-		);
+		ModuleController.init(() => window.Datepicker, this.init);
 	},
 
 	beforeDestroy() {
@@ -116,16 +116,11 @@ export default {
 
 		init() {
 			const {self} = this.$refs;
+			const opts = {...this.moduleConfig.global, ...this.module};
 			// eslint-disable-next-line no-new
-			new window.Datepicker(self, {
-				format: this.custom.format,
-				autohide: true,
-			});
+			new window.Datepicker(self, opts);
 
 			self.addEventListener('changeDate', this.updateValue);
-		},
-		initWithoutModule() {
-			InputHelper.initMaskDirty(this);
 		},
 
 		updateValue() {
@@ -147,6 +142,7 @@ export default {
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.common.model] = e.target.value;
+			console.log(e.target.value);
 
 			// this.validatorProcessDirty();
 			// InputHelper.processTextPatternDirty(this, e);
