@@ -11,7 +11,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
-import {InitModule} from '@/classes/modules/InitModule';
+import {ModuleController} from '@/classes/modules/ModuleController';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
@@ -63,11 +63,16 @@ export default {
 	},
 
 	created() {
-		InitModule.getModuleOptions('datepicker');
+		const options = ModuleController.getModuleOptions('datepicker');
+		console.log(options);
 	},
 
 	mounted() {
-		InitModule.init(() => window.Datepicker, this.init, this.initWithoutModule);
+		ModuleController.init(
+			() => window.Datepicker,
+			this.init,
+			this.initWithoutModule
+		);
 	},
 
 	beforeDestroy() {

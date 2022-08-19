@@ -1,7 +1,7 @@
 import {SchemeController} from '@/classes/scheme/SchemeController';
 import {Configurations, Module} from '@/classes/scheme/structure';
 
-export class InitModule {
+export class ModuleController {
 	static init(
 		checker: Function,
 		successLoad: Function,

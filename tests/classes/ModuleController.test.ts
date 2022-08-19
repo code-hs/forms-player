@@ -1,8 +1,9 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeController} from '@/classes/scheme/SchemeController';
-import {InitModule} from '@/classes/modules/InitModule';
+import {ModuleController} from '@/classes/modules/ModuleController';
 
 describe('InitModule class', () => {
+	// @ts-ignore
 	SchemeController.scheme = {
 		config: {
 			modules: [
@@ -57,10 +58,11 @@ describe('InitModule class', () => {
 
 	it('-> getModuleOptions', () => {
 		expect(() => {
-			InitModule.getModuleOptions('auth2323');
+			ModuleController.getModuleOptions('auth2323');
 		}).toThrow();
 
-		const options: object = InitModule.getModuleOptions('auth');
+		const options = ModuleController.getModuleOptions('auth');
+		// @ts-ignore
 		expect(options.global.foo).toEqual(111);
 	});
 
@@ -75,6 +77,6 @@ describe('InitModule class', () => {
 		};
 		const failLoad = () => {};
 
-		InitModule.init(checker, successLoad, failLoad);
+		ModuleController.init(checker, successLoad, failLoad);
 	});
 });
