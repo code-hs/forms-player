@@ -1,56 +1,77 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeController} from '@/classes/scheme/SchemeController';
-import {Scheme, Page} from '@/classes/scheme/structure';
+import {Scheme, Page, Configurations} from '@/classes/scheme/structure';
 
-describe('SchemeController class -> isValidStructure', () => {
-	it('correct work', () => {
-		const scheme: Scheme = {
-			config: {},
-			pages: [
+describe('SchemeController class', () => {
+	const scheme: Scheme = {
+		config: {
+			modules: [
 				{
-					key: 'welcome_1',
-					components: [
-						{
-							common: {
-								type: 'InputText',
-								model: 'address_1',
-							},
-						},
-						{
-							common: {
-								type: 'InputText',
-								model: 'address_2',
-								enable: true,
-							},
-							components: [
-								{
-									common: {
-										type: 'InputText',
-										model: 'address_4',
-										enable: false,
-									},
-								},
-							],
-						},
-						{
-							common: {
-								type: 'InputText',
-								model: 'address_3',
-								enable: false,
-							},
-						},
-					],
+					name: 'auth',
+					enable: false,
 				},
 			],
-		};
+		},
+		pages: [
+			{
+				key: 'welcome_1',
+				components: [
+					{
+						common: {
+							type: 'InputText',
+							model: 'address_1',
+						},
+					},
+					{
+						common: {
+							type: 'InputText',
+							model: 'address_2',
+							enable: true,
+						},
+						components: [
+							{
+								common: {
+									type: 'InputText',
+									model: 'address_4',
+									enable: false,
+								},
+							},
+						],
+					},
+					{
+						common: {
+							type: 'InputText',
+							model: 'address_3',
+							enable: false,
+						},
+					},
+				],
+			},
+		],
+	};
+	// @ts-ignore
+	SchemeController.scheme = scheme;
 
-		const SC = new SchemeController();
-		expect(SC.isValid()).toBeFalsy();
+	it('-> isValid', () => {
 		// @ts-ignore
-		SC.scheme = scheme;
-		expect(SC.isValid()).toBeTruthy();
+		SchemeController.scheme = null;
+		expect(SchemeController.isValid()).toBeFalsy();
+		// @ts-ignore
+		SchemeController.scheme = scheme;
+		expect(SchemeController.isValid()).toBeTruthy();
 
-		const page: Page = SC.getPage('welcome_1');
+		const page: Page = SchemeController.getPage('welcome_1');
 		expect(page.key).toBe('welcome_1');
+	});
+
+	it('-> getPage', () => {
+		const page: Page = SchemeController.getPage('welcome_1');
+		expect(page.key).toBe('welcome_1');
+	});
+
+	it('-> getConfig', () => {
+		const configuration: Configurations = SchemeController.getConfig();
+		// @ts-ignore
+		expect(configuration.modules[0].name).toBe('auth');
 	});
 });
