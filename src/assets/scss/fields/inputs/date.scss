@@ -1,0 +1,10 @@
+.input-date {
+	@extend %error-text;
+	@extend %hint;
+
+	input {
+		@extend %field-default;
+		@extend %validation-arrow;
+		@extend %error-field;
+	}
+}

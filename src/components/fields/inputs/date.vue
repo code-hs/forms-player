@@ -1,19 +1,30 @@
 <template>
-	<div>
-		<div class="my-date">
-			<input
-				ref="self"
-				v-model="modelStore[common.model]"
-				v-mask="mask"
-				type="text"
-				:placeholder="$t(text.placeholder)"
-				:required="validation.required"
-				class="datepicker-1"
-				:class="{error: valid.error}"
-				@blur="handleBlur"
-				@input="handleInput"
-			/>
-		</div>
+	<div class="field input-text" :class="common.class">
+		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
+
+		<!--suppress JSUnresolvedFunction -->
+		<input
+			ref="self"
+			v-model="modelStore[common.model]"
+			v-mask="mask"
+			type="text"
+			:placeholder="$t(text.placeholder)"
+			:required="validation.required"
+			class="datepicker-1"
+			:class="{error: valid.error}"
+			@blur="handleBlur"
+			@input="handleInput"
+		/>
+
+		<transition name="fade">
+			<div
+				v-if="validation.errorText"
+				:class="{showContent: valid.error}"
+				class="error-text"
+			>
+				{{ $t(validation.errorText) }}
+			</div>
+		</transition>
 	</div>
 </template>
 

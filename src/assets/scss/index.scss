@@ -16,7 +16,9 @@
 @import 'fields/mixins';
 @import 'fields/inputs/text';
 @import 'fields/inputs/password';
-@import 'fields/selector';
 @import 'fields/inputs/textarea';
+@import 'fields/inputs/email';
+@import 'fields/inputs/date';
+@import 'fields/selector';
 @import 'fields/checkbox';
 @import 'fields/buttons/submit';
