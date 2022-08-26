@@ -72,13 +72,16 @@ export interface LocalizationConfig {
  * }
  */
 
+export interface ModuleOptions {
+	global?: any;
+	forEachField?: object;
+	[key: string]: any;
+}
+
 export interface Module {
 	name: string;
 	enable: boolean;
-	options?: {
-		global?: object;
-		forEachField?: object;
-	};
+	options?: ModuleOptions;
 }
 
 export interface Configurations {

@@ -5,7 +5,7 @@ export class ModuleController {
 	static init(
 		checker: Function,
 		successLoad: Function,
-		failLoad: Function = null,
+		failLoad: Function | null = null,
 		failLoadCount = 5
 	) {
 		if (!checker()) {
