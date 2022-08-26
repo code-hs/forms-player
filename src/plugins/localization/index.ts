@@ -61,8 +61,7 @@ export class Localization {
 	 * @param key - like 'foo.boo.bar'
 	 */
 	static getText(key: string): string {
-		const currentLanguage: string =
-			store.getters['localization/currentLanguage'];
+		const currentLanguage: string = this.getLang();
 
 		if (!key || !currentLanguage) return '';
 
@@ -97,5 +96,9 @@ export class Localization {
 		}
 
 		store.commit('localization/setCurrentLanguage', lang);
+	}
+
+	static getLang(): string {
+		return store.getters['localization/currentLanguage'];
 	}
 }
