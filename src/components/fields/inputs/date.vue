@@ -1,5 +1,5 @@
 <template>
-	<div class="field input-text" :class="common.class">
+	<div class="field input-date" :class="common.class">
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
 		<!--suppress JSUnresolvedFunction -->
@@ -30,11 +30,13 @@
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-// import {FieldValidator} from '@/classes/validator/FieldValidator';
+import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 import {ModuleController} from '@/classes/modules/ModuleController';
 import {bus, busBroadcasts} from '@/utils/bus';
+import {DatepickerH} from '@/classes/modules/DatepickerH';
+import {SmartTimeout} from '@/utils/SmartTimeout';
 
 export default {
 	name: 'InputDate',
@@ -63,7 +65,6 @@ export default {
 	data() {
 		return {
 			mask: '',
-			// prevValue: '',
 			multiBoxName: FH.getMultiName(this),
 			valid: {
 				dirty: false,
@@ -71,6 +72,8 @@ export default {
 				connect: false,
 			},
 			moduleConfig: ModuleController.getModuleOptions('datepicker'),
+			lang: this.localization.getLang(),
+			datepickerItem: null,
 		};
 	},
 
@@ -102,6 +105,10 @@ export default {
 		this.validatorDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+
+		if (this.datepickerItem) {
+			this.datepickerItem.destroy();
+		}
 	},
 
 	methods: {
@@ -115,27 +122,43 @@ export default {
 		}),
 
 		init() {
+			const smtt = new SmartTimeout(50, SmartTimeout.coefficients.loadingFile);
+			const datepickerH = new DatepickerH(this.moduleConfig, this.lang);
+			datepickerH.setLangInOptions();
+
+			const initer = setInterval(() => {
+				if (datepickerH.isLoadedLocales()) {
+					clearInterval(initer);
+					this.initAfterLoadedLocales();
+				}
+			}, +smtt);
+		},
+
+		initAfterLoadedLocales() {
+			// after loaded module and locales for datepicker
 			const {self} = this.$refs;
 			const opts = {...this.moduleConfig.global, ...this.module};
-			// eslint-disable-next-line no-new
-			new window.Datepicker(self, opts);
+			const {Datepicker} = window;
 
+			this.datepickerItem = new Datepicker(self, opts);
 			self.addEventListener('changeDate', this.updateValue);
 		},
 
 		updateValue() {
 			this.modelStore[this.common.model] = this.$refs.self.value;
+			this.validatorProcessAndUpdateDirty();
 		},
-		//
-		// initValidation() {
-		// 	if (FieldValidator.canValidation(this.validation)) {
-		// 		this.valid.connect = true;
-		// 		this.validatorAdd(this.virtualKey);
-		//
-		// 		// noinspection JSUnresolvedFunction
-		// 		bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
-		// 	}
-		// },
+
+		initValidation() {
+			if (FieldValidator.canValidation(this.validation)) {
+				// запуск валидации происходит если есть regexp, или required
+				this.valid.connect = true;
+				this.validatorAdd(this.virtualKey);
+
+				// noinspection JSUnresolvedFunction
+				// bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+			}
+		},
 		handleBlur() {
 			// this.validatorProcessAndUpdateDirty();
 		},
@@ -145,7 +168,24 @@ export default {
 			console.log(e.target.value);
 
 			// this.validatorProcessDirty();
-			// InputHelper.processTextPatternDirty(this, e);
+		},
+		validatorProcessAndUpdateDirty(updateStore = true) {
+			if (!this.valid.connect) return;
+
+			this.validatorUpdateError();
+			// if field has error - becomes dirty, otherwise clear
+			this.valid.dirty = this.valid.error;
+
+			console.log(this.valid);
+			if (updateStore) this.validatorSaveInfo();
+		},
+		validatorUpdateError() {
+			try {
+				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
+			} catch (e) {
+				// eslint-disable-next-line no-console
+				console.error(e);
+			}
 		},
 		// validatorProcessDirty() {
 		// 	if (!this.valid.connect) return;
@@ -156,29 +196,13 @@ export default {
 		// 	this.validatorUpdateError();
 		// 	this.validatorSaveInfo();
 		// },
-		// validatorProcessAndUpdateDirty(updateStore = true) {
-		// 	if (!this.valid.connect) return;
-		//
-		// 	this.validatorUpdateError();
-		// 	// if field has error - becomes dirty, otherwise clear
-		// 	this.valid.dirty = this.valid.error;
-		//
-		// 	if (updateStore) this.validatorSaveInfo();
-		// },
-		// validatorUpdateError() {
-		// 	try {
-		// 		this.valid.error = !FieldValidator.isValid(this.validation, this.value);
-		// 	} catch (e) {
-		// 		// eslint-disable-next-line no-console
-		// 		console.error(e);
-		// 	}
-		// },
-		// validatorSaveInfo() {
-		// 	this.validatorUpdate({
-		// 		key: this.virtualKey,
-		// 		error: this.valid.error,
-		// 	});
-		// },
+
+		validatorSaveInfo() {
+			this.validatorUpdate({
+				key: this.virtualKey,
+				error: this.valid.error,
+			});
+		},
 		// validatorHandleTask() {
 		// 	this.validatorProcessAndUpdateDirty(false);
 		// 	this.fieldResponseOnValidationEvent({

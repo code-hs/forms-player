@@ -55,7 +55,8 @@
 		"require-await": "warn",
 		"curly": "warn",
 		"no-plusplus": 0,
-		"prefer-destructuring": 0
+		"prefer-destructuring": 0,
+		"no-bitwise": 0
 	},
 	"parserOptions": {
 		"parser": "@typescript-eslint/parser"
