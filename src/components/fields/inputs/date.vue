@@ -124,14 +124,40 @@ export default {
 		init() {
 			const smtt = new SmartTimeout(50, SmartTimeout.coefficients.loadingFile);
 			const datepickerH = new DatepickerH(this.moduleConfig, this.lang);
-			datepickerH.setLangInOptions();
+			datepickerH.setLangInOptions(); // dirty function, update this.moduleConfig
+			let runOnce = true;
 
-			const initer = setInterval(() => {
-				if (datepickerH.isLoadedLocales()) {
-					clearInterval(initer);
-					this.initAfterLoadedLocales();
-				}
-			}, +smtt);
+			const tickerFunc = () => {
+				// Функция для ожидания загрузки локалей.
+				// После каждого тика, время увеличивается вдвое
+				setTimeout(() => {
+					if (datepickerH.isLoadedLocales()) {
+						this.initAfterLoadedLocales();
+						return; // stop loop
+					}
+
+					if (runOnce && smtt.totalTime > 900) {
+						// если не удалось загрузить локали в течении 900мс,
+						// то выводим уже с дефолтным языком окно
+						runOnce = false;
+						this.initAfterLoadedLocales();
+						// не завершаем цикл, вдруг еще дозагрузиться локали
+						// continue loop
+					}
+
+					if (smtt.totalTime > 10000) {
+						// Но если вдруг они не загрузятся и за это время,
+						// то отменяем ожидание.
+						// А если бы загрузились, то выполнилась бы функция
+						// 	if (datepickerH.isLoadedLocales()) this.initAfterLoadedLocales();
+						return; // stop loop
+					}
+
+					// new tick in loop
+					tickerFunc();
+				}, +smtt);
+			};
+			tickerFunc();
 		},
 
 		initAfterLoadedLocales() {
