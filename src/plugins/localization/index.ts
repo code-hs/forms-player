@@ -21,7 +21,7 @@ export class Localization {
 
 		if (!this.canUseLang(this.defaultLang)) {
 			console.error(
-				`Localization.install: defaultLang '${this.defaultLang}' is not correct, or is not available, can't install module languages`
+				`Localization.install: defaultLang in scheme, '${this.defaultLang}' is not correct, or is not available, can't install module languages`
 			);
 		}
 	}

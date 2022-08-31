@@ -49,13 +49,21 @@ export class DatepickerH {
 	}
 
 	setLangInOptions(): void {
+		if (!this.options || !this.options.global) {
+			console.error(
+				'DatepickerH.setLangInOptions: options or options.global is not found'
+			);
+			return;
+		}
+
 		// set lang in options. dirty!
 		// this options pass ta the Datepicker constructor
 		this.options.global.language = this.relatedLang;
 	}
 
 	private getRelatedLanguage(): string {
-		const relations: Relations = this.options.locales?.relations;
+		const relations: Relations = this.options.locales?.relations || {};
+
 		return relations[this.lang] || this.lang;
 	}
 
