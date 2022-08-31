@@ -71,7 +71,7 @@ export default {
 				error: false,
 				connect: false,
 			},
-			moduleConfig: ModuleController.getModuleOptions('datepicker'),
+			moduleOptions: ModuleController.getModuleOptions('datepicker'),
 			lang: this.localization.getLang(),
 			datepickerItem: null,
 		};
@@ -123,8 +123,8 @@ export default {
 
 		loadLocales() {
 			const smtt = new SmartTimeout(50, SmartTimeout.coefficients.loadingFile);
-			const datepickerH = new DatepickerH(this.moduleConfig, this.lang);
-			datepickerH.setLangInOptions(); // dirty function, update this.moduleConfig
+			const datepickerH = new DatepickerH(this.moduleOptions, this.lang);
+			datepickerH.setLangInOptions(); // dirty function, update this.moduleOptions
 			let runOnce = true;
 
 			const tickerFunc = () => {
@@ -166,7 +166,7 @@ export default {
 		initAfterLoadedLocales() {
 			// after loaded module and locales for datepicker
 			const {self} = this.$refs;
-			const opts = {...this.moduleConfig.global, ...this.module};
+			const opts = {...this.moduleOptions.global, ...this.module};
 			const {Datepicker} = window;
 
 			this.datepickerItem = new Datepicker(self, opts);

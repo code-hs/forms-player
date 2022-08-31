@@ -32,7 +32,10 @@ export class ModuleController {
 	static getModuleOptions(moduleName: string): object {
 		const module: Module | undefined = this.getModule(moduleName);
 		if (!module) {
-			throw new Error('InitModule.getModuleOptions: module is not found');
+			console.error(
+				`InitModule.getModuleOptions: module '${moduleName}' is not found`
+			);
+			return {};
 		}
 
 		return module.options || {};

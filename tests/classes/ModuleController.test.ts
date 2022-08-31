@@ -57,9 +57,7 @@ describe('InitModule class', () => {
 	};
 
 	it('-> getModuleOptions', () => {
-		expect(() => {
-			ModuleController.getModuleOptions('auth2323');
-		}).toThrow();
+		expect(ModuleController.getModuleOptions('auth2323')).toEqual({});
 
 		const options = ModuleController.getModuleOptions('auth');
 		// @ts-ignore
