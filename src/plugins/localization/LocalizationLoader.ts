@@ -10,11 +10,12 @@ export class LocalizationLoader {
 		};
 	}
 
-	private static getLocales(): Locales {
+	private static getLocales(): Locales | undefined {
 		const localesJSON: string | null =
 			localStorage.getItem('WDFL:init:locales');
 		if (!localesJSON) {
-			throw new Error('LocalizationLoader.getLocales: no locales found');
+			console.error('LocalizationLoader.getLocales: no locales found');
+			return;
 		}
 
 		return JSON.parse(localesJSON);
@@ -25,18 +26,20 @@ export class LocalizationLoader {
 
 		// is configuration has in scheme
 		if (!scheme.config?.localization) {
-			throw new Error(
+			console.error(
 				'LocalizationLoader.getConfiguration: no localization config found in scheme'
 			);
+			return;
 		}
 
 		// is configuration has correct structure
 		const configuration: LocalizationConfig = scheme.config.localization;
 
 		if (!configuration.defaultLang || !configuration.availableLangs) {
-			throw new Error(
+			console.error(
 				'LocalizationLoader.getConfiguration: incorrect localization config structure'
 			);
+			return;
 		}
 
 		return configuration;

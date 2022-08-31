@@ -16,18 +16,19 @@ export class Localization {
 	static install(Vue: any): void {
 		this.loadData();
 
-		if (!this.canUseLang(this.defaultLang)) {
-			throw new Error(
-				`Localization.install: defaultLang '${this.defaultLang}' is not correct, or is not available`
-			);
-		}
-
 		Vue.prototype.$t = (key: string) => this.getText(key);
 		Vue.prototype.localization = this;
+
+		if (!this.canUseLang(this.defaultLang)) {
+			console.error(
+				`Localization.install: defaultLang '${this.defaultLang}' is not correct, or is not available, can't install module languages`
+			);
+		}
 	}
 
 	static loadData(): void {
 		const data: LocalizationInformation = LocalizationLoader.getData();
+		if (!data.configuration || !data.locales) return;
 		// setup fields
 		this.locales = data.locales;
 
@@ -63,13 +64,14 @@ export class Localization {
 	static getText(key: string): string {
 		const currentLanguage: string = this.getLang();
 
-		if (!key || !currentLanguage) return '';
+		if (!key) return '';
 
 		// if key starts from '#', return this text
 		if (key.startsWith('#')) {
 			return key.substr(1);
 		}
 
+		if (!currentLanguage) return '';
 		const localesByLang = this.locales[currentLanguage];
 
 		return getValueByStringKey(key, localesByLang);
@@ -90,7 +92,7 @@ export class Localization {
 
 		if (!this.canUseLang(lang)) {
 			console.warn(
-				`Localization.changeLanguage: language '${lang}' is not allowed`
+				`Localization.changeLanguage: language '${lang}' can't find in locales or cant find in array scheme.config.localization.availableLangs`
 			);
 			return;
 		}
