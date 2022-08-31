@@ -98,7 +98,7 @@ export default {
 	},
 
 	mounted() {
-		ModuleController.init(() => window.Datepicker, this.init);
+		ModuleController.init(() => window.Datepicker, this.loadLocales);
 	},
 
 	beforeDestroy() {
@@ -121,7 +121,7 @@ export default {
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
 
-		init() {
+		loadLocales() {
 			const smtt = new SmartTimeout(50, SmartTimeout.coefficients.loadingFile);
 			const datepickerH = new DatepickerH(this.moduleConfig, this.lang);
 			datepickerH.setLangInOptions(); // dirty function, update this.moduleConfig
@@ -131,12 +131,14 @@ export default {
 				// Функция для ожидания загрузки локалей.
 				// После каждого тика, время увеличивается вдвое
 				setTimeout(() => {
+					console.log(smtt.totalTime);
 					if (datepickerH.isLoadedLocales()) {
 						this.initAfterLoadedLocales();
 						return; // stop loop
 					}
 
 					if (runOnce && smtt.totalTime > 900) {
+						console.log('=900');
 						// если не удалось загрузить локали в течении 900мс,
 						// то выводим уже с дефолтным языком окно
 						runOnce = false;
@@ -146,6 +148,7 @@ export default {
 					}
 
 					if (smtt.totalTime > 10000) {
+						console.log('=10000');
 						// Но если вдруг они не загрузятся и за это время,
 						// то отменяем ожидание.
 						// А если бы загрузились, то выполнилась бы функция
