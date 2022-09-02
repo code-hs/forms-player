@@ -20,7 +20,6 @@ export class ModuleController {
 
 		// module files are not loaded -> wait, then try again
 		if (smtt.totalTime >= 1500) {
-			console.log('ModuleController.init: module files are not loaded');
 			// after 1500ms, module are not loaded, call failLoad function
 			if (failLoad) failLoad();
 			return;

@@ -98,10 +98,7 @@ export default {
 	},
 
 	mounted() {
-		const smtt = new SmartTimeout(
-			SmartTimeout.timeouts.loadingFile,
-			SmartTimeout.coefficients.loadingFile
-		);
+		const smtt = SmartTimeout.createForLoadFile();
 
 		ModuleController.init(
 			() => window.Datepicker,
@@ -132,10 +129,7 @@ export default {
 		}),
 
 		loadLocales() {
-			const smtt = new SmartTimeout(
-				SmartTimeout.timeouts.loadingFile,
-				SmartTimeout.coefficients.loadingFile
-			);
+			const smtt = SmartTimeout.createForLoadFile();
 			let runOnce = true;
 			const datepickerH = new DatepickerH(this.moduleOptions, this.lang);
 			datepickerH.setLangInOptions(); // dirty function, update this.moduleOptions

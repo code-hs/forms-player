@@ -1,12 +1,10 @@
-// создавать класс на основании статической функции, со всеми готовыми параметрами
-
 export class SmartTimeout {
-	static coefficients = {
-		loadingFile: 2,
-	};
-
 	static timeouts = {
 		loadingFile: 50,
+	};
+
+	static coefficients = {
+		loadingFile: 2,
 	};
 
 	private value: number;
@@ -21,6 +19,13 @@ export class SmartTimeout {
 		this.maxValue = maxValue;
 		this.counts = 0;
 		this.totalTime = 0;
+	}
+
+	static createForLoadFile() {
+		return new SmartTimeout(
+			this.timeouts.loadingFile,
+			this.coefficients.loadingFile
+		);
 	}
 
 	valueOf(): number {
