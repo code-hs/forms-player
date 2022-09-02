@@ -22,7 +22,6 @@ export class DatepickerH {
 	lang: string;
 	relatedLang: string;
 
-	// eslint-disable-next-line no-unused-vars
 	constructor(options: ModuleOptions, lang: string) {
 		this.options = options;
 		this.lang = lang;
@@ -31,21 +30,6 @@ export class DatepickerH {
 		// from UA to UK
 		// relatedLang = UK
 		this.relatedLang = this.getRelatedLanguage();
-	}
-
-	static getModule(): any {
-		// @ts-ignore
-		return window.Datepicker;
-	}
-
-	static isLoadedModule(): boolean {
-		return !!this.getModule();
-	}
-
-	isLoadedLocales(): boolean {
-		if (!DatepickerH.isLoadedModule()) return false;
-
-		return !!this.getLocales();
 	}
 
 	setLangInOptions(): void {
@@ -61,6 +45,21 @@ export class DatepickerH {
 		this.options.global.language = this.relatedLang;
 	}
 
+	isLoadedLocales(): boolean {
+		if (!this.isLoadedModule()) return false;
+
+		return !!this.getLocales();
+	}
+
+	private getModule(): any {
+		// @ts-ignore
+		return window.Datepicker;
+	}
+
+	private isLoadedModule(): boolean {
+		return !!this.getModule();
+	}
+
 	private getRelatedLanguage(): string {
 		const relations: Relations = this.options.locales?.relations || {};
 
@@ -68,6 +67,6 @@ export class DatepickerH {
 	}
 
 	private getLocales(): object {
-		return DatepickerH.getModule().locales[this.relatedLang];
+		return this.getModule().locales[this.relatedLang];
 	}
 }

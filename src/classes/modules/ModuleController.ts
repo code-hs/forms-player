@@ -1,5 +1,9 @@
 import {SchemeController} from '@/classes/scheme/SchemeController';
-import {Configurations, Module} from '@/classes/scheme/structure';
+import {
+	Configurations,
+	Module,
+	ModuleOptions,
+} from '@/classes/scheme/structure';
 
 export class ModuleController {
 	static init(
@@ -29,7 +33,7 @@ export class ModuleController {
 		successLoad();
 	}
 
-	static getModuleOptions(moduleName: string): object {
+	static getModuleOptions(moduleName: string): ModuleOptions {
 		const module: Module | undefined = this.getModule(moduleName);
 		if (!module) {
 			console.error(
