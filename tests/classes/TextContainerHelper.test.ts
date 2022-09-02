@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {TextContainerHelper} from '@/classes/components/content/text/TextContainerHelper';
-import {FieldThis} from '@/classes/scheme/structure';
+import {FieldThis} from '@/classes/components/field/structureField';
 
 describe('TextContainerHelper class', () => {
 	it('.canTag', () => {

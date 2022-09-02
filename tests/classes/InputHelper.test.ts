@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
-import {FieldThis} from '@/classes/scheme/structure';
+import {FieldThis} from '@/classes/components/field/structureField';
 
 describe('Api class', () => {
 	it('correct work func initMaskDirty', () => {

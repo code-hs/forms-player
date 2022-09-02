@@ -94,7 +94,3 @@ export interface Scheme {
 	styles?: StylesParams;
 	pages: Page[];
 }
-
-export interface FieldThis {
-	[key: string]: any;
-}
