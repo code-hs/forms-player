@@ -123,44 +123,33 @@ export default {
 
 		loadLocales() {
 			const smtt = new SmartTimeout(50, SmartTimeout.coefficients.loadingFile);
+			let runOnce = true;
 			const datepickerH = new DatepickerH(this.moduleOptions, this.lang);
 			datepickerH.setLangInOptions(); // dirty function, update this.moduleOptions
-			let runOnce = true;
 
-			const tickerFunc = () => {
-				// Функция для ожидания загрузки локалей.
-				// После каждого тика, время увеличивается вдвое
-				setTimeout(() => {
-					console.log(smtt.totalTime);
-					if (datepickerH.isLoadedLocales()) {
-						this.initAfterLoadedLocales();
-						return; // stop loop
-					}
+			const loop = () => {
+				if (datepickerH.isLoadedLocales()) {
+					// main function, wait when loaded locales
+					this.initAfterLoadedLocales();
+					return; // stop loop
+				}
 
-					if (runOnce && smtt.totalTime > 900) {
-						console.log('=900');
-						// если не удалось загрузить локали в течении 900мс,
-						// то выводим уже с дефолтным языком окно
-						runOnce = false;
-						this.initAfterLoadedLocales();
-						// не завершаем цикл, вдруг еще дозагрузиться локали
-						// continue loop
-					}
+				if (runOnce && smtt.totalTime > 900) {
+					// if locales not loaded after 900ms -> use default module lang 'en'
+					runOnce = false;
+					this.initAfterLoadedLocales();
+					// don't stop loop, wait, maybe loaded locales, need bigger time for that
+					// continue loop
+				}
 
-					if (smtt.totalTime > 10000) {
-						console.log('=10000');
-						// Но если вдруг они не загрузятся и за это время,
-						// то отменяем ожидание.
-						// А если бы загрузились, то выполнилась бы функция
-						// 	if (datepickerH.isLoadedLocales()) this.initAfterLoadedLocales();
-						return; // stop loop
-					}
+				if (smtt.totalTime > 10000) {
+					// if locales not loaded after 10000ms
+					return; // stop loop, stop waiting is locales load
+				}
 
-					// new tick in loop
-					tickerFunc();
-				}, +smtt);
+				setTimeout(loop, +smtt);
 			};
-			tickerFunc();
+			setTimeout(loop, +smtt);
 		},
 
 		initAfterLoadedLocales() {
