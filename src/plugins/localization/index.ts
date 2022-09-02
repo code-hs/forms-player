@@ -2,7 +2,7 @@
 import store from '@/store';
 import {getValueByStringKey} from '@/utils/objects';
 import {LocalizationLoader} from './LocalizationLoader';
-import {Locales, LocalizationInformation} from './Structure';
+import {Locales, LocalizationInformation} from './structure';
 
 export class Localization {
 	static locales: Locales = {};

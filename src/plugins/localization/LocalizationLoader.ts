@@ -1,6 +1,6 @@
 import {Scheme, LocalizationConfig} from '@/classes/scheme/structure';
 import {SchemeLoader} from '@/classes/scheme/SchemeLoader';
-import {Locales, LocalizationInformation} from './Structure';
+import {Locales, LocalizationInformation} from './structure';
 
 export class LocalizationLoader {
 	static getData(): LocalizationInformation {
