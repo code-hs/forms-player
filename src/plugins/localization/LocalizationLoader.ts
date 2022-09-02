@@ -1,6 +1,6 @@
 import {Scheme, LocalizationConfig} from '@/classes/scheme/structure';
 import {SchemeLoader} from '@/classes/scheme/SchemeLoader';
-import {Locales, LocalizationInformation} from './structure';
+import {LocalesAllLanguages, LocalizationInformation} from './structure';
 
 export class LocalizationLoader {
 	static getData(): LocalizationInformation {
@@ -10,7 +10,7 @@ export class LocalizationLoader {
 		};
 	}
 
-	private static getLocales(): Locales | undefined {
+	private static getLocales(): LocalesAllLanguages | undefined {
 		const localesJSON: string | null =
 			localStorage.getItem('WDFL:init:locales');
 		if (!localesJSON) {

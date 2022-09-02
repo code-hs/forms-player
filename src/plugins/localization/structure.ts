@@ -1,10 +1,9 @@
 import {LocalizationConfig} from '@/classes/scheme/structure';
 
 export interface Locales {
-	[lang: string]: {
-		[localeKey: string]: string;
-	};
+	[key: string]: string;
 }
+
 /**
  * {
  *		en: {
@@ -15,8 +14,11 @@ export interface Locales {
  *		}
  * }
  */
+export interface LocalesAllLanguages {
+	[lang: string]: Locales;
+}
 
 export interface LocalizationInformation {
 	configuration: LocalizationConfig;
-	locales: Locales;
+	locales: LocalesAllLanguages;
 }

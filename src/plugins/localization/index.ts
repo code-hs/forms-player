@@ -2,10 +2,14 @@
 import store from '@/store';
 import {getValueByStringKey} from '@/utils/objects';
 import {LocalizationLoader} from './LocalizationLoader';
-import {Locales, LocalizationInformation} from './structure';
+import {
+	LocalesAllLanguages,
+	Locales,
+	LocalizationInformation,
+} from './structure';
 
 export class Localization {
-	static locales: Locales = {};
+	static locales: LocalesAllLanguages = {};
 	static defaultLang: string = '';
 	static availableLangs: string[] = [];
 	static langsInLocales: string[] = [];
@@ -72,7 +76,7 @@ export class Localization {
 		}
 
 		if (!currentLanguage) return '';
-		const localesByLang = this.locales[currentLanguage];
+		const localesByLang: Locales = this.locales[currentLanguage];
 
 		return getValueByStringKey(key, localesByLang);
 	}
