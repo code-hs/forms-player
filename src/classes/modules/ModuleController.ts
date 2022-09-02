@@ -4,33 +4,31 @@ import {
 	Module,
 	ModuleOptions,
 } from '@/classes/scheme/structure';
+import {SmartTimeout} from '@/utils/SmartTimeout';
 
 export class ModuleController {
 	static init(
 		checker: Function,
 		successLoad: Function,
 		failLoad: Function | null = null,
-		failLoadCount = 5
+		smtt: SmartTimeout
 	) {
-		if (!checker()) {
-			// module files are not loaded
-			// wait, then try again
-			// eslint-disable-next-line no-param-reassign
-			failLoadCount--;
-			if (failLoadCount === 0) {
-				// after 5 tries, 1500ms, module are not loaded, call failLoad function
-				if (failLoad) failLoad();
-
-				return;
-			}
-
-			setTimeout(() => {
-				this.init(checker, successLoad, failLoad, failLoadCount);
-			}, 300);
+		if (checker()) {
+			successLoad();
 			return;
 		}
 
-		successLoad();
+		// module files are not loaded -> wait, then try again
+		if (smtt.totalTime >= 1500) {
+			console.log('ModuleController.init: module files are not loaded');
+			// after 1500ms, module are not loaded, call failLoad function
+			if (failLoad) failLoad();
+			return;
+		}
+
+		setTimeout(() => {
+			this.init(checker, successLoad, failLoad, smtt);
+		}, +smtt);
 	}
 
 	static getModuleOptions(moduleName: string): ModuleOptions {

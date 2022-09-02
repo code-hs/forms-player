@@ -1,6 +1,12 @@
+// создавать класс на основании статической функции, со всеми готовыми параметрами
+
 export class SmartTimeout {
 	static coefficients = {
 		loadingFile: 2,
+	};
+
+	static timeouts = {
+		loadingFile: 50,
 	};
 
 	private value: number;
