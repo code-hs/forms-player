@@ -21,7 +21,7 @@ export class LocalizationLoader {
 		return JSON.parse(localesJSON);
 	}
 
-	private static getConfiguration(): LocalizationConfig {
+	private static getConfiguration(): LocalizationConfig | undefined {
 		const scheme: Scheme = SchemeLoader.getData();
 
 		// is configuration has in scheme

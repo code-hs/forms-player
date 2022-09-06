@@ -13,7 +13,9 @@ describe('VirtualComponentH class', () => {
 			'Checkbox',
 		];
 		const fieldType = '1111111';
-		const field: Field = {};
+		const field: Field = {
+			common: {type: 'test'},
+		};
 
 		const r: boolean = VirtualComponentH.canInitModel(
 			allowedComponents,
@@ -34,9 +36,11 @@ describe('VirtualComponentH class', () => {
 		];
 		const fieldType = 'InputText';
 		const field: Field = {
+			common: {type: 'test'},
 			custom: {
 				multi: {
 					name: '111',
+					key: 333,
 				},
 			},
 		};
@@ -60,7 +64,7 @@ describe('VirtualComponentH class', () => {
 		];
 		const fieldType = 'InputText';
 		const field: Field = {
-			common: {model: 'test'},
+			common: {model: 'test', type: 'test'},
 		};
 
 		const r: boolean = VirtualComponentH.canInitModel(

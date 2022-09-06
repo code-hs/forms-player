@@ -19,6 +19,6 @@ export interface LocalesAllLanguages {
 }
 
 export interface LocalizationInformation {
-	configuration: LocalizationConfig;
-	locales: LocalesAllLanguages;
+	configuration?: LocalizationConfig;
+	locales?: LocalesAllLanguages;
 }

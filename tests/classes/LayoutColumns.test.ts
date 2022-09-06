@@ -5,6 +5,7 @@ import {Field} from '@/classes/scheme/structure';
 describe('LayoutColumns class', () => {
 	it('.getColumnClasses .1', () => {
 		const field: Field = {
+			common: {type: 'test'},
 			custom: {childCount: 2},
 		};
 		const classes: string = LayoutColumns.getColumnClasses(field);
@@ -15,6 +16,7 @@ describe('LayoutColumns class', () => {
 	it('.getColumnClasses .2', () => {
 		const field: Field = {
 			common: {
+				type: 'test',
 				class: 'test-col',
 			},
 			custom: {childCount: 3},
