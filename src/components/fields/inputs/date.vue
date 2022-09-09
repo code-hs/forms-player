@@ -72,7 +72,6 @@ export default {
 				connect: false,
 			},
 			moduleOptions: ModuleController.getModuleOptions('datepicker'),
-			lang: this.localization.getLang(),
 			datepickerItem: null,
 		};
 	},
@@ -80,6 +79,7 @@ export default {
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
+			lang: 'localization/currentLanguage',
 		}),
 		modelStore() {
 			if (this.multiBoxName) {
@@ -93,13 +93,21 @@ export default {
 		},
 	},
 
+	watch: {
+		lang() {
+			if (this.datepickerItem) {
+				this.datepickerItem.destroy();
+				this.loadLocales();
+			}
+		},
+	},
+
 	created() {
 		InputHelper.initMaskDirty(this);
 	},
 
 	mounted() {
 		const smtt = SmartTimeout.createForLoadFile();
-
 		ModuleController.init(
 			() => window.Datepicker,
 			this.loadLocales,
@@ -134,6 +142,7 @@ export default {
 			const datepickerH = new DatepickerH(this.moduleOptions, this.lang);
 			datepickerH.setLangInOptions(); // dirty function, update this.moduleOptions
 
+			// wait when locales will be loaded
 			const loop = () => {
 				if (datepickerH.isLoadedLocales()) {
 					// main function, wait when loaded locales
@@ -150,6 +159,7 @@ export default {
 				}
 
 				if (smtt.totalTime > 10000) {
+					console.error('Datepicker: locales not loaded, use default lang');
 					// if locales not loaded after 10000ms
 					return; // stop loop, stop waiting is locales load
 				}

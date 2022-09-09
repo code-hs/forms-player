@@ -81,15 +81,6 @@ export class Localization {
 		return getValueByStringKey(key, localesByLang);
 	}
 
-	static canUseLang(lang: string): boolean {
-		// eslint-disable-next-line no-param-reassign
-		lang = lang.toLowerCase();
-
-		return (
-			this.langsInLocales.includes(lang) && this.availableLangs.includes(lang)
-		);
-	}
-
 	static changeLanguage(lang: string): void {
 		// eslint-disable-next-line no-param-reassign
 		lang = lang.toLowerCase();
@@ -105,6 +96,16 @@ export class Localization {
 	}
 
 	static getLang(): string {
+		// return static value
 		return store.getters['localization/currentLanguage'];
+	}
+
+	private static canUseLang(lang: string): boolean {
+		// eslint-disable-next-line no-param-reassign
+		lang = lang.toLowerCase();
+
+		return (
+			this.langsInLocales.includes(lang) && this.availableLangs.includes(lang)
+		);
 	}
 }
