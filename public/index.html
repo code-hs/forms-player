@@ -51,6 +51,16 @@
 					format('svg'); /* Chrome < 4, Legacy iOS */
 		}
 
+		*,
+		::after,
+		::before {
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			outline: none;
+		}
+
 		body,
 		html {
 			background: #292a2b;
@@ -58,7 +68,7 @@
 
 		body {
 			margin: 20px;
-			max-width: 800px;
+			max-width: 600px;
 		}
 	</style>
 </html>

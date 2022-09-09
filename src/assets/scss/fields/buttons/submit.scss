@@ -8,6 +8,7 @@
 		letter-spacing: 2px;
 		color: var(--submitText);
 		background: var(--submitBackground);
+		will-change: animation;
 
 		&:disabled {
 			cursor: default;
