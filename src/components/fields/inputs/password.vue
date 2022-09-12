@@ -83,11 +83,6 @@ export default {
 
 	created() {
 		this.initValidation();
-
-		this.processInput = debounce(
-			this.processInput,
-			FieldValidator.debounceTime
-		);
 	},
 
 	beforeDestroy() {
@@ -107,13 +102,16 @@ export default {
 		}),
 
 		initValidation() {
-			if (FieldValidator.canValidation(this.validation)) {
-				this.valid.connect = true;
-				this.validatorAdd(this.virtualKey);
+			if (!FieldValidator.canValidation(this.validation)) return;
 
-				// noinspection JSUnresolvedFunction
-				bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
-			}
+			this.valid.connect = true;
+			this.validatorAdd(this.virtualKey);
+			this.validatorProcessDirty = debounce(
+				this.validatorProcessDirty,
+				FieldValidator.debounceTime
+			);
+			// noinspection JSUnresolvedFunction
+			bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
 		},
 		handleBlur() {
 			this.validatorProcessAndUpdateDirty();
