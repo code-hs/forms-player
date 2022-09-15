@@ -203,7 +203,7 @@ function parseFormatString(format: string) {
 export function parseDate(
 	dateStr: string | number | Date,
 	format: string | any,
-	locale: any
+	locale: any = undefined
 ): number | undefined {
 	if (dateStr instanceof Date || typeof dateStr === 'number') {
 		// cut hours and minutes, save only the date values
