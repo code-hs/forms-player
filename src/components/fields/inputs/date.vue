@@ -163,7 +163,8 @@ export default {
 			const smtt = SmartTimeout.createForLoadFile();
 			let runOnce = true;
 			const datepickerH = new DatepickerH(this.moduleOptions, this.lang);
-			datepickerH.setLangInOptions(); // dirty function, update this.moduleOptions
+			datepickerH.setLangInOptions(this.mergedOptions);
+			// dirty function, update this.mergedOptions
 
 			// wait when locales will be loaded
 			const loop = () => {

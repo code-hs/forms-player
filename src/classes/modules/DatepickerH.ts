@@ -1,7 +1,12 @@
 import {ModuleOptions} from '@/classes/scheme/structure';
+// import {SmartTimeout} from '@/utils/SmartTimeout';
 
 type Relations = {
 	[langFromAvailableLangs: string]: string;
+};
+
+type FieldOptions = {
+	[key: string]: any;
 };
 // "options": {
 // 	"locales": {
@@ -32,8 +37,8 @@ export class DatepickerH {
 		this.relatedLang = this.getRelatedLanguage();
 	}
 
-	setLangInOptions(): void {
-		if (!this.options || !this.options.global) {
+	setLangInOptions(fieldOptions: FieldOptions): void {
+		if (!this.options || !this.options) {
 			console.error(
 				'DatepickerH.setLangInOptions: options or options.global is not found'
 			);
@@ -41,8 +46,8 @@ export class DatepickerH {
 		}
 
 		// set lang in options. dirty!
-		// this options pass ta the Datepicker constructor
-		this.options.global.language = this.relatedLang;
+		// this options pass to the Datepicker constructor
+		fieldOptions.language = this.relatedLang;
 	}
 
 	isLoadedLocales(): boolean {
