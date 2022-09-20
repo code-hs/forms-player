@@ -22,7 +22,7 @@ type FieldOptions = {
 // 	}
 // }
 
-export class DatepickerH {
+export class DatepickerLoader {
 	options: ModuleOptions;
 	lang: string;
 	relatedLang: string;

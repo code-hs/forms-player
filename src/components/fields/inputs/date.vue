@@ -35,7 +35,7 @@ import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 import {ModuleController} from '@/classes/modules/ModuleController';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {DatepickerH} from '@/classes/modules/DatepickerH';
+import {DatepickerLoader} from '@/classes/modules/DatepickerLoader';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
 import {parseDate} from '@/utils/dateparser';
@@ -162,13 +162,16 @@ export default {
 		loadLocales() {
 			const smtt = SmartTimeout.createForLoadFile();
 			let runOnce = true;
-			const datepickerH = new DatepickerH(this.moduleOptions, this.lang);
-			datepickerH.setLangInOptions(this.mergedOptions);
+			const datepickerLoader = new DatepickerLoader(
+				this.moduleOptions,
+				this.lang
+			);
+			datepickerLoader.setLangInOptions(this.mergedOptions);
 			// dirty function, update this.mergedOptions
 
 			// wait when locales will be loaded
 			const loop = () => {
-				if (datepickerH.isLoadedLocales()) {
+				if (datepickerLoader.isLoadedLocales()) {
 					// main function, wait when loaded locales
 					this.initAfterLoadedLocales();
 					return; // stop loop
