@@ -129,14 +129,16 @@ export default {
 		this.initValidation();
 	},
 
-	mounted() {
+	async mounted() {
 		const smtt = SmartTimeout.createForLoadFile();
-		ModuleController.init(
-			() => window.Datepicker,
-			this.loadLocales,
-			null,
-			smtt
-		);
+		try {
+			await ModuleController.init(() => window.Datepicker, smtt);
+			this.loadLocales();
+			smtt.restart();
+			// wait is loaded locales
+		} catch (e) {
+			console.error(e);
+		}
 	},
 
 	beforeDestroy() {
@@ -166,8 +168,10 @@ export default {
 				this.moduleOptions,
 				this.lang
 			);
-			datepickerLoader.setLangInOptions(this.mergedOptions);
 			// dirty function, update this.mergedOptions
+			datepickerLoader.setLangInOptions(this.mergedOptions);
+
+			// todo: setTimeout to while, and delete this bad inner structure
 
 			// wait when locales will be loaded
 			const loop = () => {

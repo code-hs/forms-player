@@ -5,29 +5,22 @@ import {
 	ModuleOptions,
 } from '@/classes/scheme/structure';
 import {SmartTimeout} from '@/utils/SmartTimeout';
+import {delay} from '@/utils/asinchronius';
 
 export class ModuleController {
-	static init(
-		checker: Function,
-		successLoad: Function,
-		failLoad: Function | null = null,
-		smtt: SmartTimeout
-	) {
-		if (checker()) {
-			successLoad();
-			return;
+	static async init(checker: Function, smtt: SmartTimeout) {
+		while (!checker()) {
+			// module files are not loaded -> wait, then try again
+			if (smtt.totalTime >= 1500) {
+				// after 1500ms, module are not loaded, call failLoad function
+				throw new Error('module not loaded');
+			}
+
+			// eslint-disable-next-line no-await-in-loop
+			await delay(+smtt);
 		}
 
-		// module files are not loaded -> wait, then try again
-		if (smtt.totalTime >= 1500) {
-			// after 1500ms, module are not loaded, call failLoad function
-			if (failLoad) failLoad();
-			return;
-		}
-
-		setTimeout(() => {
-			this.init(checker, successLoad, failLoad, smtt);
-		}, +smtt);
+		return true;
 	}
 
 	static getModuleOptions(moduleName: string): ModuleOptions {
