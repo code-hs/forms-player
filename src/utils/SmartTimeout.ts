@@ -10,11 +10,13 @@ export class SmartTimeout {
 	private value: number;
 	readonly coefficient: number;
 	readonly maxValue: number;
+	startValue: number;
 	counts: number;
 	totalTime: number;
 
 	constructor(startValue: number, coefficient: number = 1, maxValue = 5000) {
 		this.value = startValue;
+		this.startValue = startValue;
 		this.coefficient = coefficient;
 		this.maxValue = maxValue;
 		this.counts = 0;
@@ -49,5 +51,11 @@ export class SmartTimeout {
 
 	getValue(): number {
 		return ~~this.value;
+	}
+
+	restart(): void {
+		this.value = this.startValue;
+		this.counts = 0;
+		this.totalTime = 0;
 	}
 }
