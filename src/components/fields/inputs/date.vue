@@ -18,11 +18,11 @@
 
 		<transition name="fade">
 			<div
-				v-if="validation.errorText"
+				v-if="valid.text"
 				:class="{showContent: valid.error}"
 				class="error-text"
 			>
-				{{ $t(validation.errorText) }}
+				{{ valid.text }}
 			</div>
 		</transition>
 	</div>
@@ -37,12 +37,22 @@ import {ModuleController} from '@/classes/modules/ModuleController';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {DatepickerH} from '@/classes/modules/DatepickerH';
 import {SmartTimeout} from '@/utils/SmartTimeout';
+import {debounce} from '@/utils/debounce';
+import {parseDate} from '@/utils/dateparser';
 
 export default {
 	name: 'InputDate',
 	props: {
 		common: FH.common,
-		validation: FH.validation,
+		validation: {
+			type: Object,
+			required: false,
+			default: () => ({
+				errorTextRequired: '',
+				errorTextNotValid: '',
+				errorTextRange: '',
+			}),
+		},
 		virtualKey: FH.virtualKey,
 		multiboxIndex: FH.multiboxIndex,
 		text: FH.text,
@@ -58,21 +68,29 @@ export default {
 		module: {
 			type: Object,
 			required: false,
-			default: () => ({}),
+			default: () => ({
+				minDate: '',
+				maxDate: '',
+			}),
 		},
 	},
 
 	data() {
+		const moduleOptions = ModuleController.getModuleOptions('datepicker');
+		const mergedOptions = {...moduleOptions.global, ...this.module};
+
 		return {
 			mask: '',
 			multiBoxName: FH.getMultiName(this),
 			valid: {
-				dirty: false,
 				error: false,
 				connect: false,
+				text: this.$t(this.validation.errorTextRequired),
 			},
-			moduleOptions: ModuleController.getModuleOptions('datepicker'),
+			moduleOptions,
+			mergedOptions,
 			datepickerItem: null,
+			dateFull: false,
 		};
 	},
 
@@ -103,7 +121,12 @@ export default {
 	},
 
 	created() {
+		if (!this.custom.mask) {
+			throw new Error('InputDate: custom.mask is required');
+		}
+
 		InputHelper.initMaskDirty(this);
+		this.initValidation();
 	},
 
 	mounted() {
@@ -172,65 +195,92 @@ export default {
 		initAfterLoadedLocales() {
 			// after loaded module and locales for datepicker
 			const {self} = this.$refs;
-			const opts = {...this.moduleOptions.global, ...this.module};
 			const {Datepicker} = window;
 
-			this.datepickerItem = new Datepicker(self, opts);
-			self.addEventListener('changeDate', this.updateValue);
+			this.datepickerItem = new Datepicker(self, this.mergedOptions);
+			self.addEventListener('changeDate', this.changeDate);
 		},
 
-		updateValue() {
+		changeDate() {
 			this.modelStore[this.common.model] = this.$refs.self.value;
-			this.validatorProcessAndUpdateDirty();
 		},
 
 		initValidation() {
-			if (FieldValidator.canValidation(this.validation)) {
-				// запуск валидации происходит если есть regexp, или required
-				this.valid.connect = true;
-				this.validatorAdd(this.virtualKey);
+			// noinspection JSCheckFunctionSignatures
+			if (!FieldValidator.canValidation(this.validation)) return;
 
-				// noinspection JSUnresolvedFunction
-				// bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
-			}
+			// запуск валидации происходит если есть regexp, или required
+			this.valid.connect = true;
+			this.validatorAdd(this.virtualKey);
+			this.validatorProcess = debounce(
+				this.validatorProcess,
+				FieldValidator.debounceTime
+			);
+
+			// noinspection JSUnresolvedFunction
+			bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
 		},
 		handleBlur() {
-			// this.validatorProcessAndUpdateDirty();
+			this.validatorProcess();
 		},
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.common.model] = e.target.value;
-			console.log(e.target.value);
-
-			// this.validatorProcessDirty();
+			this.validatorProcess();
 		},
-		validatorProcessAndUpdateDirty(updateStore = true) {
+		isFieldFulled() {
+			return this.custom.mask.length === this.value.length;
+		},
+		validatorProcess(updateStore = true) {
 			if (!this.valid.connect) return;
 
 			this.validatorUpdateError();
-			// if field has error - becomes dirty, otherwise clear
-			this.valid.dirty = this.valid.error;
-
-			console.log(this.valid);
 			if (updateStore) this.validatorSaveInfo();
 		},
 		validatorUpdateError() {
 			try {
+				// noinspection JSCheckFunctionSignatures
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
+				if (this.valid.error) {
+					this.valid.text = this.$t(this.validation.errorTextRequired);
+					return;
+				}
 			} catch (e) {
 				// eslint-disable-next-line no-console
 				console.error(e);
 			}
+
+			if (!this.isFieldFulled()) return;
+
+			// T - Timestamp
+			let inputValueT;
+			try {
+				inputValueT = parseDate(this.value, this.mergedOptions.format);
+			} catch {
+				this.valid.error = true;
+				this.valid.text = this.$t(this.validation.errorTextNotValid);
+				return;
+			}
+
+			let minDateT;
+			let maxDateT;
+
+			try {
+				minDateT = parseDate(this.module.minDate, this.mergedOptions.format);
+				maxDateT = parseDate(this.module.maxDate, this.mergedOptions.format);
+			} catch {
+				throw new Error(
+					'Datepicker: is not valid minDate or maxDate in field scheme'
+				);
+			}
+
+			if (inputValueT < minDateT || inputValueT > maxDateT) {
+				this.valid.error = true;
+				this.valid.text = this.$t(this.validation.errorTextRange);
+			} else {
+				this.valid.error = false;
+			}
 		},
-		// validatorProcessDirty() {
-		// 	if (!this.valid.connect) return;
-		//
-		// 	// only for dirty state
-		// 	if (!this.valid.dirty) return;
-		//
-		// 	this.validatorUpdateError();
-		// 	this.validatorSaveInfo();
-		// },
 
 		validatorSaveInfo() {
 			this.validatorUpdate({
@@ -238,13 +288,13 @@ export default {
 				error: this.valid.error,
 			});
 		},
-		// validatorHandleTask() {
-		// 	this.validatorProcessAndUpdateDirty(false);
-		// 	this.fieldResponseOnValidationEvent({
-		// 		key: this.virtualKey,
-		// 		error: this.valid.error,
-		// 	});
-		// },
+		validatorHandleTask() {
+			this.validatorProcess(false);
+			this.fieldResponseOnValidationEvent({
+				key: this.virtualKey,
+				error: this.valid.error,
+			});
+		},
 	},
 };
 </script>
