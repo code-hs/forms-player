@@ -1,5 +1,6 @@
 import {ModuleOptions} from '@/classes/scheme/structure';
-// import {SmartTimeout} from '@/utils/SmartTimeout';
+import {SmartTimeout} from '@/utils/SmartTimeout';
+import {delay} from '@/utils/asinchronius';
 
 type Relations = {
 	[langFromAvailableLangs: string]: string;
@@ -37,6 +38,20 @@ export class DatepickerLoader {
 		this.relatedLang = this.getRelatedLanguage();
 	}
 
+	async waitLocales() {
+		const smtt = SmartTimeout.createForLoadFile();
+		// eslint-disable-next-line no-constant-condition
+		while (true) {
+			if (this.isLoadedLocales()) return;
+			if (smtt.totalTime > 3000) {
+				console.error('Datepicker: locales not loaded, use default lang');
+				return;
+			}
+			// eslint-disable-next-line no-await-in-loop
+			await delay(+smtt);
+		}
+	}
+
 	setLangInOptions(fieldOptions: FieldOptions): void {
 		if (!this.options || !this.options) {
 			console.error(
@@ -50,7 +65,7 @@ export class DatepickerLoader {
 		fieldOptions.language = this.relatedLang;
 	}
 
-	isLoadedLocales(): boolean {
+	private isLoadedLocales(): boolean {
 		if (!this.isLoadedModule()) return false;
 
 		return !!this.getLocales();

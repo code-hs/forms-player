@@ -8,7 +8,7 @@ import {SmartTimeout} from '@/utils/SmartTimeout';
 import {delay} from '@/utils/asinchronius';
 
 export class ModuleController {
-	static async init(checker: Function, smtt: SmartTimeout) {
+	static async waitWhenLoaded(checker: Function, smtt: SmartTimeout) {
 		while (!checker()) {
 			// module files are not loaded -> wait, then try again
 			if (smtt.totalTime >= 1500) {

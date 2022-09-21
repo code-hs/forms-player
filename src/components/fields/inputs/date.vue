@@ -39,7 +39,6 @@ import {DatepickerLoader} from '@/classes/modules/DatepickerLoader';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
 import {parseDate} from '@/utils/dateparser';
-import {delay} from '@/utils/asinchronius';
 
 export default {
 	name: 'InputDate',
@@ -116,7 +115,7 @@ export default {
 		lang() {
 			if (this.datepickerItem) {
 				this.datepickerItem.destroy();
-				this.loadLocales();
+				this.waitLocales();
 			}
 		},
 	},
@@ -131,16 +130,8 @@ export default {
 	},
 
 	async mounted() {
-		const datepickerLoader = new DatepickerLoader(
-			this.moduleOptions,
-			this.lang
-		);
-		// dirty function, update this.mergedOptions
-		datepickerLoader.setLangInOptions(this.mergedOptions);
-		const smtt = SmartTimeout.createForLoadFile();
 		try {
-			await ModuleController.init(() => window.Datepicker, smtt);
-			await this.loadLocales(datepickerLoader);
+			await this.waitDatepicker();
 			this.initDatepicker();
 		} catch (e) {
 			console.error(e);
@@ -167,18 +158,17 @@ export default {
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
 
-		async loadLocales(datepickerLoader) {
+		async waitDatepicker() {
 			const smtt = SmartTimeout.createForLoadFile();
-			// eslint-disable-next-line no-constant-condition
-			while (true) {
-				if (datepickerLoader.isLoadedLocales()) return;
-				if (smtt.totalTime > 3000) {
-					console.error('Datepicker: locales not loaded, use default lang');
-					return;
-				}
-				// eslint-disable-next-line no-await-in-loop
-				await delay(+smtt);
-			}
+			const datepickerLoader = new DatepickerLoader(
+				this.moduleOptions,
+				this.lang
+			);
+			// dirty function, update this.mergedOptions
+			datepickerLoader.setLangInOptions(this.mergedOptions);
+
+			await ModuleController.waitWhenLoaded(() => window.Datepicker, smtt);
+			await datepickerLoader.waitLocales(datepickerLoader);
 		},
 
 		initDatepicker() {
