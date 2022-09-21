@@ -35,7 +35,8 @@ import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 import {ModuleController} from '@/classes/modules/ModuleController';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {DatepickerLoader} from '@/classes/modules/DatepickerLoader';
+import {DatepickerLoader} from '@/classes/modules/datepicker/DatepickerLoader';
+import {DatepickerHelper} from '@/classes/modules/datepicker/DatepickerHelper';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
 import {parseDate} from '@/utils/dateparser';
@@ -116,10 +117,9 @@ export default {
 		lang() {
 			if (!this.datepickerItem) return;
 
-			console.log('update lang');
 			this.datepickerItem.destroy();
-			// datepickerLoader.setLangInOptions(this.moduleData.fieldOptions);
-			// this.initDatepicker();
+			this.setCorrectLang();
+			this.initDatepicker();
 		},
 	},
 
@@ -167,11 +167,18 @@ export default {
 				this.moduleData.config,
 				this.lang
 			);
-			// dirty function, update this.mergedOptions
-			datepickerLoader.setLangInOptions(this.moduleData.fieldOptions);
 
 			await ModuleController.waitWhenLoaded(() => window.Datepicker, smtt);
 			await datepickerLoader.waitLocales(datepickerLoader);
+			this.setCorrectLang();
+		},
+
+		setCorrectLang() {
+			this.moduleData.fieldOptions.language =
+				DatepickerHelper.getNormalizedLanguage(
+					this.moduleData.config,
+					this.lang
+				);
 		},
 
 		initDatepicker() {
