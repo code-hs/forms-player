@@ -39,6 +39,7 @@ import {DatepickerLoader} from '@/classes/modules/DatepickerLoader';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
 import {parseDate} from '@/utils/dateparser';
+import {delay} from '@/utils/asinchronius';
 
 export default {
 	name: 'InputDate',
@@ -161,7 +162,7 @@ export default {
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
 
-		loadLocales() {
+		async loadLocales() {
 			const smtt = SmartTimeout.createForLoadFile();
 			let runOnce = true;
 			const datepickerLoader = new DatepickerLoader(
@@ -171,10 +172,9 @@ export default {
 			// dirty function, update this.mergedOptions
 			datepickerLoader.setLangInOptions(this.mergedOptions);
 
-			// todo: setTimeout to while, and delete this bad inner structure
-
-			// wait when locales will be loaded
-			const loop = () => {
+			// eslint-disable-next-line no-constant-condition
+			while (true) {
+				console.log(smtt.totalTime);
 				if (datepickerLoader.isLoadedLocales()) {
 					// main function, wait when loaded locales
 					this.initAfterLoadedLocales();
@@ -195,9 +195,9 @@ export default {
 					return; // stop loop, stop waiting is locales load
 				}
 
-				setTimeout(loop, +smtt);
-			};
-			setTimeout(loop, +smtt);
+				// eslint-disable-next-line no-await-in-loop
+				await delay(+smtt);
+			}
 		},
 
 		initAfterLoadedLocales() {
