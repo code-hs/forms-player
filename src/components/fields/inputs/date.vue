@@ -131,12 +131,17 @@ export default {
 	},
 
 	async mounted() {
+		const datepickerLoader = new DatepickerLoader(
+			this.moduleOptions,
+			this.lang
+		);
+		// dirty function, update this.mergedOptions
+		datepickerLoader.setLangInOptions(this.mergedOptions);
 		const smtt = SmartTimeout.createForLoadFile();
 		try {
 			await ModuleController.init(() => window.Datepicker, smtt);
-			this.loadLocales();
-			smtt.restart();
-			// wait is loaded locales
+			await this.loadLocales(datepickerLoader);
+			this.initDatepicker();
 		} catch (e) {
 			console.error(e);
 		}
@@ -162,45 +167,21 @@ export default {
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
 
-		async loadLocales() {
+		async loadLocales(datepickerLoader) {
 			const smtt = SmartTimeout.createForLoadFile();
-			let runOnce = true;
-			const datepickerLoader = new DatepickerLoader(
-				this.moduleOptions,
-				this.lang
-			);
-			// dirty function, update this.mergedOptions
-			datepickerLoader.setLangInOptions(this.mergedOptions);
-
 			// eslint-disable-next-line no-constant-condition
 			while (true) {
-				console.log(smtt.totalTime);
-				if (datepickerLoader.isLoadedLocales()) {
-					// main function, wait when loaded locales
-					this.initAfterLoadedLocales();
-					return; // stop loop
-				}
-
-				if (runOnce && smtt.totalTime > 900) {
-					// if locales not loaded after 900ms -> use default module lang 'en'
-					runOnce = false;
-					this.initAfterLoadedLocales();
-					// don't stop loop, wait, maybe loaded locales, need bigger time for that
-					// continue loop
-				}
-
-				if (smtt.totalTime > 10000) {
+				if (datepickerLoader.isLoadedLocales()) return;
+				if (smtt.totalTime > 3000) {
 					console.error('Datepicker: locales not loaded, use default lang');
-					// if locales not loaded after 10000ms
-					return; // stop loop, stop waiting is locales load
+					return;
 				}
-
 				// eslint-disable-next-line no-await-in-loop
 				await delay(+smtt);
 			}
 		},
 
-		initAfterLoadedLocales() {
+		initDatepicker() {
 			// after loaded module and locales for datepicker
 			const {self} = this.$refs;
 			const {Datepicker} = window;
