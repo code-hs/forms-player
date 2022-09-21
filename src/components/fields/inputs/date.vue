@@ -77,7 +77,7 @@ export default {
 	},
 
 	data() {
-		const moduleConfig = ModuleController.getModuleOptions('datepicker');
+		const moduleConfig = ModuleController.getModuleConfig('datepicker');
 		const moduleFieldOptions = {...moduleConfig.global, ...this.module};
 
 		return {
@@ -160,7 +160,6 @@ export default {
 		...mapActions({
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
 		}),
-
 		async waitDatepicker() {
 			const smtt = SmartTimeout.createForLoadFile();
 			const datepickerLoader = new DatepickerLoader(
@@ -172,7 +171,6 @@ export default {
 			await datepickerLoader.waitLocales(datepickerLoader);
 			this.setCorrectLang();
 		},
-
 		setCorrectLang() {
 			this.moduleData.fieldOptions.language =
 				DatepickerHelper.getNormalizedLanguage(
@@ -180,7 +178,6 @@ export default {
 					this.lang
 				);
 		},
-
 		initDatepicker() {
 			// after loaded module and locales for datepicker
 			const {self} = this.$refs;
@@ -189,11 +186,9 @@ export default {
 			this.datepickerItem = new Datepicker(self, this.moduleData.fieldOptions);
 			self.addEventListener('changeDate', this.changeDate);
 		},
-
 		changeDate() {
 			this.modelStore[this.common.model] = this.$refs.self.value;
 		},
-
 		initValidation() {
 			// noinspection JSCheckFunctionSignatures
 			if (!FieldValidator.canValidation(this.validation)) return;

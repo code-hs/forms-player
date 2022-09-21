@@ -72,7 +72,7 @@ export interface LocalizationConfig {
  * }
  */
 
-export interface ModuleOptions {
+export interface ModuleConfig {
 	global?: any;
 	forEachField?: object;
 	[key: string]: any;
@@ -81,7 +81,7 @@ export interface ModuleOptions {
 export interface Module {
 	name: string;
 	enable: boolean;
-	options?: ModuleOptions;
+	config: ModuleConfig;
 }
 
 export interface Configurations {

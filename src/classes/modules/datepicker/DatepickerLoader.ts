@@ -1,4 +1,4 @@
-import {ModuleOptions} from '@/classes/scheme/structure';
+import {ModuleConfig} from '@/classes/scheme/structure';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {delay} from '@/utils/asinchronius';
 import {DatepickerHelper} from './DatepickerHelper';
@@ -6,7 +6,7 @@ import {DatepickerHelper} from './DatepickerHelper';
 export class DatepickerLoader {
 	lang: string;
 
-	constructor(moduleConfig: ModuleOptions, lang: string) {
+	constructor(moduleConfig: ModuleConfig, lang: string) {
 		this.lang = DatepickerHelper.getNormalizedLanguage(moduleConfig, lang);
 	}
 

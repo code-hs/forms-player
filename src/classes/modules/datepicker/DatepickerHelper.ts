@@ -1,4 +1,4 @@
-import {ModuleOptions} from '@/classes/scheme/structure';
+import {ModuleConfig} from '@/classes/scheme/structure';
 
 type Relations = {
 	[langFromAvailableLangs: string]: string;
@@ -19,7 +19,7 @@ type Relations = {
 
 export class DatepickerHelper {
 	static getNormalizedLanguage(
-		moduleConfig: ModuleOptions,
+		moduleConfig: ModuleConfig,
 		lang: string
 	): string {
 		const relations: Relations = moduleConfig.locales?.relations || {};

@@ -1,9 +1,5 @@
 import {SchemeController} from '@/classes/scheme/SchemeController';
-import {
-	Configurations,
-	Module,
-	ModuleOptions,
-} from '@/classes/scheme/structure';
+import {Configurations, Module, ModuleConfig} from '@/classes/scheme/structure';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {delay} from '@/utils/asinchronius';
 
@@ -23,16 +19,16 @@ export class ModuleController {
 		return true;
 	}
 
-	static getModuleOptions(moduleName: string): ModuleOptions {
+	static getModuleConfig(moduleName: string): ModuleConfig {
 		const module: Module | undefined = this.getModule(moduleName);
 		if (!module) {
 			console.error(
-				`InitModule.getModuleOptions: module '${moduleName}' is not found`
+				`InitModule.getModuleConfig: module '${moduleName}' is not found`
 			);
 			return {};
 		}
 
-		return module.options || {};
+		return module.config || {};
 	}
 
 	private static getModule(moduleName: string): Module | undefined {

@@ -56,10 +56,10 @@ describe('InitModule class', () => {
 		],
 	};
 
-	it('-> getModuleOptions', () => {
-		expect(ModuleController.getModuleOptions('auth2323')).toEqual({});
+	it('-> getModuleConfig', () => {
+		expect(ModuleController.getModuleConfig('auth2323')).toEqual({});
 
-		const options = ModuleController.getModuleOptions('auth');
+		const options = ModuleController.getModuleConfig('auth');
 		// @ts-ignore
 		expect(options.global.foo).toEqual(111);
 	});
