@@ -76,8 +76,8 @@ export default {
 	},
 
 	data() {
-		const moduleOptions = ModuleController.getModuleOptions('datepicker');
-		const mergedOptions = {...moduleOptions.global, ...this.module};
+		const moduleConfig = ModuleController.getModuleOptions('datepicker');
+		const moduleFieldOptions = {...moduleConfig.global, ...this.module};
 
 		return {
 			mask: '',
@@ -87,10 +87,11 @@ export default {
 				connect: false,
 				text: this.$t(this.validation.errorTextRequired),
 			},
-			moduleOptions,
-			mergedOptions,
+			moduleData: {
+				config: moduleConfig,
+				fieldOptions: moduleFieldOptions,
+			},
 			datepickerItem: null,
-			dateFull: false,
 		};
 	},
 
@@ -113,10 +114,12 @@ export default {
 
 	watch: {
 		lang() {
-			if (this.datepickerItem) {
-				this.datepickerItem.destroy();
-				this.waitLocales();
-			}
+			if (!this.datepickerItem) return;
+
+			console.log('update lang');
+			this.datepickerItem.destroy();
+			// datepickerLoader.setLangInOptions(this.moduleData.fieldOptions);
+			// this.initDatepicker();
 		},
 	},
 
@@ -161,11 +164,11 @@ export default {
 		async waitDatepicker() {
 			const smtt = SmartTimeout.createForLoadFile();
 			const datepickerLoader = new DatepickerLoader(
-				this.moduleOptions,
+				this.moduleData.config,
 				this.lang
 			);
 			// dirty function, update this.mergedOptions
-			datepickerLoader.setLangInOptions(this.mergedOptions);
+			datepickerLoader.setLangInOptions(this.moduleData.fieldOptions);
 
 			await ModuleController.waitWhenLoaded(() => window.Datepicker, smtt);
 			await datepickerLoader.waitLocales(datepickerLoader);
@@ -176,7 +179,7 @@ export default {
 			const {self} = this.$refs;
 			const {Datepicker} = window;
 
-			this.datepickerItem = new Datepicker(self, this.mergedOptions);
+			this.datepickerItem = new Datepicker(self, this.moduleData.fieldOptions);
 			self.addEventListener('changeDate', this.changeDate);
 		},
 
@@ -234,7 +237,10 @@ export default {
 			// T - Timestamp
 			let inputValueT;
 			try {
-				inputValueT = parseDate(this.value, this.mergedOptions.format);
+				inputValueT = parseDate(
+					this.value,
+					this.moduleData.fieldOptions.format
+				);
 			} catch {
 				this.valid.error = true;
 				this.valid.text = this.$t(this.validation.errorTextNotValid);
@@ -245,8 +251,14 @@ export default {
 			let maxDateT;
 
 			try {
-				minDateT = parseDate(this.module.minDate, this.mergedOptions.format);
-				maxDateT = parseDate(this.module.maxDate, this.mergedOptions.format);
+				minDateT = parseDate(
+					this.moduleData.fieldOptions.minDate,
+					this.moduleData.fieldOptions.format
+				);
+				maxDateT = parseDate(
+					this.moduleData.fieldOptions.maxDate,
+					this.moduleData.fieldOptions.format
+				);
 			} catch {
 				throw new Error(
 					'Datepicker: is not valid minDate or maxDate in field scheme'
