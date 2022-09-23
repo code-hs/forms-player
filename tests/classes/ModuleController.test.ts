@@ -11,7 +11,7 @@ describe('InitModule class', () => {
 					name: 'auth',
 					enable: false,
 					options: {
-						global: {
+						forEachField: {
 							foo: 111,
 						},
 					},
@@ -61,7 +61,7 @@ describe('InitModule class', () => {
 
 		const options = ModuleController.getModuleConfig('auth');
 		// @ts-ignore
-		expect(options.global.foo).toEqual(111);
+		expect(options.forEachField.foo).toEqual(111);
 	});
 
 	it('-> init. correct work', () => {

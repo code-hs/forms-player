@@ -73,7 +73,6 @@ export interface LocalizationConfig {
  */
 
 export interface ModuleConfig {
-	global?: any;
 	forEachField?: object;
 	[key: string]: any;
 }
