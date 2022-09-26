@@ -75,16 +75,17 @@ export default {
 	},
 
 	beforeDestroy() {
-		this.validatorDestroy(this.virtualKey);
+		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
-		bus.$off(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
 
 	methods: {
+		//! v - validator, s - store
 		...mapMutations({
-			validatorAdd: 'validator/add',
-			validatorUpdate: 'validator/update',
-			validatorDestroy: 'validator/destroy',
+			vsAdd: 'validator/add',
+			vsUpdate: 'validator/update',
+			vsDestroy: 'validator/destroy',
 		}),
 		...mapActions({
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
@@ -92,10 +93,10 @@ export default {
 		initValidation() {
 			if (FieldValidator.canValidation(this.validation, true)) {
 				this.valid.connect = true;
-				this.validatorAdd(this.virtualKey);
+				this.vsAdd(this.virtualKey);
 
 				// noinspection JSUnresolvedFunction
-				bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+				bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 			}
 		},
 		handleChange() {
@@ -104,15 +105,15 @@ export default {
 			if (this.value) this.valid.errorForView = false;
 			this.valid.error = !this.value;
 
-			this.validatorSaveInfo();
+			this.vUpdateStore();
 		},
-		validatorSaveInfo() {
-			this.validatorUpdate({
+		vUpdateStore() {
+			this.vsUpdate({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
 		},
-		validatorHandleTask() {
+		vHandleTask() {
 			// after click submit, if empty value -> show error border
 			if (!this.value) {
 				this.valid.errorForView = true;

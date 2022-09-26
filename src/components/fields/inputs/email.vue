@@ -86,16 +86,17 @@ export default {
 	},
 
 	beforeDestroy() {
-		this.validatorDestroy(this.virtualKey);
+		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
-		bus.$off(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
 
 	methods: {
+		//! v - validator, s - store
 		...mapMutations({
-			validatorAdd: 'validator/add',
-			validatorUpdate: 'validator/update',
-			validatorDestroy: 'validator/destroy',
+			vsAdd: 'validator/add',
+			vsUpdate: 'validator/update',
+			vsDestroy: 'validator/destroy',
 		}),
 		...mapActions({
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
@@ -104,43 +105,43 @@ export default {
 			if (!FieldValidator.canValidation(this.validation)) return;
 
 			this.valid.connect = true;
-			this.validatorAdd(this.virtualKey);
-			this.validatorProcessDirty = debounce(
-				this.validatorProcessDirty,
+			this.vsAdd(this.virtualKey);
+			this.vProcessDirty = debounce(
+				this.vProcessDirty,
 				FieldValidator.debounceTime
 			);
 			// noinspection JSUnresolvedFunction
-			bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 		},
 		handleBlur() {
-			this.validatorProcessAndUpdateDirty();
+			this.vProcessAndUpdateDirty();
 		},
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.common.model] = e.target.value;
 
-			this.validatorProcessDirty();
+			this.vProcessDirty();
 			InputHelper.processTextPatternDirty(this, e);
 		},
-		validatorProcessDirty() {
+		vProcessDirty() {
 			if (!this.valid.connect) return;
 
 			// only for dirty state
 			if (!this.valid.dirty) return;
 
-			this.validatorUpdateError();
-			this.validatorSaveInfo();
+			this.vUpdateError();
+			this.vUpdateStore();
 		},
-		validatorProcessAndUpdateDirty(updateStore = true) {
+		vProcessAndUpdateDirty(updateStore = true) {
 			if (!this.valid.connect) return;
 
-			this.validatorUpdateError();
+			this.vUpdateError();
 			// if field has error - becomes dirty, otherwise clear
 			this.valid.dirty = this.valid.error;
 
-			if (updateStore) this.validatorSaveInfo();
+			if (updateStore) this.vUpdateStore();
 		},
-		validatorUpdateError() {
+		vUpdateError() {
 			try {
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {
@@ -148,14 +149,14 @@ export default {
 				console.error(e);
 			}
 		},
-		validatorSaveInfo() {
-			this.validatorUpdate({
+		vUpdateStore() {
+			this.vsUpdate({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
 		},
-		validatorHandleTask() {
-			this.validatorProcessAndUpdateDirty(false);
+		vHandleTask() {
+			this.vProcessAndUpdateDirty(false);
 			this.fieldResponseOnValidationEvent({
 				key: this.virtualKey,
 				error: this.valid.error,

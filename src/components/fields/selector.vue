@@ -87,16 +87,17 @@ export default {
 	},
 
 	beforeDestroy() {
-		this.validatorDestroy(this.virtualKey);
+		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
-		bus.$off(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
 
 	methods: {
+		//! v - validator, s - store
 		...mapMutations({
-			validatorAdd: 'validator/add',
-			validatorUpdate: 'validator/update',
-			validatorDestroy: 'validator/destroy',
+			vsAdd: 'validator/add',
+			vsUpdate: 'validator/update',
+			vsDestroy: 'validator/destroy',
 		}),
 		...mapActions({
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
@@ -105,22 +106,22 @@ export default {
 		initValidation() {
 			if (FieldValidator.canValidation(this.validation)) {
 				this.valid.connect = true;
-				this.validatorAdd(this.virtualKey);
+				this.vsAdd(this.virtualKey);
 
 				// noinspection JSUnresolvedFunction
-				bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+				bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 			}
 		},
 		handleChange() {
-			this.validatorProcess(true);
+			this.vProcess(true);
 		},
-		validatorProcess(updateStore = true) {
+		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
 
-			this.validatorUpdateError();
-			if (updateStore) this.validatorSaveInfo();
+			this.vUpdateError();
+			if (updateStore) this.vUpdateStore();
 		},
-		validatorUpdateError() {
+		vUpdateError() {
 			try {
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {
@@ -128,14 +129,14 @@ export default {
 				console.error(e);
 			}
 		},
-		validatorSaveInfo() {
-			this.validatorUpdate({
+		vUpdateStore() {
+			this.vsUpdate({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
 		},
-		validatorHandleTask() {
-			this.validatorProcess(false);
+		vHandleTask() {
+			this.vProcess(false);
 			this.fieldResponseOnValidationEvent({
 				key: this.virtualKey,
 				error: this.valid.error,
