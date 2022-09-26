@@ -141,7 +141,7 @@ export default {
 	},
 
 	beforeDestroy() {
-		this.validatorDestroy(this.virtualKey);
+		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
 
@@ -151,10 +151,11 @@ export default {
 	},
 
 	methods: {
+		//! v - validator, s - store
 		...mapMutations({
-			validatorAdd: 'validator/add',
-			validatorUpdate: 'validator/update',
-			validatorDestroy: 'validator/destroy',
+			vsAdd: 'validator/add',
+			vsUpdate: 'validator/update',
+			vsDestroy: 'validator/destroy',
 		}),
 		...mapActions({
 			fieldResponseOnValidationEvent: 'validator/fieldResponse',
@@ -194,45 +195,43 @@ export default {
 
 			// запуск валидации происходит если есть regexp, или required
 			this.valid.connect = true;
-			this.validatorAdd(this.virtualKey);
-			this.validatorProcess = debounce(
-				this.validatorProcess,
-				FieldValidator.debounceTime
-			);
+			this.vsAdd(this.virtualKey);
+			this.vProcess = debounce(this.vProcess, FieldValidator.debounceTime);
 
 			// noinspection JSUnresolvedFunction
-			bus.$on(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 		},
 		handleBlur() {
-			this.validatorProcess();
+			this.vProcess();
 		},
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.common.model] = e.target.value;
-			this.validatorProcess();
+			this.vProcess();
 		},
 		isFieldFulled() {
 			return this.custom.mask.length === this.value.length;
 		},
-		validatorProcess(updateStore = true) {
+		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
 
+			const errorText = this.vUpdateError();
+			if (errorText) {
+				this.valid.error = true;
+				this.valid.text = this.$t(errorText);
+			}
+
+			if (updateStore) this.vUpdateStore();
+		},
+		vUpdateError() {
 			try {
-				this.validatorUpdateError();
+				// noinspection JSCheckFunctionSignatures
+				const isValid = FieldValidator.isValid(this.validation, this.value);
+				if (!isValid) return this.validation.errorTextRequired;
 			} catch (e) {
+				// bad scheme validation options
 				console.error(e);
 			}
-
-			if (updateStore) this.validatorSaveInfo();
-		},
-		validatorUpdateError() {
-			// noinspection JSCheckFunctionSignatures
-			this.valid.error = !FieldValidator.isValid(this.validation, this.value);
-			if (this.valid.error) {
-				this.valid.text = this.$t(this.validation.errorTextRequired);
-				return;
-			}
-
 			if (!this.isFieldFulled()) return;
 
 			try {
@@ -242,18 +241,17 @@ export default {
 					this.validation
 				);
 			} catch (e) {
-				this.valid.error = true;
-				this.valid.text = this.$t(e.message);
+				return e.message;
 			}
 		},
-		validatorSaveInfo() {
-			this.validatorUpdate({
+		vUpdateStore() {
+			this.vsUpdate({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
 		},
-		validatorHandleTask() {
-			this.validatorProcess(false);
+		vHandleTask() {
+			this.vProcess(false);
 			this.fieldResponseOnValidationEvent({
 				key: this.virtualKey,
 				error: this.valid.error,
