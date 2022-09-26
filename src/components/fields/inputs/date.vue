@@ -39,7 +39,6 @@ import {DatepickerLoader} from '@/classes/modules/datepicker/DatepickerLoader';
 import {DatepickerHelper} from '@/classes/modules/datepicker/DatepickerHelper';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
-import {parseDate} from '@/utils/dateparser';
 
 export default {
 	name: 'InputDate',
@@ -218,63 +217,35 @@ export default {
 		validatorProcess(updateStore = true) {
 			if (!this.valid.connect) return;
 
-			this.validatorUpdateError();
+			try {
+				this.validatorUpdateError();
+			} catch (e) {
+				console.error(e);
+			}
+
 			if (updateStore) this.validatorSaveInfo();
 		},
 		validatorUpdateError() {
-			try {
-				// noinspection JSCheckFunctionSignatures
-				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
-				if (this.valid.error) {
-					this.valid.text = this.$t(this.validation.errorTextRequired);
-					return;
-				}
-			} catch (e) {
-				// eslint-disable-next-line no-console
-				console.error(e);
+			// noinspection JSCheckFunctionSignatures
+			this.valid.error = !FieldValidator.isValid(this.validation, this.value);
+			if (this.valid.error) {
+				this.valid.text = this.$t(this.validation.errorTextRequired);
+				return;
 			}
 
 			if (!this.isFieldFulled()) return;
 
-			// T - Timestamp
-			let inputValueT;
 			try {
-				inputValueT = parseDate(
+				DatepickerHelper.processValidate(
+					this.moduleData?.fieldOptions,
 					this.value,
-					this.moduleData.fieldOptions.format
+					this.validation
 				);
-			} catch {
+			} catch (e) {
 				this.valid.error = true;
-				this.valid.text = this.$t(this.validation.errorTextNotValid);
-				return;
-			}
-
-			let minDateT;
-			let maxDateT;
-
-			try {
-				minDateT = parseDate(
-					this.moduleData.fieldOptions.minDate,
-					this.moduleData.fieldOptions.format
-				);
-				maxDateT = parseDate(
-					this.moduleData.fieldOptions.maxDate,
-					this.moduleData.fieldOptions.format
-				);
-			} catch {
-				throw new Error(
-					'Datepicker: is not valid minDate or maxDate in field scheme'
-				);
-			}
-
-			if (inputValueT < minDateT || inputValueT > maxDateT) {
-				this.valid.error = true;
-				this.valid.text = this.$t(this.validation.errorTextRange);
-			} else {
-				this.valid.error = false;
+				this.valid.text = this.$t(e.message);
 			}
 		},
-
 		validatorSaveInfo() {
 			this.validatorUpdate({
 				key: this.virtualKey,

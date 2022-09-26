@@ -204,15 +204,15 @@ export function parseDate(
 	dateStr: string | number | Date,
 	format: string | any,
 	locale: any = undefined
-): number | undefined {
+): number {
 	if (dateStr instanceof Date || typeof dateStr === 'number') {
 		// cut hours and minutes, save only the date values
 		// @ts-ignore
 		const date: number = stripTime(dateStr);
-		return Number.isNaN(date) ? undefined : date;
+		return Number.isNaN(date) ? 0 : date;
 	}
 	if (!dateStr) {
-		return undefined;
+		return 0;
 	}
 	if (dateStr === 'today') {
 		return today();
@@ -221,7 +221,7 @@ export function parseDate(
 	if (format && format.toValue) {
 		const date = format.toValue(dateStr, format, locale);
 
-		return Number.isNaN(date) ? undefined : stripTime(date);
+		return Number.isNaN(date) ? 0 : stripTime(date);
 	}
 
 	return parseFormatString(format).parser(dateStr, locale);
