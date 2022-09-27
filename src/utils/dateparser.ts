@@ -205,6 +205,8 @@ export function parseDate(
 	format: string | any,
 	locale: any = undefined
 ): number {
+	// !! throw errors!!! when use -> wrap try catch
+
 	if (dateStr instanceof Date || typeof dateStr === 'number') {
 		// cut hours and minutes, save only the date values
 		// @ts-ignore
