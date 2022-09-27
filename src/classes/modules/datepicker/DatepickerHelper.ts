@@ -38,10 +38,7 @@ export class DatepickerHelper {
 	) {
 		// string
 		const {format} = fieldOptions;
-		if (!format) {
-			console.error('DatepickerHelper.processValidate: format is not defined');
-			return;
-		}
+		if (!format) return;
 
 		let inputTimestamp: number;
 		try {
@@ -63,9 +60,20 @@ export class DatepickerHelper {
 	): void {
 		// string
 		const {minDate, maxDate, format} = fieldOptions;
-		const minTimestamp: number = parseDate(minDate, format);
-		const maxTimestamp: number = parseDate(maxDate, format);
+		let minTimestamp: number;
+		let maxTimestamp: number;
 
+		try {
+			minTimestamp = parseDate(minDate, format);
+			maxTimestamp = parseDate(maxDate, format);
+		} catch {
+			console.error(
+				'DatepickerHelper: processRange: not correct format or' +
+					' values in minDate/maxDate'
+			);
+		}
+
+		// @ts-ignore
 		if (minTimestamp && maxTimestamp) {
 			const valid = DatepickerHelper.isValidRange(
 				inputTimestamp,
@@ -73,11 +81,13 @@ export class DatepickerHelper {
 				maxTimestamp
 			);
 			if (!valid) throw new Error(validation.texts.range);
+			// @ts-ignore
 		} else if (minTimestamp) {
-			const valid = this.isValidMin(inputTimestamp, minTimestamp);
+			const valid: boolean = this.isValidMin(inputTimestamp, minTimestamp);
 			if (!valid) throw new Error(validation.texts.range);
+			// @ts-ignore
 		} else if (maxTimestamp) {
-			const valid = this.isValidMax(inputTimestamp, maxTimestamp);
+			const valid: boolean = this.isValidMax(inputTimestamp, maxTimestamp);
 			if (!valid) throw new Error(validation.texts.range);
 		}
 	}

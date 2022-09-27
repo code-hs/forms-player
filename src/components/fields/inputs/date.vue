@@ -125,7 +125,12 @@ export default {
 
 	created() {
 		if (!this.custom.mask) {
-			throw new Error('InputDate: custom.mask is required');
+			console.error('InputDate: custom.mask is required');
+		}
+		if (!this.moduleData.fieldOptions.format) {
+			console.error(
+				'InputDate: format is required. In scheme.config.modules.datepicker.config.forEachField.format or in component [InputDate].module.format'
+			);
 		}
 
 		InputHelper.initMaskDirty(this);
