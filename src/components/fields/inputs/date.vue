@@ -86,7 +86,6 @@ export default {
 			multiBoxName: FH.getMultiName(this),
 			valid: {
 				error: false,
-				connect: false,
 				text: this.$t(this.validation.texts.required),
 			},
 			moduleData: {
@@ -145,7 +144,7 @@ export default {
 	beforeDestroy() {
 		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
-		bus.$off(busBroadcasts.VALIDATION_START, this.validatorHandleTask);
+		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 
 		if (this.datepickerItem) {
 			this.datepickerItem.destroy();
@@ -190,15 +189,14 @@ export default {
 		},
 		changeDate() {
 			this.modelStore[this.common.model] = this.$refs.self.value;
+			this.vProcess();
 		},
 		initValidation() {
-			// noinspection JSCheckFunctionSignatures
-			if (!FieldValidator.canValidation(this.validation)) return;
-
-			// запуск валидации происходит если есть regexp, или required
-			this.valid.connect = true;
 			this.vsAdd(this.virtualKey);
-			this.vProcess = debounce(this.vProcess, FieldValidator.debounceTime);
+			this.vProcessDebounced = debounce(
+				this.vProcess,
+				FieldValidator.debounceTime
+			);
 
 			// noinspection JSUnresolvedFunction
 			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
@@ -209,27 +207,31 @@ export default {
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.common.model] = e.target.value;
-			this.vProcess();
+			this.vProcessDebounced();
 		},
 		isFieldFulled() {
 			return this.custom.mask.length === this.value.length;
 		},
 		vProcess(updateStore = true) {
-			if (!this.valid.connect) return;
+			const errorTextKey = this.vGetErrorText();
 
-			const errorTextKey = this.vUpdateError();
 			if (errorTextKey) {
 				this.valid.error = true;
 				this.valid.text = this.$t(errorTextKey);
+			} else {
+				this.valid.error = false;
 			}
 
 			if (updateStore) this.vUpdateStore();
 		},
-		vUpdateError() {
+		vGetErrorText() {
 			try {
 				// noinspection JSCheckFunctionSignatures
 				const isValid = FieldValidator.isValid(this.validation, this.value);
-				if (!isValid) return this.validation.texts.required;
+				if (!isValid) {
+					// Can't find error text, ' ' - fix for show error,
+					return this.validation.texts.required || ' ';
+				}
 			} catch (e) {
 				// bad scheme validation options
 				console.error(e);
@@ -243,7 +245,7 @@ export default {
 					this.validation
 				);
 			} catch (e) {
-				return e.message;
+				return e.message || ' ';
 			}
 		},
 		vUpdateStore() {
@@ -254,6 +256,7 @@ export default {
 		},
 		vHandleTask() {
 			this.vProcess(false);
+			// this.vEventFieldResponse({
 			this.fieldResponseOnValidationEvent({
 				key: this.virtualKey,
 				error: this.valid.error,
