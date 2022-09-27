@@ -23,8 +23,12 @@
 		</select>
 
 		<transition name="fade">
-			<div v-if="validation.errorText" v-show="valid.error" class="error-text">
-				{{ $t(validation.errorText) }}
+			<div
+				v-if="validation.texts.required"
+				v-show="valid.error"
+				class="error-text"
+			>
+				{{ $t(validation.texts.required) }}
 			</div>
 		</transition>
 	</div>

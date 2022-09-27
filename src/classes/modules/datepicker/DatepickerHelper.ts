@@ -42,10 +42,10 @@ export class DatepickerHelper {
 		try {
 			inputTimestamp = parseDate(inputValue, format);
 		} catch {
-			throw new Error(validation.errorTextNotValid);
+			throw new Error(validation.texts.notValid);
 		}
 		if (!inputTimestamp) {
-			throw new Error(validation.errorTextNotValid);
+			throw new Error(validation.texts.notValid);
 		}
 
 		const [minTimestamp, maxTimestamp] = DatepickerHelper.parseRange(
@@ -66,7 +66,7 @@ export class DatepickerHelper {
 			maxTimestamp
 		);
 		if (!validTimeInRange) {
-			throw new Error(validation.errorTextRange);
+			throw new Error(validation.texts.range);
 		}
 	}
 

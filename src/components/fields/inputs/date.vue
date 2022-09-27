@@ -48,9 +48,11 @@ export default {
 			type: Object,
 			required: false,
 			default: () => ({
-				errorTextRequired: '',
-				errorTextNotValid: '',
-				errorTextRange: '',
+				texts: {
+					required: '',
+					notValid: '',
+					range: '',
+				},
 			}),
 		},
 		virtualKey: FH.virtualKey,
@@ -85,7 +87,7 @@ export default {
 			valid: {
 				error: false,
 				connect: false,
-				text: this.$t(this.validation.errorTextRequired),
+				text: this.$t(this.validation.texts.required),
 			},
 			moduleData: {
 				config: moduleConfig,
@@ -215,10 +217,10 @@ export default {
 		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
 
-			const errorText = this.vUpdateError();
-			if (errorText) {
+			const errorTextKey = this.vUpdateError();
+			if (errorTextKey) {
 				this.valid.error = true;
-				this.valid.text = this.$t(errorText);
+				this.valid.text = this.$t(errorTextKey);
 			}
 
 			if (updateStore) this.vUpdateStore();
@@ -227,7 +229,7 @@ export default {
 			try {
 				// noinspection JSCheckFunctionSignatures
 				const isValid = FieldValidator.isValid(this.validation, this.value);
-				if (!isValid) return this.validation.errorTextRequired;
+				if (!isValid) return this.validation.texts.required;
 			} catch (e) {
 				// bad scheme validation options
 				console.error(e);

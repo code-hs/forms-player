@@ -1,12 +1,14 @@
 export interface ValidationParams {
 	required: boolean;
 	pattern: string;
-	errorText: string;
+	texts: {
+		[key: string]: string;
+	};
 }
 export const validationExample: ValidationParams = {
 	required: false,
 	pattern: '',
-	errorText: '',
+	texts: {},
 };
 
 export interface CustomParams {

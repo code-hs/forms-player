@@ -17,11 +17,11 @@
 
 		<transition name="fade">
 			<div
-				v-if="validation.errorText"
+				v-if="validation.texts.required"
 				:class="{showContent: valid.error}"
 				class="error-text"
 			>
-				{{ $t(validation.errorText) }}
+				{{ $t(validation.texts.required) }}
 			</div>
 		</transition>
 	</div>
