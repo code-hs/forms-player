@@ -4,7 +4,10 @@ import {SmartTimeout} from '@/utils/SmartTimeout';
 import {delay} from '@/utils/asinchronius';
 
 export class ModuleController {
-	static async waitWhenLoaded(checker: Function, smtt: SmartTimeout) {
+	static async waitWhenLoaded(
+		checker: Function,
+		smtt: SmartTimeout
+	): Promise<void> {
 		while (!checker()) {
 			// module files are not loaded -> wait, then try again
 			if (smtt.totalTime >= 1500) {
@@ -15,8 +18,6 @@ export class ModuleController {
 			// eslint-disable-next-line no-await-in-loop
 			await delay(+smtt);
 		}
-
-		return true;
 	}
 
 	static getModuleConfig(moduleName: string): ModuleConfig {

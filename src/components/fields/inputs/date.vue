@@ -39,13 +39,14 @@ import {DatepickerLoader} from '@/classes/modules/datepicker/DatepickerLoader';
 import {DatepickerHelper} from '@/classes/modules/datepicker/DatepickerHelper';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
+import {ValidationParams} from '@/classes/scheme/structure';
 
 export default {
 	name: 'InputDate',
 	props: {
 		common: FH.common,
 		validation: {
-			type: Object,
+			type: ValidationParams,
 			required: false,
 			default: () => ({
 				texts: {
@@ -231,7 +232,6 @@ export default {
 		},
 		vGetErrorText() {
 			try {
-				// noinspection JSCheckFunctionSignatures
 				const isValid = FieldValidator.isValid(this.validation, this.value);
 				if (!isValid) {
 					// Can't find error text, ' ' - fix for show error,

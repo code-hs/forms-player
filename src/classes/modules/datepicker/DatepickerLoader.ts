@@ -3,6 +3,10 @@ import {SmartTimeout} from '@/utils/SmartTimeout';
 import {delay} from '@/utils/asinchronius';
 import {DatepickerHelper} from './DatepickerHelper';
 
+type DatepickerObject = {
+	[key: string]: any;
+};
+
 export class DatepickerLoader {
 	lang: string;
 
@@ -10,7 +14,7 @@ export class DatepickerLoader {
 		this.lang = DatepickerHelper.getNormalizedLanguage(moduleConfig, lang);
 	}
 
-	async waitLocales() {
+	async waitLocales(): Promise<void> {
 		const smtt = SmartTimeout.createForLoadFile();
 		// eslint-disable-next-line no-constant-condition
 		while (true) {
@@ -34,7 +38,7 @@ export class DatepickerLoader {
 		return !!this.getModule();
 	}
 
-	private getModule(): any {
+	private getModule(): DatepickerObject {
 		// @ts-ignore
 		return window.Datepicker;
 	}

@@ -31,13 +31,13 @@ export class SmartTimeout {
 	}
 
 	valueOf(): number {
-		const output = ~~this.value;
+		const output: number = ~~this.value;
 		this.increment();
 
 		return output;
 	}
 
-	private increment() {
+	private increment(): void {
 		this.totalTime += this.value;
 
 		if (this.value * this.coefficient >= this.maxValue) {

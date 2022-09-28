@@ -1,8 +1,12 @@
-import {ModuleConfig} from '@/classes/scheme/structure';
+import {ModuleConfig, ValidationParams} from '@/classes/scheme/structure';
 import {parseDate} from '@/utils/dateparser';
 
 type Relations = {
 	[langFromAvailableLangs: string]: string;
+};
+
+type FieldOptions = {
+	[key: string]: object;
 };
 // "options": {
 // 	"locales": {
@@ -32,10 +36,10 @@ export class DatepickerHelper {
 	}
 
 	static processValidate(
-		fieldOptions: any,
+		fieldOptions: FieldOptions,
 		inputValue: string,
-		validation: any
-	) {
+		validation: ValidationParams
+	): void {
 		// string
 		const {format} = fieldOptions;
 		if (!format) return;
@@ -46,6 +50,7 @@ export class DatepickerHelper {
 		} catch {
 			throw new Error(validation.texts.notValid);
 		}
+
 		if (!inputTimestamp) {
 			throw new Error(validation.texts.notValid);
 		}
@@ -55,7 +60,7 @@ export class DatepickerHelper {
 
 	private static processRange(
 		fieldOptions: any,
-		validation: any,
+		validation: ValidationParams,
 		inputTimestamp: number
 	): void {
 		// string
@@ -75,7 +80,7 @@ export class DatepickerHelper {
 
 		// @ts-ignore
 		if (minTimestamp && maxTimestamp) {
-			const valid = DatepickerHelper.isValidRange(
+			const valid: boolean = DatepickerHelper.isValidRange(
 				inputTimestamp,
 				minTimestamp,
 				maxTimestamp
@@ -92,15 +97,15 @@ export class DatepickerHelper {
 		}
 	}
 
-	private static isValidRange(time: number, min: number, max: number) {
+	private static isValidRange(time: number, min: number, max: number): boolean {
 		return time >= min && time <= max;
 	}
 
-	private static isValidMin(time: number, min: number) {
+	private static isValidMin(time: number, min: number): boolean {
 		return time >= min;
 	}
 
-	private static isValidMax(time: number, max: number) {
+	private static isValidMax(time: number, max: number): boolean {
 		return time <= max;
 	}
 }
