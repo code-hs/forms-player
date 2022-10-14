@@ -5,22 +5,9 @@ type Relations = {
 	[langFromAvailableLangs: string]: string;
 };
 
-type FieldOptions = {
-	[key: string]: object;
+export type FieldOptions = {
+	[key: string]: any;
 };
-// "options": {
-// 	"locales": {
-// 		"relations": {
-// 			"ua": "uk",
-// 			"en": "en-AU",
-// 			"fr": "fr"
-// 		}
-// 	},
-// 	"global": {
-// 		"format": "mm/dd/yyyy",
-// 		"autohide": true
-// 	}
-// }
 
 export class DatepickerHelper {
 	static getNormalizedLanguage(
@@ -48,22 +35,22 @@ export class DatepickerHelper {
 		try {
 			inputTimestamp = parseDate(inputValue, format);
 		} catch {
-			throw new Error(validation.texts.notValid);
+			throw new Error(validation.texts?.notValid);
 		}
 
 		if (!inputTimestamp) {
-			throw new Error(validation.texts.notValid);
+			throw new Error(validation.texts?.notValid);
 		}
 
 		this.processRange(fieldOptions, validation, inputTimestamp);
 	}
 
 	private static processRange(
-		fieldOptions: any,
+		fieldOptions: FieldOptions,
 		validation: ValidationParams,
 		inputTimestamp: number
 	): void {
-		// string
+		// strings
 		const {minDate, maxDate, format} = fieldOptions;
 		let minTimestamp: number;
 		let maxTimestamp: number;
@@ -85,20 +72,20 @@ export class DatepickerHelper {
 				minTimestamp,
 				maxTimestamp
 			);
-			if (!valid) throw new Error(validation.texts.range);
+			if (!valid) throw new Error(validation.texts?.range);
 			// @ts-ignore
 		} else if (minTimestamp) {
 			const valid: boolean = this.isValidMin(inputTimestamp, minTimestamp);
-			if (!valid) throw new Error(validation.texts.range);
+			if (!valid) throw new Error(validation.texts?.range);
 			// @ts-ignore
 		} else if (maxTimestamp) {
 			const valid: boolean = this.isValidMax(inputTimestamp, maxTimestamp);
-			if (!valid) throw new Error(validation.texts.range);
+			if (!valid) throw new Error(validation.texts?.range);
 		}
 	}
 
 	private static isValidRange(time: number, min: number, max: number): boolean {
-		return time >= min && time <= max;
+		return this.isValidMin(time, min) && this.isValidMax(time, max);
 	}
 
 	private static isValidMin(time: number, min: number): boolean {
