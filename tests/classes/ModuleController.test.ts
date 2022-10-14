@@ -1,6 +1,9 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeController} from '@/classes/scheme/SchemeController';
 import {ModuleController} from '@/classes/modules/ModuleController';
+import {SmartTimeout} from '@/utils/SmartTimeout';
+
+console.error = () => {};
 
 describe('InitModule class', () => {
 	// @ts-ignore
@@ -10,7 +13,7 @@ describe('InitModule class', () => {
 				{
 					name: 'auth',
 					enable: false,
-					options: {
+					config: {
 						forEachField: {
 							foo: 111,
 						},
@@ -57,6 +60,7 @@ describe('InitModule class', () => {
 	};
 
 	it('-> getModuleConfig', () => {
+		// disable error logging
 		expect(ModuleController.getModuleConfig('auth2323')).toEqual({});
 
 		const options = ModuleController.getModuleConfig('auth');
@@ -64,17 +68,27 @@ describe('InitModule class', () => {
 		expect(options.forEachField.foo).toEqual(111);
 	});
 
-	it('-> init. correct work', () => {
+	it('-> waitWhenLoaded. correct work', async () => {
 		const windowExample = {
 			Datepicker: true,
 		};
-
+		const smtt = SmartTimeout.createForLoadFile();
 		const checker = () => windowExample.Datepicker;
-		const successLoad = () => {
-			expect(true).toBeTruthy();
-		};
-		const failLoad = () => {};
 
-		ModuleController.init(checker, successLoad, failLoad);
+		await ModuleController.waitWhenLoaded(checker, smtt);
+		expect(true).toBeTruthy();
 	});
+
+	// it('-> waitWhenLoaded. incorrect work', () => {
+	// 	const windowExample = {
+	// 		Datepicker111: true,
+	// 	};
+	// 	const smtt = SmartTimeout.createForLoadFile();
+	// 	// @ts-ignore
+	// 	const checker = () => windowExample.Datepicker;
+	//
+	// 	expect(async () => {
+	// 		await ModuleController.waitWhenLoaded(checker, smtt);
+	// 	}).toThrow();
+	// });
 });

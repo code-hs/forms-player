@@ -78,6 +78,19 @@ export interface ModuleConfig {
 	forEachField?: object;
 	[key: string]: any;
 }
+// "config": {
+// 	"locales": {
+// 		"relations": {
+// 			"ua": "uk",
+// 			"en": "en-AU",
+// 			"fr": "fr"
+// 		}
+// 	},
+// 	"forEachField": {
+// 		"format": "mm/dd/yyyy",
+// 		"autohide": true
+// 	}
+// }
 
 export interface Module {
 	name: string;
