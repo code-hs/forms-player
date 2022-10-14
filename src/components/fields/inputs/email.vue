@@ -99,7 +99,7 @@ export default {
 			vsDestroy: 'validator/destroy',
 		}),
 		...mapActions({
-			fieldResponseOnValidationEvent: 'validator/fieldResponse',
+			vEventResponse: 'validator/fieldResponse',
 		}),
 		initValidation() {
 			if (!FieldValidator.canValidation(this.validation)) return;
@@ -157,7 +157,7 @@ export default {
 		},
 		vHandleTask() {
 			this.vProcessAndUpdateDirty(false);
-			this.fieldResponseOnValidationEvent({
+			this.vEventResponse({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});

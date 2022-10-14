@@ -165,7 +165,7 @@ export default {
 			vsDestroy: 'validator/destroy',
 		}),
 		...mapActions({
-			fieldResponseOnValidationEvent: 'validator/fieldResponse',
+			vEventResponse: 'validator/fieldResponse',
 		}),
 		async waitDatepicker() {
 			const smtt = SmartTimeout.createForLoadFile();
@@ -261,8 +261,7 @@ export default {
 		},
 		vHandleTask() {
 			this.vProcess(false);
-			// this.vEventFieldResponse({
-			this.fieldResponseOnValidationEvent({
+			this.vEventResponse({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});

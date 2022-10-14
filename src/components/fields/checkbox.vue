@@ -88,7 +88,7 @@ export default {
 			vsDestroy: 'validator/destroy',
 		}),
 		...mapActions({
-			fieldResponseOnValidationEvent: 'validator/fieldResponse',
+			vEventResponse: 'validator/fieldResponse',
 		}),
 		initValidation() {
 			if (FieldValidator.canValidation(this.validation, true)) {
@@ -120,7 +120,7 @@ export default {
 			}
 
 			this.handleChange(false);
-			this.fieldResponseOnValidationEvent({
+			this.vEventResponse({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
