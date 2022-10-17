@@ -1,5 +1,6 @@
 <template>
 	<div v-if="show" class="text-container" :class="common.class">
+		<!--suppress JSUnresolvedVariable JSUnresolvedFunction -->
 		<component :is="custom.tag">
 			{{ $t(text.value) }}
 		</component>

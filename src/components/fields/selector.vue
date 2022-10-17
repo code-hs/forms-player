@@ -1,5 +1,6 @@
 <template>
 	<div class="field input-selector" :class="common.class">
+		<!--suppress JSUnresolvedFunction -->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
 		<select
@@ -9,10 +10,12 @@
 			:class="{error: valid.error}"
 			@change="handleChange"
 		>
+			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
 			<option v-if="custom.defaultText" value="" disabled>
 				{{ $t(custom.defaultText) }}
 			</option>
 
+			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
 			<option
 				v-for="(optionsValue, key) in custom.options"
 				:key="key"
@@ -23,6 +26,7 @@
 		</select>
 
 		<transition name="fade">
+			<!--suppress JSUnresolvedFunction -->
 			<div
 				v-if="validation.texts.required"
 				v-show="valid.error"

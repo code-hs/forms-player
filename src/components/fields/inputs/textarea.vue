@@ -1,8 +1,9 @@
 <template>
 	<div class="field input-textarea" :class="common.class">
+		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
-		<!--suppress JSUnresolvedFunction -->
+		<!--suppress JSUnresolvedVariable JSUnresolvedFunction -->
 		<textarea
 			ref="self"
 			v-model="modelStore[common.model]"
@@ -16,6 +17,7 @@
 		</textarea>
 
 		<transition name="fade">
+			<!--suppress JSUnresolvedFunction-->
 			<div
 				v-if="validation.texts.required"
 				:class="{showContent: valid.error}"
@@ -50,6 +52,7 @@ export default {
 			required: false,
 			default: () => ({
 				pattern: '',
+				rows: 3,
 			}),
 		},
 	},

@@ -1,5 +1,6 @@
 <template>
 	<div :class="'vrc-' + fieldType">
+		<!--suppress JSUnresolvedVariable -->
 		<component
 			:is="schemeOptions.common.type"
 			:key="key"
@@ -7,6 +8,7 @@
 			:multibox-index="multiboxIndex"
 			v-bind="schemeOptions"
 		/>
+		<!--suppress JSUnresolvedVariable -->
 		<StyleIncluder v-if="schemeOptions.styles" :styles="schemeOptions.styles" />
 	</div>
 </template>

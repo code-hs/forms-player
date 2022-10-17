@@ -36,16 +36,16 @@ export default {
 			if (!elem) return;
 
 			elem.scrollIntoView({behavior: 'smooth', block: 'center'});
-			let posY = window.pageYOffset;
+			let posY = window.scrollY;
 
 			const interval = setInterval(() => {
-				if (posY === window.pageYOffset) {
+				if (posY === window.scrollY) {
 					// scrolling stopped
 					elem.focus();
 					clearInterval(interval);
 				}
 
-				posY = window.pageYOffset;
+				posY = window.scrollY;
 			}, 100);
 		},
 	},

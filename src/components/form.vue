@@ -22,7 +22,6 @@ import {bus, busBroadcasts} from '@/utils/bus';
 import {ApiResponser} from '@/classes/api/ApiResponser';
 import StyleIncluder from '@/components/utils/styleIncluder';
 
-// noinspection JSUnresolvedFunction
 export default {
 	name: 'Form',
 	components: {

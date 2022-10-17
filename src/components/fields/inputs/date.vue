@@ -1,8 +1,9 @@
 <template>
 	<div class="field input-date" :class="common.class">
+		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
-		<!--suppress JSUnresolvedFunction -->
+		<!--suppress JSUnresolvedFunction-->
 		<input
 			ref="self"
 			v-model="modelStore[common.model]"
@@ -175,7 +176,7 @@ export default {
 			);
 
 			await ModuleController.waitWhenLoaded(() => window.Datepicker, smtt);
-			await datepickerLoader.waitLocales(datepickerLoader);
+			await datepickerLoader.waitLocales();
 			this.setCorrectLang();
 		},
 		setCorrectLang() {

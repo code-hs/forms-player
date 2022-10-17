@@ -1,5 +1,6 @@
 <template>
 	<div class="submit" :class="common.class">
+		<!--suppress JSUnresolvedFunction -->
 		<button type="submit" :disabled="disabled">{{ $t(text.text) }}</button>
 	</div>
 </template>
