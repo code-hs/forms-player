@@ -1,5 +1,6 @@
 function shadowRootInit(root) {
 	// for working shadow
+	// noinspection JSUnresolvedVariable
 	const rootNode = root.el.getRootNode();
 
 	if (rootNode instanceof ShadowRoot) {

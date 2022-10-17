@@ -1,3 +1,6 @@
+/* eslint-disable */
+// @ts-nocheck
+
 function lastItemOf(arr: any[]) {
 	return arr[arr.length - 1];
 }
@@ -71,7 +74,8 @@ const parseFns = {
 			}
 
 			const monthName = month.toLowerCase();
-			const compareNames = name => name.toLowerCase().startsWith(monthName);
+			const compareNames: Function = (name: string) =>
+				name.toLowerCase().startsWith(monthName);
 			// compare with both short and full names because some locales have periods
 			// in the short names (not equal to the first X letters of the full names)
 			monthIndex = locale.monthsShort.findIndex(compareNames);
@@ -84,6 +88,7 @@ const parseFns = {
 		}
 
 		newDate.setMonth(monthIndex);
+		// noinspection UnnecessaryLocalVariableJS
 		const r =
 			newDate.getMonth() !== normalizeMonth(monthIndex)
 				? newDate.setDate(0)
@@ -106,10 +111,10 @@ const formatFns = {
 	dd(date: Date) {
 		return padZero(date.getDate(), 2);
 	},
-	D(date: Date, locale) {
+	D(date: Date, locale: any) {
 		return locale.daysShort[date.getDay()];
 	},
-	DD(date: Date, locale) {
+	DD(date: Date, locale: any) {
 		return locale.days[date.getDay()];
 	},
 	m(date: Date) {
@@ -135,7 +140,8 @@ const formatFns = {
 	},
 };
 
-function parseFormatString(format: string) {
+function parseFormatString(format: string): any {
+	// noinspection SuspiciousTypeOfGuard
 	if (typeof format !== 'string') {
 		throw new Error('Invalid date format.');
 	}
@@ -154,7 +160,7 @@ function parseFormatString(format: string) {
 	const partFormatters = parts.map(token => formatFns[token]);
 
 	// collect parse function keys used in the format
-	// iterate over parseFns' keys in order to keep the order of the keys.
+	// iterate over parseFns keys in order to keep the order of the keys.
 	const partParserKeys = Object.keys(parseFns).reduce((keys, key) => {
 		const token = parts.find(
 			part => part[0] !== 'D' && part[0].toLowerCase() === key
@@ -165,6 +171,7 @@ function parseFormatString(format: string) {
 		return keys;
 	}, []);
 
+	// eslint-disable-next-line no-return-assign
 	return (knownFormats[format] = {
 		parser(dateStr, locale) {
 			const dateParts = dateStr
@@ -192,6 +199,7 @@ function parseFormatString(format: string) {
 		},
 		formatter(date, locale) {
 			let dateStr = partFormatters.reduce((str, fn, index) => {
+				// noinspection JSUnusedAssignment
 				return (str += `${separators[index]}${fn(date, locale)}`);
 			}, '');
 			// separators' length is always parts' length + 1,
@@ -209,7 +217,6 @@ export function parseDate(
 
 	if (dateStr instanceof Date || typeof dateStr === 'number') {
 		// cut hours and minutes, save only the date values
-		// @ts-ignore
 		const date: number = stripTime(dateStr);
 		return Number.isNaN(date) ? 0 : date;
 	}

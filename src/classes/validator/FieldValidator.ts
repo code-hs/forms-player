@@ -65,8 +65,7 @@ export class FieldValidator {
 		onlyRequired: boolean = false
 	): boolean {
 		if (!rules) return false;
-
-		if (onlyRequired) return rules.required;
+		if (onlyRequired) return rules.required as boolean;
 
 		return !!(rules.pattern || rules.required);
 	}

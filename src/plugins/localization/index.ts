@@ -72,6 +72,7 @@ export class Localization {
 
 		// if key starts from '#', return this text
 		if (key.startsWith('#')) {
+			// noinspection JSDeprecatedSymbols
 			return key.substr(1);
 		}
 

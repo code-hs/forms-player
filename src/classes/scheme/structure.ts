@@ -95,7 +95,7 @@ export interface ModuleConfig {
 export interface Module {
 	name: string;
 	enable: boolean;
-	config: ModuleConfig;
+	config?: ModuleConfig;
 }
 
 export interface Configurations {

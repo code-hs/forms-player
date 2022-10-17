@@ -1,3 +1,5 @@
+// noinspection JSUnresolvedFunction, JSUnresolvedVariable
+
 const css = {
 	sourceMap: false, // - 31kb
 	extract: false,
@@ -9,6 +11,7 @@ if (process.env.CUSTOM_MODE === 'dev') {
 	css.sourceMap = true; // + 31kb
 }
 
+// noinspection FunctionWithMultipleLoopsJS
 function enableShadowCss(config) {
 	const configs = [
 		// Required to explicitly call the __inject__ function exported by

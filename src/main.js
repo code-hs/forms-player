@@ -23,4 +23,5 @@ const options = {
 		shadowRootInit(root);
 	},
 };
+// noinspection JSUnresolvedFunction
 Vue.customElement('form-widget-g', App, options);

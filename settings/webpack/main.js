@@ -1,8 +1,10 @@
+// noinspection JSUnresolvedVariable
 const webpack = require('webpack');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
+// noinspection JSUnresolvedFunction,JSUnresolvedVariable
 const plugins = [
 	new webpack.optimize.LimitChunkCountPlugin({
 		maxChunks: 1,

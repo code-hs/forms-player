@@ -18,6 +18,7 @@ import localization from './localization';
 
 Vue.use(Vuex);
 
+// noinspection JSUnresolvedFunction
 export default new Vuex.Store({
 	modules: {scheme, model, validator, request, localization},
 });
