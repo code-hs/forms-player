@@ -3,7 +3,7 @@
 		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
-		<!--suppress JSUnresolvedFunction-->
+		<!--suppress JSUnresolvedFunction JSUnresolvedVariable-->
 		<input
 			ref="self"
 			v-model="modelStore[common.model]"
@@ -40,16 +40,16 @@ import {DatepickerLoader} from '@/classes/modules/datepicker/DatepickerLoader';
 import {DatepickerHelper} from '@/classes/modules/datepicker/DatepickerHelper';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
-import {ValidationParams} from '@/classes/scheme/structure';
 
 export default {
 	name: 'InputDate',
 	props: {
 		common: FH.common,
 		validation: {
-			type: ValidationParams,
+			type: Object,
 			required: false,
 			default: () => ({
+				required: false,
 				texts: {
 					required: '',
 					notValid: '',
@@ -245,6 +245,7 @@ export default {
 			if (!this.isFieldFulled()) return;
 
 			try {
+				// noinspection JSCheckFunctionSignatures
 				DatepickerHelper.processValidate(
 					this.moduleData?.fieldOptions,
 					this.value,
