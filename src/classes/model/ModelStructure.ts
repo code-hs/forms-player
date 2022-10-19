@@ -27,8 +27,7 @@ export class ModelStructure {
 	private static getComponentStructure(
 		field: Page | Field
 	): ModelStructureStore {
-		// @ts-ignore
-		const optionalStructure = this.getOptionalStructure(field);
+		const optionalStructure = this.getOptionalStructure(field as Field);
 		const innerStructure = this.getInnerStructure(field);
 
 		return {...optionalStructure, ...innerStructure} as ModelStructureStore;
@@ -42,7 +41,6 @@ export class ModelStructure {
 		const structure: ModelStructureStore = {};
 		// create a store for future fields
 		const inputsStore: ModelStructureStore = {};
-		// @ts-ignore
 		const multiBoxModel: string = field.common.model;
 
 		structure[multiBoxModel] = [inputsStore];

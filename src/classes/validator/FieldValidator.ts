@@ -14,7 +14,6 @@ export class FieldValidator {
 		// Main regex
 		// @ts-ignore
 		const main: string = str.match(/\/(.+)\/.*/)[1];
-
 		// Regex options
 		// @ts-ignore
 		const options: string = str.match(/\/.+\/(.*)/)[1];

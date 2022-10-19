@@ -4,13 +4,11 @@ export class LayoutColumns {
 	static getColumnClasses(field: Field): string {
 		if (!field) return '';
 
-		let classes: string = '';
-
-		// custom.childLength;
+		let classes = '';
 		// col-6, col-12,...
-		// @ts-ignore
-		// this param created it columns.vue
-		let col: number = Math.floor(12 / field.custom.childCount);
+		// this param created in columns.vue
+		const childrenCount = field.custom?.childCount || 1;
+		let col: number = Math.floor(12 / childrenCount);
 
 		if (field.custom?.col) {
 			col = field.custom.col;

@@ -3,7 +3,6 @@ import {SchemeFiltrator} from './SchemeFiltrator';
 import {Scheme, Page, Configurations} from '@/classes/scheme/structure';
 
 export class SchemeController {
-	// @ts-ignore
 	private static scheme: Scheme;
 
 	static load(): Scheme {
