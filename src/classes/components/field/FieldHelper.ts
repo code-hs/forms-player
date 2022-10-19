@@ -3,8 +3,8 @@ import {
 	textExample,
 	stylesExample,
 	htmlExample,
-	Field,
-} from '@/classes/scheme/structure';
+} from '@/classes/components/field/structureField';
+import {Field} from '@/classes/scheme/structure';
 
 type VueComponentParams = Object;
 

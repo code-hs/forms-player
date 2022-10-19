@@ -5,12 +5,6 @@ export interface ValidationParams {
 		[key: string]: string;
 	};
 }
-export const validationExample: ValidationParams = {
-	required: false,
-	pattern: '',
-	texts: {},
-};
-
 export interface CustomParams {
 	multi?: {
 		name: string;
@@ -18,31 +12,20 @@ export interface CustomParams {
 	};
 	[key: string]: any;
 }
-export const customExample: CustomParams = {};
-
 export interface CommonParams {
 	type: string;
 	model?: string;
 	enable?: boolean;
 	class?: string;
 }
-
 export interface TextParams {
 	placeholder?: string;
 	hint?: string;
 }
-export const textExample: TextParams = {
-	placeholder: '',
-	hint: '',
-};
-
 export interface StylesParams {
 	value?: string;
 }
-export const stylesExample: StylesParams = {};
-
 export interface HtmlParams {}
-export const htmlExample: HtmlParams = {};
 
 export interface Field {
 	common: CommonParams;
