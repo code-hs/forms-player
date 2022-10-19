@@ -8,10 +8,13 @@ export class ModuleController {
 		checker: Function,
 		smtt: SmartTimeout
 	): Promise<void> {
+		// the check function should return true if the module is loaded
 		while (!checker()) {
 			// module files are not loaded -> wait, then try again
+
+			// fallback variant, for stop infinite loop
 			if (smtt.totalTime >= 1500) {
-				// after 1500ms, module are not loaded, call failLoad function
+				// after 1500ms, module are not loaded -> throw error
 				throw new Error('module not loaded');
 			}
 

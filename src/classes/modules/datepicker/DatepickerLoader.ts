@@ -19,6 +19,8 @@ export class DatepickerLoader {
 		// eslint-disable-next-line no-constant-condition
 		while (true) {
 			if (this.isLoadedLocales()) return;
+
+			// fallback variant, for stop infinite loop
 			if (smtt.totalTime > 3000) {
 				console.error('Datepicker: locales not loaded, use default lang');
 				return;
@@ -38,7 +40,7 @@ export class DatepickerLoader {
 		return !!this.getModule();
 	}
 
-	private getModule(): DatepickerObject {
+	getModule(): DatepickerObject {
 		// @ts-ignore
 		return window.Datepicker;
 	}

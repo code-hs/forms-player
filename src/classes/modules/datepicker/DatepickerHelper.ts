@@ -4,7 +4,6 @@ import {parseDate} from '@/utils/dateparser';
 type Relations = {
 	[langFromAvailableLangs: string]: string;
 };
-
 export type FieldOptions = {
 	[key: string]: any;
 };
@@ -18,14 +17,15 @@ export class DatepickerHelper {
 		// get lang from relations
 		// from UA to UK
 		// normalized lang = UK
+		// set relations in module config
 
 		return relations[lang] || lang;
 	}
 
 	static processValidate(
 		fieldOptions: FieldOptions,
-		inputValue: string,
-		validation: ValidationParams
+		validation: ValidationParams,
+		inputValue: string
 	): void {
 		// string
 		const {format} = fieldOptions;
@@ -50,6 +50,7 @@ export class DatepickerHelper {
 		validation: ValidationParams,
 		inputTimestamp: number
 	): void {
+		// prepare min and max rules
 		// strings
 		const {minDate, maxDate, format} = fieldOptions;
 		let minTimestamp: number;
@@ -65,6 +66,7 @@ export class DatepickerHelper {
 			);
 		}
 
+		// check by min and max dates
 		// @ts-ignore
 		if (minTimestamp && maxTimestamp) {
 			const valid: boolean = DatepickerHelper.isValidRange(

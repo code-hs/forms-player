@@ -175,7 +175,10 @@ export default {
 				this.lang
 			);
 
-			await ModuleController.waitWhenLoaded(() => window.Datepicker, smtt);
+			await ModuleController.waitWhenLoaded(
+				() => datepickerLoader.getModule(),
+				smtt
+			);
 			await datepickerLoader.waitLocales();
 			this.setCorrectLang();
 		},
@@ -248,8 +251,8 @@ export default {
 				// noinspection JSCheckFunctionSignatures
 				DatepickerHelper.processValidate(
 					this.moduleData?.fieldOptions,
-					this.value,
-					this.validation
+					this.validation,
+					this.value
 				);
 			} catch (e) {
 				return e.message || ' ';

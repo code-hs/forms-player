@@ -89,24 +89,24 @@ describe('DatepickerHelper', () => {
 		let inputValue = '01/01/2022';
 
 		expect(() => {
-			DatepickerHelper.processValidate(fieldOptions, inputValue, validation);
+			DatepickerHelper.processValidate(fieldOptions, validation, inputValue);
 			return true;
 		}).toBeTruthy();
 
 		expect(() => {
 			inputValue = '09/27/2022';
-			DatepickerHelper.processValidate(fieldOptions, inputValue, validation);
+			DatepickerHelper.processValidate(fieldOptions, validation, inputValue);
 			return true;
 		}).toBeTruthy();
 
 		expect(() => {
 			inputValue = '12/28/1979';
-			DatepickerHelper.processValidate(fieldOptions, inputValue, validation);
+			DatepickerHelper.processValidate(fieldOptions, validation, inputValue);
 		}).toThrow();
 
 		expect(() => {
 			inputValue = '09/28/2022';
-			DatepickerHelper.processValidate(fieldOptions, inputValue, validation);
+			DatepickerHelper.processValidate(fieldOptions, validation, inputValue);
 		}).toThrow();
 	});
 });
