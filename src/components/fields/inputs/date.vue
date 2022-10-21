@@ -81,6 +81,7 @@ export default {
 
 	data() {
 		const moduleConfig = ModuleController.getModuleConfig('datepicker');
+		// union all options for field
 		const moduleFieldOptions = {...moduleConfig.forEachField, ...this.module};
 
 		return {
@@ -140,6 +141,7 @@ export default {
 	},
 
 	async mounted() {
+		// wait when all loaded
 		try {
 			await this.waitDatepicker();
 			this.initDatepicker();
@@ -198,6 +200,7 @@ export default {
 			self.addEventListener('changeDate', this.changeDate);
 		},
 		changeDate() {
+			// when user change date in datepicker
 			this.modelStore[this.common.model] = this.$refs.self.value;
 			this.vProcess();
 		},

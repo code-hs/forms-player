@@ -63,10 +63,12 @@ export default {
 			prevValue: '',
 			multiBoxName: FH.getMultiName(this),
 			valid: {
-				// флаг для такого функционала, если поле было загрязнено, то при каждом
-				// вводе проверяем его, что бы отбелить его
+				// if field stay errored, dirty = true
+				// then check field on every input, for clear error status
 				dirty: false,
+				// for show error text
 				error: false,
+				// is need validate this field
 				connect: false,
 			},
 		};
