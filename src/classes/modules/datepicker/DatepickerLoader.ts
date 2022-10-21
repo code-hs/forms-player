@@ -1,4 +1,4 @@
-import {ModuleConfig} from '@/classes/scheme/structure';
+import {ModuleConfig} from '@/classes/scheme/schemeStructure';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {delay} from '@/utils/asinchronius';
 import {DatepickerHelper} from './DatepickerHelper';

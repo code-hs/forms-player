@@ -1,4 +1,4 @@
-import {Field, Page} from '@/classes/scheme/structure';
+import {Field, Page} from '@/classes/scheme/schemeStructure';
 
 /*
  * {

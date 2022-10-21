@@ -1,4 +1,4 @@
-import {Scheme, LocalizationConfig} from '@/classes/scheme/structure';
+import {Scheme, LocalizationConfig} from '@/classes/scheme/schemeStructure';
 import {SchemeLoader} from '@/classes/scheme/SchemeLoader';
 import {LocalesAllLanguages, LocalizationInformation} from './structure';
 

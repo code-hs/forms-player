@@ -4,7 +4,7 @@ import {
 	stylesExample,
 	htmlExample,
 } from '@/classes/components/field/structureField';
-import {Field} from '@/classes/scheme/structure';
+import {Field} from '@/classes/scheme/schemeStructure';
 
 type VueComponentParams = Object;
 

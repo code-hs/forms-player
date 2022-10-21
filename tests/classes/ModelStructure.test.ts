@@ -3,7 +3,7 @@ import {
 	ModelStructure,
 	ModelStructureStore,
 } from '@/classes/model/ModelStructure';
-import {Field, Page} from '@/classes/scheme/structure';
+import {Field, Page} from '@/classes/scheme/schemeStructure';
 
 describe('ModelStructure class -> generate', () => {
 	it('correct work', () => {

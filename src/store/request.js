@@ -2,7 +2,7 @@ import {Api} from '@/classes/api/Api';
 // eslint-disable-next-line no-unused-vars
 import {ModelStructure} from '@/classes/model/ModelStructure';
 // eslint-disable-next-line no-unused-vars
-import {Page} from '@/classes/scheme/structure';
+import {Page} from '@/classes/scheme/schemeStructure';
 
 const state = () => ({
 	saveFormFinished: true,

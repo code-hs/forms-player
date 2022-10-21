@@ -1,5 +1,9 @@
 import {SchemeController} from '@/classes/scheme/SchemeController';
-import {Configurations, Module, ModuleConfig} from '@/classes/scheme/structure';
+import {
+	Configurations,
+	Module,
+	ModuleConfig,
+} from '@/classes/scheme/schemeStructure';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {delay} from '@/utils/asinchronius';
 

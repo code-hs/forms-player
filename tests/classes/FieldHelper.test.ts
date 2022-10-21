@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {FieldHelper} from '@/classes/components/field/FieldHelper';
-import {Field} from '@/classes/scheme/structure';
+import {Field} from '@/classes/scheme/schemeStructure';
 
 describe('FieldHelper class', () => {
 	it('correct work func getMultiName', () => {

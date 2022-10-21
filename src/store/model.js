@@ -9,7 +9,7 @@ import {
 } from '@/classes/model/ModelStructure';
 
 // eslint-disable-next-line no-unused-vars
-import {Page} from '@/classes/scheme/structure';
+import {Page} from '@/classes/scheme/schemeStructure';
 
 /**
  * @param {ModelStructureStore} structure

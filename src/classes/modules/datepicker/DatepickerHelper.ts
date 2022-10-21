@@ -1,4 +1,4 @@
-import {ModuleConfig, ValidationParams} from '@/classes/scheme/structure';
+import {ModuleConfig, ValidationParams} from '@/classes/scheme/schemeStructure';
 import {parseDate} from '@/utils/dateparser';
 
 type Relations = {

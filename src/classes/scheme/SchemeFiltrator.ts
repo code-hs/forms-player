@@ -1,4 +1,4 @@
-import {Scheme, Page, Field} from '@/classes/scheme/structure';
+import {Scheme, Page, Field} from '@/classes/scheme/schemeStructure';
 
 export class SchemeFiltrator {
 	static filtrateParamEnable(scheme: Scheme): Scheme {

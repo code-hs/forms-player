@@ -1,4 +1,4 @@
-import {Field} from '@/classes/scheme/structure';
+import {Field} from '@/classes/scheme/schemeStructure';
 import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
 
 export class VirtualComponentH {

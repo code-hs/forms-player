@@ -3,7 +3,7 @@ import {
 	DatepickerHelper,
 	FieldOptions,
 } from '@/classes/modules/datepicker/DatepickerHelper';
-import {ValidationParams} from '@/classes/scheme/structure';
+import {ValidationParams} from '@/classes/scheme/schemeStructure';
 
 describe('DatepickerHelper', () => {
 	it('.getNormalizedLanguage', () => {
