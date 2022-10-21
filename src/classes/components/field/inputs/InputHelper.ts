@@ -1,4 +1,4 @@
-import {FieldThis} from '@/classes/components/field/structureField';
+import {FieldThis} from '@/classes/components/field/fieldStructure';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 
 interface OnInputEvent {

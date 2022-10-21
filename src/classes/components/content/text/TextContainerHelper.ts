@@ -1,4 +1,4 @@
-import {FieldThis} from '@/classes/components/field/structureField';
+import {FieldThis} from '@/classes/components/field/fieldStructure';
 
 export class TextContainerHelper {
 	static allowedTags: string[] = [
