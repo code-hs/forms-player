@@ -3,7 +3,6 @@ import Vue from 'vue';
 import VueMask from 'v-mask';
 import App from './app';
 import store from './store';
-import {shadowRootInit} from '../settings/initDom';
 import {Localization} from './plugins/localization';
 
 // add dev log functions
@@ -17,11 +16,5 @@ Vue.config.productionTip = false;
 Vue.use(Localization);
 Vue.use(VueMask);
 
-const options = {
-	shadow: false,
-	beforeCreateVueInstance: root => {
-		shadowRootInit(root);
-	},
-};
 // noinspection JSUnresolvedFunction
-Vue.customElement('form-widget-g', App, options);
+Vue.customElement('form-widget-g', App);

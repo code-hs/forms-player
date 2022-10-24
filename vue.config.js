@@ -1,13 +1,7 @@
-const {configureWebpack} = require('./settings/webpack/main');
-const {enableShadowCss, css} = require('./settings/webpack/styles');
+const {config, css} = require('./settings/webpack/main');
 
 module.exports = {
-	configureWebpack,
-	chainWebpack: config => {
-		config.optimization.delete('splitChunks');
-		config.optimization.minimize = true;
-		enableShadowCss(config);
-	},
+	configureWebpack: config,
 	filenameHashing: false,
 	css,
 };
