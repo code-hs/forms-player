@@ -4,20 +4,24 @@
 	"private": true,
 	"scripts": {
 		"serve": "cross-env CUSTOM_MODE=dev vue-cli-service serve",
-		"serve local": "npm run _local:copy:bundle && npm run _local:copy:scheme && npm run _local:copy:locales && npm run _local:copy:WDFL && serve run",
+		"serve local": "_local:copy:all:to-local && serve run",
 		" ": "",
-		"build min        (clear comments,logs)": "cross-env CUSTOM_MODE=prod vue-cli-service build && npm run _copy:bundle:to-api-public-dir && npm run _local:copy:bundle",
-		"build full         (with sourcemap, with comments, logs)": "cross-env CUSTOM_MODE=dev vue-cli-service build && npm run _copy:bundle:to-api-public-dir  && npm run _local:copy:bundle",
+		"build:min": "cross-env CUSTOM_MODE=prod vue-cli-service build && npm run _copy:bundle:to-api-public-dir && npm run _local:copy:bundle",
+		"build:full         (with sourcemap, with comments, logs)": "cross-env CUSTOM_MODE=dev vue-cli-service build && npm run _copy:bundle:to-api-public-dir  && npm run _local:copy:bundle",
 		"  ": "",
 		"lint": "vue-cli-service lint --no-fix --ext .ts,.js,.vue ./src/",
 		"test": "jest",
 		"analyze": "cross-env CUSTOM_MODE=analyze vue-cli-service build",
 		"   ": "",
+		"present: deploy": "npm run build:min && npm run _present:copy-files && cd ..\\client-present && git add . && git commit -m 'autodeploy' && git push origin master",
+		"    ": "",
+		"_local:copy:all:to-local": "npm run _local:copy:bundle && npm run _local:copy:scheme && npm run _local:copy:locales && npm run _local:copy:WDFL",
 		"_local:copy:bundle": "copy dist\\form-widget-g.js run\\local\\form-widget-g.js",
 		"_local:copy:scheme": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\scheme.json run\\local\\scheme.json",
 		"_local:copy:locales": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\locales.json run\\local\\locales.json",
 		"_local:copy:WDFL": "copy ..\\api\\public\\client\\widget-form-loader.min.js run\\local\\widget-form-loader.min.js",
-		"_copy:bundle:to-api-public-dir": "copy dist\\form-widget-g.js ..\\api\\public\\client\\bundles\\form-widget-g.js"
+		"_copy:bundle:to-api-public-dir": "copy dist\\form-widget-g.js ..\\api\\public\\client\\bundles\\form-widget-g.js",
+		"_present:copy-files": "copy run\\local ..\\client-present\\run\\local && copy run\\local.html ..\\client-present\\run\\index.html"
 	},
 	"dependencies": {
 		"document-register-element": "^1.11.0",
