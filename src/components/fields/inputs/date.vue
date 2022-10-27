@@ -18,6 +18,7 @@
 		/>
 
 		<transition name="fade">
+			<!--suppress JSUnresolvedVariable-->
 			<div
 				v-if="valid.text"
 				:class="{showContent: valid.error}"
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/classes/validator/FieldValidator';
 import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
@@ -199,9 +201,16 @@ export default {
 			this.datepickerItem = new Datepicker(self, this.moduleData.fieldOptions);
 			self.addEventListener('changeDate', this.changeDate);
 		},
+		setValue(v) {
+			// update value, only by Vue.set, not by set value.
+			// Need create reactive value for multiBox functional
+			Vue.set(this.modelStore, this.common.model, v);
+			// this.modelStructure[this.multiBoxName][this.multiboxIndex],
+		},
 		changeDate() {
 			// when user change date in datepicker
-			this.modelStore[this.common.model] = this.$refs.self.value;
+			const v = this.$refs.self.value;
+			this.setValue(v);
 			this.vProcess();
 		},
 		initValidation() {
@@ -219,7 +228,8 @@ export default {
 		},
 		handleInput(e) {
 			// update v-model, fix for mobile gboard
-			this.modelStore[this.common.model] = e.target.value;
+			this.setValue(e.target.value);
+			// this.modelStore[this.common.model] = e.target.value;
 			this.vProcessDebounced();
 		},
 		isFieldFulled() {
