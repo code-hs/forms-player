@@ -1,8 +1,8 @@
 import {describe, it, expect} from '@jest/globals';
-import {VirtualComponentH} from '@/classes/components/main/VirtualComponentH';
+import {VirtualComponentHelper} from '@/classes/components/main/VirtualComponentHelper';
 import {Field} from '@/classes/scheme/schemeStructure';
 
-describe('VirtualComponentH class', () => {
+describe('VirtualComponentHelper class', () => {
 	it('.canInitModel, ifs', () => {
 		const allowedComponents = [
 			'InputText',
@@ -17,7 +17,7 @@ describe('VirtualComponentH class', () => {
 			common: {type: 'test'},
 		};
 
-		const r: boolean = VirtualComponentH.canInitModel(
+		const r: boolean = VirtualComponentHelper.canInitModel(
 			allowedComponents,
 			fieldType,
 			field
@@ -45,7 +45,7 @@ describe('VirtualComponentH class', () => {
 			},
 		};
 
-		const r: boolean = VirtualComponentH.canInitModel(
+		const r: boolean = VirtualComponentHelper.canInitModel(
 			allowedComponents,
 			fieldType,
 			field
@@ -67,7 +67,7 @@ describe('VirtualComponentH class', () => {
 			common: {model: 'test', type: 'test'},
 		};
 
-		const r: boolean = VirtualComponentH.canInitModel(
+		const r: boolean = VirtualComponentHelper.canInitModel(
 			allowedComponents,
 			fieldType,
 			field
