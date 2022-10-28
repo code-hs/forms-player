@@ -1,7 +1,6 @@
 .app {
 	//layout
 	--appBackground: hsl(210, 2%, 16%);
-	//--dump: hsl(238, 92%, 86%);
 	--dump: hsl(238, 92%, 86%);
 
 	// group item layout
@@ -29,4 +28,8 @@
 	--submitText: hsl(0, 0%, 90%);
 	--submitBackground: hsl(116, 68%, 21%);
 	--submitFocusBackground: hsl(116, 68%, 26%);
+
+	--datepicker-current-day: hsl(187deg 68% 21%);
+	--datepicker-selected-day: hsl(187deg 68% 40%);
+	--datepicker-disable-text: hsl(0, 0%, 40%);
 }

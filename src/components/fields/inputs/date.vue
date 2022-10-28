@@ -11,7 +11,6 @@
 			type="text"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
-			class="datepicker-1"
 			:class="{error: valid.error}"
 			@blur="handleBlur"
 			@input="handleInput"
