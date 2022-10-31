@@ -1,4 +1,5 @@
 import {ModuleConfig, ValidationParams} from '@/classes/scheme/schemeStructure';
+import {FieldThis} from '@/classes/components/field/fieldStructure';
 import {parseDate} from '@/utils/dateparser';
 
 type Relations = {
@@ -9,6 +10,17 @@ export type FieldOptions = {
 };
 
 export class DatepickerHelper {
+	static validateFieldParams(fieldThis: FieldThis): void {
+		if (!fieldThis.custom.mask) {
+			console.error('InputDate: custom.mask is required');
+		}
+		if (!fieldThis.moduleData.fieldOptions.format) {
+			console.error(
+				'InputDate: format is required. In scheme.config.modules.datepicker.config.forEachField.format or in component [InputDate].module.format'
+			);
+		}
+	}
+
 	static getNormalizedLanguage(
 		moduleConfig: ModuleConfig,
 		lang: string
