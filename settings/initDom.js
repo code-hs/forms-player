@@ -1,4 +1,5 @@
 function shadowRootInit(root) {
+	// need for append styles and reload in serve run mode
 	// for working shadow
 	// noinspection JSUnresolvedVariable
 	const rootNode = root.el.getRootNode();
