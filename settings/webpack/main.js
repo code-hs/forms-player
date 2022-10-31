@@ -39,7 +39,7 @@ const minimizer = [
 	}),
 ];
 
-const config = {
+const configureWebpack = {
 	devtool: 'source-map',
 	output: {
 		path: path.resolve(__dirname, '../../dist'),
@@ -61,15 +61,4 @@ const config = {
 	},
 };
 
-const css = {
-	sourceMap: false, // - 31kb
-	extract: false,
-};
-
-if (process.env.CUSTOM_MODE === 'dev') {
-	// если в билде необходима возможность, просматривать файлы стилей
-	// корректно, по папкам и файлам раздельно
-	css.sourceMap = true; // + 31kb
-}
-
-module.exports = {config, css};
+module.exports = {configureWebpack};
