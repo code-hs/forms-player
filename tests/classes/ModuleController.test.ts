@@ -3,6 +3,7 @@ import {SchemeController} from '@/classes/scheme/SchemeController';
 import {ModuleController} from '@/classes/modules/ModuleController';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 
+// fix not useful messaging
 console.error = () => {};
 
 describe('InitModule class', () => {

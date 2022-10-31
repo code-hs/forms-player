@@ -149,7 +149,6 @@ export default {
 			try {
 				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
 			} catch (e) {
-				// eslint-disable-next-line no-console
 				console.error(e);
 			}
 		},
