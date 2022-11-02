@@ -1,24 +1,26 @@
-// all imports only in this file!!!
-@import 'utils/reset';
-@import 'utils/variables';
-@import 'utils/grid';
-@import 'utils/animation';
+form-widget-g {
+	// all imports only in this file!!!
+	@import 'utils/reset';
+	@import 'utils/variables';
+	@import 'utils/grid';
+	@import 'utils/animation';
 
-@import 'themes/dark';
-@import 'themes/light';
+	@import 'themes/dark';
+	@import 'themes/light';
 
-@import 'app';
-@import 'form';
-@import 'layout/columns';
-@import 'layout/multibox';
+	@import 'app';
+	@import 'form';
+	@import 'layout/columns';
+	@import 'layout/multibox';
 
-@import 'fields/field';
-@import 'fields/mixins';
-@import 'fields/inputs/text';
-@import 'fields/inputs/password';
-@import 'fields/inputs/textarea';
-@import 'fields/inputs/email';
-@import 'fields/inputs/date';
-@import 'fields/selector';
-@import 'fields/checkbox';
-@import 'fields/buttons/submit';
+	@import 'fields/field';
+	@import 'fields/mixins';
+	@import 'fields/inputs/text';
+	@import 'fields/inputs/password';
+	@import 'fields/inputs/textarea';
+	@import 'fields/inputs/email';
+	@import 'fields/inputs/date';
+	@import 'fields/selector';
+	@import 'fields/checkbox';
+	@import 'fields/buttons/submit';
+}
