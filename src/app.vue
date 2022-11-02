@@ -3,7 +3,10 @@
 		<template v-if="showContent">
 			<FormC />
 
-			<StyleIncluder v-if="scheme.styles" :styles="scheme.styles" />
+			<StyleIncluder
+				v-if="scheme.config.styles"
+				:styles="scheme.config.styles"
+			/>
 			<ValidationFocus />
 
 			<div v-if="showDump" class="dump">{{ modelStructure }}</div>
