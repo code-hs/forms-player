@@ -1,5 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {VirtualComponentHelper} from '@/classes/components/main/VirtualComponentHelper';
+import {VirtualComponentHelper} from '@/classes/utils/VirtualComponentHelper';
 import {Field} from '@/classes/scheme/schemeStructure';
 
 describe('VirtualComponentHelper class', () => {
