@@ -24,6 +24,7 @@ export interface TextParams {
 }
 export interface StylesParams {
 	value?: string;
+	values?: string[];
 }
 export interface HtmlParams {}
 
@@ -43,6 +44,7 @@ export interface Page {
 	type?: string;
 	description?: string;
 	position?: number;
+	styles?: StylesParams;
 	components?: Field[];
 }
 
@@ -84,10 +86,10 @@ export interface Module {
 export interface Configurations {
 	modules?: Module[];
 	localization?: LocalizationConfig;
+	styles?: StylesParams;
 }
 
 export interface Scheme {
 	config: Configurations;
-	styles?: StylesParams;
 	pages: Page[];
 }

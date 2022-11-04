@@ -3,10 +3,7 @@
 		<template v-if="showContent">
 			<FormC />
 
-			<StyleIncluder
-				v-if="scheme.config.styles"
-				:styles="scheme.config.styles"
-			/>
+			<StyleIncluder />
 			<ValidationFocus />
 
 			<div v-if="showDump" class="dump">{{ modelStructure }}</div>
@@ -22,7 +19,7 @@ import {Config} from '@/config/index';
 import {Api} from '@/classes/api/Api';
 import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
-import StyleIncluder from '@/components/utils/styleIncluder';
+import StyleIncluder from '@/components/utils/style/styleIncluder';
 
 export default {
 	components: {FormC, ValidationFocus, StyleIncluder},

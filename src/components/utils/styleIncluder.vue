@@ -19,12 +19,12 @@ export default {
 	},
 
 	created() {
-		this.styleStr = this.styles.value || '';
-
-		if (this.styles.values) {
-			const styles = this.styles.values.join(' ');
-			this.styleStr += ` ${styles}`;
-		}
+		// this.styleStr = this.styles.value || '';
+		//
+		// if (this.styles.values) {
+		// 	const styles = this.styles.values.join(' ');
+		// 	this.styleStr += ` ${styles}`;
+		// }
 	},
 };
 </script>
