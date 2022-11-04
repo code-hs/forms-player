@@ -46,7 +46,7 @@ export class StyleIncludeHelper {
 		let output = stylesObj.value || '';
 
 		if (stylesObj.values && Array.isArray(stylesObj.values)) {
-			output += ` ${stylesObj.values.join(' ')}`;
+			output += `${stylesObj.values.join(' ')} `;
 		}
 
 		return output;
@@ -58,7 +58,7 @@ export class StyleIncludeHelper {
 		// noinspection UnnecessaryLocalVariableJS
 		return styles.reduce((acc, item) => {
 			// eslint-disable-next-line no-param-reassign
-			acc += ` ${this.parseStyles(item)}`;
+			acc += `${this.parseStyles(item)} `;
 			return acc;
 		}, '');
 	}
