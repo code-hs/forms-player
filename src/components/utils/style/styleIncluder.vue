@@ -9,7 +9,7 @@ export default {
 	name: 'StyleIncluder',
 	data() {
 		return {
-			styleStr: StyleIncludeHelper.getAllStyles(),
+			styleStr: StyleIncludeHelper.getAllStylesAsStr(),
 		};
 	},
 };

@@ -2,29 +2,26 @@ import {StylesParams, Page, Field} from '@/classes/scheme/schemeStructure';
 import {SchemeController} from '@/classes/scheme/SchemeController';
 
 export class StyleIncludeHelper {
-	static stylesStore: StylesParams[] = [];
+	static stack: StylesParams[] = [];
 
-	static getAllStyles(): string {
-		const globalStyles: StylesParams | undefined =
+	static getAllStylesAsStr(): string {
+		const styles: StylesParams[] = this.getAllStyles();
+		return this.stylesToStr(styles);
+	}
+
+	private static getAllStyles(): StylesParams[] {
+		this.stack = [];
+
+		const global: StylesParams | undefined =
 			SchemeController.getConfig()?.styles;
-
-		if (globalStyles) this.stylesStore.push(globalStyles);
+		if (global) this.stack.push(global);
 
 		const pages: Page[] = SchemeController.getScheme()?.pages;
-
 		pages.forEach(page => {
 			this.getStyles(page);
 		});
 
-		if (!this.stylesStore.length) return '';
-
-		const stylesString = this.stylesStore.reduce((acc, style) => {
-			// eslint-disable-next-line no-param-reassign
-			acc += ` ${this.getStylesFromObject(style)}`;
-			return acc;
-		}, '');
-
-		return stylesString;
+		return this.stack;
 	}
 
 	private static getStyles(component: Page | Field): void {
@@ -34,7 +31,7 @@ export class StyleIncludeHelper {
 		if (component?.common?.enable === false) return;
 
 		// process styles in current component
-		if (component.styles) this.stylesStore.push(component.styles);
+		if (component.styles) this.stack.push(component.styles);
 
 		// process children
 		if (!component.components) return;
@@ -43,7 +40,7 @@ export class StyleIncludeHelper {
 		});
 	}
 
-	private static getStylesFromObject(stylesObj: StylesParams): string {
+	private static parseStyles(stylesObj: StylesParams): string {
 		if (!stylesObj.value && !stylesObj.values) return '';
 
 		let output = stylesObj.value || '';
@@ -53,5 +50,16 @@ export class StyleIncludeHelper {
 		}
 
 		return output;
+	}
+
+	private static stylesToStr(styles: StylesParams[]): string {
+		if (!styles.length) return '';
+
+		// noinspection UnnecessaryLocalVariableJS
+		return styles.reduce((acc, item) => {
+			// eslint-disable-next-line no-param-reassign
+			acc += ` ${this.parseStyles(item)}`;
+			return acc;
+		}, '');
 	}
 }
