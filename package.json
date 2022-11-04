@@ -59,7 +59,7 @@
 		"webpack-bundle-analyzer": "^4.4.2"
 	},
 	"browserslist": [
-		"> 1%",
+		"> 0.5%",
 		"not dead"
 	],
 	"jest": {
