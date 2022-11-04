@@ -24,7 +24,6 @@ export class StyleIncludeHelper {
 			return acc;
 		}, '');
 
-		console.log(stylesString);
 		return stylesString;
 	}
 

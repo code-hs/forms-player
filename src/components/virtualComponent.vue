@@ -8,8 +8,6 @@
 			:multibox-index="multiboxIndex"
 			v-bind="schemeOptions"
 		/>
-		<!--suppress JSUnresolvedVariable -->
-		<StyleIncluder v-if="schemeOptions.styles" :styles="schemeOptions.styles" />
 	</div>
 </template>
 
@@ -28,7 +26,6 @@ import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
 import ButtonSubmit from '@/components/fields/buttons/submit';
 import TextContainer from '@/components/content/textContainer';
-import StyleIncluder from '@/components/utils/styleIncluder';
 
 // async import for the box components
 const LayoutColumns = () => import('@/components/layout/columns/columns');
@@ -48,7 +45,6 @@ export default {
 		Checkbox,
 		ButtonSubmit,
 		TextContainer,
-		StyleIncluder,
 		LayoutColumns,
 		MultiBox,
 		LayoutContainer,

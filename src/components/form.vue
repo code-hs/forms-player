@@ -10,8 +10,6 @@
 			:key="index"
 			:scheme-options="component"
 		/>
-
-		<StyleIncluder v-if="pageStructure.styles" :styles="pageStructure.styles" />
 	</form>
 </template>
 
@@ -20,13 +18,11 @@ import {mapGetters, mapActions} from 'vuex';
 import VirtualComponent from '@/components/virtualComponent';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {ApiResponser} from '@/classes/api/ApiResponser';
-import StyleIncluder from '@/components/utils/styleIncluder';
 
 export default {
 	name: 'Form',
 	components: {
 		VirtualComponent,
-		StyleIncluder,
 	},
 
 	data() {
