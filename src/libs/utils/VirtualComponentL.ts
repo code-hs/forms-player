@@ -1,7 +1,7 @@
 import {Field} from '@/libs/scheme/schemeStructure';
-import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
+import {FieldL as FH} from '@/libs/components/field/FieldL';
 
-export class VirtualComponentHelper {
+export class VirtualComponentL {
 	static canInitModel(
 		allowedComponents: string[],
 		fieldType: string,

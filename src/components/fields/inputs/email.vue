@@ -32,8 +32,8 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/libs/validator/FieldValidator';
-import {InputHelper} from '@/libs/components/field/inputs/InputHelper';
-import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
+import {InputL} from '@/libs/components/field/inputs/InputL';
+import {FieldL as FH} from '@/libs/components/field/FieldL';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
@@ -123,7 +123,7 @@ export default {
 			this.modelStore[this.common.model] = e.target.value;
 
 			this.vProcessDirty();
-			InputHelper.processTextPatternDirty(this, e);
+			InputL.processTextPatternDirty(this, e);
 		},
 		vProcessDirty() {
 			if (!this.valid.connect) return;

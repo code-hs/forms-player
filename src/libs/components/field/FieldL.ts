@@ -8,7 +8,7 @@ import {Field} from '@/libs/scheme/schemeStructure';
 
 type VueComponentParams = Object;
 
-export class FieldHelper {
+export class FieldL {
 	static multiboxIndex: VueComponentParams = {
 		type: Number,
 		required: false,

@@ -1,7 +1,7 @@
 import {StylesParams, Page, Field} from '@/libs/scheme/schemeStructure';
 import {SchemeController} from '@/libs/scheme/SchemeController';
 
-export class StyleIncludeHelper {
+export class StyleIncludeL {
 	static stack: StylesParams[] = [];
 
 	static getAllStylesAsStr(): string {

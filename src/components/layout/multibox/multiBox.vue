@@ -29,7 +29,7 @@
 <script>
 import {mapMutations} from 'vuex';
 import {MultiBoxView} from '@/libs/components/layout/multibox/MultiBoxView';
-import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
+import {FieldL as FH} from '@/libs/components/field/FieldL';
 import ButtonAdd from './buttonAdd';
 import ButtonRemove from './buttonRemove';
 

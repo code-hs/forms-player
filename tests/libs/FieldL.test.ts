@@ -1,8 +1,8 @@
 import {describe, it, expect} from '@jest/globals';
-import {FieldHelper} from '@/libs/components/field/FieldHelper';
+import {FieldL} from '@/libs/components/field/FieldL';
 import {Field} from '@/libs/scheme/schemeStructure';
 
-describe('FieldHelper class', () => {
+describe('FieldL class', () => {
 	it('correct work func getMultiName', () => {
 		const field1: Field = {
 			common: {
@@ -15,7 +15,7 @@ describe('FieldHelper class', () => {
 				},
 			},
 		};
-		const r1 = FieldHelper.getMultiName(field1);
+		const r1 = FieldL.getMultiName(field1);
 		expect(r1).toBe('test');
 
 		// @ts-ignore
@@ -25,18 +25,18 @@ describe('FieldHelper class', () => {
 				multi: {},
 			},
 		};
-		const r2 = FieldHelper.getMultiName(field2);
+		const r2 = FieldL.getMultiName(field2);
 		expect(r2).toBe('');
 
 		// @ts-ignore
 		const field3: Field = {
 			custom: {},
 		};
-		const r3 = FieldHelper.getMultiName(field3);
+		const r3 = FieldL.getMultiName(field3);
 		expect(r3).toBe('');
 		// @ts-ignore
 		const field4: Field = {};
-		const r4 = FieldHelper.getMultiName(field4);
+		const r4 = FieldL.getMultiName(field4);
 		expect(r4).toBe('');
 	});
 });

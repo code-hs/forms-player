@@ -41,7 +41,7 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/FieldValidator';
-import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
+import {FieldL as FH} from '@/libs/components/field/FieldL';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {

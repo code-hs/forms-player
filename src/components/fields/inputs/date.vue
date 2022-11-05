@@ -33,12 +33,12 @@
 import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/FieldValidator';
-import {InputHelper} from '@/libs/components/field/inputs/InputHelper';
-import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
+import {InputL} from '@/libs/components/field/inputs/InputL';
+import {FieldL as FH} from '@/libs/components/field/FieldL';
 import {ModuleController} from '@/libs/modules/ModuleController';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {DatepickerLoader} from '@/libs/modules/datepicker/DatepickerLoader';
-import {DatepickerHelper} from '@/libs/modules/datepicker/DatepickerHelper';
+import {DatepickerL} from '@/libs/modules/datepicker/DatepickerL';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
 
@@ -128,8 +128,8 @@ export default {
 	},
 
 	created() {
-		DatepickerHelper.validateFieldParams(this);
-		InputHelper.initMaskDirty(this);
+		DatepickerL.validateFieldParams(this);
+		InputL.initMaskDirty(this);
 		this.initValidation();
 	},
 
@@ -178,11 +178,10 @@ export default {
 			this.setCorrectLang();
 		},
 		setCorrectLang() {
-			this.moduleData.fieldOptions.language =
-				DatepickerHelper.getNormalizedLanguage(
-					this.moduleData.config,
-					this.lang
-				);
+			this.moduleData.fieldOptions.language = DatepickerL.getNormalizedLanguage(
+				this.moduleData.config,
+				this.lang
+			);
 		},
 		initDatepicker() {
 			// after loaded module and locales for datepicker
@@ -253,7 +252,7 @@ export default {
 
 			try {
 				// noinspection JSCheckFunctionSignatures
-				DatepickerHelper.processValidate(
+				DatepickerL.processValidate(
 					this.moduleData?.fieldOptions,
 					this.validation,
 					this.value

@@ -33,8 +33,8 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/libs/validator/FieldValidator';
-import {InputHelper} from '@/libs/components/field/inputs/InputHelper';
-import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
+import {InputL} from '@/libs/components/field/inputs/InputL';
+import {FieldL as FH} from '@/libs/components/field/FieldL';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
@@ -91,7 +91,7 @@ export default {
 	},
 
 	created() {
-		InputHelper.initMaskDirty(this);
+		InputL.initMaskDirty(this);
 		this.initValidation();
 	},
 
@@ -134,7 +134,7 @@ export default {
 			// net use Vue.set(this.modelStore, this.common.model, v); as date.vue
 
 			this.vProcessDirty();
-			InputHelper.processTextPatternDirty(this, e);
+			InputL.processTextPatternDirty(this, e);
 		},
 		vProcessDirty() {
 			if (!this.valid.connect) return;

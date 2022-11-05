@@ -1,6 +1,6 @@
 import {FieldThis} from '@/libs/components/field/fieldStructure';
 
-export class TextContainerHelper {
+export class TextContainerL {
 	static allowedTags: string[] = [
 		'h1',
 		'h2',

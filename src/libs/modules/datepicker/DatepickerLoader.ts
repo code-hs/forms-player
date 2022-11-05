@@ -1,7 +1,7 @@
 import {ModuleConfig} from '@/libs/scheme/schemeStructure';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {delay} from '@/utils/asinchronius';
-import {DatepickerHelper} from './DatepickerHelper';
+import {DatepickerL} from './DatepickerL';
 
 type DatepickerObject = {
 	[key: string]: any;
@@ -11,7 +11,7 @@ export class DatepickerLoader {
 	lang: string;
 
 	constructor(moduleConfig: ModuleConfig, lang: string) {
-		this.lang = DatepickerHelper.getNormalizedLanguage(moduleConfig, lang);
+		this.lang = DatepickerL.getNormalizedLanguage(moduleConfig, lang);
 	}
 
 	async waitLocales(): Promise<void> {

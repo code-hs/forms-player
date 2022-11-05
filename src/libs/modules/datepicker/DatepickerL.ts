@@ -9,7 +9,7 @@ export type FieldOptions = {
 	[key: string]: any;
 };
 
-export class DatepickerHelper {
+export class DatepickerL {
 	static validateFieldParams(fieldThis: FieldThis): void {
 		if (!fieldThis.custom.mask) {
 			console.error('InputDate: custom.mask is required');
@@ -73,7 +73,7 @@ export class DatepickerHelper {
 			maxTimestamp = parseDate(maxDate, format);
 		} catch {
 			console.error(
-				'DatepickerHelper: processRange: not correct format or' +
+				'DatepickerL: processRange: not correct format or' +
 					' values in minDate/maxDate'
 			);
 		}
@@ -81,7 +81,7 @@ export class DatepickerHelper {
 		// check by min and max dates
 		// @ts-ignore
 		if (minTimestamp && maxTimestamp) {
-			const valid: boolean = DatepickerHelper.isValidRange(
+			const valid: boolean = DatepickerL.isValidRange(
 				inputTimestamp,
 				minTimestamp,
 				maxTimestamp

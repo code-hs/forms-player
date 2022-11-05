@@ -5,13 +5,13 @@ interface OnInputEvent {
 	[key: string]: any;
 }
 
-export class InputHelper {
+export class InputL {
 	static initMaskDirty(fieldThis: FieldThis): void {
 		fieldThis.mask = fieldThis.custom.mask || '';
 
 		if (fieldThis.custom.pattern && fieldThis.mask) {
 			throw new Error(
-				'InputHelper.initMask: mask and pattern are both set,' +
+				'InputL.initMask: mask and pattern are both set,' +
 					' use only one of them'
 			);
 		}

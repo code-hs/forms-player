@@ -1,17 +1,17 @@
 import {describe, it, expect} from '@jest/globals';
-import {TextContainerHelper} from '@/libs/components/content/text/TextContainerHelper';
+import {TextContainerL} from '@/libs/components/content/text/TextContainerL';
 import {FieldThis} from '@/libs/components/field/fieldStructure';
 
-describe('TextContainerHelper class', () => {
+describe('TextContainerL class', () => {
 	it('.canTag', () => {
 		// @ts-ignore
-		const r: boolean = TextContainerHelper.canTag('h1');
+		const r: boolean = TextContainerL.canTag('h1');
 		expect(r).toBeTruthy();
 	});
 
 	it('.canTag, bad tag', () => {
 		// @ts-ignore
-		const r: boolean = TextContainerHelper.canTag('h123');
+		const r: boolean = TextContainerL.canTag('h123');
 		expect(r).toBeFalsy();
 	});
 
@@ -25,7 +25,7 @@ describe('TextContainerHelper class', () => {
 			},
 		};
 
-		const r: boolean = TextContainerHelper.isShow(field);
+		const r: boolean = TextContainerL.isShow(field);
 		expect(r).toBeTruthy();
 	});
 
@@ -39,7 +39,7 @@ describe('TextContainerHelper class', () => {
 			},
 		};
 
-		const r: boolean = TextContainerHelper.isShow(field);
+		const r: boolean = TextContainerL.isShow(field);
 		expect(r).toBeFalsy();
 	});
 });

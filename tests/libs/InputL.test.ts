@@ -1,5 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {InputHelper} from '@/libs/components/field/inputs/InputHelper';
+import {InputL} from '@/libs/components/field/inputs/InputL';
 import {FieldThis} from '@/libs/components/field/fieldStructure';
 
 describe('Api class', () => {
@@ -7,7 +7,7 @@ describe('Api class', () => {
 		const field: FieldThis = {
 			custom: {mask: 'mask value'},
 		};
-		InputHelper.initMaskDirty(field);
+		InputL.initMaskDirty(field);
 		expect(field.mask).toEqual('mask value');
 	});
 
@@ -16,7 +16,7 @@ describe('Api class', () => {
 			const field: FieldThis = {
 				custom: {mask: 'mask value', pattern: 'pattern value'},
 			};
-			InputHelper.initMaskDirty(field);
+			InputL.initMaskDirty(field);
 		}).toThrow();
 	});
 
@@ -32,7 +32,7 @@ describe('Api class', () => {
 
 		const event = {target: {value: 'not email string'}};
 		// must stay from the prev
-		InputHelper.processTextPatternDirty(field, event);
+		InputL.processTextPatternDirty(field, event);
 		const currentValue = field.modelStore.model1;
 		expect(currentValue).toBe('');
 	});
@@ -48,7 +48,7 @@ describe('Api class', () => {
 		};
 		const event = {target: {value: 'nfuy14324a@gmail.com'}};
 		// correct email
-		InputHelper.processTextPatternDirty(field, event);
+		InputL.processTextPatternDirty(field, event);
 		expect(field.prevValue).toBe('nfuy14324a@gmail.com');
 	});
 
@@ -63,7 +63,7 @@ describe('Api class', () => {
 		};
 		const event = {target: {value: 'nfuy14324a@gmail.com'}};
 		// correct email
-		InputHelper.processTextPatternDirty(field, event);
+		InputL.processTextPatternDirty(field, event);
 		expect(field.prevValue).toBe('');
 	});
 
@@ -79,7 +79,7 @@ describe('Api class', () => {
 		};
 		const event = {target: {value: 'nfuy14324a@gmail.com'}};
 		// correct email
-		InputHelper.processTextPatternDirty(field, event);
+		InputL.processTextPatternDirty(field, event);
 		expect(field.prevValue).toBe('');
 	});
 });

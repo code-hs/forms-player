@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
-import {TextContainerHelper} from '@/libs/components/content/text/TextContainerHelper';
+import {FieldL as FH} from '@/libs/components/field/FieldL';
+import {TextContainerL} from '@/libs/components/content/text/TextContainerL';
 
 export default {
 	name: 'TextContainer',
@@ -38,7 +38,7 @@ export default {
 
 	data() {
 		return {
-			show: TextContainerHelper.isShow(this),
+			show: TextContainerL.isShow(this),
 		};
 	},
 };
