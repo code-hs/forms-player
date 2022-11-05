@@ -1,8 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {
-	StoreValidator,
-	ValidatorField,
-} from '@/classes/validator/StoreValidator';
+import {StoreValidator, ValidatorField} from '@/libs/validator/StoreValidator';
 
 describe('StoreValidator class -> findIndex', () => {
 	const fields: ValidatorField[] = [

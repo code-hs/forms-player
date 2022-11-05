@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
-import {VirtualComponentHelper} from '@/classes/utils/VirtualComponentHelper';
-import {Field} from '@/classes/scheme/schemeStructure';
+import {VirtualComponentHelper} from '@/libs/utils/VirtualComponentHelper';
+import {Field} from '@/libs/scheme/schemeStructure';
 
 describe('VirtualComponentHelper class', () => {
 	it('.canInitModel, ifs', () => {

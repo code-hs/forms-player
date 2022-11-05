@@ -32,13 +32,13 @@
 <script>
 import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
-import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
-import {ModuleController} from '@/classes/modules/ModuleController';
+import {FieldValidator} from '@/libs/validator/FieldValidator';
+import {InputHelper} from '@/libs/components/field/inputs/InputHelper';
+import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
+import {ModuleController} from '@/libs/modules/ModuleController';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {DatepickerLoader} from '@/classes/modules/datepicker/DatepickerLoader';
-import {DatepickerHelper} from '@/classes/modules/datepicker/DatepickerHelper';
+import {DatepickerLoader} from '@/libs/modules/datepicker/DatepickerLoader';
+import {DatepickerHelper} from '@/libs/modules/datepicker/DatepickerHelper';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 import {debounce} from '@/utils/debounce';
 

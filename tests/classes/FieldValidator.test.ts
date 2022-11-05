@@ -1,8 +1,8 @@
 // noinspection DuplicatedCode
 
 import {describe, it, expect} from '@jest/globals';
-import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {ValidationParams} from '@/classes/scheme/schemeStructure';
+import {FieldValidator} from '@/libs/validator/FieldValidator';
+import {ValidationParams} from '@/libs/scheme/schemeStructure';
 
 describe('FieldValidator class -> isValid', () => {
 	// noinspection DuplicatedCode

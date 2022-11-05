@@ -1,5 +1,5 @@
-import {Scheme, LocalizationConfig} from '@/classes/scheme/schemeStructure';
-import {SchemeLoader} from '@/classes/scheme/SchemeLoader';
+import {Scheme, LocalizationConfig} from '@/libs/scheme/schemeStructure';
+import {SchemeLoader} from '@/libs/scheme/SchemeLoader';
 import {LocalesAllLanguages, LocalizationInformation} from './structure';
 
 export class LocalizationLoader {

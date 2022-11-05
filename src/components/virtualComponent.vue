@@ -14,7 +14,7 @@
 <!--suppress JSCheckFunctionSignatures -->
 <script>
 import {mapMutations} from 'vuex';
-import {VirtualComponentHelper} from '@/classes/utils/VirtualComponentHelper';
+import {VirtualComponentHelper} from '@/libs/utils/VirtualComponentHelper';
 import {generateKey} from '@/utils/random';
 
 import InputText from '@/components/fields/inputs/text';

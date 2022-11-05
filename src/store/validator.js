@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import {StoreValidator} from '@/classes/validator/StoreValidator';
+import {StoreValidator} from '@/libs/validator/StoreValidator';
 
 const state = () => ({
 	fields: [],

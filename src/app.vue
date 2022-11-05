@@ -16,7 +16,7 @@
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import FormC from '@/components/form';
 import {Config} from '@/config/index';
-import {Api} from '@/classes/api/Api';
+import {Api} from '@/libs/api/Api';
 import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
 import StyleIncluder from '@/components/utils/style/styleIncluder';

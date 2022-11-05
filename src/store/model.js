@@ -6,10 +6,10 @@ import {
 	ModelStructure,
 	// eslint-disable-next-line no-unused-vars
 	ModelStructureStore,
-} from '@/classes/model/ModelStructure';
+} from '@/libs/model/ModelStructure';
 
 // eslint-disable-next-line no-unused-vars
-import {Page} from '@/classes/scheme/schemeStructure';
+import {Page} from '@/libs/scheme/schemeStructure';
 
 /**
  * @param {ModelStructureStore} structure

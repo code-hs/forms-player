@@ -2,8 +2,8 @@ import {describe, it, expect} from '@jest/globals';
 import {
 	MultiBoxView,
 	Group,
-} from '@/classes/components/layout/multibox/MultiBoxView';
-import {Field} from '@/classes/scheme/schemeStructure';
+} from '@/libs/components/layout/multibox/MultiBoxView';
+import {Field} from '@/libs/scheme/schemeStructure';
 
 describe('MultiBoxView class -> generateGroups', () => {
 	it('correct work', () => {

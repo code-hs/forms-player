@@ -1,9 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
-import {
-	ModelStructure,
-	ModelStructureStore,
-} from '@/classes/model/ModelStructure';
-import {Field, Page} from '@/classes/scheme/schemeStructure';
+import {ModelStructure, ModelStructureStore} from '@/libs/model/ModelStructure';
+import {Field, Page} from '@/libs/scheme/schemeStructure';
 
 describe('ModelStructure class -> generate', () => {
 	it('correct work', () => {

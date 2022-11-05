@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {StyleIncludeHelper} from '@/classes/utils/StyleIncludeHelper';
+import {StyleIncludeHelper} from '@/libs/utils/StyleIncludeHelper';
 
 export default {
 	name: 'StyleIncluder',

@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
-import {LayoutColumns} from '@/classes/components/layout/columns/LayoutColumns';
-import {Field} from '@/classes/scheme/schemeStructure';
+import {LayoutColumns} from '@/libs/components/layout/columns/LayoutColumns';
+import {Field} from '@/libs/scheme/schemeStructure';
 
 describe('LayoutColumns class', () => {
 	it('.getColumnClasses .1', () => {

@@ -1,7 +1,7 @@
 import {describe, it, expect} from '@jest/globals';
-import {StyleIncludeHelper} from '@/classes/utils/StyleIncludeHelper';
-import {Scheme} from '@/classes/scheme/schemeStructure';
-import {SchemeController} from '@/classes/scheme/SchemeController';
+import {StyleIncludeHelper} from '@/libs/utils/StyleIncludeHelper';
+import {Scheme} from '@/libs/scheme/schemeStructure';
+import {SchemeController} from '@/libs/scheme/SchemeController';
 
 describe('StyleIncludeHelper class -> findIndex', () => {
 	const scheme: Scheme = {

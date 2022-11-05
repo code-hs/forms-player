@@ -31,9 +31,9 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
-import {FieldValidator} from '@/classes/validator/FieldValidator';
-import {InputHelper} from '@/classes/components/field/inputs/InputHelper';
-import {FieldHelper as FH} from '@/classes/components/field/FieldHelper';
+import {FieldValidator} from '@/libs/validator/FieldValidator';
+import {InputHelper} from '@/libs/components/field/inputs/InputHelper';
+import {FieldHelper as FH} from '@/libs/components/field/FieldHelper';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {

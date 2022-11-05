@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
-import {SchemeController} from '@/classes/scheme/SchemeController';
-import {ModuleController} from '@/classes/modules/ModuleController';
+import {SchemeController} from '@/libs/scheme/SchemeController';
+import {ModuleController} from '@/libs/modules/ModuleController';
 import {SmartTimeout} from '@/utils/SmartTimeout';
 
 // fix not useful messaging

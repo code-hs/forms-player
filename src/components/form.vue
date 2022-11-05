@@ -17,7 +17,7 @@
 import {mapGetters, mapActions} from 'vuex';
 import VirtualComponent from '@/components/virtualComponent';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {ApiResponser} from '@/classes/api/ApiResponser';
+import {ApiResponser} from '@/libs/api/ApiResponser';
 
 export default {
 	name: 'Form',
