@@ -24,7 +24,7 @@
 		}
 
 		&:invalid {
-			color: var(--selectorPlaceholder);
+			//color: var(--selectorPlaceholder);
 		}
 		&.error {
 			border-color: var(--formItemRed) !important;
