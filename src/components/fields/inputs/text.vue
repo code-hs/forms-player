@@ -20,7 +20,7 @@
 			<!--suppress JSUnresolvedFunction-->
 			<div
 				v-if="validation.texts.required"
-				:class="{showContent: valid.error}"
+				:class="{show: valid.error}"
 				class="error-text"
 			>
 				{{ $t(validation.texts.required) }}

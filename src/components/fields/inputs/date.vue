@@ -18,11 +18,7 @@
 
 		<transition name="fade">
 			<!--suppress JSUnresolvedVariable-->
-			<div
-				v-if="valid.text"
-				:class="{showContent: valid.error}"
-				class="error-text"
-			>
+			<div v-if="valid.text" :class="{show: valid.error}" class="error-text">
 				{{ valid.text }}
 			</div>
 		</transition>
