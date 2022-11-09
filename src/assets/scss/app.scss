@@ -3,12 +3,13 @@
 	align-items: center;
 	flex-direction: column;
 	width: 100%;
+	padding: 10px;
+
 	color: var(--text);
-	background-color: var(--appBackground);
 	border: 2px solid var(--groupItemBorder);
 	border-radius: 3px;
+	background-color: var(--appBackground);
 	box-shadow: 6px 6px 15px 1px var(--groupItemShadow);
-	padding: 10px;
 	font: 16px/1.5 sans-serif;
 
 	.dump {
