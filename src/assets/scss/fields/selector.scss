@@ -18,16 +18,11 @@
 			display: none;
 		}
 
-		&:-moz-focusring {
-			color: transparent !important;
-			text-shadow: 0 0 0 var(--text);
-		}
-
 		&:invalid {
 			//color: var(--selectorPlaceholder);
 		}
 		&.error {
-			border-color: var(--formItemRed) !important;
+			border-color: var(--formItemRed);
 		}
 	}
 }

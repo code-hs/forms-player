@@ -30,7 +30,7 @@
 
 %error-field {
 	&.error {
-		border-color: var(--formItemRed) !important;
+		border-color: var(--formItemRed);
 	}
 }
 
@@ -39,7 +39,6 @@
 		height: 22px;
 		padding: 0 2px;
 		opacity: 0;
-
 		text-align: justify;
 		color: var(--formItemRed);
 		font-size: 0.9em;
