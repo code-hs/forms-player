@@ -3,12 +3,13 @@
 		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
-		<!--suppress JSUnresolvedFunction-->
+		<!--suppress JSUnresolvedFunction, JSUnresolvedVariable-->
 		<input
 			ref="self"
 			v-model="modelStore[common.model]"
 			v-mask="mask"
 			type="text"
+			:inputmode="custom.inputmode"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
 			:class="{error: valid.error}"
@@ -53,6 +54,7 @@ export default {
 			default: () => ({
 				mask: '',
 				pattern: '',
+				inputmode: '', // for mobile keyboard (only numbers = numeric)
 			}),
 		},
 	},
