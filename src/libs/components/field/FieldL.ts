@@ -4,7 +4,8 @@ import {
 	stylesExample,
 	htmlExample,
 } from '@/libs/components/field/fieldStructure';
-import {Field} from '@/libs/scheme/schemeStructure';
+import {Field, Variables} from '@/libs/scheme/schemeStructure';
+import {SchemeController} from '@/libs/scheme/SchemeController';
 
 type VueComponentParams = Object;
 
@@ -65,5 +66,22 @@ export class FieldL {
 
 	static getMultiName(field: Field): string {
 		return field?.custom?.multi?.name || '';
+	}
+
+	static variabling(inputVal: string): any {
+		// noinspection SuspiciousTypeOfGuard
+		if (typeof inputVal !== 'string') return inputVal;
+		if (!inputVal.startsWith('$:')) return inputVal;
+
+		const name: string = inputVal.replace('$:', '');
+		const variables: Variables | undefined =
+			SchemeController.getConfig().variables;
+		// @ts-ignore
+		const output: any = variables[name];
+		if (!output) {
+			throw new Error(`FieldL.variabling: variable ${name} is not defined`);
+		}
+
+		return output;
 	}
 }

@@ -83,10 +83,15 @@ export interface Module {
 	config?: ModuleConfig;
 }
 
+export interface Variables {
+	[key: string]: any;
+}
+
 export interface Configurations {
 	modules?: Module[];
 	localization?: LocalizationConfig;
 	styles?: StylesParams;
+	variables?: Variables;
 }
 
 export interface Scheme {
