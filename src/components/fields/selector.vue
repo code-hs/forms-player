@@ -91,6 +91,8 @@ export default {
 	},
 
 	created() {
+		// eslint-disable-next-line vue/no-mutating-props
+		this.custom.options = FH.variabling(this.custom.options);
 		this.initValidation();
 	},
 
