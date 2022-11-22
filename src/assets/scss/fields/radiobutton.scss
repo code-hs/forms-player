@@ -1,0 +1,30 @@
+.radiobutton {
+	padding: 10px;
+
+	&[data-v-error='true'] {
+		border: 1px solid var(--formItemRed);
+		border-radius: 2px;
+	}
+
+	.inputs {
+		label {
+			padding: 5px;
+		}
+
+		label:not(:first-child) {
+			margin-left: 20px;
+		}
+	}
+
+	input {
+		width: 13px;
+		height: 13px;
+		margin: 5px;
+	}
+
+	.text {
+		position: relative;
+		display: inline-block;
+		color: var(--checkboxText);
+	}
+}

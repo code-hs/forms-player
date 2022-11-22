@@ -26,6 +26,7 @@ import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
 import ButtonSubmit from '@/components/fields/buttons/submit';
 import TextContainer from '@/components/content/textContainer';
+import Radiobuttons from '@/components/fields/radiobuttons';
 
 // async import for the box components
 const LayoutColumns = () => import('@/components/layout/columns/columns');
@@ -45,6 +46,7 @@ export default {
 		Checkbox,
 		ButtonSubmit,
 		TextContainer,
+		Radiobuttons,
 		LayoutColumns,
 		MultiBox,
 		LayoutContainer,
@@ -96,6 +98,7 @@ export default {
 				'Selector',
 				'Textarea',
 				'Checkbox',
+				'Radiobuttons',
 			];
 			// noinspection JSCheckFunctionSignatures
 			if (
