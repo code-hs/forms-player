@@ -114,13 +114,12 @@ export default {
 		}),
 
 		initValidation() {
-			if (FieldValidator.canValidation(this.validation)) {
-				this.valid.connect = true;
-				this.vsAdd(this.virtualKey);
+			if (!FieldValidator.canValidation(this.validation, true)) return;
 
-				// noinspection JSUnresolvedFunction
-				bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
-			}
+			this.valid.connect = true;
+			this.vsAdd(this.virtualKey);
+			// noinspection JSUnresolvedFunction
+			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 		},
 		handleChange() {
 			this.vProcess(true);
