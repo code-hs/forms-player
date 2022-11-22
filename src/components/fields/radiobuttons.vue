@@ -7,27 +7,19 @@
 		<!--suppress JSUnresolvedFunction -->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
-		<div class="inputs">
-			<label>
+		<!--suppress JSUnresolvedVariable -->
+		<div v-if="custom.options" class="inputs">
+			<label v-for="(option, index) in custom.options" :key="index">
 				<input
 					v-model="modelStore[common.model]"
+					:name="modelStore[common.model]"
 					type="radio"
-					name="t1"
-					value="yes"
+					:value="option.value"
 					@change="handleChange"
 				/>
-				<span class="text">Yes</span>
-			</label>
 
-			<label>
-				<input
-					v-model="modelStore[common.model]"
-					type="radio"
-					name="t1"
-					value="no"
-					@change="handleChange"
-				/>
-				<span class="text">No</span>
+				<!--suppress JSUnresolvedFunction -->
+				<span class="text">{{ $t(option.text) }}</span>
 			</label>
 		</div>
 	</div>
@@ -52,7 +44,10 @@ export default {
 		custom: {
 			type: Object,
 			required: false,
-			default: () => ({}),
+			default: () => ({
+				defaultValue: '',
+				options: Array,
+			}),
 		},
 	},
 
@@ -84,6 +79,7 @@ export default {
 
 	created() {
 		this.initValidation();
+		this.modelStore[this.common.model] = this.custom?.defaultValue || '';
 	},
 
 	beforeDestroy() {
