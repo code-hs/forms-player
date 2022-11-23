@@ -1,5 +1,9 @@
 <template>
-	<div class="field input-password" :class="common.class">
+	<div
+		class="field input-password"
+		:class="common.class"
+		:data-v-error="valid.error"
+	>
 		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
@@ -10,7 +14,6 @@
 			type="password"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
-			:class="{error: valid.error}"
 			@blur="handleBlur"
 			@input="handleInput"
 		/>

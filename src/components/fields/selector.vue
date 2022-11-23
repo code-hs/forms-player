@@ -1,5 +1,9 @@
 <template>
-	<div class="field input-selector" :class="common.class">
+	<div
+		class="field input-selector"
+		:class="common.class"
+		:data-v-error="valid.error"
+	>
 		<!--suppress JSUnresolvedFunction -->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
@@ -7,7 +11,6 @@
 			ref="self"
 			v-model="modelStore[common.model]"
 			required
-			:class="{error: valid.error}"
 			@change="handleChange"
 		>
 			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->

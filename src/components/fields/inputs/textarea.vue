@@ -1,5 +1,9 @@
 <template>
-	<div class="field input-textarea" :class="common.class">
+	<div
+		class="field input-textarea"
+		:class="common.class"
+		:data-v-error="valid.error"
+	>
 		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
 
@@ -10,7 +14,6 @@
 			:placeholder="$t(text.placeholder)"
 			:rows="custom.rows"
 			:required="validation.required"
-			:class="{error: valid.error}"
 			@blur="handleBlur"
 			@input="handleInput"
 		>

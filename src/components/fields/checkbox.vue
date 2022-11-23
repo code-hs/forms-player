@@ -1,5 +1,9 @@
 <template>
-	<div class="field checkbox" :class="common.class">
+	<div
+		class="field checkbox"
+		:class="common.class"
+		:data-v-error="valid.errorForView"
+	>
 		<label>
 			<input
 				ref="self"
@@ -9,11 +13,7 @@
 				@change="handleChange"
 			/>
 			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
-			<span
-				class="text"
-				:class="{error: valid.errorForView}"
-				v-html="$t(custom.bodyHTML)"
-			/>
+			<span class="text" v-html="$t(custom.bodyHTML)" />
 		</label>
 	</div>
 </template>
