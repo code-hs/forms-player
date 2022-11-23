@@ -5,7 +5,10 @@
 	input {
 		@extend %field-default;
 		@extend %validation-arrow;
-		@extend %error-field;
+	}
+
+	&[data-v-error='true'] input {
+		border-color: var(--formItemRed);
 	}
 
 	.datepicker-picker {

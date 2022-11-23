@@ -36,12 +36,12 @@
 			border: 2px solid var(--buttonsBorder);
 		}
 
-		&.error::before {
-			border-color: var(--formItemRed);
-		}
-
 		a {
 			color: var(--checkboxText);
 		}
+	}
+
+	&[data-v-error='true'] .text::before {
+		border-color: var(--formItemRed);
 	}
 }

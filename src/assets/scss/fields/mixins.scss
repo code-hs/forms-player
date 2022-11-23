@@ -28,12 +28,6 @@
 	}
 }
 
-%error-field {
-	&.error {
-		border-color: var(--formItemRed);
-	}
-}
-
 %error-text {
 	.error-text {
 		height: 22px;

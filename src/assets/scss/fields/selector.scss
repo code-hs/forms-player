@@ -21,8 +21,9 @@
 		&:invalid {
 			//color: var(--selectorPlaceholder);
 		}
-		&.error {
-			border-color: var(--formItemRed);
-		}
+	}
+
+	&[data-v-error='true'] select {
+		border-color: var(--formItemRed);
 	}
 }
