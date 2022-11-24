@@ -10,7 +10,7 @@
 		<select
 			ref="self"
 			v-model="modelStore[common.model]"
-			required
+			:required="validation.required"
 			@change="handleChange"
 		>
 			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
@@ -28,16 +28,10 @@
 			</option>
 		</select>
 
-		<transition name="fade">
-			<!--suppress JSUnresolvedFunction -->
-			<div
-				v-if="validation.texts.required"
-				v-show="valid.error"
-				class="field__error-text"
-			>
-				{{ $t(validation.texts.required) }}
-			</div>
-		</transition>
+		<!--suppress JSUnresolvedFunction -->
+		<div v-if="valid.text" class="field__error-text">
+			{{ $t(valid.text) }}
+		</div>
 	</div>
 </template>
 
@@ -73,6 +67,7 @@ export default {
 			valid: {
 				error: false,
 				connect: false,
+				text: this.validation?.texts?.required || '',
 			},
 		};
 	},

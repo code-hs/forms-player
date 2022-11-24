@@ -23,11 +23,7 @@
 		</div>
 
 		<!--suppress JSUnresolvedFunction-->
-		<div
-			v-if="valid.text"
-			:class="{show: valid.error}"
-			class="field__error-text"
-		>
+		<div v-if="valid.text" class="field__error-text">
 			{{ $t(valid.text) }}
 		</div>
 	</div>

@@ -1,4 +1,8 @@
 .field {
 	min-height: 5.32em;
 	//margin-bottom: 20px;
+
+	&[data-v-error='true'] {
+		@extend %error-text--show;
+	}
 }
