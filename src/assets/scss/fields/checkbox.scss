@@ -41,7 +41,9 @@
 		}
 	}
 
-	&[data-v-error='true'] .text::before {
-		border-color: var(--formItemRed);
+	@include validation-status-error {
+		.text::before {
+			border-color: var(--formItemRed);
+		}
 	}
 }

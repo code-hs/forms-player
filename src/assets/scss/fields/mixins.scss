@@ -52,8 +52,13 @@
 %hint {
 	.field__hint {
 		padding: 0 2px;
-
 		text-align: justify;
 		font-size: 0.9em;
+	}
+}
+
+@mixin validation-status-error() {
+	&[data-v-error='true'] {
+		@content;
 	}
 }

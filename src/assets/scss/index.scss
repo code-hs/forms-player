@@ -13,8 +13,8 @@ form-widget-g {
 	@import 'layout/columns';
 	@import 'layout/multibox';
 
-	@import 'fields/field';
 	@import 'fields/mixins';
+	@import 'fields/field';
 	@import 'fields/inputs/text';
 	@import 'fields/inputs/password';
 	@import 'fields/inputs/textarea';

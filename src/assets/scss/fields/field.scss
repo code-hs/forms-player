@@ -1,8 +1,16 @@
+// if some one repeat in input files, move here!
+
 .field {
 	min-height: 5.32em;
 	//margin-bottom: 20px;
 
-	&[data-v-error='true'] {
+	@include validation-status-error {
+		input,
+		textarea,
+		select {
+			border-color: var(--formItemRed);
+		}
+
 		@extend %error-text--show;
 	}
 }

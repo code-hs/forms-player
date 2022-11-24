@@ -22,8 +22,4 @@
 			//color: var(--selectorPlaceholder);
 		}
 	}
-
-	&[data-v-error='true'] select {
-		border-color: var(--formItemRed);
-	}
 }

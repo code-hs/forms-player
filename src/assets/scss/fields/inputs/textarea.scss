@@ -11,8 +11,4 @@
 			background-position: top 12px right 12px;
 		}
 	}
-
-	&[data-v-error='true'] textarea {
-		border-color: var(--formItemRed);
-	}
 }

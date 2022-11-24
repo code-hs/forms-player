@@ -7,10 +7,6 @@
 		@extend %validation-icon;
 	}
 
-	&[data-v-error='true'] input {
-		border-color: var(--formItemRed);
-	}
-
 	.datepicker-picker {
 		background-color: var(--formItemBg);
 		color: var(--text);
