@@ -18,7 +18,7 @@
 					@change="handleChange"
 				/>
 				<!--suppress JSUnresolvedFunction -->
-				<span class="text">{{ $t(option.text) }}</span>
+				<span class="inputs__text">{{ $t(option.text) }}</span>
 			</label>
 		</div>
 

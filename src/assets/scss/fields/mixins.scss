@@ -32,11 +32,9 @@
 	.field__error-text {
 		height: 22px;
 		padding: 0 2px;
-		text-align: justify;
 		opacity: 0;
 		color: var(--formItemRed);
 		font-size: 0.9em;
-
 		//animation-name: shakeError;
 		//animation-fill-mode: forwards;
 		//animation-duration: 0.4s;

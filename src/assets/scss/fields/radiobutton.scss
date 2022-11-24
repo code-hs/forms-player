@@ -1,14 +1,24 @@
 .radiobutton {
-	padding: 10px;
+	@extend %error-text;
+	@extend %hint;
 
-	&[data-v-error='true'] {
-		border: 1px solid var(--formItemRed);
-		border-radius: 2px;
-	}
+	padding: 10px;
 
 	.inputs {
 		label {
 			padding: 5px;
+
+			input {
+				width: 13px;
+				height: 13px;
+				margin: 5px;
+			}
+
+			.inputs__text {
+				position: relative;
+				display: inline-block;
+				color: var(--checkboxText);
+			}
 		}
 
 		label:not(:first-child) {
@@ -16,15 +26,8 @@
 		}
 	}
 
-	input {
-		width: 13px;
-		height: 13px;
-		margin: 5px;
-	}
-
-	.text {
-		position: relative;
-		display: inline-block;
-		color: var(--checkboxText);
+	&[data-v-error='true'] {
+		border: 1px solid var(--formItemRed);
+		border-radius: 2px;
 	}
 }
