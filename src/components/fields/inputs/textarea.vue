@@ -19,16 +19,14 @@
 		>
 		</textarea>
 
-		<transition name="fade">
-			<!--suppress JSUnresolvedFunction-->
-			<div
-				v-if="validation.texts.required"
-				:class="{show: valid.error}"
-				class="field__error-text"
-			>
-				{{ $t(validation.texts.required) }}
-			</div>
-		</transition>
+		<!--suppress JSUnresolvedFunction-->
+		<div
+			v-if="valid.text"
+			:class="{show: valid.error}"
+			class="field__error-text"
+		>
+			{{ $t(valid.text) }}
+		</div>
 	</div>
 </template>
 
@@ -68,6 +66,7 @@ export default {
 				dirty: false,
 				error: false,
 				connect: false,
+				text: this.validation?.texts?.required || '',
 			},
 		};
 	},

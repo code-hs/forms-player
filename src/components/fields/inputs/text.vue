@@ -20,16 +20,14 @@
 			@input="handleInput"
 		/>
 
-		<transition name="fade">
-			<!--suppress JSUnresolvedFunction-->
-			<div
-				v-if="validation.texts.required"
-				:class="{show: valid.error}"
-				class="field__error-text"
-			>
-				{{ $t(validation.texts.required) }}
-			</div>
-		</transition>
+		<!--suppress JSUnresolvedFunction-->
+		<div
+			v-if="valid.text"
+			:class="{show: valid.error}"
+			class="field__error-text"
+		>
+			{{ $t(valid.text) }}
+		</div>
 	</div>
 </template>
 
@@ -75,6 +73,7 @@ export default {
 				error: false,
 				// is need validate this field
 				connect: false,
+				text: this.validation?.texts?.required || '',
 			},
 		};
 	},

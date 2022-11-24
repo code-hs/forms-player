@@ -17,10 +17,18 @@
 					:value="option.value"
 					@change="handleChange"
 				/>
-
 				<!--suppress JSUnresolvedFunction -->
 				<span class="text">{{ $t(option.text) }}</span>
 			</label>
+		</div>
+
+		<!--suppress JSUnresolvedFunction-->
+		<div
+			v-if="valid.text"
+			:class="{show: valid.error}"
+			class="field__error-text"
+		>
+			{{ $t(valid.text) }}
 		</div>
 	</div>
 </template>
@@ -57,6 +65,7 @@ export default {
 			valid: {
 				error: false,
 				connect: false,
+				text: this.validation?.texts?.required || '',
 			},
 		};
 	},

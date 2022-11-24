@@ -19,16 +19,14 @@
 			@input="handleInput"
 		/>
 
-		<transition name="fade">
-			<!--suppress JSUnresolvedVariable-->
-			<div
-				v-if="valid.text"
-				:class="{show: valid.error}"
-				class="field__error-text"
-			>
-				{{ valid.text }}
-			</div>
-		</transition>
+		<!--suppress JSUnresolvedVariable-->
+		<div
+			v-if="valid.text"
+			:class="{show: valid.error}"
+			class="field__error-text"
+		>
+			{{ valid.text }}
+		</div>
 	</div>
 </template>
 
@@ -93,7 +91,7 @@ export default {
 			multiBoxName: FH.getMultiName(this),
 			valid: {
 				error: false,
-				text: this.$t(this.validation.texts.required),
+				text: this.$t(this.validation?.texts?.required),
 			},
 			moduleData: {
 				config: moduleConfig,
