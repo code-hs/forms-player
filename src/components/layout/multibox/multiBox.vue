@@ -3,7 +3,7 @@
 		<div
 			v-for="(group, index) in groups"
 			:key="index"
-			class="multibox-item"
+			class="multibox__item"
 			:data-show-multiple-separator="showMultipleSeparator"
 		>
 			<ButtonRemove
@@ -20,7 +20,7 @@
 			/>
 		</div>
 
-		<div class="buttons-container">
+		<div class="multibox__buttons-container">
 			<ButtonAdd :groups-length="groups.length" @handleAdd="handleAdd" />
 		</div>
 	</div>

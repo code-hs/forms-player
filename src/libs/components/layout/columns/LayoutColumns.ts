@@ -6,7 +6,7 @@ export class LayoutColumns {
 
 		let classes = '';
 		// col-6, col-12,...
-		// this param created in columns.vue
+		// this param created in columns/index.vue
 		const childrenCount = field.custom?.childCount || 1;
 		let col: number = Math.floor(12 / childrenCount);
 

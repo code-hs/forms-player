@@ -29,7 +29,7 @@
 }
 
 %error-text {
-	.error-text {
+	.field__error-text {
 		height: 22px;
 		padding: 0 2px;
 		text-align: justify;
@@ -43,14 +43,14 @@
 		//animation-timing-function: ease-in-out;
 	}
 
-	.error-text.show {
+	.field__error-text.show {
 		height: auto;
 		opacity: 1;
 	}
 }
 
 %hint {
-	.hint {
+	.field__hint {
 		padding: 0 2px;
 
 		text-align: justify;

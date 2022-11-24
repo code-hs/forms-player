@@ -5,7 +5,7 @@
 	justify-content: space-between;
 	width: 100%;
 
-	.column {
+	.columns__column {
 		&[class*='col'] {
 			min-height: 0.125em;
 		}

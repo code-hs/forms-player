@@ -1,5 +1,9 @@
 <template>
-	<div v-show="groupsLength" class="button-add" @click="$emit('handleAdd')">
+	<div
+		v-show="groupsLength"
+		class="multibox__button-add"
+		@click="$emit('handleAdd')"
+	>
 		+
 	</div>
 </template>

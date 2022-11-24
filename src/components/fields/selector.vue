@@ -5,7 +5,7 @@
 		:data-v-error="valid.error"
 	>
 		<!--suppress JSUnresolvedFunction -->
-		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
+		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
 
 		<select
 			ref="self"
@@ -33,7 +33,7 @@
 			<div
 				v-if="validation.texts.required"
 				v-show="valid.error"
-				class="error-text"
+				class="field__error-text"
 			>
 				{{ $t(validation.texts.required) }}
 			</div>

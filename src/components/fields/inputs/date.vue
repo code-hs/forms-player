@@ -5,7 +5,7 @@
 		:data-v-error="valid.error"
 	>
 		<!--suppress JSUnresolvedFunction-->
-		<div v-if="text.hint" class="hint">{{ $t(text.hint) }}</div>
+		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
 
 		<!--suppress JSUnresolvedFunction JSUnresolvedVariable-->
 		<input
@@ -21,7 +21,11 @@
 
 		<transition name="fade">
 			<!--suppress JSUnresolvedVariable-->
-			<div v-if="valid.text" :class="{show: valid.error}" class="error-text">
+			<div
+				v-if="valid.text"
+				:class="{show: valid.error}"
+				class="field__error-text"
+			>
 				{{ valid.text }}
 			</div>
 		</transition>

@@ -1,7 +1,7 @@
 .multibox {
 	margin-bottom: 20px;
 
-	.multibox-item {
+	.multibox__item {
 		position: relative;
 		margin-bottom: 10px;
 		padding-top: 22px;
@@ -13,19 +13,9 @@
 		&:last-child {
 			margin-bottom: 0;
 		}
-
-		.title {
-			width: 100%;
-			margin-top: 5px;
-			margin-bottom: 13px;
-			padding-bottom: 9px;
-			text-align: center;
-			letter-spacing: 1px;
-			color: var(--text);
-		}
 	}
 
-	.button-remove {
+	.multibox__button-remove {
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -43,11 +33,11 @@
 		}
 	}
 
-	.buttons-container {
+	.multibox__buttons-container {
 		display: flex;
 		justify-content: center;
 
-		.button-add {
+		.multibox__button-add {
 			width: 20px;
 			height: 20px;
 

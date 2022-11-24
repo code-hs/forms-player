@@ -1,7 +1,7 @@
 <template>
 	<div
 		v-show="groupsLength > 1"
-		class="button-remove"
+		class="multibox__button-remove"
 		@click="$emit('handleRemove', groupIndex)"
 	>
 		✖

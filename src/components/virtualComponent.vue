@@ -29,7 +29,7 @@ import TextContainer from '@/components/content/textContainer';
 import Radiobuttons from '@/components/fields/radiobuttons';
 
 // async import for the box components
-const LayoutColumns = () => import('@/components/layout/columns/columns');
+const LayoutColumns = () => import('@/components/layout/columns/index');
 const MultiBox = () => import('@/components/layout/multibox/multiBox');
 const LayoutContainer = () =>
 	import('@/components/layout/containers/layoutContainer');
