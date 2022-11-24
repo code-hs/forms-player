@@ -21,10 +21,12 @@ export default {
 		processError() {
 			// noinspection JSUnresolvedVariable
 			const app = this.$root.$el;
-			const errorFields = app.querySelectorAll('.field .error');
+			const selector =
+				".field[data-v-error='true'] input, .field[data-v-error='true'] textarea";
+			const errorFields = app.querySelectorAll(selector);
 
 			if (!errorFields.length) {
-				throw new Error('validation>focus: No error fields found');
+				throw new Error('validation > focus: No error fields found');
 			}
 
 			// move focus to first error field
