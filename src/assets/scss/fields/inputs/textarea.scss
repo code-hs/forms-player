@@ -4,7 +4,7 @@
 
 	textarea {
 		@extend %field-default;
-		@extend %validation-arrow;
+		@extend %validation-icon;
 		resize: none;
 
 		&:required {

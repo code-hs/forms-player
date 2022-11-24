@@ -4,7 +4,7 @@
 
 	input {
 		@extend %field-default;
-		@extend %validation-arrow;
+		@extend %validation-icon;
 	}
 
 	&[data-v-error='true'] input {
