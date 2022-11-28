@@ -14,6 +14,7 @@ form-widget-g {
 	@import 'layout/multibox';
 
 	@import 'fields/mixins';
+	@import 'fields/template-classes';
 	@import 'fields/field';
 	@import 'fields/inputs/text';
 	@import 'fields/inputs/password';
