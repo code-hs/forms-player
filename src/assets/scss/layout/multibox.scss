@@ -1,10 +1,10 @@
 .multibox {
-	margin-bottom: 20px;
+	margin-bottom: 1.25em;
 
 	.multibox__item {
 		position: relative;
-		margin-bottom: 10px;
-		padding-top: 22px;
+		margin-bottom: 0.63em;
+		padding-top: 1.38em;
 
 		&[data-show-multiple-separator='true']:not(:first-child) {
 			border-top: 2px solid var(--fieldsetsSeparator);
@@ -19,14 +19,14 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 20px;
-		height: 20px;
+		width: 1.25em;
+		height: 1.25em;
 
 		cursor: pointer;
 		text-align: center;
 		color: var(--buttonsBorder);
 		border-radius: 3px;
-		line-height: 20px;
+		line-height: 1.25em;
 
 		&:hover {
 			background-color: var(--formItemBgFocus);
@@ -38,16 +38,16 @@
 		justify-content: center;
 
 		.multibox__button-add {
-			width: 20px;
-			height: 20px;
+			width: 1.25em;
+			height: 1.25em;
 
 			cursor: pointer;
 			text-align: center;
 			border: 1px solid var(--buttonsBorder);
-			border-radius: 3px;
+			border-radius: 0.19em;
 			font-family: serif;
-			font-size: 18px;
-			line-height: 19px;
+			font-size: 1.12em;
+			line-height: 1.21em;
 
 			&:hover {
 				background-color: var(--formItemBgFocus);

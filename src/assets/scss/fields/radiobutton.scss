@@ -2,16 +2,16 @@
 	@extend %error-text;
 	@extend %hint;
 
-	padding: 10px;
+	padding: 0.62em;
 
 	.inputs {
 		label {
-			padding: 5px;
+			padding: 0.31em;
 
 			input {
-				width: 13px;
-				height: 13px;
-				margin: 5px;
+				width: 0.81em;
+				height: 0.81em;
+				margin: 0.4em;
 			}
 
 			.inputs__text {
@@ -20,14 +20,10 @@
 				color: var(--checkboxText);
 			}
 		}
-
-		label:not(:first-child) {
-			margin-left: 20px;
-		}
 	}
 
 	@include validation-status-error {
 		border: 1px solid var(--formItemRed);
-		border-radius: 2px;
+		border-radius: 0.12em;
 	}
 }

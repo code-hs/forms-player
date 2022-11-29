@@ -1,15 +1,15 @@
 .checkbox {
-	padding: 10px;
+	padding: 0.62em;
 
 	input {
 		position: absolute;
 		left: -9999px;
 
 		&:checked + .text::after {
-			top: 3px;
-			left: 8px;
-			width: 6px;
-			height: 14px;
+			top: 0.18em;
+			left: 0.5em;
+			width: 0.38em;
+			height: 0.88em;
 			transform: rotate(45deg);
 			border-right: 2px solid var(--checkboxBorderInto);
 			border-bottom: 2px solid var(--checkboxBorderInto);
@@ -29,10 +29,10 @@
 		}
 
 		&::before {
-			top: 1px;
+			top: 0.07em;
 			left: 0;
-			width: 22px;
-			height: 22px;
+			width: 1.38em;
+			height: 1.38em;
 			border: 2px solid var(--buttonsBorder);
 		}
 
