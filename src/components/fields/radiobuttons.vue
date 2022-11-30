@@ -34,6 +34,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/FieldValidator';
 import {FieldL as FH} from '@/libs/components/field/FieldL';
 import {bus, busBroadcasts} from '@/utils/bus';
+import {RadiobuttonL} from '@/libs/components/field/inputs/RadiobuttonL';
 
 export default {
 	name: 'Radiobuttons',
@@ -111,10 +112,21 @@ export default {
 			// noinspection JSUnresolvedFunction
 			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 		},
-		handleChange() {
+		handleChange(e) {
+			this.vProcess();
+
+			const option = RadiobuttonL.findOption(
+				this.custom.options,
+				e.target.value
+			);
+			const action = option?.action || null;
+			console.logp(action);
+		},
+		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
 			if (this.value) this.valid.error = false;
-			this.vUpdateStore();
+
+			if (updateStore) this.vUpdateStore();
 		},
 		vUpdateStore() {
 			this.vsUpdate({
@@ -128,7 +140,8 @@ export default {
 				this.valid.error = true;
 			}
 
-			this.handleChange(false);
+			// false - don't update store, because we do it in down line
+			this.vProcess(false);
 			this.vEventResponse({
 				key: this.virtualKey,
 				error: this.valid.error,
