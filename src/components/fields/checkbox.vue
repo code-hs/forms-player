@@ -99,12 +99,15 @@ export default {
 			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 		},
 		handleChange() {
+			this.vProcess();
+		},
+		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
 
 			if (this.value) this.valid.errorForView = false;
 			this.valid.error = !this.value;
 
-			this.vUpdateStore();
+			if (updateStore) this.vUpdateStore();
 		},
 		vUpdateStore() {
 			this.vsUpdate({
@@ -118,7 +121,8 @@ export default {
 				this.valid.errorForView = true;
 			}
 
-			this.handleChange(false);
+			// false - don't update store, because we do it in down line
+			this.vProcess(false);
 			this.vEventResponse({
 				key: this.virtualKey,
 				error: this.valid.error,
