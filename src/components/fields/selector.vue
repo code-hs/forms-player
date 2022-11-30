@@ -142,6 +142,7 @@ export default {
 			});
 		},
 		vHandleTask() {
+			// false - don't update store, because we do it in down line
 			this.vProcess(false);
 			this.vEventResponse({
 				key: this.virtualKey,
