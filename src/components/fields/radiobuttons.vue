@@ -114,13 +114,7 @@ export default {
 		},
 		handleChange(e) {
 			this.vProcess();
-
-			const option = RadiobuttonL.findOption(
-				this.custom.options,
-				e.target.value
-			);
-			const action = option?.action || null;
-			console.logp(action);
+			RadiobuttonL.processActions(this.custom.options, e);
 		},
 		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
