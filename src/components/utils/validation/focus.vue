@@ -21,6 +21,7 @@ export default {
 		processError() {
 			// noinspection JSUnresolvedVariable
 			const app = this.$root.$el;
+			// todo: mayme some time, delete input, textarea. And use without this, as one selector
 			const selector =
 				".field[data-v-error='true'] input, .field[data-v-error='true'] textarea";
 			const errorFields = app.querySelectorAll(selector);

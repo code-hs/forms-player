@@ -5,6 +5,7 @@
 
 			<StyleIncluder />
 			<ValidationFocus />
+			<Actioner />
 
 			<div v-if="showDump" class="dump">{{ modelStructure }}</div>
 			<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
@@ -15,14 +16,15 @@
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import FormC from '@/components/form';
-import {Config} from '@/config/index';
+import {Config} from '@/config';
 import {Api} from '@/libs/api/Api';
 import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
 import StyleIncluder from '@/components/utils/style/styleIncluder';
+import Actioner from '@/components/utils/actioner';
 
 export default {
-	components: {FormC, ValidationFocus, StyleIncluder},
+	components: {FormC, ValidationFocus, StyleIncluder, Actioner},
 	props: {
 		// project id
 		dataProjectId: {
