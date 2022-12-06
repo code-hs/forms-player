@@ -32,28 +32,29 @@ export class ActionerL {
 		action: Action,
 		app: Element
 	): Element | undefined | null {
+		let vrcContainer;
+
 		if (action.container) {
-			return app.querySelector(action.container);
+			vrcContainer = app.querySelector(action.container);
+		} else if (action.nextSibling === 1) {
+			vrcContainer = startActionElem.nextSibling;
+		} else if (action.nextSibling === 2) {
+			vrcContainer = startActionElem.nextSibling.nextSibling;
+		} else if (action.nextSibling === 3) {
+			vrcContainer = startActionElem.nextSibling.nextSibling.nextSibling;
+		} else if (action.previousSibling === 1) {
+			vrcContainer = startActionElem.previousSibling;
+		} else if (action.previousSibling === 2) {
+			vrcContainer = startActionElem.previousSibling.previousSibling;
+		} else if (action.previousSibling === 3) {
+			vrcContainer =
+				startActionElem.previousSibling.previousSibling.previousSibling;
 		}
 
-		if (action.nextSibling === 1) {
-			return startActionElem.nextSibling;
-		}
-		if (action.nextSibling === 2) {
-			return startActionElem.nextSibling.nextSibling;
-		}
-		if (action.nextSibling === 3) {
-			return startActionElem.nextSibling.nextSibling.nextSibling;
-		}
+		return this.getElementFromContainer(vrcContainer);
+	}
 
-		if (action.previousSibling === 1) {
-			return startActionElem.previousSibling;
-		}
-		if (action.previousSibling === 2) {
-			return startActionElem.previousSibling.previousSibling;
-		}
-		if (action.previousSibling === 3) {
-			return startActionElem.previousSibling.previousSibling.previousSibling;
-		}
+	private static getElementFromContainer(container: Element): Element {
+		return container.firstChild as Element;
 	}
 }
