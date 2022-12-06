@@ -12,17 +12,37 @@ export default {
 		bus.$on(busBroadcasts.DISPLAY_CONTAINER, this.process);
 	},
 	methods: {
-		process(action) {
-			console.log(action);
-			// console.log('process');
+		process({startActionElem, action}) {
+			if (!startActionElem || !action.type) return;
+
+			const elem = this.getElement(startActionElem, action);
+			if (!elem) {
+				console.error('ActionerDisplayer: Element not found');
+				return;
+			}
+
+			if (action.type === 'SHOW_CONTAINER') {
+				elem.hidden = false;
+			} else if (action.type === 'HIDE_CONTAINER') {
+				elem.hidden = true;
+			}
+		},
+		getElement(startActionElem, action) {
 			// noinspection JSUnresolvedVariable
-			// const app = this.$root.$el;
-			// const selector =
-			// 	".field[data-v-error='true'] input, .field[data-v-error='true'] textarea";
-			// const errorFields = app.querySelectorAll(selector);
-			// if (!errorFields.length) {
-			// 	throw new Error('validation > focus: No error fields found');
-			// }
+			const app = this.$root.$el;
+
+			if (action.container) {
+				return app.querySelector(action.container);
+			}
+			if (action.nextSibling === 1) {
+				return startActionElem.nextSibling;
+			}
+			if (action.nextSibling === 2) {
+				return startActionElem.nextSibling.nextSibling;
+			}
+			if (action.nextSibling === 3) {
+				return startActionElem.nextSibling.nextSibling.nextSibling;
+			}
 		},
 	},
 };
