@@ -1,5 +1,6 @@
 <template>
 	<div
+		ref="self"
 		class="field radiobutton"
 		:class="common.class"
 		:data-v-error="valid.error"
@@ -114,7 +115,7 @@ export default {
 		},
 		handleChange(e) {
 			this.vProcess();
-			RadiobuttonL.processActions(this.custom.options, e);
+			RadiobuttonL.processActions(this.custom.options, e, this.$refs.self);
 		},
 		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
