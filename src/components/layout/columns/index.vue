@@ -1,5 +1,10 @@
 <template>
-	<div class="columns" :class="common.class" :style="getStyleObj()">
+	<div
+		class="columns"
+		:class="common.class"
+		:style="getStyleObj()"
+		v-bind="attrs"
+	>
 		<LayoutColumn
 			v-for="(column, columnIndex) in components"
 			:key="columnIndex"
@@ -21,6 +26,7 @@ export default {
 	},
 	props: {
 		common: FH.common,
+		attrs: FH.attrs,
 		components: FH.components,
 		custom: {
 			type: Object,

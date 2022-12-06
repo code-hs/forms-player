@@ -18,6 +18,10 @@ export interface CommonParams {
 	enable?: boolean;
 	class?: string;
 }
+
+export interface AttrsParams {
+	[key: string]: any;
+}
 export interface TextParams {
 	placeholder?: string;
 	hint?: string;
@@ -30,6 +34,7 @@ export interface HtmlParams {}
 
 export interface Field {
 	common: CommonParams;
+	attrs?: AttrsParams;
 	custom?: CustomParams;
 	validation?: ValidationParams;
 	text?: TextParams;

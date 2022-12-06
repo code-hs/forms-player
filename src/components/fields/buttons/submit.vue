@@ -1,5 +1,5 @@
 <template>
-	<div class="submit" :class="common.class">
+	<div class="submit" :class="common.class" v-bind="attrs">
 		<!--suppress JSUnresolvedFunction -->
 		<button type="submit" :disabled="disabled">{{ $t(text.text) }}</button>
 	</div>
@@ -13,6 +13,7 @@ export default {
 	name: 'ButtonSubmit',
 	props: {
 		common: FH.common,
+		attrs: FH.attrs,
 		custom: {
 			type: Object,
 			required: false,

@@ -3,6 +3,7 @@ import {
 	textExample,
 	stylesExample,
 	htmlExample,
+	attrsExample,
 } from '@/libs/components/field/fieldStructure';
 import {Field, Variables} from '@/libs/scheme/schemeStructure';
 import {SchemeController} from '@/libs/scheme/SchemeController';
@@ -24,6 +25,12 @@ export class FieldL {
 	static common: VueComponentParams = {
 		type: Object,
 		required: true,
+	};
+
+	static attrs: VueComponentParams = {
+		type: Object,
+		required: false,
+		default: () => attrsExample,
 	};
 
 	static validation: VueComponentParams = {

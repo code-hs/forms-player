@@ -1,5 +1,10 @@
 <template>
-	<div v-if="hasContent" class="columns__column" :class="classes">
+	<div
+		v-if="hasContent"
+		class="columns__column"
+		:class="classes"
+		v-bind="attrs"
+	>
 		<VirtualComponent
 			v-for="(component, index) in components"
 			:key="index"
@@ -22,6 +27,7 @@ export default {
 	},
 	props: {
 		common: FH.common,
+		attrs: FH.attrs,
 		custom: {
 			type: Object,
 			required: false,

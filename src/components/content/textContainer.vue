@@ -1,5 +1,5 @@
 <template>
-	<div v-if="show" class="text-container" :class="common.class">
+	<div v-if="show" class="text-container" :class="common.class" v-bind="attrs">
 		<!--suppress JSUnresolvedVariable JSUnresolvedFunction -->
 		<component :is="custom.tag">
 			{{ $t(text.value) }}
@@ -15,6 +15,7 @@ export default {
 	name: 'TextContainer',
 	props: {
 		common: FH.common,
+		attrs: FH.attrs,
 		validation: FH.plugO,
 		virtualKey: FH.virtualKey,
 		multiboxIndex: FH.multiboxIndex,

@@ -3,6 +3,7 @@
 		class="field input-email"
 		:class="common.class"
 		:data-v-error="valid.error"
+		v-bind="attrs"
 	>
 		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
@@ -37,6 +38,7 @@ export default {
 	name: 'InputEmail',
 	props: {
 		common: FH.common,
+		attrs: FH.attrs,
 		validation: FH.validation,
 		virtualKey: FH.virtualKey,
 		multiboxIndex: FH.multiboxIndex,

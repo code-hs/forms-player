@@ -1,5 +1,5 @@
 <template>
-	<div class="layout-container" :class="common.class">
+	<div class="layout-container" :class="common.class" v-bind="attrs">
 		<VirtualComponent
 			v-for="(component, index) in components"
 			:key="index"
@@ -21,6 +21,7 @@ export default {
 	},
 	props: {
 		common: FH.common,
+		attrs: FH.attrs,
 		validation: FH.plugO,
 		virtualKey: FH.virtualKey,
 		multiboxIndex: FH.multiboxIndex,

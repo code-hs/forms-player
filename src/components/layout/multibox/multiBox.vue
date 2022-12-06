@@ -1,5 +1,10 @@
 <template>
-	<div v-if="groups.length" class="multibox" :class="common.class">
+	<div
+		v-if="groups.length"
+		class="multibox"
+		:class="common.class"
+		v-bind="attrs"
+	>
 		<div
 			v-for="(group, index) in groups"
 			:key="index"
@@ -44,6 +49,7 @@ export default {
 	},
 	props: {
 		common: FH.common,
+		attrs: FH.attrs,
 		components: FH.components,
 		custom: {
 			type: Object,

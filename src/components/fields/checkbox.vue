@@ -3,6 +3,7 @@
 		class="field checkbox"
 		:class="common.class"
 		:data-v-error="valid.errorForView"
+		v-bind="attrs"
 	>
 		<label>
 			<input
@@ -28,6 +29,7 @@ export default {
 	name: 'Checkbox',
 	props: {
 		common: FH.common,
+		attrs: FH.attrs,
 		validation: FH.validation,
 		virtualKey: FH.virtualKey,
 		multiboxIndex: FH.multiboxIndex,
