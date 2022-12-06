@@ -1,5 +1,4 @@
 import {ActionerL, Action} from '@/libs/utils/ActionerL';
-import {FieldThis} from '@/libs/components/field/fieldStructure';
 
 interface OnInputEvent {
 	[key: string]: any;
@@ -21,13 +20,16 @@ export class RadiobuttonL {
 	static processActions(
 		options: Options,
 		e: OnInputEvent,
-		startActionElem: FieldThis
+		startActionElem: Element
 	): void {
 		const option = this.findOption(options, e?.target?.value);
 		const action = option?.action || null;
 
 		if (!action) return;
 
-		ActionerL.processAction(startActionElem.parentNode, action);
+		// for stay in the .vrc-Radiobuttons
+		const inputContainer = startActionElem.parentNode as Element;
+
+		ActionerL.processAction(inputContainer, action);
 	}
 }

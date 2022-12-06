@@ -4,6 +4,7 @@
 
 <script>
 import {bus, busBroadcasts} from '@/utils/bus';
+import {ActionerL} from '@/libs/utils/ActionerL';
 
 export default {
 	name: 'ActionerDisplayer',
@@ -15,7 +16,9 @@ export default {
 		process({startActionElem, action}) {
 			if (!startActionElem || !action.type) return;
 
-			const elem = this.getElement(startActionElem, action);
+			// noinspection JSUnresolvedVariable
+			const app = this.$root.$el;
+			const elem = ActionerL.getPurposeElement(startActionElem, action, app);
 			if (!elem) {
 				console.error('ActionerDisplayer: Element not found');
 				return;
@@ -25,23 +28,6 @@ export default {
 				elem.hidden = false;
 			} else if (action.type === 'HIDE_CONTAINER') {
 				elem.hidden = true;
-			}
-		},
-		getElement(startActionElem, action) {
-			// noinspection JSUnresolvedVariable
-			const app = this.$root.$el;
-
-			if (action.container) {
-				return app.querySelector(action.container);
-			}
-			if (action.nextSibling === 1) {
-				return startActionElem.nextSibling;
-			}
-			if (action.nextSibling === 2) {
-				return startActionElem.nextSibling.nextSibling;
-			}
-			if (action.nextSibling === 3) {
-				return startActionElem.nextSibling.nextSibling.nextSibling;
 			}
 		},
 	},
