@@ -35,8 +35,8 @@
 import {mapMutations} from 'vuex';
 import {MultiBoxView} from '@/libs/components/layout/multibox/MultiBoxView';
 import {FieldL as FH} from '@/libs/components/field/FieldL';
-import ButtonAdd from './buttonAdd';
-import ButtonRemove from './buttonRemove';
+import ButtonAdd from './button-add';
+import ButtonRemove from './button-remove';
 
 const VirtualComponent = () => import('@/components/virtual-component');
 

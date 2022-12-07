@@ -30,9 +30,9 @@ import Radiobuttons from '@/components/fields/radiobuttons';
 
 // async import for the box components
 const LayoutColumns = () => import('@/components/layout/columns/index');
-const MultiBox = () => import('@/components/layout/multibox/multiBox');
+const MultiBox = () => import('@/components/layout/multibox/multibox');
 const LayoutContainer = () =>
-	import('@/components/layout/containers/layoutContainer');
+	import('@/components/layout/containers/layout-container');
 
 export default {
 	name: 'VirtualComponent',
