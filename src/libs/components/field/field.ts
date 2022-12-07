@@ -4,7 +4,7 @@ import {
 	stylesExample,
 	htmlExample,
 	attrsExample,
-} from '@/libs/components/field/fieldStructure';
+} from '@/libs/components/field/field-structure';
 import {Field, Variables} from '@/libs/scheme/schemeStructure';
 import {SchemeController} from '@/libs/scheme/SchemeController';
 

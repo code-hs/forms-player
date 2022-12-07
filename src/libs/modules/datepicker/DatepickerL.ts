@@ -1,5 +1,5 @@
 import {ModuleConfig, ValidationParams} from '@/libs/scheme/schemeStructure';
-import {FieldThis} from '@/libs/components/field/fieldStructure';
+import {FieldThis} from '@/libs/components/field/field-structure';
 import {parseDate} from '@/utils/dateparser';
 
 type Relations = {

@@ -1,4 +1,4 @@
-import {FieldThis} from '@/libs/components/field/fieldStructure';
+import {FieldThis} from '@/libs/components/field/field-structure';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export interface Action {
