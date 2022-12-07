@@ -1,7 +1,7 @@
 // @ts-ignore
 import store from '@/store';
 import {getValueByStringKey} from '@/utils/objects';
-import {LocalizationLoader} from './LocalizationLoader';
+import {LocalizationLoader} from './localization-loader';
 import {
 	LocalesAllLanguages,
 	Locales,
