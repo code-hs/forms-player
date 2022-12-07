@@ -7,7 +7,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {FieldL as FH} from '@/libs/components/field/FieldL';
+import {FieldL as FH} from '@/libs/components/field/field';
 
 export default {
 	name: 'ButtonSubmit',

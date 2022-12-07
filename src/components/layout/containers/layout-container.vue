@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {FieldL as FH} from '@/libs/components/field/FieldL';
+import {FieldL as FH} from '@/libs/components/field/field';
 
 const VirtualComponent = () => import('@/components/virtual-component');
 

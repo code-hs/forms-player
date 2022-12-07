@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {FieldL as FH} from '@/libs/components/field/FieldL';
+import {FieldL as FH} from '@/libs/components/field/field';
 import {TextContainerL} from '@/libs/components/content/text/text-container';
 
 export default {

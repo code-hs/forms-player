@@ -1,5 +1,5 @@
 import {Field} from '@/libs/scheme/schemeStructure';
-import {FieldL as FH} from '@/libs/components/field/FieldL';
+import {FieldL as FH} from '@/libs/components/field/field';
 
 export class VirtualComponentL {
 	static canInitModel(

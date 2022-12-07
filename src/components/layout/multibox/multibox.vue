@@ -34,7 +34,7 @@
 <script>
 import {mapMutations} from 'vuex';
 import {MultiBoxView} from '@/libs/components/layout/multibox/MultiBoxView';
-import {FieldL as FH} from '@/libs/components/field/FieldL';
+import {FieldL as FH} from '@/libs/components/field/field';
 import ButtonAdd from './button-add';
 import ButtonRemove from './button-remove';
 

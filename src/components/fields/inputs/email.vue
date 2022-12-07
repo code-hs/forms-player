@@ -31,7 +31,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/libs/validator/FieldValidator';
 import {InputL} from '@/libs/components/field/inputs/input';
-import {FieldL as FH} from '@/libs/components/field/FieldL';
+import {FieldL as FH} from '@/libs/components/field/field';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {

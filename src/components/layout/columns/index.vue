@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {FieldL as FH} from '@/libs/components/field/FieldL';
+import {FieldL as FH} from '@/libs/components/field/field';
 
 const LayoutColumn = () => import('./column');
 
