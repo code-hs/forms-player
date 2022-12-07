@@ -20,7 +20,7 @@ import {Config} from '@/config';
 import {Api} from '@/libs/api/Api';
 import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
-import StyleIncluder from '@/components/utils/style/styleIncluder';
+import StyleIncluder from '@/components/utils/style/style-includer';
 import Actioner from '@/components/utils/actioner';
 
 export default {
