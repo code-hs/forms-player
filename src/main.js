@@ -3,7 +3,7 @@ import Vue from 'vue';
 import VueMask from 'v-mask';
 import App from './app';
 import store from './store';
-import {shadowRootInit} from '../settings/initDom';
+import {shadowRootInit} from '../settings/init-dom';
 import {Localization} from './plugins/localization';
 
 // add dev log functions
