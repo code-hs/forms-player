@@ -16,7 +16,7 @@
 
 <script>
 import {FieldL as FH} from '@/libs/components/field/field';
-import {LayoutColumns} from '@/libs/components/layout/columns/LayoutColumns';
+import {LayoutColumns} from '@/libs/components/layout/columns/layout-columns';
 
 const VirtualComponent = () => import('@/components/virtual-component');
 
