@@ -37,7 +37,7 @@ import {ModuleController} from '@/libs/modules/ModuleController';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {DatepickerLoader} from '@/libs/modules/datepicker/DatepickerLoader';
 import {DatepickerL} from '@/libs/modules/datepicker/DatepickerL';
-import {SmartTimeout} from '@/utils/SmartTimeout';
+import {SmartTimeout} from '@/utils/smart-timeout';
 import {debounce} from '@/utils/debounce';
 
 export default {

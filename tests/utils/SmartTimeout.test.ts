@@ -1,7 +1,7 @@
 // noinspection DuplicatedCode,BadExpressionStatementJS
 
 import {describe, it, expect} from '@jest/globals';
-import {SmartTimeout} from '@/utils/SmartTimeout';
+import {SmartTimeout} from '@/utils/smart-timeout';
 
 describe('SmartTimeout', () => {
 	it('main functional', () => {

@@ -4,7 +4,7 @@ import {
 	Module,
 	ModuleConfig,
 } from '@/libs/scheme/schemeStructure';
-import {SmartTimeout} from '@/utils/SmartTimeout';
+import {SmartTimeout} from '@/utils/smart-timeout';
 import {delay} from '@/utils/asinchronius';
 
 export class ModuleController {
