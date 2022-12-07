@@ -36,7 +36,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/FieldValidator';
 import {FieldL as FH} from '@/libs/components/field/FieldL';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {RadiobuttonL} from '@/libs/components/field/inputs/RadiobuttonL';
+import {RadiobuttonL} from '@/libs/components/field/inputs/radiobutton';
 
 export default {
 	name: 'Radiobuttons',
