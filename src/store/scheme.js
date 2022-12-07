@@ -1,6 +1,6 @@
-import {SchemeController} from '@/libs/scheme/SchemeController';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 // eslint-disable-next-line no-unused-vars
-import {Page} from '@/libs/scheme/schemeStructure';
+import {Page} from '@/libs/scheme/scheme-structure';
 
 /**
  * @param {Page} page

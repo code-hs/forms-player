@@ -1,8 +1,8 @@
-import {Api} from '@/libs/api/Api';
+import {Api} from '@/libs/api/api';
 // eslint-disable-next-line no-unused-vars
-import {ModelStructure} from '@/libs/model/ModelStructure';
+import {ModelStructure} from '@/libs/model/model-structure';
 // eslint-disable-next-line no-unused-vars
-import {Page} from '@/libs/scheme/schemeStructure';
+import {Page} from '@/libs/scheme/scheme-structure';
 
 const state = () => ({
 	saveFormFinished: true,
