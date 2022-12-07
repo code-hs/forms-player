@@ -33,7 +33,7 @@
 
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-import {FieldValidator} from '@/libs/validator/FieldValidator';
+import {FieldValidator} from '@/libs/validator/field-validator';
 import {FieldL as FH} from '@/libs/components/field/field';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {RadiobuttonL} from '@/libs/components/field/inputs/radiobutton';

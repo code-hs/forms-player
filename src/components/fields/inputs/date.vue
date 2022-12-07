@@ -30,7 +30,7 @@
 <script>
 import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex';
-import {FieldValidator} from '@/libs/validator/FieldValidator';
+import {FieldValidator} from '@/libs/validator/field-validator';
 import {InputL} from '@/libs/components/field/inputs/input';
 import {FieldL as FH} from '@/libs/components/field/field';
 import {ModuleController} from '@/libs/modules/module-controller';
