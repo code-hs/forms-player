@@ -1,4 +1,4 @@
-import {Scheme, Page, Field} from '@/libs/scheme/schemeStructure';
+import {Scheme, Page, Field} from '@/libs/scheme/scheme-structure';
 
 export class SchemeFiltrator {
 	static filtrateParamEnable(scheme: Scheme): Scheme {

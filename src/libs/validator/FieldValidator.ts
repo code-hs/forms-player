@@ -1,4 +1,4 @@
-import {ValidationParams} from '@/libs/scheme/schemeStructure';
+import {ValidationParams} from '@/libs/scheme/scheme-structure';
 
 export class FieldValidator {
 	static debounceTime: number = 300;

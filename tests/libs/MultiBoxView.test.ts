@@ -3,7 +3,7 @@ import {
 	MultiBoxView,
 	Group,
 } from '@/libs/components/layout/multibox/multibox-view';
-import {Field} from '@/libs/scheme/schemeStructure';
+import {Field} from '@/libs/scheme/scheme-structure';
 
 describe('MultiBoxView class -> generateGroups', () => {
 	it('correct work', () => {

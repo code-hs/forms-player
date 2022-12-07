@@ -3,7 +3,7 @@ import {
 	Configurations,
 	Module,
 	ModuleConfig,
-} from '@/libs/scheme/schemeStructure';
+} from '@/libs/scheme/scheme-structure';
 import {SmartTimeout} from '@/utils/smart-timeout';
 import {delay} from '@/utils/asinchronius';
 

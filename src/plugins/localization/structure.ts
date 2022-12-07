@@ -1,4 +1,4 @@
-import {LocalizationConfig} from '@/libs/scheme/schemeStructure';
+import {LocalizationConfig} from '@/libs/scheme/scheme-structure';
 
 export interface Locales {
 	[key: string]: string;

@@ -1,4 +1,4 @@
-import {Field} from '@/libs/scheme/schemeStructure';
+import {Field} from '@/libs/scheme/scheme-structure';
 import {FieldL as FH} from '@/libs/components/field/field';
 
 export class VirtualComponentL {

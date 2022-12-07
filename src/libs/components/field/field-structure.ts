@@ -5,7 +5,7 @@ import {
 	StylesParams,
 	TextParams,
 	ValidationParams,
-} from '@/libs/scheme/schemeStructure';
+} from '@/libs/scheme/scheme-structure';
 
 export interface FieldThis {
 	[key: string]: any;

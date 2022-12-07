@@ -1,7 +1,7 @@
 import {generateKey} from '@/utils/random';
 import {deepCopy} from '@/utils/objects';
 import {customExample} from '@/libs/components/field/field-structure';
-import {Field} from '@/libs/scheme/schemeStructure';
+import {Field} from '@/libs/scheme/scheme-structure';
 
 // stack of components
 export type Group = Field[];
