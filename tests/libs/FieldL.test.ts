@@ -1,7 +1,7 @@
 import {describe, expect, it} from '@jest/globals';
 import {FieldL} from '@/libs/components/field/field';
 import {Field} from '@/libs/scheme/schemeStructure';
-import {SchemeController} from '@/libs/scheme/SchemeController';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 describe('FieldL class', () => {
 	it('correct work func getMultiName', () => {

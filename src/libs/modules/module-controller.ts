@@ -1,4 +1,4 @@
-import {SchemeController} from '@/libs/scheme/SchemeController';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 import {
 	Configurations,
 	Module,

@@ -1,5 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {SchemeController} from '@/libs/scheme/SchemeController';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 import {Scheme, Page, Configurations} from '@/libs/scheme/schemeStructure';
 
 describe('SchemeController class', () => {

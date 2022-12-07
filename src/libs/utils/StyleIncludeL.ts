@@ -1,5 +1,5 @@
 import {StylesParams, Page, Field} from '@/libs/scheme/schemeStructure';
-import {SchemeController} from '@/libs/scheme/SchemeController';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 export class StyleIncludeL {
 	static stack: StylesParams[] = [];

@@ -1,7 +1,7 @@
 import {describe, it, expect} from '@jest/globals';
 import {StyleIncludeL} from '@/libs/utils/StyleIncludeL';
 import {Scheme} from '@/libs/scheme/schemeStructure';
-import {SchemeController} from '@/libs/scheme/SchemeController';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 describe('StyleIncludeL class -> findIndex', () => {
 	const scheme: Scheme = {

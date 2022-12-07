@@ -6,7 +6,7 @@ import {
 	attrsExample,
 } from '@/libs/components/field/field-structure';
 import {Field, Variables} from '@/libs/scheme/schemeStructure';
-import {SchemeController} from '@/libs/scheme/SchemeController';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 type VueComponentParams = Object;
 
