@@ -1,5 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {TextContainerL} from '@/libs/components/content/text/TextContainerL';
+import {TextContainerL} from '@/libs/components/content/text/text-container';
 import {FieldThis} from '@/libs/components/field/fieldStructure';
 
 describe('TextContainerL class', () => {

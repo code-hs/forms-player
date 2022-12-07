@@ -9,7 +9,7 @@
 
 <script>
 import {FieldL as FH} from '@/libs/components/field/FieldL';
-import {TextContainerL} from '@/libs/components/content/text/TextContainerL';
+import {TextContainerL} from '@/libs/components/content/text/text-container';
 
 export default {
 	name: 'TextContainer',
