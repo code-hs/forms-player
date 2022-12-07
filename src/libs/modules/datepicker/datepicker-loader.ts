@@ -1,7 +1,7 @@
 import {ModuleConfig} from '@/libs/scheme/schemeStructure';
 import {SmartTimeout} from '@/utils/smart-timeout';
 import {delay} from '@/utils/asinchronius';
-import {DatepickerL} from './DatepickerL';
+import {DatepickerL} from './datepicker';
 
 type DatepickerObject = {
 	[key: string]: any;

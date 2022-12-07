@@ -1,5 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {DatepickerL, FieldOptions} from '@/libs/modules/datepicker/DatepickerL';
+import {DatepickerL, FieldOptions} from '@/libs/modules/datepicker/datepicker';
 import {ValidationParams} from '@/libs/scheme/schemeStructure';
 
 describe('DatepickerL', () => {
