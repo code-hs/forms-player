@@ -25,7 +25,7 @@ import Selector from '@/components/fields/selector';
 import Textarea from '@/components/fields/inputs/textarea';
 import Checkbox from '@/components/fields/checkbox';
 import ButtonSubmit from '@/components/fields/buttons/submit';
-import TextContainer from '@/components/content/textContainer';
+import TextContainer from '@/components/content/text-container';
 import Radiobuttons from '@/components/fields/radiobuttons';
 
 // async import for the box components
