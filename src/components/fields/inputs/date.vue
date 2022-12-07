@@ -33,7 +33,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/FieldValidator';
 import {InputL} from '@/libs/components/field/inputs/input';
 import {FieldL as FH} from '@/libs/components/field/field';
-import {ModuleController} from '@/libs/modules/ModuleController';
+import {ModuleController} from '@/libs/modules/module-controller';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {DatepickerLoader} from '@/libs/modules/datepicker/DatepickerLoader';
 import {DatepickerL} from '@/libs/modules/datepicker/DatepickerL';
