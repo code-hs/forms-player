@@ -4,7 +4,7 @@
 
 <script>
 import {bus, busBroadcasts} from '@/utils/bus';
-import {ActionerL} from '@/libs/utils/ActionerL';
+import {ActionerL} from '@/libs/utils/actioner';
 
 export default {
 	name: 'ActionerDisplayer',

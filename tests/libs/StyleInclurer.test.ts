@@ -1,9 +1,9 @@
 import {describe, it, expect} from '@jest/globals';
-import {StyleIncludeL} from '@/libs/utils/StyleIncludeL';
+import {StyleIncluderL} from '@/libs/utils/style-includer';
 import {Scheme} from '@/libs/scheme/scheme-structure';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
-describe('StyleIncludeL class -> findIndex', () => {
+describe('StyleIncluderL class -> findIndex', () => {
 	const scheme: Scheme = {
 		config: {
 			styles: {
@@ -62,7 +62,7 @@ describe('StyleIncludeL class -> findIndex', () => {
 	// @ts-ignore
 	SchemeController.scheme = scheme;
 
-	const str = StyleIncludeL.getAllStylesAsStr();
+	const str = StyleIncluderL.getAllStylesAsStr();
 
 	it('correct work', () => {
 		expect(str).toBe('1 2 3  4 5  6 ');

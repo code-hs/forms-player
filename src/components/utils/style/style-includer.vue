@@ -3,13 +3,13 @@
 </template>
 
 <script>
-import {StyleIncludeL} from '@/libs/utils/StyleIncludeL';
+import {StyleIncluderL} from '@/libs/utils/style-includer';
 
 export default {
 	name: 'StyleIncluder',
 	data() {
 		return {
-			styleStr: StyleIncludeL.getAllStylesAsStr(),
+			styleStr: StyleIncluderL.getAllStylesAsStr(),
 		};
 	},
 };
