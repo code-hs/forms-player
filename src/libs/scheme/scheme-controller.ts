@@ -1,5 +1,5 @@
 import {SchemeLoader} from './SchemeLoader';
-import {SchemeFiltrator} from './SchemeFiltrator';
+import {SchemeFiltrator} from './scheme-filtrator';
 import {Scheme, Page, Configurations} from '@/libs/scheme/schemeStructure';
 
 export class SchemeController {
