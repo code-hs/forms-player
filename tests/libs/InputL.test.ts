@@ -1,5 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {InputL} from '@/libs/components/field/inputs/InputL';
+import {InputL} from '@/libs/components/field/inputs/input';
 import {FieldThis} from '@/libs/components/field/fieldStructure';
 
 describe('Api class', () => {
