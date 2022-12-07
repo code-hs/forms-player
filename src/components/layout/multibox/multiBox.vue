@@ -38,7 +38,7 @@ import {FieldL as FH} from '@/libs/components/field/FieldL';
 import ButtonAdd from './buttonAdd';
 import ButtonRemove from './buttonRemove';
 
-const VirtualComponent = () => import('@/components/virtualComponent');
+const VirtualComponent = () => import('@/components/virtual-component');
 
 export default {
 	name: 'MultiBox',

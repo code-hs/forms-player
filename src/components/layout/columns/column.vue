@@ -18,7 +18,7 @@
 import {FieldL as FH} from '@/libs/components/field/FieldL';
 import {LayoutColumns} from '@/libs/components/layout/columns/LayoutColumns';
 
-const VirtualComponent = () => import('@/components/virtualComponent');
+const VirtualComponent = () => import('@/components/virtual-component');
 
 export default {
 	name: 'LayoutColumn',

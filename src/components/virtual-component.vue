@@ -83,10 +83,10 @@ export default {
 		}),
 		checkComponent() {
 			if (!this.schemeOptions?.common) {
-				throw new Error('virtualComponent.vue: param common is empty');
+				throw new Error('virtual-component.vue: param common is empty');
 			}
 			if (!this.schemeOptions?.common?.type) {
-				throw new Error('virtualComponent.vue: param type in common is empty');
+				throw new Error('virtual-component.vue: param type in common is empty');
 			}
 		},
 		initModel() {

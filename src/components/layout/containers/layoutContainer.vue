@@ -12,7 +12,7 @@
 <script>
 import {FieldL as FH} from '@/libs/components/field/FieldL';
 
-const VirtualComponent = () => import('@/components/virtualComponent');
+const VirtualComponent = () => import('@/components/virtual-component');
 
 export default {
 	name: 'LayoutContainer',
