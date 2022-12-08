@@ -1,6 +1,7 @@
 export interface ValidationParams {
 	required?: boolean;
 	pattern?: string;
+	requiredOnlyIfVisible?: boolean;
 	texts?: {
 		[key: string]: string;
 	};

@@ -22,5 +22,6 @@ export const textExample: TextParams = {
 export const validationExample: ValidationParams = {
 	required: false,
 	pattern: '',
+	requiredOnlyIfVisible: false,
 	texts: {},
 };

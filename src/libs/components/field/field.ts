@@ -91,4 +91,20 @@ export class FieldL {
 
 		return output;
 	}
+
+	static isVisible(elem: Element): boolean {
+		// is visible on html page, not visible on screen
+		const rect = elem.getBoundingClientRect();
+		// noinspection OverlyComplexBooleanExpressionJS
+		return (
+			rect.top !== 0 ||
+			rect.bottom !== 0 ||
+			rect.left !== 0 ||
+			rect.right !== 0 ||
+			rect.width !== 0 ||
+			rect.height !== 0 ||
+			rect.x !== 0 ||
+			rect.y !== 0
+		);
+	}
 }

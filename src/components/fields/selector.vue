@@ -144,6 +144,17 @@ export default {
 			});
 		},
 		vHandleTask() {
+			if (
+				this.validation.requiredOnlyIfVisible &&
+				!FH.isVisible(this.$refs.self)
+			) {
+				// skip validation
+				this.vEventResponse({
+					key: this.virtualKey,
+					error: false,
+				});
+				return;
+			}
 			// false - don't update store, because we do it in down line
 			this.vProcess(false);
 			this.vEventResponse({
