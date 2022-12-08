@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {FieldL as FH} from '@/libs/components/field/field';
+import {FieldL as FL} from '@/libs/components/field/field';
 import {LayoutColumns} from '@/libs/components/layout/columns/layout-columns';
 
 const VirtualComponent = () => import('@/components/virtual-component');
@@ -26,8 +26,8 @@ export default {
 		VirtualComponent,
 	},
 	props: {
-		common: FH.common,
-		attrs: FH.attrs,
+		common: FL.common,
+		attrs: FL.attrs,
 		custom: {
 			type: Object,
 			required: false,
@@ -36,8 +36,8 @@ export default {
 				childCount: 0,
 			}),
 		},
-		multiboxIndex: FH.multiboxIndex,
-		components: FH.components,
+		multiboxIndex: FL.multiboxIndex,
+		components: FL.components,
 	},
 
 	data() {

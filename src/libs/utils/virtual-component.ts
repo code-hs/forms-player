@@ -1,5 +1,5 @@
 import {Field} from '@/libs/scheme/scheme-structure';
-import {FieldL as FH} from '@/libs/components/field/field';
+import {FieldL as FL} from '@/libs/components/field/field';
 
 export class VirtualComponentL {
 	static canInitModel(
@@ -9,7 +9,7 @@ export class VirtualComponentL {
 	): boolean {
 		if (!allowedComponents.includes(fieldType)) return false;
 
-		const multiBoxName = FH.getMultiName(field);
+		const multiBoxName = FL.getMultiName(field);
 		// skip initialize, fix bug, when add new group of fields,
 		// all groups rerender, and reinit, and clear values
 		if (multiBoxName) return false;

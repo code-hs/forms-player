@@ -32,7 +32,7 @@ import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
 import {InputL} from '@/libs/components/field/inputs/input';
-import {FieldL as FH} from '@/libs/components/field/field';
+import {FieldL as FL} from '@/libs/components/field/field';
 import {ModuleController} from '@/libs/modules/module-controller';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {DatepickerLoader} from '@/libs/modules/datepicker/datepicker-loader';
@@ -43,8 +43,8 @@ import {debounce} from '@/utils/debounce';
 export default {
 	name: 'InputDate',
 	props: {
-		common: FH.common,
-		attrs: FH.attrs,
+		common: FL.common,
+		attrs: FL.attrs,
 		validation: {
 			type: Object,
 			required: false,
@@ -57,11 +57,11 @@ export default {
 				},
 			}),
 		},
-		virtualKey: FH.virtualKey,
-		multiboxIndex: FH.multiboxIndex,
-		text: FH.text,
-		html: FH.html,
-		styles: FH.styles,
+		virtualKey: FL.virtualKey,
+		multiboxIndex: FL.multiboxIndex,
+		text: FL.text,
+		html: FL.html,
+		styles: FL.styles,
 		custom: {
 			type: Object,
 			required: true,
@@ -86,7 +86,7 @@ export default {
 
 		return {
 			mask: '',
-			multiBoxName: FH.getMultiName(this),
+			multiBoxName: FL.getMultiName(this),
 			valid: {
 				error: false,
 				text: this.$t(this.validation?.texts?.required),

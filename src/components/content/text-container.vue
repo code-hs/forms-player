@@ -8,17 +8,17 @@
 </template>
 
 <script>
-import {FieldL as FH} from '@/libs/components/field/field';
+import {FieldL as FL} from '@/libs/components/field/field';
 import {TextContainerL} from '@/libs/components/content/text/text-container';
 
 export default {
 	name: 'TextContainer',
 	props: {
-		common: FH.common,
-		attrs: FH.attrs,
-		validation: FH.plugO,
-		virtualKey: FH.virtualKey,
-		multiboxIndex: FH.multiboxIndex,
+		common: FL.common,
+		attrs: FL.attrs,
+		validation: FL.plugO,
+		virtualKey: FL.virtualKey,
+		multiboxIndex: FL.multiboxIndex,
 		text: {
 			type: Object,
 			required: false,
@@ -26,8 +26,8 @@ export default {
 				value: '',
 			}),
 		},
-		html: FH.html,
-		styles: FH.styles,
+		html: FL.html,
+		styles: FL.styles,
 		custom: {
 			type: Object,
 			required: false,

@@ -33,20 +33,20 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {debounce} from '@/utils/debounce';
 import {FieldValidator} from '@/libs/validator/field-validator';
 import {InputL} from '@/libs/components/field/inputs/input';
-import {FieldL as FH} from '@/libs/components/field/field';
+import {FieldL as FL} from '@/libs/components/field/field';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
 	name: 'InputText',
 	props: {
-		common: FH.common,
-		attrs: FH.attrs,
-		validation: FH.validation,
-		virtualKey: FH.virtualKey,
-		multiboxIndex: FH.multiboxIndex,
-		text: FH.text,
-		html: FH.html,
-		styles: FH.styles,
+		common: FL.common,
+		attrs: FL.attrs,
+		validation: FL.validation,
+		virtualKey: FL.virtualKey,
+		multiboxIndex: FL.multiboxIndex,
+		text: FL.text,
+		html: FL.html,
+		styles: FL.styles,
 		custom: {
 			type: Object,
 			required: false,
@@ -62,7 +62,7 @@ export default {
 		return {
 			mask: '',
 			prevValue: '',
-			multiBoxName: FH.getMultiName(this),
+			multiBoxName: FL.getMultiName(this),
 			valid: {
 				// if field stay errored, dirty = true
 				// then check field on every input, for clear error status

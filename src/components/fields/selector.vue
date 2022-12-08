@@ -39,20 +39,20 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
-import {FieldL as FH} from '@/libs/components/field/field';
+import {FieldL as FL} from '@/libs/components/field/field';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
 	name: 'Selector',
 	props: {
-		common: FH.common,
-		attrs: FH.attrs,
-		validation: FH.validation,
-		virtualKey: FH.virtualKey,
-		multiboxIndex: FH.multiboxIndex,
-		text: FH.text,
-		html: FH.html,
-		styles: FH.styles,
+		common: FL.common,
+		attrs: FL.attrs,
+		validation: FL.validation,
+		virtualKey: FL.virtualKey,
+		multiboxIndex: FL.multiboxIndex,
+		text: FL.text,
+		html: FL.html,
+		styles: FL.styles,
 		custom: {
 			type: Object,
 			required: false,
@@ -65,7 +65,7 @@ export default {
 
 	data() {
 		return {
-			multiBoxName: FH.getMultiName(this),
+			multiBoxName: FL.getMultiName(this),
 			valid: {
 				error: false,
 				connect: false,
@@ -92,7 +92,7 @@ export default {
 
 	created() {
 		// eslint-disable-next-line vue/no-mutating-props
-		this.custom.options = FH.variabling(this.custom.options);
+		this.custom.options = FL.variabling(this.custom.options);
 		this.initValidation();
 	},
 
@@ -146,7 +146,7 @@ export default {
 		vHandleTask() {
 			if (
 				this.validation.requiredOnlyIfVisible &&
-				!FH.isVisible(this.$refs.self)
+				!FL.isVisible(this.$refs.self)
 			) {
 				// skip validation
 				this.vEventResponse({

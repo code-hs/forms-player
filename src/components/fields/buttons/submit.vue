@@ -7,24 +7,24 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {FieldL as FH} from '@/libs/components/field/field';
+import {FieldL as FL} from '@/libs/components/field/field';
 
 export default {
 	name: 'ButtonSubmit',
 	props: {
-		common: FH.common,
-		attrs: FH.attrs,
+		common: FL.common,
+		attrs: FL.attrs,
 		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		validation: FH.plugO,
-		virtualKey: FH.plugN,
-		multiboxIndex: FH.plugN,
-		text: FH.plugO,
-		html: FH.plugO,
-		styles: FH.plugO,
+		validation: FL.plugO,
+		virtualKey: FL.plugN,
+		multiboxIndex: FL.plugN,
+		text: FL.plugO,
+		html: FL.plugO,
+		styles: FL.plugO,
 	},
 
 	computed: {

@@ -34,7 +34,7 @@
 <script>
 import {mapMutations} from 'vuex';
 import {MultiBoxView} from '@/libs/components/layout/multibox/multibox-view';
-import {FieldL as FH} from '@/libs/components/field/field';
+import {FieldL as FL} from '@/libs/components/field/field';
 import ButtonAdd from './button-add';
 import ButtonRemove from './button-remove';
 
@@ -48,16 +48,16 @@ export default {
 		ButtonRemove,
 	},
 	props: {
-		common: FH.common,
-		attrs: FH.attrs,
-		components: FH.components,
+		common: FL.common,
+		attrs: FL.attrs,
+		components: FL.components,
 		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		virtualKey: FH.plugN,
-		multiboxIndex: FH.plugN,
+		virtualKey: FL.plugN,
+		multiboxIndex: FL.plugN,
 	},
 	data() {
 		const groups = MultiBoxView.generateGroups(
