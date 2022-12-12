@@ -44,7 +44,7 @@ export default {
 			const interval = setInterval(() => {
 				if (posY === window.scrollY) {
 					// scrolling stopped
-					elem.focus();
+					elem.focus({preventScroll: true});
 					clearInterval(interval);
 				}
 
