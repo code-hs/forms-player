@@ -4,6 +4,7 @@
 
 <script>
 import {bus, busBroadcasts} from '@/utils/bus';
+import {Focus} from '@/libs/utils/focus';
 
 export default {
 	mounted() {
@@ -17,14 +18,13 @@ export default {
 				this.processError();
 			});
 		},
-
 		processError() {
 			// noinspection JSUnresolvedVariable
 			const app = this.$root.$el;
-			// todo: mayme some time, delete input, textarea. And use without this, as one selector
-			const selector =
-				".field[data-v-error='true'] input, .field[data-v-error='true'] textarea";
-			const errorFields = app.querySelectorAll(selector);
+			const errorFields = app.querySelectorAll(Focus.getSelector());
+			// debug
+			// const elements = [...errorFields].map(f => f.outerHTML);
+			// console.log(elements);
 
 			if (!errorFields.length) {
 				throw new Error('validation > focus: No error fields found');
@@ -34,7 +34,6 @@ export default {
 			const firstErrorElement = errorFields[0];
 			this.scrollAndFocusElement(firstErrorElement);
 		},
-
 		scrollAndFocusElement(elem) {
 			if (!elem) return;
 
