@@ -1,6 +1,5 @@
 <template>
 	<div
-		ref="self"
 		class="field radiobutton"
 		:class="common.class"
 		:data-v-error="valid.error"
@@ -13,6 +12,7 @@
 		<div v-if="custom.options" class="inputs">
 			<label v-for="(option, index) in custom.options" :key="index">
 				<input
+					ref="self"
 					v-model="modelStore[common.model]"
 					:name="modelStore[common.model]"
 					type="radio"
@@ -36,7 +36,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {RadiobuttonL} from '@/libs/components/field/inputs/radiobutton';
+import {ActionerL} from '@/libs/utils/actioner';
 
 export default {
 	name: 'Radiobuttons',
@@ -61,6 +61,7 @@ export default {
 
 	data() {
 		return {
+			firstElement: null,
 			multiBoxName: FL.getMultiName(this),
 			valid: {
 				error: false,
@@ -90,7 +91,10 @@ export default {
 		this.initValidation();
 		this.modelStore[this.common.model] = this.custom?.defaultValue || '';
 	},
-
+	mounted() {
+		// many inputs, auto wrapped in array
+		this.firstElement = this.$refs.self[0];
+	},
 	beforeDestroy() {
 		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
@@ -117,7 +121,7 @@ export default {
 		},
 		handleChange(e) {
 			this.vProcess();
-			RadiobuttonL.processActions(this.custom.options, e, this.$refs.self);
+			ActionerL.process(this.custom.options, e, this.firstElement);
 		},
 		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
@@ -131,7 +135,13 @@ export default {
 				error: this.valid.error,
 			});
 		},
-		vHandleTask() {
+		vTaskSkip() {
+			this.vEventResponse({
+				key: this.virtualKey,
+				error: false,
+			});
+		},
+		vTaskProcess() {
 			// after click submit, if empty value -> show error border
 			if (!this.value) {
 				this.valid.error = true;
@@ -143,6 +153,17 @@ export default {
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
+		},
+		vHandleTask() {
+			if (
+				this.validation.requiredOnlyIfVisible &&
+				!FL.isVisible(this.firstElement)
+			) {
+				this.vTaskSkip();
+				return;
+			}
+
+			this.vTaskProcess();
 		},
 	},
 };
