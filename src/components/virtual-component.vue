@@ -1,5 +1,5 @@
 <template>
-	<div :class="'vrc-' + fieldType">
+	<div :class="'vrc vrc-' + fieldType">
 		<!--suppress JSUnresolvedVariable -->
 		<component
 			:is="schemeOptions.common.type"

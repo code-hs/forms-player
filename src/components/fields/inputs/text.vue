@@ -169,13 +169,30 @@ export default {
 				error: this.valid.error,
 			});
 		},
-		vHandleTask() {
+		vTaskSkip() {
+			this.vEventResponse({
+				key: this.virtualKey,
+				error: false,
+			});
+		},
+		vTaskProcess() {
 			// false - don't update store, because we do it in down line
 			this.vProcessAndUpdateDirty(false);
 			this.vEventResponse({
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
+		},
+		vHandleTask() {
+			if (
+				this.validation.requiredOnlyIfVisible &&
+				!FL.isVisible(this.$refs.self)
+			) {
+				this.vTaskSkip();
+				return;
+			}
+
+			this.vTaskProcess();
 		},
 	},
 };

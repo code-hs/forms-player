@@ -117,7 +117,13 @@ export default {
 				error: this.valid.error,
 			});
 		},
-		vHandleTask() {
+		vTaskSkip() {
+			this.vEventResponse({
+				key: this.virtualKey,
+				error: false,
+			});
+		},
+		vTaskProcess() {
 			// after click submit, if empty value -> show error border
 			if (!this.value) {
 				this.valid.errorForView = true;
@@ -129,6 +135,17 @@ export default {
 				key: this.virtualKey,
 				error: this.valid.error,
 			});
+		},
+		vHandleTask() {
+			if (
+				this.validation.requiredOnlyIfVisible &&
+				!FL.isVisible(this.$refs.self)
+			) {
+				this.vTaskSkip();
+				return;
+			}
+
+			this.vTaskProcess();
 		},
 	},
 };
