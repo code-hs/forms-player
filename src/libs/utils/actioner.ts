@@ -1,6 +1,10 @@
 import {FieldThis} from '@/libs/components/field/field-structure';
 import {bus, busBroadcasts} from '@/utils/bus';
 
+interface OnInputEvent {
+	[key: string]: any;
+}
+
 export interface Action {
 	type: string;
 	container?: string;
@@ -9,11 +13,34 @@ export interface Action {
 	[key: string]: any;
 }
 
+interface Option {
+	value: string;
+	text: string;
+	action?: Action;
+}
+
+type Options = Option[];
+// custom.options
+
 export class ActionerL {
 	static types = {
 		SHOW_CONTAINER: 'SHOW_CONTAINER',
 		HIDE_CONTAINER: 'HIDE_CONTAINER',
 	};
+
+	static process(
+		options: Options,
+		e: OnInputEvent,
+		startActionElem: Element
+	): void {
+		const option = this.findOption(options, e.target?.value);
+		const action = option?.action || null;
+		if (!action) return;
+
+		// go to .vrc-Radiobuttons
+		const inputContainer = startActionElem.closest('.vrc') as Element;
+		this.processAction(inputContainer, action);
+	}
 
 	static processAction(startActionElem: FieldThis, action: Action) {
 		const params = {action, startActionElem};
@@ -27,6 +54,12 @@ export class ActionerL {
 		}
 	}
 
+	// static getActionFromOptions
+
+	static findOption(options: Options, value: string): Option {
+		return options.find((item: Option) => item.value === value) as Option;
+	}
+
 	static getPurposeElement(
 		startActionElem: FieldThis,
 		action: Action,
@@ -37,18 +70,22 @@ export class ActionerL {
 		if (action.container) {
 			vrcContainer = app.querySelector(action.container);
 		} else if (action.nextSibling === 1) {
-			vrcContainer = startActionElem.nextSibling;
+			vrcContainer = startActionElem.nextElementSibling;
 		} else if (action.nextSibling === 2) {
-			vrcContainer = startActionElem.nextSibling.nextSibling;
+			vrcContainer = startActionElem.nextElementSibling.nextElementSibling;
 		} else if (action.nextSibling === 3) {
-			vrcContainer = startActionElem.nextSibling.nextSibling.nextSibling;
+			vrcContainer =
+				startActionElem.nextElementSibling.nextElementSibling
+					.nextElementSibling;
 		} else if (action.previousSibling === 1) {
-			vrcContainer = startActionElem.previousSibling;
+			vrcContainer = startActionElem.previousElementSibling;
 		} else if (action.previousSibling === 2) {
-			vrcContainer = startActionElem.previousSibling.previousSibling;
+			vrcContainer =
+				startActionElem.previousElementSibling.previousElementSibling;
 		} else if (action.previousSibling === 3) {
 			vrcContainer =
-				startActionElem.previousSibling.previousSibling.previousSibling;
+				startActionElem.previousElementSibling.previousElementSibling
+					.previousElementSibling;
 		}
 
 		return this.getElementFromContainer(vrcContainer);
