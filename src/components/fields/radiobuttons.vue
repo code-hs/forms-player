@@ -36,7 +36,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {bus, busBroadcasts} from '@/utils/bus';
-import {ActionerL} from '@/libs/utils/actioner';
+import {RadiobuttonsL} from '@/libs/components/field/inputs/radiobutton';
 
 export default {
 	name: 'Radiobuttons',
@@ -121,7 +121,7 @@ export default {
 		},
 		handleChange(e) {
 			this.vProcess();
-			ActionerL.process(this.custom.options, e, this.firstElement);
+			RadiobuttonsL.sendAction(this.custom.options, e, this.firstElement);
 		},
 		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;

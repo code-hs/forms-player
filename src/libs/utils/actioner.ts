@@ -1,9 +1,4 @@
-import {FieldThis} from '@/libs/components/field/field-structure';
 import {bus, busBroadcasts} from '@/utils/bus';
-
-interface OnInputEvent {
-	[key: string]: any;
-}
 
 export interface Action {
 	type: string;
@@ -13,85 +8,74 @@ export interface Action {
 	[key: string]: any;
 }
 
-interface Option {
-	value: string;
-	text: string;
-	action?: Action;
-}
-
-type Options = Option[];
-// custom.options
-
-export class ActionerL {
+export class Actioner {
 	static types = {
 		SHOW_CONTAINER: 'SHOW_CONTAINER',
 		HIDE_CONTAINER: 'HIDE_CONTAINER',
+		ADD_CLASS: 'ADD_CLASS',
+		REMOVE_CLASS: 'REMOVE_CLASS',
 	};
 
-	static process(
-		options: Options,
-		e: OnInputEvent,
-		startActionElem: Element
-	): void {
-		const option = this.findOption(options, e.target?.value);
-		const action = option?.action || null;
-		if (!action) return;
+	private readonly action: Action;
+	private readonly vrcContainer: Element;
 
-		// go to .vrc-Radiobuttons
-		const inputContainer = startActionElem.closest('.vrc') as Element;
-		this.processAction(inputContainer, action);
+	constructor(action: Action, creatorAction: Element) {
+		this.action = action;
+		// go to .vrc-Radiobuttons or another container
+		this.vrcContainer = creatorAction.closest('.vrc') as Element;
 	}
 
-	static processAction(startActionElem: FieldThis, action: Action) {
-		const params = {action, startActionElem};
+	process(): void {
+		if (!this.action) {
+			console.error('ActionerL.process: cant find action');
+			return;
+		}
+		if (!this.vrcContainer) {
+			console.error('ActionerL.process: cant find vrcContainer');
+			return;
+		}
 
+		this.emitAction();
+	}
+
+	private emitAction(): void {
 		if (
-			action.type === this.types.SHOW_CONTAINER ||
-			action.type === this.types.HIDE_CONTAINER
+			this.action.type === Actioner.types.SHOW_CONTAINER ||
+			this.action.type === Actioner.types.HIDE_CONTAINER
 		) {
-			bus.$emit(busBroadcasts.DISPLAY_CONTAINER, params);
+			bus.$emit(busBroadcasts.DISPLAY_CONTAINER, this);
 			// catch this event in src/components/utils/actioner/displayer.vue
 		}
 	}
 
-	// static getActionFromOptions
+	getPurposeElement(app: Element): Element | undefined {
+		let purposeContainer: Element | null | undefined;
 
-	static findOption(options: Options, value: string): Option {
-		return options.find((item: Option) => item.value === value) as Option;
-	}
-
-	static getPurposeElement(
-		startActionElem: FieldThis,
-		action: Action,
-		app: Element
-	): Element | undefined | null {
-		let vrcContainer;
-
-		if (action.container) {
-			vrcContainer = app.querySelector(action.container);
-		} else if (action.nextSibling === 1) {
-			vrcContainer = startActionElem.nextElementSibling;
-		} else if (action.nextSibling === 2) {
-			vrcContainer = startActionElem.nextElementSibling.nextElementSibling;
-		} else if (action.nextSibling === 3) {
-			vrcContainer =
-				startActionElem.nextElementSibling.nextElementSibling
-					.nextElementSibling;
-		} else if (action.previousSibling === 1) {
-			vrcContainer = startActionElem.previousElementSibling;
-		} else if (action.previousSibling === 2) {
-			vrcContainer =
-				startActionElem.previousElementSibling.previousElementSibling;
-		} else if (action.previousSibling === 3) {
-			vrcContainer =
-				startActionElem.previousElementSibling.previousElementSibling
-					.previousElementSibling;
+		if (this.action.container) {
+			purposeContainer = app.querySelector(this.action.container);
+		} else if (this.action.nextSibling === 1) {
+			purposeContainer = this.vrcContainer.nextElementSibling;
+		} else if (this.action.nextSibling === 2) {
+			purposeContainer =
+				this.vrcContainer.nextElementSibling?.nextElementSibling;
+		} else if (this.action.nextSibling === 3) {
+			purposeContainer =
+				this.vrcContainer.nextElementSibling?.nextElementSibling
+					?.nextElementSibling;
+		} else if (this.action.previousSibling === 1) {
+			purposeContainer = this.vrcContainer.previousElementSibling;
+		} else if (this.action.previousSibling === 2) {
+			purposeContainer =
+				this.vrcContainer.previousElementSibling?.previousElementSibling;
+		} else if (this.action.previousSibling === 3) {
+			purposeContainer =
+				this.vrcContainer.previousElementSibling?.previousElementSibling
+					?.previousElementSibling;
 		}
 
-		return this.getElementFromContainer(vrcContainer);
-	}
+		if (!purposeContainer) return;
 
-	private static getElementFromContainer(container: Element): Element {
-		return container.firstChild as Element;
+		// get .field element
+		return purposeContainer.firstChild as Element;
 	}
 }
