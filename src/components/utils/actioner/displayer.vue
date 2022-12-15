@@ -15,9 +15,8 @@ export default {
 		process(cAction) {
 			if (!cAction || !cAction.action.type) return;
 
-			// noinspection JSUnresolvedVariable
-			const app = this.$root.$el;
-			const elem = cAction.getPurposeElement(app);
+			// noinspection JSUnresolvedVariableФцФ
+			const elem = cAction.getPurposeElement(this.$root.$el);
 
 			if (!elem) {
 				console.error('ActionerDisplayer: purpose element not found');
