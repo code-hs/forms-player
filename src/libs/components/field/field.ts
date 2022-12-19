@@ -4,6 +4,7 @@ import {
 	stylesExample,
 	htmlExample,
 	attrsExample,
+	attrsOnlyContainerExample,
 } from '@/libs/components/field/field-structure';
 import {Field, Variables} from '@/libs/scheme/scheme-structure';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
@@ -31,6 +32,12 @@ export class FieldL {
 		type: Object,
 		required: false,
 		default: () => attrsExample,
+	};
+
+	static attrsOnlyContainer: VueComponentParams = {
+		type: Object,
+		required: false,
+		default: () => attrsOnlyContainerExample,
 	};
 
 	static validation: VueComponentParams = {

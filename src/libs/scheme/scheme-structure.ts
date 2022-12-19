@@ -21,8 +21,8 @@ export interface CommonParams {
 }
 
 export interface AttrsParams {
-	container: {[key: string]: any};
-	component: {[key: string]: any};
+	container?: {[key: string]: any};
+	component?: {[key: string]: any};
 }
 export interface TextParams {
 	placeholder?: string;

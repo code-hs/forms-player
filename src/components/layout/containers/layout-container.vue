@@ -21,7 +21,7 @@ export default {
 	},
 	props: {
 		common: FL.common,
-		attrs: FL.attrs,
+		attrs: FL.attrsOnlyContainer,
 		validation: FL.plugO,
 		virtualKey: FL.virtualKey,
 		multiboxIndex: FL.multiboxIndex,

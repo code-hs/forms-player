@@ -16,6 +16,9 @@ export const attrsExample: AttrsParams = {
 	container: {},
 	component: {},
 };
+export const attrsOnlyContainerExample: AttrsParams = {
+	container: {},
+};
 export const stylesExample: StylesParams = {};
 export const htmlExample: HtmlParams = {};
 export const textExample: TextParams = {

@@ -27,7 +27,7 @@ export default {
 	},
 	props: {
 		common: FL.common,
-		attrs: FL.attrs,
+		attrs: FL.attrsOnlyContainer,
 		custom: {
 			type: Object,
 			required: false,
