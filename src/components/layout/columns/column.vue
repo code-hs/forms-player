@@ -3,7 +3,7 @@
 		v-if="hasContent"
 		class="columns__column"
 		:class="classes"
-		v-bind="attrs"
+		v-bind="attrs.container"
 	>
 		<VirtualComponent
 			v-for="(component, index) in components"

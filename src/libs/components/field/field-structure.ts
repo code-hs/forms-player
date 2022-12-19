@@ -12,7 +12,10 @@ export interface FieldThis {
 }
 
 export const customExample: CustomParams = {};
-export const attrsExample: AttrsParams = {};
+export const attrsExample: AttrsParams = {
+	container: {},
+	component: {},
+};
 export const stylesExample: StylesParams = {};
 export const htmlExample: HtmlParams = {};
 export const textExample: TextParams = {

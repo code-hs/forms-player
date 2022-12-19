@@ -3,7 +3,7 @@
 		v-if="groups.length"
 		class="multibox"
 		:class="common.class"
-		v-bind="attrs"
+		v-bind="attrs.container"
 	>
 		<div
 			v-for="(group, index) in groups"

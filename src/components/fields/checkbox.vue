@@ -3,7 +3,7 @@
 		class="field checkbox"
 		:class="common.class"
 		:data-v-error="valid.errorForView"
-		v-bind="attrs"
+		v-bind="attrs.container"
 	>
 		<label>
 			<input
@@ -11,6 +11,7 @@
 				v-model="modelStore[common.model]"
 				type="checkbox"
 				:required="validation.required"
+				v-bind="attrs.component"
 				@change="handleChange"
 			/>
 			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->

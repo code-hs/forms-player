@@ -3,7 +3,7 @@
 		class="field input-selector"
 		:class="common.class"
 		:data-v-error="valid.error"
-		v-bind="attrs"
+		v-bind="attrs.container"
 	>
 		<!--suppress JSUnresolvedFunction -->
 		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
@@ -12,6 +12,7 @@
 			ref="self"
 			v-model="modelStore[common.model]"
 			:required="validation.required"
+			v-bind="attrs.component"
 			@change="handleChange"
 		>
 			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->

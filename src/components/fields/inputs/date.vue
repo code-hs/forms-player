@@ -3,7 +3,7 @@
 		class="field input-date"
 		:class="common.class"
 		:data-v-error="valid.error"
-		v-bind="attrs"
+		v-bind="attrs.container"
 	>
 		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
@@ -16,6 +16,7 @@
 			type="text"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
+			v-bind="attrs.component"
 			@blur="handleBlur"
 			@input="handleInput"
 		/>

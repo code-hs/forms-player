@@ -1,5 +1,5 @@
 <template>
-	<div class="layout-container" :class="common.class" v-bind="attrs">
+	<div class="layout-container" :class="common.class" v-bind="attrs.container">
 		<VirtualComponent
 			v-for="(component, index) in components"
 			:key="index"

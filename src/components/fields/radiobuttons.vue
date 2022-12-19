@@ -3,7 +3,7 @@
 		class="field radiobutton"
 		:class="common.class"
 		:data-v-error="valid.error"
-		v-bind="attrs"
+		v-bind="attrs.container"
 	>
 		<!--suppress JSUnresolvedFunction -->
 		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
@@ -17,6 +17,7 @@
 					:name="modelStore[common.model]"
 					type="radio"
 					:value="option.value"
+					v-bind="attrs.component"
 					@change="handleChange"
 				/>
 				<!--suppress JSUnresolvedFunction -->

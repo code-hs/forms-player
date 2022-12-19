@@ -3,7 +3,7 @@
 		class="field input-textarea"
 		:class="common.class"
 		:data-v-error="valid.error"
-		v-bind="attrs"
+		v-bind="attrs.container"
 	>
 		<!--suppress JSUnresolvedFunction-->
 		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
@@ -15,6 +15,7 @@
 			:placeholder="$t(text.placeholder)"
 			:rows="custom.rows"
 			:required="validation.required"
+			v-bind="attrs.component"
 			@blur="handleBlur"
 			@input="handleInput"
 		>

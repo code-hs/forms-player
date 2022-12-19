@@ -3,7 +3,7 @@
 		class="columns"
 		:class="common.class"
 		:style="getStyleObj()"
-		v-bind="attrs"
+		v-bind="attrs.container"
 	>
 		<LayoutColumn
 			v-for="(column, columnIndex) in components"

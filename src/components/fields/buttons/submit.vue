@@ -1,7 +1,9 @@
 <template>
-	<div class="submit" :class="common.class" v-bind="attrs">
+	<div class="submit" :class="common.class" v-bind="attrs.container">
 		<!--suppress JSUnresolvedFunction -->
-		<button type="submit" :disabled="disabled">{{ $t(text.text) }}</button>
+		<button type="submit" :disabled="disabled" v-bind="attrs.component">
+			{{ $t(text.text) }}
+		</button>
 	</div>
 </template>
 
