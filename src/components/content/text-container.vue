@@ -13,17 +13,17 @@
 </template>
 
 <script>
-import {FieldL as FL} from '@/libs/components/field/field';
+import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import {TextContainerL} from '@/libs/components/content/text/text-container';
 
 export default {
 	name: 'TextContainer',
 	props: {
-		common: FL.common,
-		attrs: FL.attrs,
-		validation: FL.plugO,
-		virtualKey: FL.virtualKey,
-		multiboxIndex: FL.multiboxIndex,
+		common: CP.common,
+		attrs: CP.attrs,
+		validation: CP.plugO,
+		virtualKey: CP.virtualKey,
+		multiboxIndex: CP.multiboxIndex,
 		text: {
 			type: Object,
 			required: false,
@@ -31,8 +31,8 @@ export default {
 				value: '',
 			}),
 		},
-		html: FL.html,
-		styles: FL.styles,
+		html: CP.html,
+		styles: CP.styles,
 		custom: {
 			type: Object,
 			required: false,

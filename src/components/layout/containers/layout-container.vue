@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {FieldL as FL} from '@/libs/components/field/field';
+import {ComponentParams as CP} from '@/libs/components/component/component-params';
 
 const VirtualComponent = () => import('@/components/virtual-component');
 
@@ -20,14 +20,14 @@ export default {
 		VirtualComponent,
 	},
 	props: {
-		common: FL.common,
-		attrs: FL.attrsOnlyContainer,
-		validation: FL.plugO,
-		virtualKey: FL.virtualKey,
-		multiboxIndex: FL.multiboxIndex,
-		html: FL.html,
-		styles: FL.styles,
-		components: FL.components,
+		common: CP.common,
+		attrs: CP.attrsOnlyContainer,
+		validation: CP.plugO,
+		virtualKey: CP.virtualKey,
+		multiboxIndex: CP.multiboxIndex,
+		html: CP.html,
+		styles: CP.styles,
+		components: CP.components,
 	},
 };
 </script>

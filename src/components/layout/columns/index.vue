@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {FieldL as FL} from '@/libs/components/field/field';
+import {ComponentParams as CP} from '@/libs/components/component/component-params';
 
 const LayoutColumn = () => import('./column');
 
@@ -25,17 +25,17 @@ export default {
 		LayoutColumn,
 	},
 	props: {
-		common: FL.common,
-		attrs: FL.attrsOnlyContainer,
-		components: FL.components,
+		common: CP.common,
+		attrs: CP.attrsOnlyContainer,
+		components: CP.components,
 		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		styles: FL.styles,
-		virtualKey: FL.plugN,
-		multiboxIndex: FL.multiboxIndex,
+		styles: CP.styles,
+		virtualKey: CP.plugN,
+		multiboxIndex: CP.multiboxIndex,
 	},
 
 	created() {

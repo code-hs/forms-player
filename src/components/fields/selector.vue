@@ -41,19 +41,20 @@
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
 import {FieldL as FL} from '@/libs/components/field/field';
+import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export default {
 	name: 'Selector',
 	props: {
-		common: FL.common,
-		attrs: FL.attrs,
-		validation: FL.validation,
-		virtualKey: FL.virtualKey,
-		multiboxIndex: FL.multiboxIndex,
-		text: FL.text,
-		html: FL.html,
-		styles: FL.styles,
+		common: CP.common,
+		attrs: CP.attrs,
+		validation: CP.validation,
+		virtualKey: CP.virtualKey,
+		multiboxIndex: CP.multiboxIndex,
+		text: CP.text,
+		html: CP.html,
+		styles: CP.styles,
 		custom: {
 			type: Object,
 			required: false,

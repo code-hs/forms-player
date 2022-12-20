@@ -34,6 +34,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
 import {InputL} from '@/libs/components/field/inputs/input';
 import {FieldL as FL} from '@/libs/components/field/field';
+import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import {ModuleController} from '@/libs/modules/module-controller';
 import {bus, busBroadcasts} from '@/utils/bus';
 import {DatepickerLoader} from '@/libs/modules/datepicker/datepicker-loader';
@@ -44,8 +45,8 @@ import {debounce} from '@/utils/debounce';
 export default {
 	name: 'InputDate',
 	props: {
-		common: FL.common,
-		attrs: FL.attrs,
+		common: CP.common,
+		attrs: CP.attrs,
 		validation: {
 			type: Object,
 			required: false,
@@ -58,11 +59,11 @@ export default {
 				},
 			}),
 		},
-		virtualKey: FL.virtualKey,
-		multiboxIndex: FL.multiboxIndex,
-		text: FL.text,
-		html: FL.html,
-		styles: FL.styles,
+		virtualKey: CP.virtualKey,
+		multiboxIndex: CP.multiboxIndex,
+		text: CP.text,
+		html: CP.html,
+		styles: CP.styles,
 		custom: {
 			type: Object,
 			required: true,
