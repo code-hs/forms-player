@@ -25,17 +25,12 @@ export default {
 		LayoutColumn,
 	},
 	props: {
-		common: CP.common,
-		attrs: CP.attrsOnlyContainer,
-		components: CP.components,
+		...CP.getAllParams(),
 		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		styles: CP.styles,
-		virtualKey: CP.plugN,
-		multiboxIndex: CP.multiboxIndex,
 	},
 
 	created() {

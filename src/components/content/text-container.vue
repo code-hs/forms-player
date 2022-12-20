@@ -19,11 +19,7 @@ import {TextContainerL} from '@/libs/components/content/text/text-container';
 export default {
 	name: 'TextContainer',
 	props: {
-		common: CP.common,
-		attrs: CP.attrs,
-		validation: CP.plugO,
-		virtualKey: CP.virtualKey,
-		multiboxIndex: CP.multiboxIndex,
+		...CP.getAllParams(),
 		text: {
 			type: Object,
 			required: false,
@@ -31,8 +27,6 @@ export default {
 				value: '',
 			}),
 		},
-		html: CP.html,
-		styles: CP.styles,
 		custom: {
 			type: Object,
 			required: false,

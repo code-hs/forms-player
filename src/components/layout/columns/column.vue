@@ -26,7 +26,7 @@ export default {
 		VirtualComponent,
 	},
 	props: {
-		common: CP.common,
+		...CP.getAllParams(),
 		attrs: CP.attrsOnlyContainer,
 		custom: {
 			type: Object,
@@ -36,8 +36,6 @@ export default {
 				childCount: 0,
 			}),
 		},
-		multiboxIndex: CP.multiboxIndex,
-		components: CP.components,
 	},
 
 	data() {

@@ -14,19 +14,12 @@ import {ComponentParams as CP} from '@/libs/components/component/component-param
 export default {
 	name: 'ButtonSubmit',
 	props: {
-		common: CP.common,
-		attrs: CP.attrs,
+		...CP.getAllParams(),
 		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		validation: CP.plugO,
-		virtualKey: CP.plugN,
-		multiboxIndex: CP.plugN,
-		text: CP.plugO,
-		html: CP.plugO,
-		styles: CP.plugO,
 	},
 
 	computed: {

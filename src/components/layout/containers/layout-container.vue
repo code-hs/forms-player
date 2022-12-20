@@ -19,15 +19,6 @@ export default {
 	components: {
 		VirtualComponent,
 	},
-	props: {
-		common: CP.common,
-		attrs: CP.attrsOnlyContainer,
-		validation: CP.plugO,
-		virtualKey: CP.virtualKey,
-		multiboxIndex: CP.multiboxIndex,
-		html: CP.html,
-		styles: CP.styles,
-		components: CP.components,
-	},
+	props: CP.getAllParams(),
 };
 </script>

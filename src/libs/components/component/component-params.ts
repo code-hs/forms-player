@@ -10,17 +10,6 @@ import {
 type VueComponentParams = Object;
 
 export class ComponentParams {
-	static multiboxIndex: VueComponentParams = {
-		type: Number,
-		required: false,
-		default: -1,
-	};
-
-	static virtualKey: VueComponentParams = {
-		type: Number,
-		required: true,
-	};
-
 	static common: VueComponentParams = {
 		type: Object,
 		required: true,
@@ -68,6 +57,17 @@ export class ComponentParams {
 		default: () => [],
 	};
 
+	static multiboxIndex: VueComponentParams = {
+		type: Number,
+		required: false,
+		default: -1,
+	};
+
+	static virtualKey: VueComponentParams = {
+		type: Number,
+		required: false,
+	};
+
 	static plugO: VueComponentParams = {
 		type: Object,
 	};
@@ -75,4 +75,23 @@ export class ComponentParams {
 	static plugN: VueComponentParams = {
 		type: Number,
 	};
+
+	static getAllParams() {
+		return {
+			common: this.common,
+			custom: this.plugO,
+			attrs: this.attrs,
+
+			text: this.text,
+			html: this.html,
+			styles: this.styles,
+
+			validation: this.validation,
+			virtualKey: this.virtualKey,
+			multiboxIndex: this.multiboxIndex,
+
+			components: this.components,
+			module: this.plugO,
+		};
+	}
 }

@@ -39,14 +39,7 @@ import {bus, busBroadcasts} from '@/utils/bus';
 export default {
 	name: 'InputPassword',
 	props: {
-		common: CP.common,
-		attrs: CP.attrs,
-		validation: CP.validation,
-		virtualKey: CP.virtualKey,
-		multiboxIndex: CP.multiboxIndex,
-		text: CP.text,
-		html: CP.html,
-		styles: CP.styles,
+		...CP.getAllParams(),
 		custom: {
 			type: Object,
 			required: false,

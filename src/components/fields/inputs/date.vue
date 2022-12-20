@@ -45,8 +45,7 @@ import {debounce} from '@/utils/debounce';
 export default {
 	name: 'InputDate',
 	props: {
-		common: CP.common,
-		attrs: CP.attrs,
+		...CP.getAllParams(),
 		validation: {
 			type: Object,
 			required: false,
@@ -59,11 +58,6 @@ export default {
 				},
 			}),
 		},
-		virtualKey: CP.virtualKey,
-		multiboxIndex: CP.multiboxIndex,
-		text: CP.text,
-		html: CP.html,
-		styles: CP.styles,
 		custom: {
 			type: Object,
 			required: true,

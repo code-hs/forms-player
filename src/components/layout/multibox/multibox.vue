@@ -48,16 +48,12 @@ export default {
 		ButtonRemove,
 	},
 	props: {
-		common: CP.common,
-		attrs: CP.attrsOnlyContainer,
-		components: CP.components,
+		...CP.getAllParams(),
 		custom: {
 			type: Object,
 			required: false,
 			default: () => ({}),
 		},
-		virtualKey: CP.plugN,
-		multiboxIndex: CP.plugN,
 	},
 	data() {
 		const groups = MultiBoxView.generateGroups(

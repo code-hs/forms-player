@@ -43,14 +43,7 @@ import {RadiobuttonsL} from '@/libs/components/field/inputs/radiobutton';
 export default {
 	name: 'Radiobuttons',
 	props: {
-		common: CP.common,
-		attrs: CP.attrs,
-		validation: CP.validation,
-		virtualKey: CP.virtualKey,
-		multiboxIndex: CP.multiboxIndex,
-		text: CP.text,
-		html: CP.html,
-		styles: CP.styles,
+		...CP.getAllParams(),
 		custom: {
 			type: Object,
 			required: false,
