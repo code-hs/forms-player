@@ -14,7 +14,6 @@
 			v-model="modelStore[common.model]"
 			v-mask="mask"
 			type="text"
-			:inputmode="custom.inputmode"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
 			v-bind="attrs.component"
@@ -48,7 +47,6 @@ export default {
 			default: () => ({
 				mask: '',
 				pattern: '',
-				inputmode: '', // for mobile keyboard (only numbers = numeric)
 			}),
 		},
 	},

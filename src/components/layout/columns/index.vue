@@ -26,6 +26,7 @@ export default {
 	},
 	props: {
 		...CP.getAllParams(),
+		attrs: CP.attrsOnlyContainer,
 		custom: {
 			type: Object,
 			required: false,

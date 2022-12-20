@@ -19,6 +19,9 @@ export default {
 	components: {
 		VirtualComponent,
 	},
-	props: CP.getAllParams(),
+	props: {
+		...CP.getAllParams(),
+		attrs: CP.attrsOnlyContainer,
+	},
 };
 </script>
