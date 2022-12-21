@@ -52,34 +52,70 @@ export class Actioner {
 		}
 	}
 
-	getPurposeElement(app: Element): Element | undefined {
-		let purposeContainer: Element | null | undefined;
-
+	getPurposeElements(app: Element): Element[] | undefined {
 		if (this.action.container) {
-			purposeContainer = app.querySelector(this.action.container);
-		} else if (this.action.nextSibling === 1) {
-			purposeContainer = this.vrcContainer.nextElementSibling;
-		} else if (this.action.nextSibling === 2) {
-			purposeContainer =
-				this.vrcContainer.nextElementSibling?.nextElementSibling;
-		} else if (this.action.nextSibling === 3) {
-			purposeContainer =
-				this.vrcContainer.nextElementSibling?.nextElementSibling
-					?.nextElementSibling;
-		} else if (this.action.previousSibling === 1) {
-			purposeContainer = this.vrcContainer.previousElementSibling;
-		} else if (this.action.previousSibling === 2) {
-			purposeContainer =
-				this.vrcContainer.previousElementSibling?.previousElementSibling;
-		} else if (this.action.previousSibling === 3) {
-			purposeContainer =
-				this.vrcContainer.previousElementSibling?.previousElementSibling
-					?.previousElementSibling;
+			return this.getFromContainer(app);
+		} else if (this.action.nextSibling || this.action.previousSibling) {
+			return this.getFromSibling();
+		}
+	}
+
+	private getFromContainer(app: Element): Element[] | undefined {
+		// @ts-ignore
+		const selector: string = this.action.container;
+		const container = app.querySelectorAll(selector) as NodeList;
+
+		if (!container) return;
+
+		// get .field element, not .vrc-Container
+		// const res: Element[] = [];
+		// container.forEach((el: Node) => {
+		// 	res.push(el.firstChild as Element);
+		// });
+		//
+		// return res;
+
+		return Array.from(container).map(el => el.firstChild as Element);
+	}
+
+	private getFromSibling(): Element[] | undefined {
+		let container: Element | undefined | null;
+
+		if (this.action.nextSibling) {
+			container = this.processNextSibling();
+		} else if (this.action.previousSibling) {
+			container = this.processPreviousSibling();
 		}
 
-		if (!purposeContainer) return;
+		if (!container) return;
 
-		// get .field element
-		return purposeContainer.firstChild as Element;
+		const element = container.firstChild as Element;
+		return [element];
+	}
+
+	private processNextSibling(): Element | null | undefined {
+		if (this.action.nextSibling === 1) {
+			return this.vrcContainer.nextElementSibling;
+		}
+		if (this.action.nextSibling === 2) {
+			return this.vrcContainer.nextElementSibling?.nextElementSibling;
+		}
+		if (this.action.nextSibling === 3) {
+			return this.vrcContainer.nextElementSibling?.nextElementSibling
+				?.nextElementSibling;
+		}
+	}
+
+	private processPreviousSibling(): Element | null | undefined {
+		if (this.action.previousSibling === 1) {
+			return this.vrcContainer.previousElementSibling;
+		}
+		if (this.action.previousSibling === 2) {
+			return this.vrcContainer.previousElementSibling?.previousElementSibling;
+		}
+		if (this.action.previousSibling === 3) {
+			return this.vrcContainer.previousElementSibling?.previousElementSibling
+				?.previousElementSibling;
+		}
 	}
 }
