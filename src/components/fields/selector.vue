@@ -5,9 +5,10 @@
 		:data-v-error="valid.error"
 		v-bind="attrs.container"
 	>
-		<!--suppress JSUnresolvedFunction -->
+		<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
 		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
 
+		<!--suppress JSUnresolvedVariable -->
 		<select
 			ref="self"
 			v-model="modelStore[common.model]"
@@ -54,6 +55,22 @@ export default {
 			default: () => ({
 				options: {},
 				defaultText: '',
+			}),
+		},
+		validation: {
+			type: Object,
+			required: false,
+			default: () => ({
+				required: false,
+				requiredOnlyIfVisible: false,
+				texts: {},
+			}),
+		},
+		text: {
+			type: Object,
+			required: false,
+			default: () => ({
+				hint: '',
 			}),
 		},
 	},

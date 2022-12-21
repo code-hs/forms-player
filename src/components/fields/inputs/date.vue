@@ -46,18 +46,6 @@ export default {
 	name: 'InputDate',
 	props: {
 		...CP.getAllParams(),
-		validation: {
-			type: Object,
-			required: false,
-			default: () => ({
-				required: false,
-				texts: {
-					required: '',
-					notValid: '',
-					range: '',
-				},
-			}),
-		},
 		custom: {
 			type: Object,
 			required: true,
@@ -68,9 +56,18 @@ export default {
 		module: {
 			type: Object,
 			required: false,
+			default: () => ({}),
+		},
+		validation: {
+			type: Object,
+			required: false,
 			default: () => ({
-				minDate: '',
-				maxDate: '',
+				required: false,
+				texts: {
+					required: '',
+					notValid: '',
+					range: '',
+				},
 			}),
 		},
 	},

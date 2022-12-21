@@ -6,6 +6,7 @@
 		v-bind="attrs.container"
 	>
 		<label>
+			<!--suppress JSUnresolvedVariable -->
 			<input
 				ref="self"
 				v-model="modelStore[common.model]"
@@ -37,6 +38,19 @@ export default {
 			default: () => ({
 				bodyHTML: '',
 			}),
+		},
+		validation: {
+			type: Object,
+			required: false,
+			default: () => ({
+				required: false,
+				requiredOnlyIfVisible: false,
+			}),
+		},
+		text: {
+			type: Object,
+			required: false,
+			default: () => ({}),
 		},
 	},
 
