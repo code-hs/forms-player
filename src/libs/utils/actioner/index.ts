@@ -19,17 +19,21 @@ export class Actioner {
 
 	constructor(action: Action, creatorAction: Element) {
 		this.action = action;
-		// go to .vrc-Radiobuttons or another container
+		// go to .vrc-Radiobuttons or another container, upper creator action
 		this.vrcContainer = creatorAction.closest('.vrc') as Element;
 	}
 
 	process(): void {
 		if (!this.action) {
-			console.error('ActionerL.process: cant find action');
+			console.error('ActionerL.process: empty action');
 			return;
 		}
 		if (!this.vrcContainer) {
-			console.error('ActionerL.process: cant find vrcContainer');
+			console.error('ActionerL.process: bad action purpose');
+			return;
+		}
+		if (!this.action.type) {
+			console.error('ActionerL.process: empty action type');
 			return;
 		}
 
