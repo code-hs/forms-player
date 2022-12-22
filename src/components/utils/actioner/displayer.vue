@@ -12,13 +12,12 @@ export default {
 		bus.$on(busBroadcasts.DISPLAY_CONTAINER, this.process);
 	},
 	methods: {
-		process(cAction) {
-			if (!cAction || !cAction.action.type) return;
+		process(cActioner) {
+			if (!cActioner || !cActioner.action.type) return;
 
 			// noinspection JSUnresolvedVariable
 			const app = this.$root.$el;
-			const elements = cAction.getPurposeElements(app);
-			console.log(elements);
+			const elements = cActioner.getPurposeElements(app);
 
 			if (!elements) {
 				console.error('ActionerDisplayer: purpose element not found');
@@ -26,9 +25,9 @@ export default {
 			}
 
 			for (const elem of elements) {
-				if (cAction.action.type === 'SHOW_CONTAINER') {
+				if (cActioner.action.type === 'SHOW_CONTAINER') {
 					elem.hidden = false;
-				} else if (cAction.action.type === 'HIDE_CONTAINER') {
+				} else if (cActioner.action.type === 'HIDE_CONTAINER') {
 					elem.hidden = true;
 				}
 			}
