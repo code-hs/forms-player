@@ -1,4 +1,5 @@
-import {Action, Actioner} from '@/libs/utils/actioner';
+import {Actioner} from '@/libs/utils/actioner';
+import {Action} from '@/libs/utils/actioner/structure';
 
 interface OnInputEvent {
 	[key: string]: any;
@@ -20,7 +21,7 @@ export class RadiobuttonsL {
 	): void {
 		const action: Action | undefined = RadiobuttonsL.getAction(options, e);
 		if (!action) {
-			return;
+			return console.error('Radiobuttons: empty action');
 		}
 
 		new Actioner(action, firstElement).process();

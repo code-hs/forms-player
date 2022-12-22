@@ -25,16 +25,13 @@ export class Actioner {
 
 	process(): void {
 		if (!this.action) {
-			console.error('ActionerL.process: empty action');
-			return;
+			return console.error('ActionerL.process: empty action');
 		}
 		if (!this.vrcContainer) {
-			console.error('ActionerL.process: bad action purpose');
-			return;
+			return console.error('ActionerL.process: bad action purpose');
 		}
 		if (!this.action.type) {
-			console.error('ActionerL.process: empty action type');
-			return;
+			return console.error('ActionerL.process: empty action type');
 		}
 
 		this.emitAction();
