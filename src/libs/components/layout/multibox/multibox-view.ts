@@ -1,6 +1,6 @@
 import {generateKey} from '@/utils/random';
 import {deepCopy} from '@/utils/objects';
-import {customExample} from '@/libs/components/field/field-structure';
+import {customExample} from '@/libs/components/component/params-source';
 import {Field} from '@/libs/scheme/scheme-structure';
 
 // stack of components
