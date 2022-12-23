@@ -13,6 +13,7 @@ export default {
 	},
 	methods: {
 		process(cActioner) {
+			// cActioner => libs/utils/actioner/index.ts
 			if (!cActioner || !cActioner.action.type) return;
 
 			// noinspection JSUnresolvedVariable
@@ -20,8 +21,7 @@ export default {
 			const elements = cActioner.getPurposeElements(app);
 
 			if (!elements) {
-				console.error('ActionerDisplayer: purpose element not found');
-				return;
+				return console.error('ActionerDisplayer: purpose element not found');
 			}
 
 			for (const elem of elements) {
