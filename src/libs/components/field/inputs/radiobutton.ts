@@ -21,7 +21,8 @@ export class RadiobuttonsL {
 	): void {
 		const action: Action | undefined = RadiobuttonsL.getAction(options, e);
 		if (!action) {
-			return console.error('Radiobuttons: empty action');
+			// if correct, scheme don't have any action on element
+			return;
 		}
 
 		new Actioner(action, firstElement).run();
