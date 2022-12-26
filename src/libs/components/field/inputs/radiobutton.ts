@@ -1,17 +1,17 @@
 import {Actioner} from '@/libs/utils/actioner';
 import {Action} from '@/libs/utils/actioner/structure';
 
-interface OnInputEvent {
+export interface OnInputEvent {
 	[key: string]: any;
 }
 
-interface Option {
+export interface Option {
 	value: string;
 	text: string;
 	action?: Action;
 }
 
-type Options = Option[];
+export type Options = Option[];
 
 export class RadiobuttonsL {
 	static sendAction(
@@ -33,6 +33,6 @@ export class RadiobuttonsL {
 			o => o.value === selectedValue
 		) as Option;
 
-		return option.action;
+		return option?.action;
 	}
 }
