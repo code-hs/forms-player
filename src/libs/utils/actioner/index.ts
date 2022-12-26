@@ -32,7 +32,7 @@ export class Actioner {
 		}
 	}
 
-	checkParams() {
+	private checkParams(): void {
 		if (!this.action) {
 			throw new Error('ActionerL.process: empty action');
 		}
@@ -44,14 +44,23 @@ export class Actioner {
 		}
 	}
 
+	private getEmmitKey(): string | undefined {
+		const keys = {
+			[Actioner.types.SHOW_CONTAINER]: busBroadcasts.DISPLAY_CONTAINER,
+			[Actioner.types.HIDE_CONTAINER]: busBroadcasts.DISPLAY_CONTAINER,
+		};
+
+		return keys[this.action.type];
+	}
+
 	private emitAction(): void {
-		if (
-			this.action.type === Actioner.types.SHOW_CONTAINER ||
-			this.action.type === Actioner.types.HIDE_CONTAINER
-		) {
-			bus.$emit(busBroadcasts.DISPLAY_CONTAINER, this);
-			// catch this event in src/components/utils/actioner/displayer.vue
+		const key = this.getEmmitKey();
+		if (!key) {
+			return console.error('ActionerL.emitAction: unknown emmit key');
 		}
+
+		bus.$emit(key, this);
+		// catch this event in src/components/utils/actioner/displayer.vue
 	}
 
 	getPurposeElements(app: Element): Element[] | undefined {
