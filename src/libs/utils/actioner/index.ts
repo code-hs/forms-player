@@ -23,18 +23,25 @@ export class Actioner {
 		this.vrcContainer = creatorAction.closest('.vrc') as Element;
 	}
 
-	process(): void {
+	run(): void {
+		try {
+			this.checkParams();
+			this.emitAction();
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	checkParams() {
 		if (!this.action) {
-			return console.error('ActionerL.process: empty action');
+			throw new Error('ActionerL.process: empty action');
 		}
 		if (!this.vrcContainer) {
-			return console.error('ActionerL.process: bad action purpose');
+			throw new Error('ActionerL.process: bad action purpose');
 		}
 		if (!this.action.type) {
-			return console.error('ActionerL.process: empty action type');
+			throw new Error('ActionerL.process: empty action type');
 		}
-
-		this.emitAction();
 	}
 
 	private emitAction(): void {

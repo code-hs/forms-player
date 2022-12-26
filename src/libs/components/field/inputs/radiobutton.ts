@@ -24,7 +24,7 @@ export class RadiobuttonsL {
 			return console.error('Radiobuttons: empty action');
 		}
 
-		new Actioner(action, firstElement).process();
+		new Actioner(action, firstElement).run();
 	}
 
 	static getAction(options: Options, e: OnInputEvent): Action | undefined {

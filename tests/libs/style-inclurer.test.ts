@@ -4,6 +4,7 @@ import {Scheme} from '@/libs/scheme/scheme-structure';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 describe('StyleIncluderL class -> findIndex', () => {
+	// noinspection UnnecessaryLocalVariableJS
 	const scheme: Scheme = {
 		config: {
 			styles: {
