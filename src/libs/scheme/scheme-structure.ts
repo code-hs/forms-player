@@ -1,63 +1,63 @@
 export interface ValidationParams {
-	required?: boolean;
-	pattern?: string;
-	requiredOnlyIfVisible?: boolean;
-	texts?: {
-		[key: string]: string;
+	readonly required?: boolean;
+	readonly pattern?: string;
+	readonly requiredOnlyIfVisible?: boolean;
+	readonly texts?: {
+		readonly [key: string]: string;
 	};
 }
 export interface CustomParams {
 	multi?: {
-		name: string;
+		readonly name: string;
 		key: number;
 	};
 	[key: string]: any;
 }
 export interface CommonParams {
-	type: string;
-	model?: string;
-	enable?: boolean;
-	class?: string;
+	readonly type: string;
+	readonly model?: string;
+	readonly enable?: boolean;
+	readonly class?: string;
 }
 
 export interface AttrsParams {
-	container?: {[key: string]: any};
-	component?: {[key: string]: any};
+	readonly container?: {[key: string]: any};
+	readonly component?: {[key: string]: any};
 }
 export interface TextParams {
-	placeholder?: string;
-	hint?: string;
+	readonly placeholder?: string;
+	readonly hint?: string;
 }
 export interface StylesParams {
-	value?: string;
-	values?: string[];
+	readonly value?: string;
+	readonly values?: string[];
 }
 export interface HtmlParams {}
 
 export interface Field {
-	common: CommonParams;
-	attrs?: AttrsParams;
+	readonly common: CommonParams;
+	readonly attrs?: AttrsParams;
 	custom?: CustomParams;
-	validation?: ValidationParams;
-	text?: TextParams;
-	styles?: StylesParams;
-	html?: HtmlParams;
+	readonly validation?: ValidationParams;
+	readonly text?: TextParams;
+	readonly styles?: StylesParams;
+	readonly html?: HtmlParams;
 	components?: Field[];
 }
 
 export interface Page {
-	id?: number;
-	key?: string;
-	type?: string;
-	description?: string;
-	position?: number;
-	styles?: StylesParams;
+	readonly id?: number;
+	readonly key?: string;
+	readonly type?: string;
+	readonly description?: string;
+	readonly position?: number;
+	readonly styles?: StylesParams;
 	components?: Field[];
 }
 
 export interface LocalizationConfig {
-	defaultLang?: string;
-	availableLangs?: string[];
+	readonly defaultLang?: string;
+	readonly availableLangs?: string[];
 }
 /**
  * {
@@ -67,8 +67,8 @@ export interface LocalizationConfig {
  */
 
 export interface ModuleConfig {
-	forEachField?: object;
-	[key: string]: any;
+	readonly forEachField?: object;
+	readonly [key: string]: any;
 }
 // "config": {
 // 	"locales": {
@@ -85,23 +85,23 @@ export interface ModuleConfig {
 // }
 
 export interface Module {
-	name: string;
-	enable: boolean;
-	config?: ModuleConfig;
+	readonly name: string;
+	readonly enable: boolean;
+	readonly config?: ModuleConfig;
 }
 
 export interface Variables {
-	[key: string]: any;
+	readonly [key: string]: any;
 }
 
 export interface Configurations {
-	modules?: Module[];
-	localization?: LocalizationConfig;
-	styles?: StylesParams;
-	variables?: Variables;
+	readonly modules?: Module[];
+	readonly localization?: LocalizationConfig;
+	readonly styles?: StylesParams;
+	readonly variables?: Variables;
 }
 
 export interface Scheme {
-	config: Configurations;
+	readonly config: Configurations;
 	pages: Page[];
 }

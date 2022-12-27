@@ -1,7 +1,7 @@
 import {LocalizationConfig} from '@/libs/scheme/scheme-structure';
 
 export interface Locales {
-	[key: string]: string;
+	readonly [key: string]: string;
 }
 
 /**
@@ -15,10 +15,10 @@ export interface Locales {
  * }
  */
 export interface LocalesAllLanguages {
-	[lang: string]: Locales;
+	readonly [lang: string]: Locales;
 }
 
 export interface LocalizationInformation {
-	configuration?: LocalizationConfig;
-	locales?: LocalesAllLanguages;
+	readonly configuration?: LocalizationConfig;
+	readonly locales?: LocalesAllLanguages;
 }

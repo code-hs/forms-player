@@ -2,13 +2,13 @@ import {Actioner} from '@/libs/utils/actioner';
 import {Action} from '@/libs/utils/actioner/structure';
 
 export interface OnInputEvent {
-	[key: string]: any;
+	readonly [key: string]: any;
 }
 
 export interface Option {
-	value: string;
-	text: string;
-	action?: Action;
+	readonly value: string;
+	readonly text: string;
+	readonly action?: Action;
 }
 
 export type Options = Option[];

@@ -1,7 +1,7 @@
 import {bus, busBroadcasts} from '@/utils/bus';
 
 export interface ValidatorField {
-	key: number;
+	readonly key: number;
 	error: boolean;
 	answered: boolean;
 }

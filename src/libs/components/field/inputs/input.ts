@@ -2,7 +2,7 @@ import {FieldThis} from '@/libs/components/field/field-structure';
 import {FieldValidator} from '@/libs/validator/field-validator';
 
 interface OnInputEvent {
-	[key: string]: any;
+	readonly [key: string]: any;
 }
 
 export class InputL {
