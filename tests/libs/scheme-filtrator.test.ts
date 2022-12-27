@@ -43,9 +43,8 @@ describe('SchemeFiltrator class -> filtrateParamEnable', () => {
 			],
 		};
 
-		const filteredComponents: Scheme =
-			SchemeFiltrator.filtrateParamEnable(scheme);
-		const page: Page = filteredComponents.pages[0];
+		new SchemeFiltrator(scheme).filtrate();
+		const page: Page = scheme.pages[0];
 
 		// @ts-ignore
 		const pageFields: Field[] = page.components;

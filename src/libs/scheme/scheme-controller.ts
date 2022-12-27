@@ -7,7 +7,7 @@ export class SchemeController {
 
 	static load(): Scheme {
 		this.scheme = SchemeLoader.getData();
-		SchemeFiltrator.filtrateParamEnable(this.scheme);
+		new SchemeFiltrator(this.scheme).filtrate();
 
 		if (!this.isValid()) {
 			throw new Error('SchemeParser.load: scheme is empty');
