@@ -33,11 +33,9 @@ export default {
 			default: () => ({}),
 		},
 	},
-
 	created() {
 		this.initChildCount();
 	},
-
 	methods: {
 		initChildCount() {
 			if (!this.components || !this.components.length) return;

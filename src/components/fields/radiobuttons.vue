@@ -69,7 +69,6 @@ export default {
 			}),
 		},
 	},
-
 	data() {
 		return {
 			firstElement: null,
@@ -81,7 +80,6 @@ export default {
 			},
 		};
 	},
-
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
@@ -97,7 +95,6 @@ export default {
 			return this.modelStore[this.common.model];
 		},
 	},
-
 	created() {
 		this.initValidation();
 		this.modelStore[this.common.model] = this.custom?.defaultValue || '';
@@ -111,7 +108,6 @@ export default {
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
-
 	methods: {
 		//! v - validator, s - store
 		...mapMutations({
@@ -132,6 +128,7 @@ export default {
 		},
 		handleChange(e) {
 			this.vProcess();
+			// if scheme don't have any action on element, don't run
 			RadiobuttonsL.sendAction(this.custom.options, e, this.firstElement);
 		},
 		vProcess(updateStore = true) {

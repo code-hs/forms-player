@@ -63,7 +63,6 @@ export default {
 			default: -1,
 		},
 	},
-
 	data() {
 		// set unique key for each field
 		return {
@@ -71,12 +70,10 @@ export default {
 			fieldType: this.schemeOptions?.common?.type,
 		};
 	},
-
 	created() {
 		this.checkComponent();
 		this.initModel();
 	},
-
 	methods: {
 		...mapMutations({
 			modelInitField: 'model/initField',

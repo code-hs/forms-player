@@ -21,7 +21,6 @@ export default {
 			default: () => ({}),
 		},
 	},
-
 	computed: {
 		...mapGetters({
 			validatorHasError: 'validator/hasError',

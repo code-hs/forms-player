@@ -74,7 +74,6 @@ export default {
 			}),
 		},
 	},
-
 	data() {
 		return {
 			multiBoxName: FL.getMultiName(this),
@@ -85,7 +84,6 @@ export default {
 			},
 		};
 	},
-
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
@@ -101,19 +99,16 @@ export default {
 			return this.modelStore[this.common.model];
 		},
 	},
-
 	created() {
 		// eslint-disable-next-line vue/no-mutating-props
 		this.custom.options = FL.variabling(this.custom.options);
 		this.initValidation();
 	},
-
 	beforeDestroy() {
 		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
-
 	methods: {
 		//! v - validator, s - store
 		...mapMutations({

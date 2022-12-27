@@ -48,7 +48,6 @@ export default {
 			}),
 		},
 	},
-
 	data() {
 		return {
 			prevValue: '',
@@ -61,7 +60,6 @@ export default {
 			},
 		};
 	},
-
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
@@ -77,17 +75,14 @@ export default {
 			return this.modelStore[this.common.model];
 		},
 	},
-
 	created() {
 		this.initValidation();
 	},
-
 	beforeDestroy() {
 		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
-
 	methods: {
 		//! v - validator, s - store
 		...mapMutations({
@@ -98,7 +93,6 @@ export default {
 		...mapActions({
 			vEventResponse: 'validator/fieldResponse',
 		}),
-
 		initValidation() {
 			if (!FieldValidator.canValidation(this.validation)) return;
 
@@ -146,7 +140,6 @@ export default {
 				console.error(e);
 			}
 		},
-
 		vUpdateStore() {
 			this.vsUpdate({
 				key: this.virtualKey,

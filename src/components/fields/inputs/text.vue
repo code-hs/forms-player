@@ -50,7 +50,6 @@ export default {
 			}),
 		},
 	},
-
 	data() {
 		return {
 			mask: '',
@@ -68,7 +67,6 @@ export default {
 			},
 		};
 	},
-
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
@@ -84,18 +82,15 @@ export default {
 			return this.modelStore[this.common.model];
 		},
 	},
-
 	created() {
 		InputL.initMaskDirty(this);
 		this.initValidation();
 	},
-
 	beforeDestroy() {
 		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
-
 	methods: {
 		//! v - validator, s - store
 		...mapMutations({
@@ -106,7 +101,6 @@ export default {
 		...mapActions({
 			vEventResponse: 'validator/fieldResponse',
 		}),
-
 		initValidation() {
 			if (!FieldValidator.canValidation(this.validation)) return;
 
@@ -177,6 +171,7 @@ export default {
 			});
 		},
 		vHandleTask() {
+			// if element is hidden, hidden by action displayer
 			if (
 				this.validation.requiredOnlyIfVisible &&
 				!FL.isVisible(this.$refs.self)

@@ -71,7 +71,6 @@ export default {
 			}),
 		},
 	},
-
 	data() {
 		const moduleConfig = ModuleController.getModuleConfig('datepicker');
 		// union all options for field
@@ -91,7 +90,6 @@ export default {
 			datepickerItem: null,
 		};
 	},
-
 	computed: {
 		...mapGetters({
 			modelStructure: 'model/structure',
@@ -108,7 +106,6 @@ export default {
 			return this.modelStore[this.common.model];
 		},
 	},
-
 	watch: {
 		lang() {
 			if (!this.datepickerItem) return;
@@ -118,13 +115,11 @@ export default {
 			this.initDatepicker();
 		},
 	},
-
 	created() {
 		DatepickerL.validateFieldParams(this);
 		InputL.initMaskDirty(this);
 		this.initValidation();
 	},
-
 	async mounted() {
 		// wait when all loaded
 		try {
@@ -134,7 +129,6 @@ export default {
 			console.error(e);
 		}
 	},
-
 	beforeDestroy() {
 		this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
@@ -144,7 +138,6 @@ export default {
 			this.datepickerItem.destroy();
 		}
 	},
-
 	methods: {
 		//! v - validator, s - store
 		...mapMutations({

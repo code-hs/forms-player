@@ -24,25 +24,21 @@ export default {
 	components: {
 		VirtualComponent,
 	},
-
 	data() {
 		return {
 			pageClass: '',
 		};
 	},
-
 	computed: {
 		...mapGetters({
 			pageStructure: 'scheme/page',
 			modelStructure: 'model/structure',
 		}),
 	},
-
 	created() {
 		this.initClass();
 		this.initValidation();
 	},
-
 	methods: {
 		...mapActions({
 			validatorStart: 'validator/start',

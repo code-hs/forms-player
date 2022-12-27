@@ -66,13 +66,11 @@ export default {
 			groups,
 		};
 	},
-
 	computed: {
 		showMultipleSeparator() {
 			return this.groups.length > 1;
 		},
 	},
-
 	methods: {
 		...mapMutations({
 			addItemInMultiBox: 'model/addItemInMultiBox',
