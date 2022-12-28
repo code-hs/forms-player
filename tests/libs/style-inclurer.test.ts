@@ -1,14 +1,16 @@
 import {describe, it, expect} from '@jest/globals';
-import {StyleIncluderL} from '@/libs/utils/style-includer';
+import {StyleIncluder} from '@/libs/utils/style-includer';
 import {Scheme} from '@/libs/scheme/scheme-structure';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
-describe('StyleIncluderL class -> findIndex', () => {
+const endLine = '\r\n';
+
+describe('StyleIncluder class -> toString', () => {
 	// noinspection UnnecessaryLocalVariableJS
 	const scheme: Scheme = {
 		config: {
 			styles: {
-				values: ['1', '2', '3'],
+				value: ['1', '2', '3'],
 			},
 		},
 		pages: [
@@ -17,18 +19,19 @@ describe('StyleIncluderL class -> findIndex', () => {
 				components: [
 					{
 						common: {
+							enable: false,
 							type: 'InputText',
 							model: 'address_1',
 						},
 						styles: {
-							values: ['4', '5'],
+							value: ['4', '5'],
 						},
 					},
 					{
 						common: {
 							type: 'InputText',
 							model: 'address_2',
-							enable: true,
+							enable: false,
 						},
 						styles: {
 							value: '6',
@@ -62,10 +65,9 @@ describe('StyleIncluderL class -> findIndex', () => {
 	};
 	// @ts-ignore
 	SchemeController.scheme = scheme;
-
-	const str = StyleIncluderL.getAllStylesAsStr();
+	const str: string = new StyleIncluder().toString();
 
 	it('correct work', () => {
-		expect(str).toBe('1 2 3  4 5  6 ');
+		expect(str).toBe(`1 ${endLine}2 ${endLine}3  `);
 	});
 });

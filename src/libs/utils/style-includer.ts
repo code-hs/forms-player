@@ -46,14 +46,16 @@ export class StyleIncluder {
 	}
 
 	private parseStylesFromStack(stylesObj: StylesParams): string {
-		if (!stylesObj.value && !stylesObj.values) return '';
+		const endLine = '\r\n';
+		if (!stylesObj.value) return '';
 
-		let output = stylesObj.value || '';
-
-		if (stylesObj.values && Array.isArray(stylesObj.values)) {
-			output += `${stylesObj.values.join(' ')} `;
+		if (typeof stylesObj.value === 'string') {
+			return `${stylesObj.value}  ${endLine}`;
+		} else if (Array.isArray(stylesObj.value)) {
+			const str = stylesObj.value.join(` ${endLine}`);
+			return `${str} `;
 		}
 
-		return output;
+		return '';
 	}
 }

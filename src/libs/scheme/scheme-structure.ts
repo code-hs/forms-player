@@ -29,8 +29,7 @@ export interface TextParams {
 	readonly hint?: string;
 }
 export interface StylesParams {
-	readonly value?: string;
-	readonly values?: string[];
+	readonly value?: string | string[];
 }
 export interface HtmlParams {}
 
