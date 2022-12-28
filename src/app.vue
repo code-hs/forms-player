@@ -22,6 +22,7 @@ import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
 import StyleIncluder from '@/components/utils/style/style-includer';
 import Actioner from '@/components/utils/actioner';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 export default {
 	components: {FormC, ValidationFocus, StyleIncluder, Actioner},
@@ -81,7 +82,7 @@ export default {
 			throw new Error('app.created: attr data-page is empty');
 		}
 
-		this.scheme = await this.loadScheme();
+		this.scheme = SchemeController.load();
 		const pageStructure = await this.initPage(this.pageKey);
 		if (!pageStructure) {
 			throw new Error('app.created: pageStructure is empty');
@@ -99,7 +100,6 @@ export default {
 			generateModelSkeleton: 'model/generateSkeleton',
 		}),
 		...mapActions({
-			loadScheme: 'scheme/load',
 			initPage: 'scheme/initPage',
 		}),
 		initPlugins() {

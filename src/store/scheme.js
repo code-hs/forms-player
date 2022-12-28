@@ -23,9 +23,6 @@ const mutations = {
 };
 
 const actions = {
-	load() {
-		return SchemeController.load();
-	},
 	/**
 	 * @param {string} pageKey
 	 * @returns {Page} page

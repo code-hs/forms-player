@@ -1,6 +1,6 @@
-import {Scheme, LocalizationConfig} from '@/libs/scheme/scheme-structure';
-import {SchemeLoader} from '@/libs/scheme/scheme-loader';
+import {LocalizationConfig} from '@/libs/scheme/scheme-structure';
 import {LocalesAllLanguages, LocalizationInformation} from './structure';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 export class LocalizationLoader {
 	static getData(): LocalizationInformation {
@@ -22,10 +22,11 @@ export class LocalizationLoader {
 	}
 
 	private static getConfiguration(): LocalizationConfig | undefined {
-		const scheme: Scheme = SchemeLoader.getData();
-
+		SchemeController.load();
+		const configuration: LocalizationConfig | undefined =
+			SchemeController.getConfig()?.localization;
 		// is configuration has in scheme
-		if (!scheme.config?.localization) {
+		if (!configuration) {
 			console.error(
 				'LocalizationLoader.getConfiguration: no localization config found in scheme'
 			);
@@ -33,8 +34,6 @@ export class LocalizationLoader {
 		}
 
 		// is configuration has correct structure
-		const configuration: LocalizationConfig = scheme.config.localization;
-
 		if (!configuration.defaultLang || !configuration.availableLangs) {
 			console.error(
 				'LocalizationLoader.getConfiguration: incorrect localization config structure'

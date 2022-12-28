@@ -6,6 +6,8 @@ export class SchemeController {
 	private static scheme: Scheme;
 
 	static load(): Scheme {
+		if (this.scheme) return this.scheme;
+
 		this.scheme = SchemeLoader.getData();
 		new SchemeFiltrator(this.scheme).filtrate();
 
