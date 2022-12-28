@@ -1,30 +1,25 @@
 import {StylesParams, Page, Field} from '@/libs/scheme/scheme-structure';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
-export class StyleIncluderL {
-	static stack: StylesParams[] = [];
+export class StyleIncluder {
+	private readonly stack: StylesParams[] = [];
 
-	static getAllStylesAsStr(): string {
-		const styles: StylesParams[] = this.getAllStyles();
-		return this.stylesToStr(styles);
+	constructor() {
+		this.initStack();
 	}
 
-	private static getAllStyles(): StylesParams[] {
-		this.stack = [];
-
+	private initStack(): void {
 		const global: StylesParams | undefined =
 			SchemeController.getConfig()?.styles;
 		if (global) this.stack.push(global);
 
 		const pages: Page[] = SchemeController.getScheme()?.pages;
 		pages.forEach(page => {
-			this.getStyles(page);
+			this.initStackInChildren(page);
 		});
-
-		return this.stack;
 	}
 
-	private static getStyles(component: Page | Field): void {
+	private initStackInChildren(component: Page | Field): void {
 		// is correct component
 		if (!component) return;
 		// @ts-ignore
@@ -36,11 +31,21 @@ export class StyleIncluderL {
 		// process children
 		if (!component.components) return;
 		component.components.forEach((child: Field) => {
-			this.getStyles(child);
+			this.initStackInChildren(child);
 		});
 	}
 
-	private static parseStyles(stylesObj: StylesParams): string {
+	toString(): string {
+		if (!this.stack.length) return '';
+
+		return this.stack.reduce((acc, item) => {
+			// eslint-disable-next-line no-param-reassign
+			acc += `${this.parseStylesFromStack(item)} `;
+			return acc;
+		}, '');
+	}
+
+	private parseStylesFromStack(stylesObj: StylesParams): string {
 		if (!stylesObj.value && !stylesObj.values) return '';
 
 		let output = stylesObj.value || '';
@@ -50,16 +55,5 @@ export class StyleIncluderL {
 		}
 
 		return output;
-	}
-
-	private static stylesToStr(styles: StylesParams[]): string {
-		if (!styles.length) return '';
-
-		// noinspection UnnecessaryLocalVariableJS
-		return styles.reduce((acc, item) => {
-			// eslint-disable-next-line no-param-reassign
-			acc += `${this.parseStyles(item)} `;
-			return acc;
-		}, '');
 	}
 }
