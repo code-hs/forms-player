@@ -8,7 +8,7 @@ export class SchemeController {
 	static load(): Scheme {
 		if (this.scheme) return this.scheme;
 
-		this.scheme = SchemeLoader.getData();
+		this.scheme = new SchemeLoader().getScheme();
 		new SchemeFiltrator(this.scheme).filtrate();
 
 		if (!this.isValid()) {
