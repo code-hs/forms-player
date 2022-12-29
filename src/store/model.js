@@ -3,7 +3,8 @@
 import Vue from 'vue';
 import {deepCopy} from '@/utils/objects';
 import {
-	ModelStructure,
+	// eslint-disable-next-line import/named
+	ModelController,
 	// eslint-disable-next-line no-unused-vars
 	ModelStructureStore,
 } from '@/libs/model/model-structure';
@@ -31,7 +32,7 @@ const mutations = {
 			throw new Error('model.generateSkeleton: param page is empty');
 		}
 
-		s.structure = ModelStructure.generate(page);
+		s.structure = new ModelController().generateStructure(page);
 	},
 
 	/**

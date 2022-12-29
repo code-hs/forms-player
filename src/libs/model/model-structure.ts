@@ -14,26 +14,24 @@ export interface ModelStructureStore {
 	[key: string]: string | object;
 }
 
-export class ModelStructure {
+export class ModelController {
 	/**
 	 * Generate a structure for the current page, based on the page structure
 	 */
-	static generate(page: Page): ModelStructureStore {
+	generateStructure(page: Page): ModelStructureStore {
 		if (!page?.components) return {};
 
 		return this.getComponentStructure(page);
 	}
 
-	private static getComponentStructure(
-		field: Page | Field
-	): ModelStructureStore {
+	private getComponentStructure(field: Page | Field): ModelStructureStore {
 		const optionalStructure = this.getOptionalStructure(field as Field);
 		const innerStructure = this.getInnerStructure(field);
 
 		return {...optionalStructure, ...innerStructure} as ModelStructureStore;
 	}
 
-	private static getOptionalStructure(field: Field): ModelStructureStore {
+	private getOptionalStructure(field: Field): ModelStructureStore {
 		if (field?.common?.type !== 'MultiBox' || !field.common.model) {
 			return {};
 		}
@@ -48,7 +46,7 @@ export class ModelStructure {
 		return structure;
 	}
 
-	private static getInnerStructure(field: Page | Field): ModelStructureStore {
+	private getInnerStructure(field: Page | Field): ModelStructureStore {
 		if (!field?.components?.length) return {};
 
 		return field.components.reduce((store, child: Field) => {
