@@ -21,7 +21,7 @@ const mutations = {
 const actions = {
 	/**
 	 * @param {Page} page - current page structure
-	 * @param {ModelStructure} values - store model/structure
+	 * @param {ModelStructureStore} values - store model/structure
 	 */
 	async saveFormValues({commit}, {page, values}) {
 		commit('setSaveFormFinished', false);

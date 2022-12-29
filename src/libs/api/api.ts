@@ -1,5 +1,4 @@
 import {Config} from '@/config';
-import {ModelStructure} from '@/libs/model/model-structure';
 
 export interface ProjectInfo {
 	projectId: string;
@@ -29,13 +28,10 @@ export class Api {
 		};
 	}
 
-	/**
-	 * @param {Object} data - inputs values
-	 */
 	// eslint-disable-next-line require-await
 	static async post(
 		url: string,
-		data: ModelStructure,
+		data: Object,
 		options: object = {}
 	): Promise<any> {
 		const sendData = {
