@@ -14,7 +14,7 @@
 <!--suppress JSCheckFunctionSignatures -->
 <script>
 import {mapMutations} from 'vuex';
-import {VirtualComponentL} from '@/libs/utils/virtual-component';
+import {VirtualComponent} from '@/libs/utils/virtual-component';
 import {generateKey} from '@/utils/random';
 
 import InputText from '@/components/fields/inputs/text';
@@ -99,7 +99,7 @@ export default {
 			];
 			// noinspection JSCheckFunctionSignatures
 			if (
-				!VirtualComponentL.canInitModel(
+				!VirtualComponent.canInitModel(
 					allowedComponents,
 					this.fieldType,
 					this.schemeOptions

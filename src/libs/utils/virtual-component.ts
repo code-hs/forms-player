@@ -1,7 +1,7 @@
 import {Field} from '@/libs/scheme/scheme-structure';
 import {FieldL as FL} from '@/libs/components/field/field';
 
-export class VirtualComponentL {
+export class VirtualComponent {
 	static canInitModel(
 		allowedComponents: string[],
 		fieldType: string,
