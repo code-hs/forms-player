@@ -1,35 +1,8 @@
 import {ValidationParams} from '@/libs/scheme/scheme-structure';
+import {stringToRegex} from '@/utils/regexp';
 
 export class FieldValidator {
 	static debounceTime: number = 300;
-
-	static stringToRegex(str: string): RegExp {
-		if (!str) {
-			throw new Error(
-				'FieldValidator.stringToRegex: source' +
-					' string for create regexp is empty'
-			);
-		}
-
-		// Main regex
-		// @ts-ignore
-		const main: string = str.match(/\/(.+)\/.*/)[1];
-		// Regex options
-		// @ts-ignore
-		const options: string = str.match(/\/.+\/(.*)/)[1];
-
-		// Compiled regex
-		const regexp = new RegExp(main, options);
-
-		if (regexp.constructor.name !== 'RegExp') {
-			throw new Error(
-				'FieldValidator.stringToRegex: validation pattern (source) is not' +
-					' correct type'
-			);
-		}
-
-		return regexp;
-	}
 
 	static isValid(rules: ValidationParams, fieldValue: string): boolean {
 		// if there are no rules in the scheme ->  field becomes valid
@@ -39,7 +12,7 @@ export class FieldValidator {
 
 		if (rules.pattern) {
 			try {
-				const regexp = this.stringToRegex(rules.pattern);
+				const regexp = stringToRegex(rules.pattern);
 				return regexp.test(fieldValue);
 			} catch {
 				throw new Error('FieldValidator.isValid: validation pattern is broken');

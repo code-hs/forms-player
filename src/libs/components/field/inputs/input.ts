@@ -1,5 +1,5 @@
 import {FieldThis} from '@/libs/components/field/field-structure';
-import {FieldValidator} from '@/libs/validator/field-validator';
+import {stringToRegex} from '@/utils/regexp';
 
 interface OnInputEvent {
 	readonly [key: string]: any;
@@ -21,7 +21,7 @@ export class InputL {
 		if (!fieldThis?.custom?.pattern || !e) return;
 		if (fieldThis.mask) return; // if mask is set, pattern is not used
 
-		const regexp = FieldValidator.stringToRegex(fieldThis.custom.pattern);
+		const regexp = stringToRegex(fieldThis.custom.pattern);
 		const {model} = fieldThis.common;
 
 		if (!regexp.test(e.target.value)) {
