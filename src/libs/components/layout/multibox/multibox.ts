@@ -5,64 +5,60 @@ import {Field} from '@/libs/scheme/scheme-structure';
 
 // stack of components
 export type Group = Field[];
+export type Groups = Group[];
 
-export class MultiBoxView {
-	/**
-	 * @param {string} multiBoxName - model of multiBox
-	 */
-	static generateGroups(group: Group, multiBoxName: string): Group[] {
-		// group from exists fields
-		const firstGroup: Group = group;
-		this.addMultiBoxInfo(firstGroup, multiBoxName);
+export class Multibox {
+	private readonly group: Group;
+	private readonly multiboxName: string;
 
-		return [firstGroup] as Group[];
+	constructor(group: Group, multiboxName: string) {
+		this.group = group;
+		this.multiboxName = multiboxName;
 	}
 
-	/**
-	 * Edit out data
-	 * @param {string} multiBoxName - model of multiBox
-	 */
-	private static addMultiBoxInfo(group: Group, multiBoxName: string): void {
+	createGroups(): Groups {
+		// create groups from components, from the first component
+		// that component is the basis for all other components, as template
+		this.writeInfo(this.group);
+		return [this.group] as Groups;
+	}
+
+	private writeInfo(group: Group): void {
 		if (!group.length) return;
 
 		group.forEach((field: Field) => {
 			if (!field.custom) field.custom = customExample;
-
 			// generate unique keys for each item, since we remove and add these items
 			// if this is not done, vue lazily updates the blocks
 			field.custom.multi = {
-				name: multiBoxName,
+				name: this.multiboxName,
 				key: generateKey(),
 			};
-
 			// start recursion
 			if (field.components) {
-				this.addMultiBoxInfo(field.components, multiBoxName);
+				this.writeInfo(field.components);
 			}
 		});
 	}
 
-	/**
-	 * Generate new item, on click button ADD
-	 */
 	static generateNewGroup(groups: Group[]): Group {
 		if (!groups?.length) {
-			throw new Error('MultiBoxView.generateNewGroup: param groups is empty');
+			throw new Error('MultiBox.generateNewGroup: param groups is empty');
 		}
 
 		const source: Group = groups[0];
-		const newGroup: Group = deepCopy(source);
+		const newItem: Group = deepCopy(source);
 
-		newGroup.forEach((field: Field) => {
-			// update only key
+		// update key
+		newItem.forEach((field: Field) => {
 			if (!field?.custom?.multi) {
 				throw new Error(
-					'MultiBoxView.generateNewGroup: field.custom.multi is empty'
+					'MultiBox.generateNewGroup: field.custom.multi is empty'
 				);
 			}
 			field.custom.multi.key = generateKey();
 		});
 
-		return newGroup;
+		return newItem;
 	}
 }

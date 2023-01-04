@@ -33,7 +33,7 @@
 
 <script>
 import {mapMutations} from 'vuex';
-import {MultiBoxView} from '@/libs/components/layout/multibox/multibox-view';
+import {Multibox} from '@/libs/components/layout/multibox/multibox';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import ButtonAdd from './button-add';
 import ButtonRemove from './button-remove';
@@ -57,10 +57,14 @@ export default {
 		},
 	},
 	data() {
-		const groups = MultiBoxView.generateGroups(
+		// мультибокс = [группа1, группа2, группа3]
+		// в группе уже хранятся поля = [поле1, поле2, поле3]
+		// предполагается что в схеме указана только одна группа от мультибокса
+		// и в этой первой группе прописываем информацию о мультибоксе
+		const groups = new Multibox(
 			this.components,
 			this.common.model
-		);
+		).createGroups();
 
 		return {
 			groups,
@@ -82,18 +86,15 @@ export default {
 			if (!this.groups.length) return;
 
 			// add store object in model
-			this.addItemInMultiBox({
-				multiBoxName: this.common.model,
-			});
-
+			this.addItemInMultiBox({multiboxName: this.common.model});
 			// add item to view
-			const group = MultiBoxView.generateNewGroup(this.groups);
+			const group = Multibox.generateNewGroup(this.groups);
 			this.groups.push(group);
 		},
 		handleRemove(index) {
 			// delete from model
 			this.removeItemInMultiBox({
-				multiBoxName: this.common.model,
+				multiboxName: this.common.model,
 				itemIndex: index,
 			});
 
