@@ -1,5 +1,7 @@
 import {Field, Variables} from '@/libs/scheme/scheme-structure';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
+import {FieldThis} from './field-structure';
+import {generateStr} from '@/utils/random';
 
 export class FieldL {
 	static getMultiName(field: Field): string {
@@ -37,5 +39,18 @@ export class FieldL {
 			rect.x !== 0 ||
 			rect.y !== 0
 		);
+	}
+
+	static generateNameValue(field: FieldThis) {
+		// generate random value for input tag name
+		// inputs that have the same name value are grouped together
+		// and need stop that behavior
+		const mb: string = field.multiboxName || '';
+		// if index = 0 -> '0' not the empty string ''
+		const mbIndex: string = field.multiboxIndex.toString() || '';
+		const model: string = field.common.model || '';
+		const rnd: string = generateStr(3);
+
+		return `${mb}.${mbIndex}.${model}.${rnd}`;
 	}
 }

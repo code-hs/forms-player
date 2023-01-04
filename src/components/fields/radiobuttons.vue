@@ -14,7 +14,7 @@
 				<input
 					ref="self"
 					v-model="modelStore[common.model]"
-					:name="common.model"
+					:name="inputName"
 					type="radio"
 					:value="option.value"
 					v-bind="attrs.component"
@@ -72,7 +72,8 @@ export default {
 	data() {
 		return {
 			firstElement: null,
-			multiBoxName: FL.getMultiName(this),
+			multiboxName: FL.getMultiName(this),
+			inputName: '',
 			valid: {
 				error: false,
 				connect: false,
@@ -85,9 +86,9 @@ export default {
 			modelStructure: 'model/structure',
 		}),
 		modelStore() {
-			if (this.multiBoxName) {
+			if (this.multiboxName) {
 				// if multibox is parent of this field, use multibox name and index
-				return this.modelStructure[this.multiBoxName][this.multiboxIndex];
+				return this.modelStructure[this.multiboxName][this.multiboxIndex];
 			}
 			return this.modelStructure;
 		},
@@ -96,6 +97,10 @@ export default {
 		},
 	},
 	created() {
+		// generate random value for input tag name
+		// inputs that have the same name value are grouped together
+		// and need stop that behavior
+		this.inputName = FL.generateNameValue(this);
 		this.initValidation();
 		this.modelStore[this.common.model] = this.custom?.defaultValue || '';
 	},
