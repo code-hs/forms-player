@@ -11,6 +11,7 @@
 				ref="self"
 				v-model="modelStore[common.model]"
 				type="checkbox"
+				:name="inputName"
 				:required="validation.required"
 				v-bind="attrs.component"
 				@change="handleChange"
@@ -57,6 +58,7 @@ export default {
 	data() {
 		return {
 			multiboxName: FL.getMultiName(this),
+			inputName: '',
 			valid: {
 				error: false,
 				errorForView: false,
@@ -80,6 +82,7 @@ export default {
 		},
 	},
 	created() {
+		this.inputName = FL.generateNameValue(this);
 		this.initValidation();
 	},
 	beforeDestroy() {
