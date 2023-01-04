@@ -44,7 +44,6 @@ const mutations = {
 		if (!inputModelName) {
 			throw new Error('model.initField: param inputModelName is empty');
 		}
-
 		if (s.structure[inputModelName] !== undefined) {
 			throw new Error('model.initField: model already exists');
 		}
