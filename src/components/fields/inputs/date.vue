@@ -78,7 +78,7 @@ export default {
 
 		return {
 			mask: '',
-			multiBoxName: FL.getMultiName(this),
+			multiboxName: FL.getMultiName(this),
 			valid: {
 				error: false,
 				text: this.$t(this.validation?.texts?.required),
@@ -96,9 +96,9 @@ export default {
 			lang: 'localization/currentLanguage',
 		}),
 		modelStore() {
-			if (this.multiBoxName) {
+			if (this.multiboxName) {
 				// if multibox is parent of this field, use multibox name and index
-				return this.modelStructure[this.multiBoxName][this.multiboxIndex];
+				return this.modelStructure[this.multiboxName][this.multiboxIndex];
 			}
 			return this.modelStructure;
 		},
@@ -180,7 +180,7 @@ export default {
 			// update value, only by Vue.set, not by set value.
 			// Need create reactive value for multiBox functional
 			Vue.set(this.modelStore, this.common.model, v);
-			// this.modelStructure[this.multiBoxName][this.multiboxIndex],
+			// this.modelStructure[this.multiboxName][this.multiboxIndex],
 		},
 		changeDate() {
 			// when user change date in datepicker

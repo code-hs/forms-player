@@ -54,27 +54,27 @@ const mutations = {
 
 	/**
 	 * Remove block of fields from multiBox
-	 * @param {string} multiBoxName - multibox component model value
+	 * @param {string} multiboxName - multibox component model value
 	 * @param {number} itemIndex
 	 */
-	removeItemInMultiBox: (s, {multiBoxName, itemIndex}) => {
-		s.structure[multiBoxName].splice(itemIndex, 1);
+	removeItemInMultiBox: (s, {multiboxName, itemIndex}) => {
+		s.structure[multiboxName].splice(itemIndex, 1);
 	},
 
 	/**
 	 * Add new item to multiBox
-	 * @param {string} multiBoxName
+	 * @param {string} multiboxName
 	 */
-	addItemInMultiBox(s, {multiBoxName}) {
-		if (!s.structure || !s.structure[multiBoxName]) {
+	addItemInMultiBox(s, {multiboxName}) {
+		if (!s.structure || !s.structure[multiboxName]) {
 			throw new Error(
 				'model.copyItemInMultiBox: bad structure or cant find' +
-					' that multiBoxName in structure'
+					' that multiboxName in structure'
 			);
 		}
 
 		// one object with fields
-		const sourceItem = s.structure[multiBoxName][0];
+		const sourceItem = s.structure[multiboxName][0];
 		if (!sourceItem) {
 			throw new Error('model.copyItemInMultiBox: sourceItem is empty');
 		}
@@ -86,7 +86,7 @@ const mutations = {
 			newItem[key] = '';
 		});
 
-		s.structure[multiBoxName].push(newItem);
+		s.structure[multiboxName].push(newItem);
 	},
 };
 

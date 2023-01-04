@@ -9,10 +9,10 @@ export class VirtualComponent {
 	): boolean {
 		if (!allowedComponents.includes(fieldType)) return false;
 
-		const multiBoxName = FL.getMultiName(field);
+		const multiboxName = FL.getMultiName(field);
 		// skip initialize, fix bug, when add new group of fields,
 		// all groups rerender, and reinit, and clear values
-		if (multiBoxName) return false;
+		if (multiboxName) return false;
 
 		// noinspection RedundantIfStatementJS
 		if (!field.common.model) return false;

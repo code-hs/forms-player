@@ -7,7 +7,7 @@ import {Field} from '@/libs/scheme/scheme-structure';
 
 describe('MultiBoxView class -> generateGroups', () => {
 	it('correct work', () => {
-		const multiBoxName: string = 'box-1';
+		const multiboxName: string = 'box-1';
 		const field: Field = {
 			common: {
 				type: 'InputText',
@@ -15,7 +15,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 			},
 		};
 		const group: Group = [field];
-		const groups: Group[] = MultiBoxView.generateGroups(group, multiBoxName);
+		const groups: Group[] = MultiBoxView.generateGroups(group, multiboxName);
 		// groups
 		// [
 		// 	[
@@ -37,7 +37,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 		const group1: Group = groups[0];
 		const field1: Field = group1[0];
 		// @ts-ignore
-		expect(field1.custom.multi.name).toBe(multiBoxName);
+		expect(field1.custom.multi.name).toBe(multiboxName);
 	});
 
 	it('MultiBoxView class -> generateNewItem', () => {

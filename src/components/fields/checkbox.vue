@@ -56,7 +56,7 @@ export default {
 
 	data() {
 		return {
-			multiBoxName: FL.getMultiName(this),
+			multiboxName: FL.getMultiName(this),
 			valid: {
 				error: false,
 				errorForView: false,
@@ -69,9 +69,9 @@ export default {
 			modelStructure: 'model/structure',
 		}),
 		modelStore() {
-			if (this.multiBoxName) {
+			if (this.multiboxName) {
 				// if multibox is parent of this field, use multibox name and index
-				return this.modelStructure[this.multiBoxName][this.multiboxIndex];
+				return this.modelStructure[this.multiboxName][this.multiboxIndex];
 			}
 			return this.modelStructure;
 		},
