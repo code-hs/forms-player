@@ -120,7 +120,7 @@ export default {
 			// update v-model, fix for mobile gboard
 			this.modelStore[this.common.model] = e.target.value;
 			// if we find problem with this, input cant update value
-			// net use Vue.set(this.modelStore, this.common.model, v); as date.vue
+			// use Vue.set(this.modelStore, this.common.model, v); as date.vue
 
 			this.vProcessDirty();
 			InputL.processTextPatternDirty(this, e);
