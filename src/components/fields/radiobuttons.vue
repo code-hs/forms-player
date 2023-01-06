@@ -101,8 +101,8 @@ export default {
 		// inputs that have the same name value are grouped together
 		// and need stop that behavior
 		this.inputName = FL.generateNameValue(this);
-		this.initValidation();
 		this.modelStore[this.common.model] = this.custom?.defaultValue || '';
+		this.initValidation();
 	},
 	mounted() {
 		// many inputs, auto wrapped in array
