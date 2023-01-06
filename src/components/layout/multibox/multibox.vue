@@ -88,7 +88,7 @@ export default {
 			// add store object in model
 			this.addItemInMultiBox({multiboxName: this.common.model});
 			// add item to view
-			const group = Multibox.generateNewGroup(this.groups);
+			const group = Multibox.createGroup(this.groups);
 			this.groups.push(group);
 		},
 		handleRemove(index) {

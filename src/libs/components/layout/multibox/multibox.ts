@@ -41,9 +41,9 @@ export class Multibox {
 		});
 	}
 
-	static generateNewGroup(groups: Group[]): Group {
+	static createGroup(groups: Group[]): Group {
 		if (!groups?.length) {
-			throw new Error('MultiBox.generateNewGroup: param groups is empty');
+			throw new Error('MultiBox.createGroup: param groups is empty');
 		}
 
 		const source: Group = groups[0];
@@ -53,7 +53,7 @@ export class Multibox {
 		newItem.forEach((field: Field) => {
 			if (!field?.custom?.multi) {
 				throw new Error(
-					'MultiBox.generateNewGroup: field.custom.multi is empty'
+					'MultiBox.createGroup: field.custom.multi is empty'
 				);
 			}
 			field.custom.multi.key = generateKey();

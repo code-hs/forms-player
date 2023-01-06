@@ -1,11 +1,11 @@
 import {describe, it, expect} from '@jest/globals';
 import {
-	MultiBoxView,
+	Multibox,
 	Group,
-} from '@/libs/components/layout/multibox/multibox-view';
+} from '@/libs/components/layout/multibox/multibox';
 import {Field} from '@/libs/scheme/scheme-structure';
 
-describe('MultiBoxView class -> generateGroups', () => {
+describe('Multibox class -> generateGroups', () => {
 	it('correct work', () => {
 		const multiboxName: string = 'box-1';
 		const field: Field = {
@@ -15,7 +15,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 			},
 		};
 		const group: Group = [field];
-		const groups: Group[] = MultiBoxView.generateGroups(group, multiboxName);
+		const groups: Group[] = new Multibox(group, multiboxName).createGroups();
 		// groups
 		// [
 		// 	[
@@ -40,7 +40,7 @@ describe('MultiBoxView class -> generateGroups', () => {
 		expect(field1.custom.multi.name).toBe(multiboxName);
 	});
 
-	it('MultiBoxView class -> generateNewItem', () => {
+	it('Multibox class -> createGroup, return correct item', () => {
 		const field: Field = {
 			common: {
 				type: 'InputText',
@@ -56,11 +56,13 @@ describe('MultiBoxView class -> generateGroups', () => {
 		const group: Group = [field];
 		const groups: Group[] = [group];
 
-		const newGroup: Group = MultiBoxView.generateNewGroup(groups);
+		const newGroup: Group = Multibox.createGroup(groups);
 		const fieldInGroup: Field = newGroup[0];
 
 		expect(fieldInGroup.common.model).toBe('address_1');
 		// @ts-ignore
 		expect(fieldInGroup.custom.multi.name).toBe('box-1');
+		// @ts-ignore
+		expect(fieldInGroup.custom.multi.key).not.toBe(field.custom.multi.key);
 	});
 });
