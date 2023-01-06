@@ -38,6 +38,7 @@ export default {
 			required: false,
 			default: () => ({
 				bodyHTML: '',
+				checked: false,
 			}),
 		},
 		validation: {
@@ -83,6 +84,7 @@ export default {
 	},
 	created() {
 		this.inputName = FL.generateNameValue(this);
+		this.modelStore[this.common.model] = this.custom?.checked || false;
 		this.initValidation();
 	},
 	beforeDestroy() {
