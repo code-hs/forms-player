@@ -21,7 +21,7 @@
 		"_local:copy:locales": "copy ..\\api\\store\\projects\\62508e2544f0831be0b66a0b\\locales.json run\\local\\locales.json",
 		"_local:copy:WDFL": "copy ..\\api\\public\\client\\widget-form-loader.min.js run\\local\\widget-form-loader.min.js",
 		"_copy:bundle:to-api-public-dir": "copy dist\\form-widget-g.js ..\\api\\public\\client\\bundles\\form-widget-g.js",
-		"_present:copy-files": "npm run _local:copy:all:to-local && xcopy run\\local ..\\client-present\\run\\local /h /i /c /k /e /r /y && copy run\\local.html ..\\client-present\\run\\index.html"
+		"_present:copy-files": "npm run _local:copy:all:to-local && xcopy run\\local ..\\client-present\\public\\local /h /i /c /k /e /r /y && copy run\\local.html ..\\client-present\\public\\index.html"
 	},
 	"dependencies": {
 		"document-register-element": "^1.11.0",
