@@ -23,5 +23,5 @@ yarn-error.log*
 *.sw*
 /dist/
 !/package-lock.json
-run/local/
+run/src/
 .wrangler.toml
