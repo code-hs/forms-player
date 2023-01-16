@@ -50,11 +50,6 @@ export default {
 	props: {
 		...CP.getAllParams(),
 		attrs: CP.attrsOnlyContainer,
-		custom: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
 	},
 	data() {
 		// мультибокс = [группа1, группа2, группа3]

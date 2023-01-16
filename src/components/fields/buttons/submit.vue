@@ -15,11 +15,6 @@ export default {
 	name: 'ButtonSubmit',
 	props: {
 		...CP.getAllParams(),
-		custom: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
 	},
 	computed: {
 		...mapGetters({

@@ -53,11 +53,6 @@ export default {
 				mask: '', // required
 			}),
 		},
-		module: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
 		validation: {
 			type: Object,
 			required: false,

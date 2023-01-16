@@ -49,11 +49,6 @@ export default {
 				requiredOnlyIfVisible: false,
 			}),
 		},
-		text: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
 	},
 
 	data() {

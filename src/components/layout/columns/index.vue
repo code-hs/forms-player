@@ -20,18 +20,13 @@ import {ComponentParams as CP} from '@/libs/components/component/component-param
 const LayoutColumn = () => import('./column');
 
 export default {
-	name: 'LayoutColumns',
+	name: 'LayoutColumnsContainer',
 	components: {
 		LayoutColumn,
 	},
 	props: {
 		...CP.getAllParams(),
 		attrs: CP.attrsOnlyContainer,
-		custom: {
-			type: Object,
-			required: false,
-			default: () => ({}),
-		},
 	},
 	created() {
 		this.initChildCount();
