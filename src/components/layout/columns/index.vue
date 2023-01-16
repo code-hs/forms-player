@@ -20,7 +20,7 @@ import {ComponentParams as CP} from '@/libs/components/component/component-param
 const LayoutColumn = () => import('./column');
 
 export default {
-	name: 'LayoutColumnsContainer',
+	name: 'ColumnsContainer',
 	components: {
 		LayoutColumn,
 	},

@@ -21,7 +21,7 @@ import {LayoutColumns} from '@/libs/components/layout/columns/layout-columns';
 const VirtualComponent = () => import('@/components/virtual-component');
 
 export default {
-	name: 'LayoutColumn',
+	name: 'Column',
 	components: {
 		VirtualComponent,
 	},
