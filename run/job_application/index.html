@@ -7,7 +7,6 @@
 		<title>Form</title>
 		<link href="/assets/widget-form-loader.min.js" rel="preload" as="script" />
 	</head>
-
 	<body>
 		<form-widget-g
 			data-project-id="62508e2544f0831be0b66a0b"
@@ -20,20 +19,11 @@
 		<!-- data-theme="light"-->
 		<!-- data-layout="small"-->
 
+		<!--		<script src="dev/mobileConsole.js"></script>-->
 		<script src="/assets/widget-form-loader.min.js"></script>
 	</body>
 
 	<style>
-		body,
-		html {
-			background: #292a2b;
-		}
-
-		body {
-			margin: 20px;
-			max-width: 600px;
-		}
-
 		@font-face {
 			font-family: 'Proxima Nova Thin';
 			src: url('/assets/fonts/proxima_nova_thin.eot');
@@ -49,6 +39,22 @@
 				/* Safari, Android, iOS */
 					url('/assets/fonts/proxima_nova_thin.svg#proxima_nova_thin')
 					format('svg'); /* Chrome < 4, Legacy iOS */
+		}
+
+		*,
+		::after,
+		::before {
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			outline: none;
+		}
+
+		body {
+			margin: 20px;
+			max-width: 600px;
+			background: #292a2b;
 		}
 	</style>
 </html>

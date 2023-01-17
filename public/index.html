@@ -8,22 +8,18 @@
 		<link href="assets/widget-form-loader.min.js" rel="preload" as="script" />
 	</head>
 	<body>
-		<!--	этот файл важен, без него не запуститься serve	-->
+		<!--	файл для запуска serve	-->
 		<form-widget-g
 			data-project-id="62508e2544f0831be0b66a0b"
-			data-use-api
+			data-path="/assets"
+			dev
 			data-page="welcome_1"
 			data-language="en"
 			data-theme="dark"
 		></form-widget-g>
 
-		<!--		для тестирования  формы в мелком расширении-->
-		<!--		<div class="form-widget-g-container" style="width:380px">-->
-		<!--			<form-widget-g-->
-		<!--				data-theme="light"-->
-		<!--				data-layout="small"-->
-		<!--			></form-widget-g>-->
-		<!--		</div>-->
+		<!-- data-theme="light"-->
+		<!-- data-layout="small"-->
 
 		<!--		<script src="dev/mobileConsole.js"></script>-->
 		<script src="assets/widget-form-loader.min.js"></script>
@@ -57,14 +53,10 @@
 			outline: none;
 		}
 
-		body,
-		html {
-			background: #292a2b;
-		}
-
 		body {
 			margin: 20px;
 			max-width: 600px;
+			background: #292a2b;
 		}
 	</style>
 </html>
