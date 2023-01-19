@@ -7,4 +7,5 @@ if (process.env.CUSTOM_MODE === 'dev') {
 	Config.showDump = true;
 }
 
+Object.freeze(Config);
 export {Config};
