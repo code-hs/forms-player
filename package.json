@@ -21,8 +21,7 @@
 		"_cp:r:locales": "copy ..\\jsons\\locales.json run\\assets",
 		"_cp:r:WDFL": "copy ..\\widget-form-loader\\dist\\widget-form-loader.min.js run\\assets",
 		"     ": "",
-		"_cp:all-to-public-dir": "npm run _cp:p:bundle && npm run _cp:p:scheme && npm run _cp:p:locales && npm run _cp:p:WDFL",
-		"_cp:p:bundle": "copy dist\\form-widget-g.js public\\assets",
+		"_cp:all-to-public-dir": "npm run _cp:p:scheme && npm run _cp:p:locales && npm run _cp:p:WDFL",
 		"_cp:p:scheme": "copy ..\\jsons\\scheme.json public\\assets",
 		"_cp:p:locales": "copy ..\\jsons\\locales.json public\\assets",
 		"_cp:p:WDFL": "copy ..\\widget-form-loader\\dist\\widget-form-loader.min.js public\\assets\\widget-form-loader.min.js"
