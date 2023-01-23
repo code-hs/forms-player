@@ -12,7 +12,7 @@ export class SchemeController {
 		new SchemeFiltrator(this.scheme).filtrate();
 
 		if (!this.isValid()) {
-			throw new Error('SchemeParser.load: scheme is empty');
+			throw new Error('SchemeController.load: scheme is empty');
 		}
 
 		return this.scheme;
@@ -32,7 +32,7 @@ export class SchemeController {
 
 	static getPage(pageKey: string): Page {
 		if (!pageKey) {
-			throw new Error('SchemeParser.getPage: param pageKey is empty');
+			throw new Error('SchemeController.getPage: param pageKey is empty');
 		}
 		if (!this.scheme?.pages) return {};
 
