@@ -17,14 +17,14 @@
 		"      ": "",
 		"_cp:all-to-dev-site-dir": "npm run _cp:d:bundle && npm run _cp:d:scheme && npm run _cp:d:locales && npm run _cp:d:WDFL",
 		"_cp:d:bundle": "copy dist\\form-widget-g.js dev-site\\assets",
-		"_cp:d:scheme": "copy ..\\jsons\\scheme.json dev-site\\assets",
-		"_cp:d:locales": "copy ..\\jsons\\locales.json dev-site\\assets",
-		"_cp:d:WDFL": "copy ..\\widget-form-loader\\dist\\widget-form-loader.min.js dev-site\\assets",
+		"_cp:d:scheme": "copy ..\\forms-jsons\\scheme.json dev-site\\assets",
+		"_cp:d:locales": "copy ..\\forms-jsons\\locales.json dev-site\\assets",
+		"_cp:d:WDFL": "copy ..\\forms-loader\\dist\\widget-form-loader.min.js dev-site\\assets",
 		"     ": "",
 		"_cp:all-to-public-dir": "npm run _cp:p:scheme && npm run _cp:p:locales && npm run _cp:p:WDFL",
-		"_cp:p:scheme": "copy ..\\jsons\\scheme.json public\\assets",
-		"_cp:p:locales": "copy ..\\jsons\\locales.json public\\assets",
-		"_cp:p:WDFL": "copy ..\\widget-form-loader\\dist\\widget-form-loader.min.js public\\assets\\widget-form-loader.min.js"
+		"_cp:p:scheme": "copy ..\\forms-jsons\\scheme.json public\\assets",
+		"_cp:p:locales": "copy ..\\forms-jsons\\locales.json public\\assets",
+		"_cp:p:WDFL": "copy ..\\forms-loader\\dist\\widget-form-loader.min.js public\\assets\\widget-form-loader.min.js"
 	},
 	"dependencies": {
 		"document-register-element": "^1.11.0",
