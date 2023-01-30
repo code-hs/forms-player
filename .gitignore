@@ -22,7 +22,6 @@ yarn-error.log*
 *.sln
 *.sw*
 /dist/
-!/package-lock.json
 dev-site/assets/
 .wrangler.toml!/
 public/assets/
