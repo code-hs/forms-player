@@ -10,9 +10,7 @@ import {Field, Page} from '@/libs/scheme/scheme-structure';
  * 	"surname": ""
  * }
  */
-export interface ModelStructureStore {
-	[key: string]: string | object;
-}
+export type ModelStructureStore = Record<string, string | object>;
 
 export class ModelController {
 	/**

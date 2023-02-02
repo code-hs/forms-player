@@ -21,8 +21,8 @@ export interface CommonParams {
 }
 
 export interface AttrsParams {
-	readonly container?: {[key: string]: any};
-	readonly component?: {[key: string]: any};
+	readonly container?: Record<string, any>;
+	readonly component?: Record<string, any>;
 }
 export interface TextParams {
 	readonly placeholder?: string;

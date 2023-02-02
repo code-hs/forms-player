@@ -5,9 +5,7 @@ import {parseDate} from '@/utils/dateparser';
 type Relations = {
 	[langFromAvailableLangs: string]: string;
 };
-export type FieldOptions = {
-	[key: string]: any;
-};
+export type FieldOptions = Record<string, any>;
 
 export class DatepickerL {
 	static validateFieldParams(fieldThis: FieldThis): void {

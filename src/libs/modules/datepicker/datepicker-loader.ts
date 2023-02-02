@@ -3,9 +3,7 @@ import {SmartTimeout} from '@/utils/smart-timeout';
 import {delay} from '@/utils/asinchronius';
 import {DatepickerL} from './datepicker';
 
-type DatepickerObject = {
-	[key: string]: any;
-};
+type DatepickerObject = Record<string, any>;
 
 export class DatepickerLoader {
 	lang: string;
