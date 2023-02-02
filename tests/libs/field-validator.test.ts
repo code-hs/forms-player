@@ -7,7 +7,6 @@ import {ValidationParams} from '@/libs/scheme/scheme-structure';
 describe('FieldValidator class -> isValid', () => {
 	// noinspection DuplicatedCode
 	it('full rules, empty value', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: true,
 			pattern: '/^[a-z0-9_-]{2,6}$/i',
@@ -17,7 +16,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('full rules, valid value', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: true,
 			pattern: '/^[a-z0-9_-]{2,6}$/i',
@@ -27,7 +25,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('full rules, less length', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: true,
 			pattern: '/^[a-z0-9_-]{2,6}$/i',
@@ -37,7 +34,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('full rules, bigger length', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: true,
 			pattern: '/^[a-z0-9_-]{2,6}$/i',
@@ -47,7 +43,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('only required, valid value', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: true,
 		};
@@ -56,7 +51,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('only required = false, empty value', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: true,
 		};
@@ -65,7 +59,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('only required = false', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: false,
 		};
@@ -74,7 +67,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('full rules, pattern important, value correct', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: false,
 			pattern: '/^[a-z0-9_-]{2,6}$/i',
@@ -84,7 +76,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('full rules, pattern important, less value', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {
 			required: false,
 			pattern: '/^[a-z0-9_-]{2,6}$/i',
@@ -94,7 +85,6 @@ describe('FieldValidator class -> isValid', () => {
 	});
 
 	it('empty rules', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {};
 		const res: boolean = FieldValidator.isValid(rules, '');
 
@@ -120,7 +110,6 @@ describe('FieldValidator class -> canValidation', () => {
 	});
 
 	it('rules = pattern', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {pattern: '/[A-Z]/'};
 		const res: boolean = FieldValidator.canValidation(rules);
 
@@ -128,7 +117,6 @@ describe('FieldValidator class -> canValidation', () => {
 	});
 
 	it('rules = {pattern, required}', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {pattern: '/[A-Z]/', required: true};
 		const res: boolean = FieldValidator.canValidation(rules);
 
@@ -136,7 +124,6 @@ describe('FieldValidator class -> canValidation', () => {
 	});
 
 	it('rules = {required}', () => {
-		// @ts-ignore
 		const rules: ValidationParams = {required: true};
 		const res: boolean = FieldValidator.canValidation(rules);
 
@@ -145,7 +132,6 @@ describe('FieldValidator class -> canValidation', () => {
 
 	it('rules = {required = false}', () => {
 		// if rules only required, and === false -> will not connect field
-		// @ts-ignore
 		const rules: ValidationParams = {required: false};
 		const res: boolean = FieldValidator.canValidation(rules);
 
@@ -154,7 +140,6 @@ describe('FieldValidator class -> canValidation', () => {
 
 	it('rules = {required = false}, onlyRequired = true', () => {
 		// if rules only required, and === false -> will not connect field
-		// @ts-ignore
 		const rules: ValidationParams = {required: false};
 		const res: boolean = FieldValidator.canValidation(rules, true);
 
@@ -163,7 +148,6 @@ describe('FieldValidator class -> canValidation', () => {
 
 	it('rules = {required = true}, onlyRequired = true', () => {
 		// if rules only required, and === false -> will not connect field
-		// @ts-ignore
 		const rules: ValidationParams = {required: true};
 		const res: boolean = FieldValidator.canValidation(rules, true);
 

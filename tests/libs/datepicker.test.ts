@@ -1,10 +1,10 @@
 import {describe, it, expect} from '@jest/globals';
 import {DatepickerL, FieldOptions} from '@/libs/modules/datepicker/datepicker';
-import {ValidationParams} from '@/libs/scheme/scheme-structure';
+import {ValidationParams, ModuleConfig} from '@/libs/scheme/scheme-structure';
 
 describe('DatepickerL', () => {
 	it('.getNormalizedLanguage', () => {
-		const moduleConfig = {
+		const moduleConfig: ModuleConfig = {
 			locales: {
 				relations: {
 					ua: 'uk',

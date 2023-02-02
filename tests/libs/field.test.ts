@@ -19,7 +19,6 @@ describe('FieldL class', () => {
 		const r1 = FieldL.getMultiName(field1);
 		expect(r1).toBe('test');
 
-		// @ts-ignore
 		const field2: Field = {
 			custom: {
 				// @ts-ignore
@@ -73,7 +72,6 @@ describe('FieldL class', () => {
 	});
 
 	it('.variabling. correct 3', () => {
-		// @ts-ignore
 		const item = FieldL.variabling('123');
 		expect(item).toBe('123');
 	});
