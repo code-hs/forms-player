@@ -47,7 +47,6 @@ export interface Field {
 export interface Page {
 	readonly id?: number;
 	readonly key?: string;
-	readonly type?: string;
 	readonly description?: string;
 	readonly position?: number;
 	readonly styles?: StylesParams;
