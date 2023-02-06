@@ -75,23 +75,19 @@ export default {
 		dataLanguage(newLang) {
 			this.localization.changeLanguage(newLang);
 		},
+		dataPage(newPage) {
+			this.pageKey = newPage;
+			this.initPage(newPage);
+		},
 	},
 
-	async created() {
+	created() {
 		if (!this.dataPage) {
 			throw new Error('app.created: attr data-page is empty');
 		}
 
 		this.scheme = SchemeController.load();
-		const pageStructure = await this.initPage(this.pageKey);
-		if (!pageStructure) {
-			throw new Error('app.created: pageStructure is empty');
-		}
-
-		this.generateModelSkeleton(pageStructure);
-		// after page structure generated, we can inject inputs
-		if (pageStructure && this.modelStructure) this.showContent = true;
-
+		this.initPage();
 		this.initPlugins();
 	},
 
@@ -100,11 +96,21 @@ export default {
 			generateModelSkeleton: 'model/generateSkeleton',
 		}),
 		...mapActions({
-			initPage: 'scheme/initPage',
+			sInitPage: 'scheme/initPage',
 		}),
 		initPlugins() {
 			Api.init(this.dataProjectId, this.appId);
 			this.localization.init(this.dataLanguage);
+		},
+		async initPage() {
+			const pageStructure = await this.sInitPage(this.pageKey);
+			if (!pageStructure) {
+				throw new Error('app.created: pageStructure is empty');
+			}
+
+			this.generateModelSkeleton(pageStructure);
+			// after page structure generated, we can inject inputs
+			if (pageStructure && this.modelStructure) this.showContent = true;
 		},
 		getPageKey() {
 			// can use hash url
