@@ -1,19 +1,9 @@
 import {FieldThis} from '@/libs/components/field/field-structure';
+import {Consts} from '@/config/consts';
 
 export class TextContainerL {
-	static allowedTags: string[] = [
-		'h1',
-		'h2',
-		'h3',
-		'h4',
-		'h5',
-		'h6',
-		'span',
-		'p',
-	];
-
 	private static canTag(tag: string): boolean {
-		return this.allowedTags.includes(tag);
+		return Consts.textContainerAllowedTags.includes(tag);
 	}
 
 	static isShow(fieldThis: FieldThis): boolean {

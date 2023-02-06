@@ -1,13 +1,10 @@
 import {Field} from '@/libs/scheme/scheme-structure';
 import {FieldL as FL} from '@/libs/components/field/field';
+import {Consts} from '@/config/consts';
 
 export class VirtualComponent {
-	static canInitModel(
-		allowedComponents: string[],
-		fieldType: string,
-		field: Field
-	): boolean {
-		if (!allowedComponents.includes(fieldType)) return false;
+	static canInitModel(fieldType: string, field: Field): boolean {
+		if (!Consts.allowedComponentsForModelData.includes(fieldType)) return false;
 
 		const multiboxName = FL.getMultiName(field);
 		// skip initialize, fix bug, when add new group of fields,

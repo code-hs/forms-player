@@ -87,24 +87,7 @@ export default {
 			}
 		},
 		initModel() {
-			const allowedComponents = [
-				'InputText',
-				'InputPassword',
-				'InputEmail',
-				'InputDate',
-				'Selector',
-				'Textarea',
-				'Checkbox',
-				'Radiobuttons',
-			];
-			// noinspection JSCheckFunctionSignatures
-			if (
-				!VirtualComponent.canInitModel(
-					allowedComponents,
-					this.fieldType,
-					this.schemeOptions
-				)
-			) {
+			if (!VirtualComponent.canInitModel(this.fieldType, this.schemeOptions)) {
 				return;
 			}
 
