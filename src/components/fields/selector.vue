@@ -113,7 +113,7 @@ export default {
 		this.initValidation();
 	},
 	beforeDestroy() {
-		this.vsDestroy(this.virtualKey);
+		if (this.valid.connect) this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},

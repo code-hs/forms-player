@@ -87,7 +87,9 @@ export default {
 		this.initValidation();
 	},
 	beforeDestroy() {
-		this.vsDestroy(this.virtualKey);
+		// if element not connected to validation, not need destroy in stack.
+		// 'not connected' - means, that element not required in validation scheme options
+		if (this.valid.connect) this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},

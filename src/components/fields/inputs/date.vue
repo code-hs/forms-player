@@ -125,7 +125,7 @@ export default {
 		}
 	},
 	beforeDestroy() {
-		this.vsDestroy(this.virtualKey);
+		if (this.valid.connect) this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 
@@ -184,6 +184,10 @@ export default {
 			this.vProcess();
 		},
 		initValidation() {
+			if (!FieldValidator.canValidation(this.validation, true)) return;
+
+			this.valid.connect = true;
+
 			this.vsAdd(this.virtualKey);
 			this.vProcessDebounced = debounce(
 				this.vProcess,
