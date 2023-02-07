@@ -76,6 +76,7 @@ export default {
 			this.localization.changeLanguage(newLang);
 		},
 		dataPage(newPage) {
+			this.showContent = false;
 			this.pageKey = newPage;
 			this.initPage(newPage);
 		},
@@ -110,6 +111,10 @@ export default {
 
 			this.generateModelSkeleton(pageStructure);
 			// after page structure generated, we can inject inputs
+			// each input will be run init and create self field in modelStructure.
+			// need to wait for modelStructure to be generated.
+			// if, don't wait, modelStructure will be updated (mean = {}, new reference to object)
+			// that was after initialized fields
 			if (pageStructure && this.modelStructure) this.showContent = true;
 		},
 		getPageKey() {
