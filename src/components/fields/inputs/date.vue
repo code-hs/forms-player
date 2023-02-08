@@ -76,6 +76,7 @@ export default {
 			multiboxName: FL.getMultiName(this),
 			valid: {
 				error: false,
+				connect: false,
 				text: this.$t(this.validation?.texts?.required),
 			},
 			moduleData: {
