@@ -142,10 +142,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (
-				this.validation.requiredOnlyIfVisible &&
-				!FL.isVisible(this.$refs.self)
-			) {
+			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

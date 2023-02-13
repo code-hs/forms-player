@@ -34,16 +34,9 @@ function enableShadowCss(config) {
 				if (config.module.rule(ruleSet).oneOfs.store.has(rName)) {
 					// console.info(`**** config.module.rule(${ruleSet}).oneOf(${rName}) uses: `);
 					// console.info(config.module.rule(ruleSet).oneOf(rName).uses.store.keys());
-					if (
-						config.module
-							.rule(ruleSet)
-							.oneOf(rName)
-							.uses.store.has('vue-style-loader')
-					) {
+					if (config.module.rule(ruleSet).oneOf(rName).uses.store.has('vue-style-loader')) {
 						// console.info(`*** vue-style-loader found in rule(${ruleSet}).oneOf(${rName})!`);
-						configs.push(
-							config.module.rule(ruleSet).oneOf(rName).use('vue-style-loader')
-						);
+						configs.push(config.module.rule(ruleSet).oneOf(rName).use('vue-style-loader'));
 					}
 				}
 			});

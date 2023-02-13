@@ -168,10 +168,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (
-				this.validation.requiredOnlyIfVisible &&
-				!FL.isVisible(this.firstElement)
-			) {
+			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.firstElement)) {
 				this.vTaskSkip();
 				return;
 			}

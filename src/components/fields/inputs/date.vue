@@ -146,15 +146,9 @@ export default {
 		}),
 		async waitDatepicker() {
 			const smtt = SmartTimeout.createForLoadFile();
-			const datepickerLoader = new DatepickerLoader(
-				this.moduleData.config,
-				this.lang
-			);
+			const datepickerLoader = new DatepickerLoader(this.moduleData.config, this.lang);
 
-			await ModuleController.waitWhenLoaded(
-				() => datepickerLoader.getModule(),
-				smtt
-			);
+			await ModuleController.waitWhenLoaded(() => datepickerLoader.getModule(), smtt);
 			await datepickerLoader.waitLocales();
 			this.setCorrectLang();
 		},
@@ -190,10 +184,7 @@ export default {
 			this.valid.connect = true;
 
 			this.vsAdd(this.virtualKey);
-			this.vProcessDebounced = debounce(
-				this.vProcess,
-				FieldValidator.debounceTime
-			);
+			this.vProcessDebounced = debounce(this.vProcess, FieldValidator.debounceTime);
 
 			// noinspection JSUnresolvedFunction
 			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
@@ -237,11 +228,7 @@ export default {
 
 			try {
 				// noinspection JSCheckFunctionSignatures
-				DatepickerL.processValidate(
-					this.moduleData?.fieldOptions,
-					this.validation,
-					this.value
-				);
+				DatepickerL.processValidate(this.moduleData?.fieldOptions, this.validation, this.value);
 			} catch (e) {
 				return e.message || ' ';
 			}
@@ -266,10 +253,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (
-				this.validation.requiredOnlyIfVisible &&
-				!FL.isVisible(this.$refs.self)
-			) {
+			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

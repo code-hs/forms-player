@@ -49,8 +49,7 @@ export class ModelController {
 		if (!field?.components?.length) return {};
 
 		return field.components.reduce((store, child: Field) => {
-			const childStructure: ModelStructureStore =
-				this.getComponentStructure(child);
+			const childStructure: ModelStructureStore = this.getComponentStructure(child);
 
 			return {...store, ...childStructure};
 		}, {} as ModelStructureStore);

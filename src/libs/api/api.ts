@@ -29,11 +29,7 @@ export class Api {
 	}
 
 	// eslint-disable-next-line require-await
-	static async post(
-		url: string,
-		data: Object,
-		options: object = {}
-	): Promise<any> {
+	static async post(url: string, data: Object, options: object = {}): Promise<any> {
 		const sendData = {
 			...this.getProjectInfo(),
 			...data,

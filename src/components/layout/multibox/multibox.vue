@@ -1,10 +1,5 @@
 <template>
-	<div
-		v-if="groups.length"
-		class="multibox"
-		:class="common.class"
-		v-bind="attrs.container"
-	>
+	<div v-if="groups.length" class="multibox" :class="common.class" v-bind="attrs.container">
 		<div
 			v-for="(group, index) in groups"
 			:key="index"
@@ -56,10 +51,7 @@ export default {
 		// в группе уже хранятся поля = [поле1, поле2, поле3]
 		// предполагается что в схеме указана только одна группа от мультибокса
 		// и в этой первой группе прописываем информацию о мультибоксе
-		const groups = new Multibox(
-			this.components,
-			this.common.model
-		).createGroups();
+		const groups = new Multibox(this.components, this.common.model).createGroups();
 
 		return {
 			groups,

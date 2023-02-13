@@ -24,10 +24,7 @@ export class SmartTimeout {
 	}
 
 	static createForLoadFile() {
-		return new SmartTimeout(
-			this.timeouts.loadingFile,
-			this.coefficients.loadingFile
-		);
+		return new SmartTimeout(this.timeouts.loadingFile, this.coefficients.loadingFile);
 	}
 
 	valueOf(): number {

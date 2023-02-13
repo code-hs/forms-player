@@ -9,8 +9,7 @@ export class StyleIncluder {
 	}
 
 	private initStack(): void {
-		const global: StylesParams | undefined =
-			SchemeController.getConfig()?.styles;
+		const global: StylesParams | undefined = SchemeController.getConfig()?.styles;
 		if (global) this.stack.push(global);
 
 		const pages: Page[] = SchemeController.getScheme()?.pages;

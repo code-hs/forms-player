@@ -70,9 +70,7 @@ describe('SmartTimeout', () => {
 		values.push(+smtt);
 		values.push(+smtt);
 
-		expect(values).toEqual([
-			50, 100, 200, 400, 800, 1600, 3200, 5000, 5000, 5000, 5000,
-		]);
+		expect(values).toEqual([50, 100, 200, 400, 800, 1600, 3200, 5000, 5000, 5000, 5000]);
 	});
 
 	it('another data', () => {

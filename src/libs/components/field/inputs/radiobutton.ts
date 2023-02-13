@@ -14,11 +14,7 @@ export interface Option {
 export type Options = Option[];
 
 export class RadiobuttonsL {
-	static sendAction(
-		options: Options,
-		e: OnInputEvent,
-		firstElement: Element
-	): void {
+	static sendAction(options: Options, e: OnInputEvent, firstElement: Element): void {
 		const action: Action | undefined = RadiobuttonsL.getAction(options, e);
 		if (!action) {
 			// if correct, scheme don't have any action on element
@@ -30,9 +26,7 @@ export class RadiobuttonsL {
 
 	static getAction(options: Options, e: OnInputEvent): Action | undefined {
 		const selectedValue: string = e.target?.value;
-		const option: Option | undefined = options.find(
-			o => o.value === selectedValue
-		) as Option;
+		const option: Option | undefined = options.find(o => o.value === selectedValue) as Option;
 
 		return option?.action;
 	}

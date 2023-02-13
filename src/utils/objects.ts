@@ -11,8 +11,7 @@ export function getValueByStringKey(key: string, store: object) {
 	const keysParts: string[] = key.split('.');
 
 	return keysParts.reduce(
-		(accObject: any, keyPart: string) =>
-			accObject[keyPart] ? accObject[keyPart] : '',
+		(accObject: any, keyPart: string) => (accObject[keyPart] ? accObject[keyPart] : ''),
 		store
 	);
 }

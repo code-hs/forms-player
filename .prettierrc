@@ -2,7 +2,7 @@
 	"bracketSpacing": false,
 	"singleQuote": true,
 	"endOfLine": "auto",
-	"printWidth": 80,
+	"printWidth": 100,
 	"arrowParens": "avoid",
 	"trailingComma": "es5",
 	"useTabs": true,

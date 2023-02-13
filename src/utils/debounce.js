@@ -68,11 +68,7 @@ exports.debounce.decorator = (delay, immediate) => {
 			configurable: true,
 			enumerable: propDesc.enumerable,
 			get() {
-				const debounced = exports.debounce(
-					delay,
-					immediate || false,
-					propDesc.value
-				);
+				const debounced = exports.debounce(delay, immediate || false, propDesc.value);
 				Object.defineProperty(this, propName, {
 					configurable: true,
 					enumerable: propDesc.enumerable,

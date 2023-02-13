@@ -22,11 +22,7 @@
 			</option>
 
 			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
-			<option
-				v-for="(optionsValue, key) in custom.options"
-				:key="key"
-				:value="key"
-			>
+			<option v-for="(optionsValue, key) in custom.options" :key="key" :value="key">
 				{{ $t(optionsValue) }}
 			</option>
 		</select>
@@ -172,10 +168,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (
-				this.validation.requiredOnlyIfVisible &&
-				!FL.isVisible(this.$refs.self)
-			) {
+			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

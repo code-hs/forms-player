@@ -1,10 +1,5 @@
 <template>
-	<div
-		v-if="hasContent"
-		class="columns__column"
-		:class="classes"
-		v-bind="attrs.container"
-	>
+	<div v-if="hasContent" class="columns__column" :class="classes" v-bind="attrs.container">
 		<VirtualComponent
 			v-for="(component, index) in components"
 			:key="index"
