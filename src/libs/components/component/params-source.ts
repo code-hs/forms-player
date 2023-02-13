@@ -7,6 +7,9 @@ import {
 	ValidationParams,
 } from '@/libs/scheme/scheme-structure';
 
+// this file, use only in the component-params.ts file
+// only!!
+
 export const customExample: CustomParams = {};
 export const attrsExample: AttrsParams = {
 	container: {},

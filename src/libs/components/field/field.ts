@@ -14,8 +14,7 @@ export class FieldL {
 		if (!inputVal.startsWith('$:')) return inputVal;
 
 		const name: string = inputVal.replace('$:', '');
-		const variables: Variables | undefined =
-			SchemeController.getConfig().variables;
+		const variables: Variables | undefined = SchemeController.getConfig().variables;
 		// @ts-ignore
 		const output: any = variables[name];
 		if (!output) {

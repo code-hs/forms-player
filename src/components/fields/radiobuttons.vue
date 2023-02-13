@@ -109,7 +109,7 @@ export default {
 		this.firstElement = this.$refs.self[0];
 	},
 	beforeDestroy() {
-		this.vsDestroy(this.virtualKey);
+		if (this.valid.connect) this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
@@ -168,10 +168,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (
-				this.validation.requiredOnlyIfVisible &&
-				!FL.isVisible(this.firstElement)
-			) {
+			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.firstElement)) {
 				this.vTaskSkip();
 				return;
 			}

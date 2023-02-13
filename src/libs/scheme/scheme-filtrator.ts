@@ -14,9 +14,7 @@ export class SchemeFiltrator {
 	}
 
 	private byParamEnable(): void {
-		this.scheme.pages = this.scheme.pages.filter((page: Page) =>
-			this.isEnable(page)
-		);
+		this.scheme.pages = this.scheme.pages.filter((page: Page) => this.isEnable(page));
 	}
 
 	private isEnable(component: Page | Field): boolean {
@@ -27,9 +25,7 @@ export class SchemeFiltrator {
 
 		// if component has children
 		// filtrate children by reference
-		component.components = component.components.filter((child: Field) =>
-			this.isEnable(child)
-		);
+		component.components = component.components.filter((child: Field) => this.isEnable(child));
 
 		return true;
 	}

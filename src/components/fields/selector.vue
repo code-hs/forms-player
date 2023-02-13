@@ -22,11 +22,7 @@
 			</option>
 
 			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
-			<option
-				v-for="(optionsValue, key) in custom.options"
-				:key="key"
-				:value="key"
-			>
+			<option v-for="(optionsValue, key) in custom.options" :key="key" :value="key">
 				{{ $t(optionsValue) }}
 			</option>
 		</select>
@@ -113,7 +109,7 @@ export default {
 		this.initValidation();
 	},
 	beforeDestroy() {
-		this.vsDestroy(this.virtualKey);
+		if (this.valid.connect) this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
@@ -172,10 +168,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (
-				this.validation.requiredOnlyIfVisible &&
-				!FL.isVisible(this.$refs.self)
-			) {
+			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

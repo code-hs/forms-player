@@ -1,17 +1,10 @@
 import {SchemeController} from '@/libs/scheme/scheme-controller';
-import {
-	Configurations,
-	Module,
-	ModuleConfig,
-} from '@/libs/scheme/scheme-structure';
+import {Configurations, Module, ModuleConfig} from '@/libs/scheme/scheme-structure';
 import {SmartTimeout} from '@/utils/smart-timeout';
 import {delay} from '@/utils/asinchronius';
 
 export class ModuleController {
-	static async waitWhenLoaded(
-		checker: Function,
-		smtt: SmartTimeout
-	): Promise<void> {
+	static async waitWhenLoaded(checker: Function, smtt: SmartTimeout): Promise<void> {
 		// the check function should return true if the module is loaded
 		while (!checker()) {
 			// module files are not loaded -> wait, then try again
@@ -30,9 +23,7 @@ export class ModuleController {
 	static getModuleConfig(moduleName: string): ModuleConfig {
 		const module: Module | undefined = this.getModule(moduleName);
 		if (!module) {
-			console.error(
-				`InitModule.getModuleConfig: module '${moduleName}' is not found`
-			);
+			console.error(`InitModule.getModuleConfig: module '${moduleName}' is not found`);
 			return {};
 		}
 

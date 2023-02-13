@@ -58,8 +58,7 @@ export class Purposer {
 			return this.vrcContainer.nextElementSibling?.nextElementSibling;
 		}
 		if (this.action.nextSibling === 3) {
-			return this.vrcContainer.nextElementSibling?.nextElementSibling
-				?.nextElementSibling;
+			return this.vrcContainer.nextElementSibling?.nextElementSibling?.nextElementSibling;
 		}
 	}
 

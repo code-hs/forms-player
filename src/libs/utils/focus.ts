@@ -6,8 +6,6 @@ export class Focus {
 		// only if field has status data-v-error='true'
 		// that means field has error, field start process validation
 
-		return tags
-			.map(tag => `.field[data-v-error='true'] ${tag}${modificators}`)
-			.join(', ');
+		return tags.map(tag => `.field[data-v-error='true'] ${tag}${modificators}`).join(', ');
 	}
 }

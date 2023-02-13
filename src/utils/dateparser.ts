@@ -74,8 +74,7 @@ const parseFns = {
 			}
 
 			const monthName = month.toLowerCase();
-			const compareNames: Function = (name: string) =>
-				name.toLowerCase().startsWith(monthName);
+			const compareNames: Function = (name: string) => name.toLowerCase().startsWith(monthName);
 			// compare with both short and full names because some locales have periods
 			// in the short names (not equal to the first X letters of the full names)
 			monthIndex = locale.monthsShort.findIndex(compareNames);
@@ -90,9 +89,7 @@ const parseFns = {
 		newDate.setMonth(monthIndex);
 		// noinspection UnnecessaryLocalVariableJS
 		const r =
-			newDate.getMonth() !== normalizeMonth(monthIndex)
-				? newDate.setDate(0)
-				: newDate.getTime();
+			newDate.getMonth() !== normalizeMonth(monthIndex) ? newDate.setDate(0) : newDate.getTime();
 
 		return r;
 	},
@@ -162,9 +159,7 @@ function parseFormatString(format: string): any {
 	// collect parse function keys used in the format
 	// iterate over parseFns keys in order to keep the order of the keys.
 	const partParserKeys = Object.keys(parseFns).reduce((keys, key) => {
-		const token = parts.find(
-			part => part[0] !== 'D' && part[0].toLowerCase() === key
-		);
+		const token = parts.find(part => part[0] !== 'D' && part[0].toLowerCase() === key);
 		if (token) {
 			keys.push(key);
 		}
@@ -174,19 +169,17 @@ function parseFormatString(format: string): any {
 	// eslint-disable-next-line no-return-assign
 	return (knownFormats[format] = {
 		parser(dateStr, locale) {
-			const dateParts = dateStr
-				.split(reNonDateParts)
-				.reduce((dtParts, part, index) => {
-					if (part.length > 0 && parts[index]) {
-						const token = parts[index][0];
-						if (token === 'M') {
-							dtParts.m = part;
-						} else if (token !== 'D') {
-							dtParts[token] = part;
-						}
+			const dateParts = dateStr.split(reNonDateParts).reduce((dtParts, part, index) => {
+				if (part.length > 0 && parts[index]) {
+					const token = parts[index][0];
+					if (token === 'M') {
+						dtParts.m = part;
+					} else if (token !== 'D') {
+						dtParts[token] = part;
 					}
-					return dtParts;
-				}, {});
+				}
+				return dtParts;
+			}, {});
 
 			// iterate over partParserkeys so that the parsing is made in the oder
 			// of year, month and day to prevent the day parser from correcting last

@@ -18,9 +18,7 @@ export class StoreValidator {
 	static findIndex(fields: ValidatorField[], key: number): number {
 		if (!key) throw new Error('StoreValidator.findIndex: param key is empty');
 
-		const index: number = fields.findIndex(
-			(field: ValidatorField) => field.key === key
-		);
+		const index: number = fields.findIndex((field: ValidatorField) => field.key === key);
 		if (index === -1) {
 			throw new Error("StoreValidator.findIndex: can't find index");
 		}

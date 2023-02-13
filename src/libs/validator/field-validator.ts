@@ -32,10 +32,7 @@ export class FieldValidator {
 		return true;
 	}
 
-	static canValidation(
-		rules: ValidationParams,
-		onlyRequired: boolean = false
-	): boolean {
+	static canValidation(rules: ValidationParams, onlyRequired: boolean = false): boolean {
 		if (!rules) return false;
 		if (onlyRequired) return rules.required as boolean;
 

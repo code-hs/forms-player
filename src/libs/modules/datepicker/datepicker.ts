@@ -19,10 +19,7 @@ export class DatepickerL {
 		}
 	}
 
-	static getNormalizedLanguage(
-		moduleConfig: ModuleConfig,
-		lang: string
-	): string {
+	static getNormalizedLanguage(moduleConfig: ModuleConfig, lang: string): string {
 		const relations: Relations = moduleConfig.locales?.relations || {};
 		// get lang from relations
 		// from UA to UK
@@ -71,19 +68,14 @@ export class DatepickerL {
 			maxTimestamp = parseDate(maxDate, format);
 		} catch {
 			console.error(
-				'DatepickerL: processRange: not correct format or' +
-					' values in minDate/maxDate'
+				'DatepickerL: processRange: not correct format or' + ' values in minDate/maxDate'
 			);
 		}
 
 		// check by min and max dates
 		// @ts-ignore
 		if (minTimestamp && maxTimestamp) {
-			const valid: boolean = DatepickerL.isValidRange(
-				inputTimestamp,
-				minTimestamp,
-				maxTimestamp
-			);
+			const valid: boolean = DatepickerL.isValidRange(inputTimestamp, minTimestamp, maxTimestamp);
 			if (!valid) throw new Error(validation.texts?.range);
 			// @ts-ignore
 		} else if (minTimestamp) {

@@ -79,7 +79,7 @@ export default {
 		this.initValidation();
 	},
 	beforeDestroy() {
-		this.vsDestroy(this.virtualKey);
+		if (this.valid.connect) this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 	},
@@ -98,10 +98,7 @@ export default {
 
 			this.valid.connect = true;
 			this.vsAdd(this.virtualKey);
-			this.vProcessDirty = debounce(
-				this.vProcessDirty,
-				FieldValidator.debounceTime
-			);
+			this.vProcessDirty = debounce(this.vProcessDirty, FieldValidator.debounceTime);
 			// noinspection JSUnresolvedFunction
 			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 		},
@@ -160,10 +157,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (
-				this.validation.requiredOnlyIfVisible &&
-				!FL.isVisible(this.$refs.self)
-			) {
+			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

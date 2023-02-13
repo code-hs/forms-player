@@ -1,8 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {
-	ModelController,
-	ModelStructureStore,
-} from '@/libs/model/model-structure';
+import {ModelController, ModelStructureStore} from '@/libs/model/model-structure';
 import {Field, Page} from '@/libs/scheme/scheme-structure';
 
 describe('ModelStructure class -> generate', () => {
@@ -85,9 +82,7 @@ describe('ModelStructure class -> generate', () => {
 			],
 		};
 
-		const model: ModelStructureStore = new ModelController().generateStructure(
-			page
-		);
+		const model: ModelStructureStore = new ModelController().generateStructure(page);
 
 		expect(typeof model).toBe('object');
 		expect('multi_box_1' in model).toBeTruthy();

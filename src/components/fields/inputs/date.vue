@@ -76,6 +76,7 @@ export default {
 			multiboxName: FL.getMultiName(this),
 			valid: {
 				error: false,
+				connect: false,
 				text: this.$t(this.validation?.texts?.required),
 			},
 			moduleData: {
@@ -125,7 +126,7 @@ export default {
 		}
 	},
 	beforeDestroy() {
-		this.vsDestroy(this.virtualKey);
+		if (this.valid.connect) this.vsDestroy(this.virtualKey);
 		// noinspection JSUnresolvedFunction
 		bus.$off(busBroadcasts.VALIDATION_START, this.vHandleTask);
 
@@ -145,15 +146,9 @@ export default {
 		}),
 		async waitDatepicker() {
 			const smtt = SmartTimeout.createForLoadFile();
-			const datepickerLoader = new DatepickerLoader(
-				this.moduleData.config,
-				this.lang
-			);
+			const datepickerLoader = new DatepickerLoader(this.moduleData.config, this.lang);
 
-			await ModuleController.waitWhenLoaded(
-				() => datepickerLoader.getModule(),
-				smtt
-			);
+			await ModuleController.waitWhenLoaded(() => datepickerLoader.getModule(), smtt);
 			await datepickerLoader.waitLocales();
 			this.setCorrectLang();
 		},
@@ -184,11 +179,12 @@ export default {
 			this.vProcess();
 		},
 		initValidation() {
+			if (!FieldValidator.canValidation(this.validation, true)) return;
+
+			this.valid.connect = true;
+
 			this.vsAdd(this.virtualKey);
-			this.vProcessDebounced = debounce(
-				this.vProcess,
-				FieldValidator.debounceTime
-			);
+			this.vProcessDebounced = debounce(this.vProcess, FieldValidator.debounceTime);
 
 			// noinspection JSUnresolvedFunction
 			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
@@ -232,11 +228,7 @@ export default {
 
 			try {
 				// noinspection JSCheckFunctionSignatures
-				DatepickerL.processValidate(
-					this.moduleData?.fieldOptions,
-					this.validation,
-					this.value
-				);
+				DatepickerL.processValidate(this.moduleData?.fieldOptions, this.validation, this.value);
 			} catch (e) {
 				return e.message || ' ';
 			}
@@ -261,10 +253,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (
-				this.validation.requiredOnlyIfVisible &&
-				!FL.isVisible(this.$refs.self)
-			) {
+			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

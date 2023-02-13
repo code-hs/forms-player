@@ -2,11 +2,7 @@
 import store from '@/store';
 import {getValueByStringKey} from '@/utils/objects';
 import {LocalizationLoader} from './localization-loader';
-import {
-	LocalesAllLanguages,
-	Locales,
-	LocalizationInformation,
-} from './structure';
+import {LocalesAllLanguages, Locales, LocalizationInformation} from './structure';
 
 export class Localization {
 	static locales: LocalesAllLanguages = {};
@@ -36,18 +32,13 @@ export class Localization {
 		// setup fields
 		this.locales = data.locales;
 
-		if (
-			data.configuration.availableLangs &&
-			data.configuration.availableLangs.length
-		) {
-			this.availableLangs = data.configuration.availableLangs.map(
-				(lang: string) => lang.toLowerCase()
+		if (data.configuration.availableLangs && data.configuration.availableLangs.length) {
+			this.availableLangs = data.configuration.availableLangs.map((lang: string) =>
+				lang.toLowerCase()
 			);
 		}
 
-		this.langsInLocales = Object.keys(this.locales).map(lang =>
-			lang.toLowerCase()
-		);
+		this.langsInLocales = Object.keys(this.locales).map(lang => lang.toLowerCase());
 		this.defaultLang = data.configuration.defaultLang || '';
 	}
 
@@ -105,8 +96,6 @@ export class Localization {
 		// eslint-disable-next-line no-param-reassign
 		lang = lang.toLowerCase();
 
-		return (
-			this.langsInLocales.includes(lang) && this.availableLangs.includes(lang)
-		);
+		return this.langsInLocales.includes(lang) && this.availableLangs.includes(lang);
 	}
 }

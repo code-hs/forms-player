@@ -42,8 +42,7 @@ describe('DatepickerL', () => {
 			required: true,
 			texts: {
 				required: '#Date of Birth is required.',
-				range:
-					'#The date falls outside of the acceptable range. From 01/01/1980 to 09/27/2022',
+				range: '#The date falls outside of the acceptable range. From 01/01/1980 to 09/27/2022',
 				notValid: '#This is not a valid date.',
 			},
 		};
@@ -78,8 +77,7 @@ describe('DatepickerL', () => {
 			required: true,
 			texts: {
 				required: '#Date of Birth is required.',
-				range:
-					'#The date falls outside of the acceptable range. From 01/01/1980 to 09/27/2022',
+				range: '#The date falls outside of the acceptable range. From 01/01/1980 to 09/27/2022',
 				notValid: '#This is not a valid date.',
 			},
 		};

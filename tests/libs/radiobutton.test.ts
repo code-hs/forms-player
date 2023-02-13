@@ -1,9 +1,5 @@
 import {describe, it, expect} from '@jest/globals';
-import {
-	Options,
-	RadiobuttonsL,
-	OnInputEvent,
-} from '@/libs/components/field/inputs/radiobutton';
+import {Options, RadiobuttonsL, OnInputEvent} from '@/libs/components/field/inputs/radiobutton';
 import {Action} from '@/libs/utils/actioner/structure';
 
 describe('Radiobuttons', () => {
@@ -31,20 +27,14 @@ describe('Radiobuttons', () => {
 
 	it('Radiobutton class -> getAction, correct work', () => {
 		const eventHandler: OnInputEvent = {target: {value: 'yes'}};
-		const action: Action = RadiobuttonsL.getAction(
-			options,
-			eventHandler
-		) as Action;
+		const action: Action = RadiobuttonsL.getAction(options, eventHandler) as Action;
 
 		expect(action.type).toBe('SHOW_CONTAINER');
 	});
 
 	it('Radiobutton class -> getAction, cant find item', () => {
 		const eventHandler: OnInputEvent = {target: {value: 'test 123213'}};
-		const action: undefined = RadiobuttonsL.getAction(
-			options,
-			eventHandler
-		) as undefined;
+		const action: undefined = RadiobuttonsL.getAction(options, eventHandler) as undefined;
 
 		expect(action).toBe(undefined);
 	});
