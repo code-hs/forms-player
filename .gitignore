@@ -23,5 +23,5 @@ yarn-error.log*
 *.sw*
 /dist/
 dev-site/assets/
-.wrangler.toml!/
+.wrangler.toml
 public/assets/
