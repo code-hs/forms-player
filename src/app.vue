@@ -118,9 +118,9 @@ export default {
 			if (pageStructure && this.modelStructure) this.showContent = true;
 		},
 		getPageKey() {
-			// can use hash url
-			// window.location.hash.slice(1)
-			// from tag attribute
+			const urlHash = window.location.hash.slice(1);
+			if (urlHash) return urlHash;
+
 			return this.dataPage;
 		},
 	},
