@@ -1,6 +1,6 @@
 import {describe, expect, it} from '@jest/globals';
 import {FieldL} from '@/libs/components/field/field';
-import {Field} from '@/libs/scheme/scheme-structure';
+import {Field} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 describe('FieldL class', () => {

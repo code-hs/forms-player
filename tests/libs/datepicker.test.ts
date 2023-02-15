@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {DatepickerL, FieldOptions} from '@/libs/modules/datepicker/datepicker';
-import {ValidationParams, ModuleConfig} from '@/libs/scheme/scheme-structure';
+import {ValidationParams, ModuleConfig} from '@/libs/scheme/scheme.types';
 
 describe('DatepickerL', () => {
 	it('.getNormalizedLanguage', () => {

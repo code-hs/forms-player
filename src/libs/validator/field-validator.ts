@@ -1,4 +1,4 @@
-import {ValidationParams} from '@/libs/scheme/scheme-structure';
+import {ValidationParams} from '@/libs/scheme/scheme.types';
 import {stringToRegex} from '@/utils/regexp';
 
 export class FieldValidator {

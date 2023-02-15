@@ -1,4 +1,4 @@
-import {StylesParams, Page, Field} from '@/libs/scheme/scheme-structure';
+import {StylesParams, Page, Field} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 export class StyleIncluder {

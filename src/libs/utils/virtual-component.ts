@@ -1,4 +1,4 @@
-import {Field} from '@/libs/scheme/scheme-structure';
+import {Field} from '@/libs/scheme/scheme.types';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {Consts} from '@/config/consts';
 

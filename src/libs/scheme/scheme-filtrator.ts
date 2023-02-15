@@ -1,4 +1,4 @@
-import {Scheme, Page, Field} from '@/libs/scheme/scheme-structure';
+import {Scheme, Page, Field} from '@/libs/scheme/scheme.types';
 
 export class SchemeFiltrator {
 	private readonly scheme: Scheme;

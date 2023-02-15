@@ -1,4 +1,4 @@
-import {Field, Page} from '@/libs/scheme/scheme-structure';
+import {Field, Page} from '@/libs/scheme/scheme.types';
 
 /*
  * {

@@ -1,4 +1,4 @@
-import {Field, Variables} from '@/libs/scheme/scheme-structure';
+import {Field, Variables} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 import {FieldThis} from './field-structure';
 import {generateStr} from '@/utils/random';

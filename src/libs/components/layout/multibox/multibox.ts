@@ -1,6 +1,6 @@
 import {generateKey} from '@/utils/random';
 import {deepCopy} from '@/utils/objects';
-import {Field, CustomParams} from '@/libs/scheme/scheme-structure';
+import {Field, CustomParams} from '@/libs/scheme/scheme.types';
 
 // stack of components
 export type Group = Field[];

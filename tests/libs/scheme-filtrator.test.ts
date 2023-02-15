@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeFiltrator} from '@/libs/scheme/scheme-filtrator';
-import {Field, Page, Scheme} from '@/libs/scheme/scheme-structure';
+import {Field, Page, Scheme} from '@/libs/scheme/scheme.types';
 
 describe('SchemeFiltrator class -> filtrateParamEnable', () => {
 	it('correct work', () => {

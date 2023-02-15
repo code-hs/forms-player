@@ -1,4 +1,4 @@
-import {Scheme} from '@/libs/scheme/scheme-structure';
+import {Scheme} from '@/libs/scheme/scheme.types';
 
 export class SchemeLoader {
 	private readonly scheme: Scheme;

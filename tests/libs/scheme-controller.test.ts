@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
-import {Scheme, Page, Configurations} from '@/libs/scheme/scheme-structure';
+import {Scheme, Page, Configurations} from '@/libs/scheme/scheme.types';
 
 describe('SchemeController class', () => {
 	const scheme: Scheme = {

@@ -5,7 +5,7 @@ import {
 	StylesParams,
 	TextParams,
 	ValidationParams,
-} from '@/libs/scheme/scheme-structure';
+} from '@/libs/scheme/scheme.types';
 
 // this file, use only in the component-params.ts file
 // only!!

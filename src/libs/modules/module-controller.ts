@@ -1,5 +1,5 @@
 import {SchemeController} from '@/libs/scheme/scheme-controller';
-import {Configurations, Module, ModuleConfig} from '@/libs/scheme/scheme-structure';
+import {Configurations, Module, ModuleConfig} from '@/libs/scheme/scheme.types';
 import {SmartTimeout} from '@/utils/smart-timeout';
 import {delay} from '@/utils/asinchronius';
 

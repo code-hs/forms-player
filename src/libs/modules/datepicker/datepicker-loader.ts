@@ -1,4 +1,4 @@
-import {ModuleConfig} from '@/libs/scheme/scheme-structure';
+import {ModuleConfig} from '@/libs/scheme/scheme.types';
 import {SmartTimeout} from '@/utils/smart-timeout';
 import {delay} from '@/utils/asinchronius';
 import {DatepickerL} from './datepicker';

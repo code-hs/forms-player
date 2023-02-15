@@ -1,4 +1,4 @@
-import {ModuleConfig, ValidationParams} from '@/libs/scheme/scheme-structure';
+import {ModuleConfig, ValidationParams} from '@/libs/scheme/scheme.types';
 import {FieldThis} from '@/libs/components/field/field-structure';
 import {parseDate} from '@/utils/dateparser';
 

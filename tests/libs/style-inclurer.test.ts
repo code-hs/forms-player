@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {StyleIncluder} from '@/libs/utils/style-includer';
-import {Scheme} from '@/libs/scheme/scheme-structure';
+import {Scheme} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 const endLine = '\r\n';
