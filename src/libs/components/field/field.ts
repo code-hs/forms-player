@@ -1,6 +1,6 @@
 import {Field, Variables} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
-import {FieldThis} from './field-structure';
+import {FieldThis} from './field.types';
 import {generateStr} from '@/utils/random';
 
 export class FieldL {

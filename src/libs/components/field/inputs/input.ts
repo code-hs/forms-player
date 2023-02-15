@@ -1,4 +1,4 @@
-import {FieldThis} from '@/libs/components/field/field-structure';
+import {FieldThis} from '@/libs/components/field/field.types';
 import {stringToRegex} from '@/utils/regexp';
 
 interface OnInputEvent {
