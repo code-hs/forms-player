@@ -1,5 +1,7 @@
 <template>
-	<div v-show="groupsLength" class="multibox__button-add" @click="$emit('handleAdd')">+</div>
+	<div v-show="groupsLength" class="multibox__button-add" @click="$emit('handleAdd')">
+		{{ $t(text) }}
+	</div>
 </template>
 
 <script>
@@ -10,6 +12,11 @@ export default {
 		groupsLength: {
 			type: Number,
 			required: true,
+		},
+		text: {
+			type: String,
+			required: false,
+			default: 'add',
 		},
 	},
 	emits: ['handleAdd'],

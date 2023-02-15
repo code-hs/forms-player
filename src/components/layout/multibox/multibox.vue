@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="multibox__buttons-container">
-			<ButtonAdd :groups-length="groups.length" @handleAdd="handleAdd" />
+			<ButtonAdd :groups-length="groups.length" :text="text.value" @handleAdd="handleAdd" />
 		</div>
 	</div>
 </template>

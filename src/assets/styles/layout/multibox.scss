@@ -38,16 +38,27 @@
 		justify-content: center;
 
 		.multibox__button-add {
-			width: 1.25em;
-			height: 1.25em;
+			position: relative;
+			padding: 0.5em 0.937em 0.5em 2.812em;
 
 			cursor: pointer;
 			text-align: center;
 			border: 1px solid var(--buttonsBorder);
 			border-radius: 0.19em;
-			font-family: serif;
-			font-size: 1.12em;
-			line-height: 1.21em;
+
+			&:before {
+				position: absolute;
+				left: 0.635em;
+				width: 1.25em;
+				height: 1.25em;
+
+				content: '+';
+				text-align: center;
+				border-radius: 0.19em;
+				font-family: serif;
+				font-size: 1.12em;
+				line-height: 1.21em;
+			}
 
 			&:hover {
 				background-color: var(--formItemBgFocus);
