@@ -1,5 +1,5 @@
 import {Actioner} from '@/libs/utils/actioner';
-import {Action} from '@/libs/utils/actioner/structure';
+import {Action} from '@/libs/utils/actioner/types';
 
 export interface OnInputEvent {
 	readonly [key: string]: any;

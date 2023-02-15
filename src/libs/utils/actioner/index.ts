@@ -1,5 +1,5 @@
 import {bus, busBroadcasts} from '@/utils/bus';
-import {Action} from './structure';
+import {Action} from './types';
 import {Purposer} from '@/libs/utils/actioner/purposer';
 
 export class Actioner {

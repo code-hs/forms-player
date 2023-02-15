@@ -1,6 +1,6 @@
 import {describe, it, expect} from '@jest/globals';
 import {Options, RadiobuttonsL, OnInputEvent} from '@/libs/components/field/inputs/radiobutton';
-import {Action} from '@/libs/utils/actioner/structure';
+import {Action} from '@/libs/utils/actioner/types';
 
 describe('Radiobuttons', () => {
 	const act1: Action = {
