@@ -10,7 +10,7 @@ export class InputL {
 		fieldThis.mask = fieldThis.custom.mask || '';
 
 		if (fieldThis.custom.pattern && fieldThis.mask) {
-			throw new Error('InputL.initMask: mask and pattern are both set,' + ' use only one of them');
+			throw new Error('InputL.initMask: mask and pattern are both set, use only one of them');
 		}
 	}
 

@@ -67,7 +67,7 @@ const mutations = {
 	addItemInMultiBox(s, {multiboxName}) {
 		if (!s.structure || !s.structure[multiboxName]) {
 			throw new Error(
-				'model.copyItemInMultiBox: bad structure or cant find' + ' that multiboxName in structure'
+				'model.copyItemInMultiBox: bad structure or cant find that multiboxName in structure'
 			);
 		}
 

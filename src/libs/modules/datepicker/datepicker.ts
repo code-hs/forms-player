@@ -67,9 +67,7 @@ export class DatepickerL {
 			minTimestamp = parseDate(minDate, format);
 			maxTimestamp = parseDate(maxDate, format);
 		} catch {
-			console.error(
-				'DatepickerL: processRange: not correct format or' + ' values in minDate/maxDate'
-			);
+			console.error('DatepickerL: processRange: not correct format or values in minDate/maxDate');
 		}
 
 		// check by min and max dates
