@@ -9,7 +9,7 @@ export default {
 	name: 'ActionerClasser',
 	mounted() {
 		// noinspection JSUnresolvedFunction
-		bus.$on(busBroadcasts.CLASS_CONTAINER, this.process);
+		bus.$on(busBroadcasts.SET_CONTAINER_CLASS, this.process);
 	},
 	methods: {
 		process(cActioner) {
