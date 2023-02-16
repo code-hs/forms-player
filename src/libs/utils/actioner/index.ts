@@ -12,6 +12,8 @@ export class Actioner {
 
 		ENABLE: 'ENABLE_INPUT',
 		DISABLE: 'DISABLE_INPUT',
+
+		UNCHECK_ANOTHER: 'UNCHECK_ANOTHER',
 	};
 
 	private readonly action: Action;
@@ -48,6 +50,14 @@ export class Actioner {
 		const keys = {
 			[Actioner.types.SHOW_CONTAINER]: busBroadcasts.DISPLAY_CONTAINER,
 			[Actioner.types.HIDE_CONTAINER]: busBroadcasts.DISPLAY_CONTAINER,
+
+			[Actioner.types.ADD_CLASS_CONTAINER]: busBroadcasts.SET_CONTAINER_CLASS,
+			[Actioner.types.REMOVE_CLASS_CONTAINER]: busBroadcasts.SET_CONTAINER_CLASS,
+
+			[Actioner.types.ENABLE]: busBroadcasts.ENABLING_INPUT,
+			[Actioner.types.DISABLE]: busBroadcasts.ENABLING_INPUT,
+
+			[Actioner.types.UNCHECK_ANOTHER]: busBroadcasts.CHECKING_INPUT,
 		};
 
 		return keys[this.action.type];
