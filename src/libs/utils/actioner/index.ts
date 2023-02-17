@@ -13,7 +13,8 @@ export class Actioner {
 		ENABLE: 'ENABLE_INPUT',
 		DISABLE: 'DISABLE_INPUT',
 
-		UNCHECK_ANOTHER: 'UNCHECK_ANOTHER',
+		UNCHECK_ANOTHERS: 'UNCHECK_ANOTHERS',
+		CHECK_ANOTHERS: 'CHECK_ANOTHERS',
 	};
 
 	private readonly action: Action;
@@ -57,7 +58,8 @@ export class Actioner {
 			[Actioner.types.ENABLE]: busBroadcasts.ENABLING_INPUT,
 			[Actioner.types.DISABLE]: busBroadcasts.ENABLING_INPUT,
 
-			[Actioner.types.UNCHECK_ANOTHER]: busBroadcasts.CHECKING_INPUT,
+			[Actioner.types.UNCHECK_ANOTHERS]: busBroadcasts.CHECKING_INPUT,
+			[Actioner.types.CHECK_ANOTHERS]: busBroadcasts.CHECKING_INPUT,
 		};
 
 		return keys[this.action.type];
