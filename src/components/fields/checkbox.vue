@@ -28,6 +28,7 @@ import {FieldValidator} from '@/libs/validator/field-validator';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import {bus, busBroadcasts} from '@/utils/bus';
+import {CheckboxL} from '@/libs/components/field/inputs/checkbox';
 
 export default {
 	name: 'Checkbox',
@@ -39,6 +40,7 @@ export default {
 			default: () => ({
 				bodyHTML: '',
 				checked: false,
+				action: null,
 			}),
 		},
 		validation: {
@@ -105,8 +107,9 @@ export default {
 			// noinspection JSUnresolvedFunction
 			bus.$on(busBroadcasts.VALIDATION_START, this.vHandleTask);
 		},
-		handleChange() {
+		handleChange(e) {
 			this.vProcess();
+			CheckboxL.sendAction(this.custom.action, e, this.$refs.self);
 		},
 		vProcess(updateStore = true) {
 			if (!this.valid.connect) return;
