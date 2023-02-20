@@ -40,7 +40,7 @@ export default {
 			saveForm: 'request/saveFormValues',
 		}),
 		initClass() {
-			this.pageClass = this.pageStructure?.common?.class || '';
+			this.pageClass = this.pageStructure?.common?.class.container || '';
 		},
 		initValidation() {
 			// binding form

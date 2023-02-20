@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="field input-date"
-		:class="common.class"
+		:class="common.class.container"
 		:data-v-error="valid.error"
 		v-bind="attrs.container"
 	>

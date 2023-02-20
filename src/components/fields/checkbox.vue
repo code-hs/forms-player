@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="field checkbox"
-		:class="common.class"
+		:class="common.class.container"
 		:data-v-error="valid.errorForView"
 		v-bind="attrs.container"
 	>
