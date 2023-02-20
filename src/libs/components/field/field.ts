@@ -1,4 +1,4 @@
-import {Field, Variables} from '@/libs/scheme/scheme.types';
+import {Field, Variables, CommonClasses} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 import {FieldThis} from './field.types';
 import {generateStr} from '@/utils/random';
@@ -53,5 +53,14 @@ export class FieldL {
 		if (field.custom?.equalNameInMultibox) return `${mb}.${model}`;
 
 		return `${mb}.${mbIndex}.${model}.${rnd}`;
+	}
+
+	static getClasses(field: Field): CommonClasses {
+		if (!field) return {};
+
+		return {
+			container: field.common?.class?.container || '',
+			element: field.common?.class?.element || '',
+		};
 	}
 }

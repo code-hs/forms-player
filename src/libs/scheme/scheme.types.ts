@@ -13,11 +13,17 @@ export interface CustomParams {
 	};
 	[key: string]: any;
 }
+
+export interface CommonClasses {
+	readonly container?: string;
+	readonly element?: string;
+}
+
 export interface CommonParams {
 	readonly type: string;
 	readonly model?: string;
 	readonly enable?: boolean;
-	readonly class?: string;
+	readonly class?: CommonClasses;
 }
 
 export interface AttrsParams {

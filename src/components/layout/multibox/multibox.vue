@@ -1,10 +1,5 @@
 <template>
-	<div
-		v-if="groups.length"
-		class="multibox"
-		:class="common.class.container"
-		v-bind="attrs.container"
-	>
+	<div v-if="groups.length" class="multibox" :class="classes.container" v-bind="attrs.container">
 		<div
 			v-for="(group, index) in groups"
 			:key="index"
@@ -37,6 +32,7 @@ import {Multibox} from '@/libs/components/layout/multibox/multibox';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import ButtonAdd from './button-add';
 import ButtonRemove from './button-remove';
+import {FieldL as FL} from '@/libs/components/field/field';
 
 const VirtualComponent = () => import('@/components/virtual-component');
 
@@ -60,6 +56,7 @@ export default {
 
 		return {
 			groups,
+			classes: FL.getClasses(this),
 		};
 	},
 	computed: {

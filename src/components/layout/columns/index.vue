@@ -1,10 +1,5 @@
 <template>
-	<div
-		class="columns"
-		:class="common.class.container"
-		:style="getStyleObj()"
-		v-bind="attrs.container"
-	>
+	<div class="columns" :class="classes.container" :style="getStyleObj()" v-bind="attrs.container">
 		<LayoutColumn
 			v-for="(column, columnIndex) in components"
 			:key="columnIndex"
@@ -16,6 +11,7 @@
 
 <script>
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
+import {FieldL as FL} from '@/libs/components/field/field';
 
 const LayoutColumn = () => import('./column');
 
@@ -27,6 +23,11 @@ export default {
 	props: {
 		...CP.getAllParams(),
 		attrs: CP.attrsOnlyContainer,
+	},
+	data() {
+		return {
+			classes: FL.getClasses(this),
+		};
 	},
 	created() {
 		this.initChildCount();

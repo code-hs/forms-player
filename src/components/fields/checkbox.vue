@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="field checkbox"
-		:class="common.class.container"
+		:class="classes.container"
 		:data-v-error="valid.errorForView"
 		v-bind="attrs.container"
 	>
@@ -55,6 +55,7 @@ export default {
 
 	data() {
 		return {
+			classes: FL.getClasses(this),
 			multiboxName: FL.getMultiName(this),
 			inputName: '',
 			valid: {

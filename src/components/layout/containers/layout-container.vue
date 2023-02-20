@@ -1,5 +1,5 @@
 <template>
-	<div class="layout-container" :class="common.class.container" v-bind="attrs.container">
+	<div class="layout-container" :class="classes.container" v-bind="attrs.container">
 		<VirtualComponent
 			v-for="(component, index) in components"
 			:key="index"
@@ -11,6 +11,7 @@
 
 <script>
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
+import {FieldL as FL} from '@/libs/components/field/field';
 
 const VirtualComponent = () => import('@/components/virtual-component');
 
@@ -22,6 +23,11 @@ export default {
 	props: {
 		...CP.getAllParams(),
 		attrs: CP.attrsOnlyContainer,
+	},
+	data() {
+		return {
+			classes: FL.getClasses(this),
+		};
 	},
 };
 </script>

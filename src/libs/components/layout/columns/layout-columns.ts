@@ -16,7 +16,7 @@ export class LayoutColumns {
 
 		classes += `col-${col} `;
 
-		if (field.common?.class.container) classes += `${field.common.class.container} `;
+		if (field.common?.class?.container) classes += `${field.common.class.container} `;
 
 		return classes;
 	}

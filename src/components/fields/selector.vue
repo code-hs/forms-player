@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="field input-selector"
-		:class="common.class.container"
+		:class="classes.container"
 		:data-v-error="valid.error"
 		v-bind="attrs.container"
 	>
@@ -72,6 +72,7 @@ export default {
 	},
 	data() {
 		return {
+			classes: FL.getClasses(this),
 			multiboxName: FL.getMultiName(this),
 			defaultValue: '',
 			valid: {
