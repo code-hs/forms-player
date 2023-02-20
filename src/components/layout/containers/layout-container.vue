@@ -26,7 +26,7 @@ export default {
 	},
 	data() {
 		return {
-			classes: FL.getClasses(this),
+			classes: FL.getClasses(this.common),
 		};
 	},
 };

@@ -72,7 +72,7 @@ export default {
 		const moduleFieldOptions = {...moduleConfig.forEachField, ...this.module};
 
 		return {
-			classes: FL.getClasses(this),
+			classes: FL.getClasses(this.common),
 			mask: '',
 			multiboxName: FL.getMultiName(this),
 			valid: {

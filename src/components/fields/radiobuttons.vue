@@ -71,7 +71,7 @@ export default {
 	},
 	data() {
 		return {
-			classes: FL.getClasses(this),
+			classes: FL.getClasses(this.common),
 			firstElement: null,
 			multiboxName: FL.getMultiName(this),
 			inputName: '',

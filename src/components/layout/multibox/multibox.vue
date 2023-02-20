@@ -56,7 +56,7 @@ export default {
 
 		return {
 			groups,
-			classes: FL.getClasses(this),
+			classes: FL.getClasses(this.common),
 		};
 	},
 	computed: {
