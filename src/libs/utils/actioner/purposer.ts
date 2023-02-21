@@ -1,4 +1,4 @@
-import {Action} from './types';
+import {Action, ActionTypes} from './types';
 
 export class Purposer {
 	private readonly action: Action;
@@ -12,26 +12,27 @@ export class Purposer {
 	}
 
 	getElements(): Element[] | undefined {
+		let elements;
+
 		if (this.action.container) {
-			return this.getFromContainer();
+			elements = this.getFromContainer();
 		} else if (this.action.nextSibling || this.action.previousSibling) {
-			return this.getFromSibling();
+			elements = this.getFromSibling();
 		}
+
+		if (elements) elements = this.prepareElements(elements);
+
+		return elements;
 	}
 
 	private getFromContainer(): Element[] | undefined {
-		// @ts-ignore
-		const selector: string = this.action.container;
-		const container = this.app.querySelectorAll(selector) as NodeList;
+		const selector: string = this.action.container as string;
+		const container = this.app.querySelectorAll(selector);
 
 		if (!container) return;
 
-		// transform NodeList to Array,
-		// because NodeList hasn't method .map()
-
-		// and take first child of each element
-		// (get .field element, not .vrc-Container)
-		return Array.from(container).map(el => el.firstChild as Element);
+		// to array, for have functions like .filter
+		return Array.from(container);
 	}
 
 	private getFromSibling(): Element[] | undefined {
@@ -73,5 +74,22 @@ export class Purposer {
 			return this.vrcContainer.previousElementSibling?.previousElementSibling
 				?.previousElementSibling;
 		}
+	}
+
+	private prepareElements(elements: Element[]): Element[] {
+		if (
+			(this.action.type === ActionTypes.CHECK_ANOTHERS ||
+				this.action.type === ActionTypes.UNCHECK_ANOTHERS) &&
+			this.action.container
+		) {
+			// delete one checkbox, that was checked, clicked
+			// and in the future, all another checkboxes will be unchecked
+			const selector = this.action.container as string;
+			const checkbox = this.vrcContainer.querySelector(selector);
+
+			return elements.filter(el => el !== checkbox);
+		}
+
+		return elements;
 	}
 }

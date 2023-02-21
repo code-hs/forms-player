@@ -4,6 +4,7 @@
 
 <script>
 import {bus, busBroadcasts} from '@/utils/bus';
+import {ActionTypes} from '@/libs/utils/actioner/types';
 
 export default {
 	name: 'ActionerDisplayer',
@@ -19,18 +20,15 @@ export default {
 			// noinspection JSUnresolvedVariable
 			const app = this.$root.$el;
 			const elements = cActioner.getPurposeElements(app);
-
-			console.log(elements);
-
 			if (!elements) {
 				return console.error('ActionerDisplayer: purpose element not found');
 			}
 
 			for (const elem of elements) {
-				if (cActioner.action.type === 'UNCHECK_ANOTHERS') {
-					elem.checked = false;
-				} else if (cActioner.action.type === 'CHECK_ANOTHERS') {
+				if (cActioner.action.type === ActionTypes.CHECK_ANOTHERS) {
 					elem.checked = true;
+				} else if (cActioner.action.type === ActionTypes.UNCHECK_ANOTHERS) {
+					elem.checked = false;
 				}
 			}
 		},

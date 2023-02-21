@@ -1,14 +1,14 @@
 import {describe, it, expect} from '@jest/globals';
 import {Options, RadiobuttonsL, OnInputEvent} from '@/libs/components/field/inputs/radiobutton';
-import {Action} from '@/libs/utils/actioner/types';
+import {Action, ActionTypes} from '@/libs/utils/actioner/types';
 
 describe('Radiobuttons', () => {
 	const act1: Action = {
-		type: 'SHOW_CONTAINER',
+		type: ActionTypes.SHOW_CONTAINER,
 		nextSibling: 1,
 	};
 	const act2: Action = {
-		type: 'HIDE_CONTAINER',
+		type: ActionTypes.HIDE_CONTAINER,
 		nextSibling: 1,
 	};
 
