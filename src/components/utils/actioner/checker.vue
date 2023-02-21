@@ -26,9 +26,9 @@ export default {
 
 			for (const elem of elements) {
 				if (cActioner.action.type === ActionTypes.CHECK_ANOTHERS) {
-					elem.checked = true;
+					if (!elem.checked) elem.click();
 				} else if (cActioner.action.type === ActionTypes.UNCHECK_ANOTHERS) {
-					elem.checked = false;
+					if (elem.checked) elem.click();
 				}
 			}
 		},
