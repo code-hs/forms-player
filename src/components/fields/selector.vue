@@ -12,6 +12,7 @@
 		<select
 			ref="self"
 			v-model="modelStore[common.model]"
+			:class="classes.element"
 			:required="validation.required"
 			v-bind="attrs.component"
 			@change="handleChange"

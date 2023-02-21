@@ -14,6 +14,7 @@
 			v-model="modelStore[common.model]"
 			v-mask="mask"
 			type="text"
+			:class="classes.element"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
 			v-bind="attrs.component"

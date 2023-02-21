@@ -11,6 +11,7 @@
 				ref="self"
 				v-model="modelStore[common.model]"
 				type="checkbox"
+				:class="classes.element"
 				:name="inputName"
 				:required="validation.required"
 				v-bind="attrs.component"

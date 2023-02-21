@@ -13,6 +13,7 @@
 			ref="self"
 			v-model="modelStore[common.model]"
 			type="password"
+			:class="classes.element"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
 			v-bind="attrs.component"

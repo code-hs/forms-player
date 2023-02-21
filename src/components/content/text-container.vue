@@ -1,7 +1,7 @@
 <template>
 	<div v-if="show" class="text-container" :class="classes.container" v-bind="attrs.container">
 		<!--suppress JSUnresolvedVariable JSUnresolvedFunction -->
-		<component :is="custom.tag" v-bind="attrs.component">
+		<component :is="custom.tag" :class="classes.element" v-bind="attrs.component">
 			{{ $t(text.value) }}
 		</component>
 	</div>

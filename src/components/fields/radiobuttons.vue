@@ -14,8 +14,9 @@
 				<input
 					ref="self"
 					v-model="modelStore[common.model]"
-					:name="inputName"
 					type="radio"
+					:class="classes.element"
+					:name="inputName"
 					:value="option.value"
 					v-bind="attrs.component"
 					@change="handleChange"

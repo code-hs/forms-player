@@ -12,6 +12,7 @@
 		<textarea
 			ref="self"
 			v-model="modelStore[common.model]"
+			:class="classes.element"
 			:placeholder="$t(text.placeholder)"
 			:rows="custom.rows"
 			:required="validation.required"

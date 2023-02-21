@@ -13,6 +13,7 @@
 			ref="self"
 			v-model="modelStore[common.model]"
 			type="email"
+			:class="classes.element"
 			:placeholder="$t(text.placeholder)"
 			:required="validation.required"
 			v-bind="attrs.component"
