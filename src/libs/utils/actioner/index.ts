@@ -1,22 +1,12 @@
 import {bus, busBroadcasts} from '@/utils/bus';
-import {Action} from './types';
+import {Action, ActionTypes} from './types';
 import {Purposer} from '@/libs/utils/actioner/purposer';
 
+interface BusRelations {
+	[key: string]: string;
+}
+
 export class Actioner {
-	static types = {
-		SHOW_CONTAINER: 'SHOW_CONTAINER',
-		HIDE_CONTAINER: 'HIDE_CONTAINER',
-
-		ADD_CLASS_CONTAINER: 'ADD_CLASS_CONTAINER',
-		REMOVE_CLASS_CONTAINER: 'REMOVE_CLASS_CONTAINER',
-
-		ENABLE: 'ENABLE_INPUT',
-		DISABLE: 'DISABLE_INPUT',
-
-		UNCHECK_ANOTHERS: 'UNCHECK_ANOTHERS',
-		CHECK_ANOTHERS: 'CHECK_ANOTHERS',
-	};
-
 	private readonly action: Action;
 	private readonly vrcContainer: Element;
 
@@ -48,18 +38,20 @@ export class Actioner {
 	}
 
 	private getEmmitKey(): string | undefined {
-		const keys = {
-			[Actioner.types.SHOW_CONTAINER]: busBroadcasts.DISPLAY_CONTAINER,
-			[Actioner.types.HIDE_CONTAINER]: busBroadcasts.DISPLAY_CONTAINER,
+		// relations, many actions fire one event,
+		// one vue file, catch one event
+		const keys: BusRelations = {
+			[ActionTypes.SHOW_CONTAINER]: busBroadcasts.DISPLAY_CONTAINER,
+			[ActionTypes.HIDE_CONTAINER]: busBroadcasts.DISPLAY_CONTAINER,
 
-			[Actioner.types.ADD_CLASS_CONTAINER]: busBroadcasts.SET_CONTAINER_CLASS,
-			[Actioner.types.REMOVE_CLASS_CONTAINER]: busBroadcasts.SET_CONTAINER_CLASS,
+			[ActionTypes.ADD_CLASS_CONTAINER]: busBroadcasts.SET_CONTAINER_CLASS,
+			[ActionTypes.REMOVE_CLASS_CONTAINER]: busBroadcasts.SET_CONTAINER_CLASS,
 
-			[Actioner.types.ENABLE]: busBroadcasts.ENABLING_INPUT,
-			[Actioner.types.DISABLE]: busBroadcasts.ENABLING_INPUT,
+			[ActionTypes.ENABLE_INPUT]: busBroadcasts.ENABLING_INPUT,
+			[ActionTypes.DISABLE_INPUT]: busBroadcasts.ENABLING_INPUT,
 
-			[Actioner.types.UNCHECK_ANOTHERS]: busBroadcasts.CHECKING_INPUT,
-			[Actioner.types.CHECK_ANOTHERS]: busBroadcasts.CHECKING_INPUT,
+			[ActionTypes.UNCHECK_ANOTHERS]: busBroadcasts.CHECKING_INPUT,
+			[ActionTypes.CHECK_ANOTHERS]: busBroadcasts.CHECKING_INPUT,
 		};
 
 		return keys[this.action.type];
