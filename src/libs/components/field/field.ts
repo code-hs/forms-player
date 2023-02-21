@@ -50,8 +50,6 @@ export class FieldL {
 		const model: string = field.common.model || '';
 		const rnd: string = generateStr(3);
 
-		if (field.custom?.equalNameInMultibox) return `${mb}.${model}`;
-
 		return `${mb}.${mbIndex}.${model}.${rnd}`;
 	}
 
