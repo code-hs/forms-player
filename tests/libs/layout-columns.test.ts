@@ -17,7 +17,9 @@ describe('LayoutColumns class', () => {
 		const field: Field = {
 			common: {
 				type: 'test',
-				class: 'test-col',
+				class: {
+					container: 'test-col',
+				},
 			},
 			custom: {childCount: 3},
 		};
