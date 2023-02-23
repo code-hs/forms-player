@@ -6,7 +6,6 @@
 		"serve": "cross-env CUSTOM_MODE=dev vue-cli-service serve",
 		" ": "",
 		"build:min": "npm run _cp:all-asset-files && cross-env CUSTOM_MODE=prod vue-cli-service build",
-		"only-build:min": "cross-env CUSTOM_MODE=prod vue-cli-service build",
 		"build:full         (with sourcemap, with comments, logs)": "npm run _cp:all-asset-files && cross-env CUSTOM_MODE=dev vue-cli-service build",
 		"present: deploy": "wrangler publish",
 		"  ": "",
