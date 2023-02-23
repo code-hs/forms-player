@@ -30,9 +30,10 @@
 import {mapMutations} from 'vuex';
 import {Multibox} from '@/libs/components/layout/multibox/multibox';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
+import {FieldL as FL} from '@/libs/components/field/field';
 import ButtonAdd from './button-add';
 import ButtonRemove from './button-remove';
-import {FieldL as FL} from '@/libs/components/field/field';
+
 
 const VirtualComponent = () => import('@/components/virtual-component');
 

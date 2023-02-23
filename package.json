@@ -6,6 +6,7 @@
 		"serve": "cross-env CUSTOM_MODE=dev vue-cli-service serve",
 		" ": "",
 		"build:min": "npm run _cp:all-asset-files && cross-env CUSTOM_MODE=prod vue-cli-service build",
+		"only-build:min": "cross-env CUSTOM_MODE=prod vue-cli-service build",
 		"build:full         (with sourcemap, with comments, logs)": "npm run _cp:all-asset-files && cross-env CUSTOM_MODE=dev vue-cli-service build",
 		"present: deploy": "wrangler publish",
 		"  ": "",
@@ -37,9 +38,9 @@
 		"@babel/preset-typescript": "^7.17.12",
 		"@jest/globals": "^27.2.3",
 		"@typescript-eslint/parser": "^5.28.0",
-		"@vue/cli-plugin-babel": "^3.4.1",
-		"@vue/cli-plugin-eslint": "^3.4.1",
-		"@vue/cli-service": "^3.5.3",
+		"@vue/cli-plugin-babel": "~5.0.0",
+		"@vue/cli-plugin-eslint": "^5.0.8",
+		"@vue/cli-service": "^5.0.8",
 		"@vue/eslint-config-airbnb": "^5.3.0",
 		"@vue/test-utils": "^1.2.2",
 		"babel-core": "^7.0.0-bridge.0",
@@ -50,14 +51,12 @@
 		"eslint-plugin-vue": "^7.18.0",
 		"jest": "^27.2.3",
 		"jsdom": "^17.0.0",
-		"node-sass": "^6.0.1",
+		"node-sass": "8.0.0",
 		"sass": "^1.42.1",
-		"sass-loader": "^7.0.3",
-		"serve": "^13.0.2",
-		"uglifyjs-webpack-plugin": "^2.2.0",
-		"vue-jest": "^3.0.7",
+		"sass-loader": "^13.2.0",
+		"serve": "^14.2.0",
 		"vue-template-compiler": "^2.5.16",
-		"webpack": "^4.46.0",
+		"webpack": "^5.75.0",
 		"webpack-bundle-analyzer": "^4.4.2"
 	},
 	"browserslist": [
@@ -72,7 +71,6 @@
 			"ts"
 		],
 		"transform": {
-			".*\\.(vue)$": "vue-jest",
 			"^.+\\.js$": "<rootDir>/node_modules/babel-jest",
 			"^.+\\.ts$": "<rootDir>/node_modules/babel-jest"
 		},
