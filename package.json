@@ -16,13 +16,13 @@
 		"_cp:all-asset-files": "npm run _cp:all-to-dev-site-dir && npm run _cp:all-to-public-dir",
 		"      ": "",
 		"_cp:all-to-dev-site-dir": "npm run _cp:d:bundle && npm run _cp:d:scheme-locales && npm run _cp:d:loader",
-		"_cp:d:bundle": "cpy dist/*.js dev-site/assets",
-		"_cp:d:scheme-locales": "cpy ../forms-jsons/*.json dev-site/assets",
-		"_cp:d:loader": "cpy ../forms-loader/dist/*.js dev-site/assets",
+		"_cp:d:bundle": "cpy \"dist/*.js\" dev-site/assets",
+		"_cp:d:scheme-locales": "cpy \"../forms-jsons/*.json\" dev-site/assets",
+		"_cp:d:loader": "cpy \"../forms-loader/dist/*.js\" dev-site/assets",
 		"     ": "",
 		"_cp:all-to-public-dir": "npm run _cp:p:scheme-locales && npm run _cp:p:loader",
-		"_cp:p:scheme-locales": "cpy ../forms-jsons/*.json public/assets",
-		"_cp:p:loader": "cpy ../forms-loader/dist/*.js public/assets"
+		"_cp:p:scheme-locales": "cpy \"../forms-jsons/*.json\" public/assets",
+		"_cp:p:loader": "cpy \"../forms-loader/dist/*.js\" public/assets"
 	},
 	"dependencies": {
 		"document-register-element": "^1.11.0",
