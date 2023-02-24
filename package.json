@@ -5,8 +5,7 @@
 	"scripts": {
 		"serve": "cross-env CUSTOM_MODE=dev vue-cli-service serve",
 		" ": "",
-		"build:min": "npm run _cp:all-asset-files && cross-env CUSTOM_MODE=prod vue-cli-service build",
-		"build:full         (with sourcemap, with comments, logs)": "npm run _cp:all-asset-files && cross-env CUSTOM_MODE=dev vue-cli-service build",
+		"build:min": "cross-env CUSTOM_MODE=prod vue-cli-service build && npm run _cp:all-asset-files",
 		"present: deploy": "wrangler publish",
 		"  ": "",
 		"lint": "vue-cli-service lint --no-fix --ext .ts,.js,.vue ./src/",
