@@ -1,8 +1,6 @@
 // noinspection JSUnresolvedVariable
 const webpack = require('webpack');
 const path = require('path');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const TerserPlugin = require('terser-webpack-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 
 // noinspection JSUnresolvedFunction,JSUnresolvedVariable
@@ -10,41 +8,26 @@ const plugins = [
 	new webpack.optimize.LimitChunkCountPlugin({
 		maxChunks: 1,
 	}),
-	// new webpack.LoaderOptionsPlugin({
-	// 	minimize: true,
-	// 	debug: false,
-	// }),
+	new webpack.LoaderOptionsPlugin({
+		minimize: true,
+		debug: false,
+	}),
 	new webpack.DefinePlugin({
 		'process.env.CUSTOM_MODE': JSON.stringify(process.env.CUSTOM_MODE),
 	}),
 ];
 
-// let dropConsole = false;
-
-if (process.env.CUSTOM_MODE === 'dev') {
-	// dropConsole = false;
-} else if (process.env.CUSTOM_MODE === 'analyze') {
+if (process.env.CUSTOM_MODE === 'analyze') {
 	plugins.push(new BundleAnalyzerPlugin());
 }
 
 const configureWebpack = {
-	devtool: 'source-map',
 	output: {
 		path: path.resolve(__dirname, '../../dist'),
 		filename: 'form-widget-g.js',
 	},
 	resolve: {extensions: ['.js', '.ts', '.vue']},
 	plugins,
-	// optimization: {
-	// 	minimize: true,
-	// 	minimizer: [
-	// 		new TerserPlugin({
-	// 			extractComments: true,
-	// 			parallel: true,
-	// 			terserOptions: {output: {comments: false}},
-	// 		}),
-	// 	],
-	// },
 	module: {
 		rules: [
 			{

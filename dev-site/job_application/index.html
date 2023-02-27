@@ -14,7 +14,7 @@
 				form.setAttribute('data-page', page);
 			}
 		</script>
-		<div>
+		<div class="page-btns">
 			<button onclick="changePage('welcome')">welcome</button>
 			<button onclick="changePage('driver-application-confirm')">
 				driver -application-confirm
@@ -68,6 +68,15 @@
 			margin: 20px;
 			max-width: 600px;
 			background: #292a2b;
+		}
+		
+		.page-btns button {
+			background: transparent;
+			color: #9f9f9f;
+			border: none;
+			border-right: 1px solid gray;
+			padding-right: 6px;
+			cursor: pointer;
 		}
 	</style>
 </html>
