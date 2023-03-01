@@ -1,6 +1,6 @@
+import {Scheme, Page, Configurations} from '@/libs/scheme/scheme.types';
 import {SchemeLoader} from './scheme-loader';
 import {SchemeFiltrator} from './scheme-filtrator';
-import {Scheme, Page, Configurations} from '@/libs/scheme/scheme.types';
 
 export class SchemeController {
 	private static scheme: Scheme;

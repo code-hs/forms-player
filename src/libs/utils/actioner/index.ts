@@ -1,6 +1,6 @@
 import {bus, busBroadcasts} from '@/utils/bus';
-import {Action, ActionTypes} from './types';
 import {Purposer} from '@/libs/utils/actioner/purposer';
+import {Action, ActionTypes} from './types';
 
 interface BusRelations {
 	[key: string]: string;

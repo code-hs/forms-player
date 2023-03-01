@@ -1,6 +1,6 @@
 import {LocalizationConfig} from '@/libs/scheme/scheme.types';
-import {LocalesAllLanguages, LocalizationInformation} from './types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
+import {LocalesAllLanguages, LocalizationInformation} from './types';
 
 export class LocalizationLoader {
 	static getData(): LocalizationInformation {

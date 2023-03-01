@@ -1,7 +1,7 @@
 import {Field, Variables, CommonClasses, CommonParams} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
-import {FieldThis} from './field.types';
 import {generateStr} from '@/utils/random';
+import {FieldThis} from './field.types';
 
 export class FieldL {
 	static getMultiName(field: Field): string {
