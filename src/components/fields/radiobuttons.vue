@@ -38,7 +38,7 @@ import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
-import {bus, busBroadcasts} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/libs/utils/bus';
 import {RadiobuttonsL} from '@/libs/components/field/inputs/radiobutton';
 
 export default {

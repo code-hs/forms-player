@@ -36,7 +36,7 @@ import {FieldValidator} from '@/libs/validator/field-validator';
 import {InputL} from '@/libs/components/field/inputs/input';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
-import {bus, busBroadcasts} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/libs/utils/bus';
 
 export default {
 	name: 'InputTextarea',

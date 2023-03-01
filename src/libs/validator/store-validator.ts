@@ -1,4 +1,4 @@
-import {bus, busBroadcasts} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/libs/utils/bus';
 
 export interface ValidatorField {
 	readonly key: number;

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {bus, busBroadcasts} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/libs/utils/bus';
 
 export default {
 	name: 'ActionerClasser',

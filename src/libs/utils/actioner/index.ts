@@ -1,4 +1,4 @@
-import {bus, busBroadcasts} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/libs/utils/bus';
 import {Purposer} from '@/libs/utils/actioner/purposer';
 import {Action, ActionTypes} from './types';
 

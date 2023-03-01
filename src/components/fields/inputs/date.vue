@@ -37,7 +37,7 @@ import {InputL} from '@/libs/components/field/inputs/input';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import {ModuleController} from '@/libs/modules/module-controller';
-import {bus, busBroadcasts} from '@/utils/bus';
+import {bus, busBroadcasts} from '@/libs/utils/bus';
 import {DatepickerLoader} from '@/libs/modules/datepicker/datepicker-loader';
 import {DatepickerL} from '@/libs/modules/datepicker/datepicker';
 import {SmartTimeout} from '@/utils/smart-timeout';
