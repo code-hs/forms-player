@@ -170,7 +170,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			// if element is hidden, hidden by action displayer
+			// if element is hidden
 			if (FieldValidator.isSkipTaskByOptionsReqOnlyIfVis(this.validation, this.$refs.self)) {
 				this.vTaskSkip();
 				return;
