@@ -1,5 +1,5 @@
 <template>
-	<article :class="'vrc vrc-' + fieldType">
+	<div :class="'vrc vrc-' + fieldType">
 		<!--suppress JSUnresolvedVariable -->
 		<component
 			:is="schemeOptions.common.type"
@@ -8,7 +8,7 @@
 			:multibox-index="multiboxIndex"
 			v-bind="schemeOptions"
 		/>
-	</article>
+	</div>
 </template>
 
 <!--suppress JSCheckFunctionSignatures -->

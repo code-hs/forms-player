@@ -170,7 +170,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.firstElement)) {
+			if (FieldValidator.isSkipTaskByOptionsReqOnlyIfVis(this.validation, this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

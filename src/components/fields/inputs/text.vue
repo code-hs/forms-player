@@ -173,7 +173,7 @@ export default {
 		},
 		vHandleTask() {
 			// if element is hidden, hidden by action displayer
-			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.$refs.self)) {
+			if (FieldValidator.isSkipTaskByOptionsReqOnlyIfVis(this.validation, this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

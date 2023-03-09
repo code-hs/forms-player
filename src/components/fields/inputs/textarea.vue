@@ -161,7 +161,7 @@ export default {
 			});
 		},
 		vHandleTask() {
-			if (this.validation.requiredOnlyIfVisible && !FL.isVisible(this.$refs.self)) {
+			if (FieldValidator.isSkipTaskByOptionsReqOnlyIfVis(this.validation, this.$refs.self)) {
 				this.vTaskSkip();
 				return;
 			}

@@ -1,5 +1,7 @@
 import {ValidationParams} from '@/libs/scheme/scheme.types';
 import {stringToRegex} from '@/utils/regexp';
+import {FieldThis} from '@/libs/components/field/field.types';
+import {FieldL as FL} from '@/libs/components/field/field';
 
 export class FieldValidator {
 	static debounceTime: number = 300;
@@ -37,5 +39,11 @@ export class FieldValidator {
 		if (onlyRequired) return rules.required as boolean;
 
 		return !!(rules.pattern || rules.required);
+	}
+
+	static isSkipTaskByOptionsReqOnlyIfVis(field: FieldThis, element: Element): boolean {
+		if (!field || !element) return false;
+
+		return (field.requiredOnlyIfVisible && !FL.isVisible(element)) as boolean;
 	}
 }
