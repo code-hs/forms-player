@@ -1,0 +1,24 @@
+.main-form {
+	display: flex;
+}
+
+.menu {
+	width: 100%;
+	max-width: 250px;
+	padding: 0.63rem 0.63rem 0.63rem 0;
+
+	ul {
+		list-style-type: none;
+	}
+
+	li {
+		+ li {
+			margin-top: 6px;
+		}
+	}
+
+	.btn-link {
+		text-align: left;
+		width: 100%;
+	}
+}

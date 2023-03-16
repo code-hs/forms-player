@@ -12,6 +12,7 @@ form-widget-g {
 	@import 'form';
 	@import 'layout/columns';
 	@import 'layout/multibox';
+	@import 'layout/menu';
 
 	@import 'fields/mixins';
 	@import 'fields/template-classes';
@@ -25,4 +26,5 @@ form-widget-g {
 	@import 'fields/checkbox';
 	@import 'fields/radiobutton';
 	@import 'fields/buttons/submit';
+	@import 'fields/buttons/link';
 }

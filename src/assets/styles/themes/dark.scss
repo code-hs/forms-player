@@ -4,7 +4,7 @@
 	--dump: hsl(238, 92%, 86%);
 
 	// group item layout
-	--groupItemShadow: hsl(0, 0%, 0%, 68%);
+	--groupItemShadow: hsl(0, 0%, 0%, 28%);
 	--groupItemBorder: hsl(0, 0%, 15%);
 
 	// fieldset
@@ -32,4 +32,8 @@
 	--datepicker-current-day: hsl(187deg 68% 21%);
 	--datepicker-selected-day: hsl(187deg 68% 40%);
 	--datepicker-disable-text: hsl(0, 0%, 40%);
+
+	//links
+	--linkItemActive: hsl(0, 0%, 14%);
+	--linkItemFocus: hsl(0, 0%, 20%);
 }

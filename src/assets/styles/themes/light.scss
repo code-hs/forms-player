@@ -4,19 +4,20 @@
 	--dump: hsl(0, 0%, 40%);
 
 	// group item layout
-	--groupItemShadow: hsl(0, 0%, 0%, 48%);
+	--groupItemShadow: hsl(0, 0%, 0%, 28%);
 	--groupItemBorder: hsl(0, 0%, 82%);
 
 	// fieldset
 	--fieldsetsSeparator: hsl(0, 0%, 85%);
 
 	// text
-	--text: hsl(0, 0%, 28%);
+	--text: hsl(0, 0%, 0%, 100%);
 
 	// inputs
-	--formItemBorder: hsl(0, 0%, 85%);
-	--formItemBg: hsl(0, 0%, 98%);
-	--formItemBgFocus: hsl(0, 8%, 96%);
+	--formItemBorder: hsl(0, 0%, 100%);
+	--formItemBg: hsl(0, 0%, 97%);
+	--formItemBgFocus: hsl(0, 8%, 100%);
+	--formItemBorderFocus: hsl(0, 8%, 90%);
 	--formItemRed: hsl(0, 100%, 50%);
 
 	--checkboxBorderInto: hsl(0, 0%, 28%);
@@ -32,4 +33,8 @@
 	--datepicker-current-day: hsl(187deg 72% 81%);
 	--datepicker-selected-day: hsl(187deg 68% 40%);
 	--datepicker-disable-text: hsl(0, 0%, 40%);
+
+	//links
+	--linkItemActive: hsl(0, 0%, 90%);
+	--linkItemFocus: hsl(0, 0%, 97%);
 }

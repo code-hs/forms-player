@@ -3,18 +3,14 @@
 	align-items: center;
 	flex-direction: column;
 	width: 100%;
-	padding: 0.63em;
 
 	color: var(--text);
-	border: 2px solid var(--groupItemBorder);
-	border-radius: 0.19em;
 	background-color: var(--appBackground);
-	box-shadow: 6px 6px 15px 1px var(--groupItemShadow);
 	font: 16px/1.5 sans-serif;
 
 	.dump {
 		width: 300px;
-		margin-top: 50px;
+		margin: 50px auto 0;
 		white-space: pre;
 		color: var(--dump);
 		border-top: 1px dashed;
