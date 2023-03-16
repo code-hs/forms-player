@@ -7,10 +7,12 @@ import {Page} from '@/libs/scheme/scheme.types';
  */
 const state = () => ({
 	page: null,
+	pages: [],
 });
 
 const getters = {
 	page: s => s.page,
+	pages: s => s.pages,
 };
 
 const mutations = {
@@ -19,6 +21,9 @@ const mutations = {
 	 */
 	setPage: (s, v) => {
 		s.page = v;
+	},
+	setPages: (s, v) => {
+		s.pages = v;
 	},
 };
 
@@ -36,6 +41,12 @@ const actions = {
 		commit('setPage', page);
 
 		return page;
+	},
+	initPages({commit}) {
+		const pages = SchemeController.getPages();
+		commit('setPages', pages);
+
+		return pages;
 	},
 };
 

@@ -38,4 +38,10 @@ export class SchemeController {
 
 		return this.scheme.pages.find(p => p.key === pageKey) as Page;
 	}
+
+	static getPages() {
+		if (!this.scheme?.pages) return {};
+
+		return this.scheme.pages;
+	}
 }

@@ -1,15 +1,18 @@
 <template>
 	<div class="app" :data-layout="dataLayout" :data-theme="dataTheme">
-		<template v-if="showContent">
-			<FormC />
+		<div class="main-form" style="width: 100%">
+			<Menu v-if="enabledMenu" @dataPageHandler="menuItemHandler" :module-menu="moduleMenu.pages" />
+			<div v-if="showContent" class="form-wrapper">
+				<FormC />
 
-			<StyleIncluder />
-			<ValidationFocus />
-			<Actioner />
+				<StyleIncluder />
+				<ValidationFocus />
+				<Actioner />
 
-			<div v-if="showDump" class="dump">{{ modelStructure }}</div>
-			<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
-		</template>
+				<div v-if="showDump" class="dump">{{ modelStructure }}</div>
+				<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -22,10 +25,12 @@ import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
 import StyleIncluder from '@/components/utils/style/style-includer';
 import Actioner from '@/components/utils/actioner';
+import Menu from '@/components/layout/page-menu';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
+import {ModuleController} from '@/libs/modules/module-controller';
 
 export default {
-	components: {FormC, ValidationFocus, StyleIncluder, Actioner},
+	components: {FormC, ValidationFocus, StyleIncluder, Actioner, Menu},
 	props: {
 		// project id
 		dataProjectId: {
@@ -56,11 +61,13 @@ export default {
 
 	data() {
 		return {
+			menuItem: '',
 			pageKey: this.getPageKey(),
 			showContent: false,
 			showDump: Config.showDump,
 			appId: generateHash(), // id for the app, for api ddos protection
 			scheme: null,
+			moduleMenu: ModuleController.getModuleConfig('menu'),
 		};
 	},
 
@@ -69,6 +76,9 @@ export default {
 			modelStructure: 'model/structure',
 			validatorFields: 'validator/fields',
 		}),
+		enabledMenu() {
+			return Boolean(this.scheme.config.modules.filter(i => i.name === 'menu')[0].enable);
+		},
 	},
 
 	watch: {
@@ -76,9 +86,10 @@ export default {
 			this.localization.changeLanguage(newLang);
 		},
 		dataPage(newPage) {
-			this.showContent = false;
-			this.pageKey = newPage;
-			this.initPage(newPage);
+			this.setNewPage(newPage);
+		},
+		menuItem() {
+			this.setNewPage(this.menuItem);
 		},
 	},
 
@@ -90,6 +101,7 @@ export default {
 		this.scheme = SchemeController.load();
 		this.initPage();
 		this.initPlugins();
+		this.sInitPages();
 	},
 
 	methods: {
@@ -98,6 +110,7 @@ export default {
 		}),
 		...mapActions({
 			sInitPage: 'scheme/initPage',
+			sInitPages: 'scheme/initPages',
 		}),
 		initPlugins() {
 			Api.init(this.dataProjectId, this.appId);
@@ -123,10 +136,18 @@ export default {
 
 			return this.dataPage;
 		},
+		setNewPage(pageName) {
+			this.showContent = false;
+			this.pageKey = pageName;
+			this.initPage(pageName);
+		},
+		menuItemHandler(item) {
+			this.menuItem = item;
+		},
 	},
 };
 </script>
 
 <style lang="scss">
-@import '@/assets/styles/index';
+@import '@/assets/styles/index.scss';
 </style>
