@@ -1,0 +1,94 @@
+:root {
+	/*copy from light.scss*/
+	--text: hsl(0, 0%, 69%);
+	--groupItemShadow: hsl(0, 0%, 0%, 28%);
+	--appBackgroundDark: hsl(210, 2%, 16%);
+}
+
+.wrapper {
+	padding: 0.63rem;
+}
+
+.content {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0.63em;
+
+	color: var(--text);
+	border-radius: 0.19em;
+
+	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
+}
+
+body {
+	--text: hsl(0, 0%, 0%, 100%);
+	font-family: 'Proxima Nova 300', sans-serif;
+}
+
+body[data-theme='dark'] {
+	--text: hsl(0, 0%, 69%);
+	background-color: var(--appBackgroundDark);
+}
+
+.btn-theme span {
+	display: none;
+}
+
+body[data-theme='dark'] .header .--dark,
+body[data-theme='light'] .header .--light {
+	display: inline-block;
+}
+body[data-theme='dark'] .header .--light,
+body[data-theme='light'] .header .--dark {
+	display: none;
+}
+
+.btn-theme {
+	margin: 0 0 0 auto;
+	outline: none !important;
+	border: none !important;
+	line-height: 1;
+	font-size: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	padding: 2px;
+	cursor: pointer;
+	background-color: #edecec;
+}
+
+.btn-theme:hover {
+	background-color: #f6f6f6;
+}
+
+.header {
+	margin-bottom: 24px;
+}
+
+.footer {
+	text-align: center;
+	font-weight: 300;
+	font-size: 11px;
+	color: #808080;
+	padding: 1rem 0.63rem 0;
+	position: relative;
+	margin-top: 1rem;
+}
+
+.footer:after {
+	content: '';
+	position: absolute;
+	left: 5%;
+	right: 5%;
+	top: 0;
+	height: 0px;
+	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
+	opacity: 0.5;
+}
+
+body[data-theme='dark'] .footer:after {
+	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
+}
