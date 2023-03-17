@@ -25,7 +25,7 @@ import {mapGetters} from 'vuex';
 export default {
 	props: {
 		moduleMenu: {
-			type: Object,
+			type: Array,
 			default: null,
 			required: true,
 		},
