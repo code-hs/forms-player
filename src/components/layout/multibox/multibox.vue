@@ -12,6 +12,9 @@
 				@handleRemove="handleRemove"
 			/>
 
+			<!--suppress JSUnresolvedVariable -->
+			<div v-if="custom.title" class="multibox__item-title">{{ generateTitle(index) }}</div>
+
 			<VirtualComponent
 				v-for="field in group"
 				:key="field.custom.multi.key"
@@ -34,7 +37,6 @@ import {FieldL as FL} from '@/libs/components/field/field';
 import ButtonAdd from './button-add';
 import ButtonRemove from './button-remove';
 
-
 const VirtualComponent = () => import('@/components/virtual-component');
 
 export default {
@@ -47,6 +49,14 @@ export default {
 	props: {
 		...CP.getAllParams(),
 		attrs: CP.attrsOnlyContainer,
+		custom: {
+			type: Object,
+			required: false,
+			default: () => ({
+				title: '',
+				addIndex: true,
+			}),
+		},
 	},
 	data() {
 		// мультибокс = [группа1, группа2, группа3]
@@ -58,6 +68,7 @@ export default {
 		return {
 			groups,
 			classes: FL.getClasses(this.common),
+			addIndexInTitle: this.custom.addIndex ?? true,
 		};
 	},
 	computed: {
@@ -90,6 +101,14 @@ export default {
 
 			// delete from view
 			this.groups.splice(index, 1);
+		},
+		generateTitle(index) {
+			if (!this.custom.title) return '';
+
+			const locatedStr = this.$t(this.custom.title);
+
+			if (this.addIndexInTitle) return `${locatedStr}${index + 1}`;
+			return locatedStr;
 		},
 	},
 };
