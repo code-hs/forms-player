@@ -10,39 +10,6 @@
 					as="script" />
 	</head>
 	<body>
-		<script>
-			function changePage(page) {
-				const form = document.querySelector('form-widget-g');
-				form.setAttribute('data-page', page);
-			}
-			const body = document.querySelector('body');
-			const formWidget = document.getElementsByTagName('form-widget-g');
-			function changeTheme() {
-				const storageTheme = localStorage.getItem('WT');
-				if (storageTheme) {
-					localStorage.removeItem('WT');
-					formWidget[0].dataTheme = body.dataset.theme = 'light';
-				} else {
-					localStorage.setItem('WT', 'dark');
-					formWidget[0].dataTheme = body.dataset.theme = 'dark';
-				}
-			}
-			window.onload = () => {
-				const themeColor = localStorage.getItem('WT');
-				formWidget[0].dataTheme = body.dataset.theme = themeColor ? 'dark' : 'light';
-				document.getElementById('year').innerHTML = new Date().getFullYear();
-			};
-		</script>
-		<div class="page-btns">
-			<button onclick="changePage('welcome')">welcome</button>
-			<button onclick="changePage('driver-application-confirm')">
-				driver -application-confirm
-			</button>
-			<button onclick="changePage('personal-information-text')">personal-information-text</button>
-			<button onclick="changePage('personal-information')">personal-information</button>
-			<button onclick="changePage('work-history')">work-history</button>
-			<button onclick="changePage('complete')">complete</button>
-		</div>
 
 		<div class="wrapper">
 			<div class="content">
@@ -73,6 +40,7 @@
 
 		<!--		<script src="dev/mobileConsole.js"></script>-->
 		<script src="/assets/files/widget-form-loader.min.js"></script>
+		<script src="index.js"></script>
 	</body>
 
 	<style>
@@ -88,28 +56,6 @@
 			src: url('./assets/fonts/proxima-nova-400.otf');
 			src: url('./assets/fonts/proxima-nova-400.woff2') format('woff2'),
 			url('./assets/fonts/proxima-nova-400.woff') format('woff');
-		}
-
-		*,
-		::after,
-		::before {
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
-			margin: 0;
-			padding: 0;
-			outline: none;
-		}
-
-		body {
-		}
-
-		.page-btns button {
-			background: transparent;
-			color: #9f9f9f;
-			border: none;
-			border-right: 1px solid gray;
-			padding-right: 6px;
-			cursor: pointer;
 		}
 	</style>
 </html>
