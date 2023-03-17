@@ -24,4 +24,4 @@ yarn-error.log*
 /dist/
 dev-site/assets/
 wrangler.toml
-public/assets/
+public/assets/files/
