@@ -5,7 +5,9 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		<title>Form</title>
-		<link href="/assets/widget-form-loader.min.js" rel="preload" as="script" />
+		<link rel="stylesheet" href="/assets/index.css" />
+		<link href="/assets/files/widget-form-loader.min.js" rel="preload" 
+					as="script" />
 	</head>
 	<body>
 		<script>
@@ -13,6 +15,23 @@
 				const form = document.querySelector('form-widget-g');
 				form.setAttribute('data-page', page);
 			}
+			const body = document.querySelector('body');
+			const formWidget = document.getElementsByTagName('form-widget-g');
+			function changeTheme() {
+				const storageTheme = localStorage.getItem('WT');
+				if (storageTheme) {
+					localStorage.removeItem('WT');
+					formWidget[0].dataTheme = body.dataset.theme = 'light';
+				} else {
+					localStorage.setItem('WT', 'dark');
+					formWidget[0].dataTheme = body.dataset.theme = 'dark';
+				}
+			}
+			window.onload = () => {
+				const themeColor = localStorage.getItem('WT');
+				formWidget[0].dataTheme = body.dataset.theme = themeColor ? 'dark' : 'light';
+				document.getElementById('year').innerHTML = new Date().getFullYear();
+			};
 		</script>
 		<div class="page-btns">
 			<button onclick="changePage('welcome')">welcome</button>
@@ -25,33 +44,50 @@
 			<button onclick="changePage('complete')">complete</button>
 		</div>
 
-		<form-widget-g
-			data-project-id="62508e2544f0831be0b66a0b"
-			data-path="/assets"
-			data-page="welcome"
-			data-language="en"
-			data-theme="dark"
-		></form-widget-g>
+		<div class="wrapper">
+			<div class="content">
+				<header class="header">
+					<button class="btn-theme" onclick="changeTheme()">
+						<span class="--light">&#9728;</span>
+						<span class="--dark">&#9789;</span>
+					</button>
+				</header>
+
+				<!--	файл для запуска serve	-->
+				<form-widget-g
+					data-project-id="62508e2544f0831be0b66a0b"
+					data-path="/assets/files"
+					data-page="welcome"
+					data-language="en"
+					data-theme="light"
+				></form-widget-g>
+
+				<div class="footer">
+					<p>&copy; <span id="year"></span> Company Global.</p>
+				</div>
+			</div>
+		</div>
 
 		<!-- data-theme="light"-->
 		<!-- data-layout="small"-->
 
 		<!--		<script src="dev/mobileConsole.js"></script>-->
-		<script src="/assets/widget-form-loader.min.js"></script>
+		<script src="/assets/files/widget-form-loader.min.js"></script>
 	</body>
 
 	<style>
 		@font-face {
-			font-family: 'Proxima Nova Thin';
-			src: url('/assets/fonts/proxima_nova_thin.eot');
-			/* IE 9 Compatibility Mode */
-			src: url('/assets/fonts/proxima_nova_thin.eot?#iefix') format('embedded-opentype'),
-				/* IE < 9 */ url('/assets/fonts/proxima_nova_thin.woff2') format('woff2'),
-				/* Super Modern Browsers */ url('/assets/fonts/proxima_nova_thin.woff') format('woff'),
-				/* Firefox >= 3.6, any other modern browser */ url('/assets/fonts/proxima_nova_thin.ttf')
-					format('truetype'),
-				/* Safari, Android, iOS */ url('/assets/fonts/proxima_nova_thin.svg#proxima_nova_thin')
-					format('svg'); /* Chrome < 4, Legacy iOS */
+			font-family: 'Proxima Nova 300';
+			src: url('./assets/fonts/proxima-nova.otf');
+			src: url('./assets/fonts/proxima-nova.woff2') format('woff2'),
+			url('./assets/fonts/proxima-nova.woff') format('woff');
+		}
+
+		@font-face {
+			font-family: 'Proxima Nova 400';
+			src: url('./assets/fonts/proxima-nova-400.otf');
+			src: url('./assets/fonts/proxima-nova-400.woff2') format('woff2'),
+			url('./assets/fonts/proxima-nova-400.woff') format('woff');
 		}
 
 		*,
@@ -65,11 +101,8 @@
 		}
 
 		body {
-			margin: 20px;
-			max-width: 600px;
-			background: #292a2b;
 		}
-		
+
 		.page-btns button {
 			background: transparent;
 			color: #9f9f9f;
