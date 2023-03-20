@@ -1,11 +1,7 @@
 <template>
 	<div v-if="isEnable" class="menu">
 		<ul>
-			<li
-				v-for="(page, idx) in menuItems"
-				:key="page.title + idx"
-				:class="{'not-enable': page.disabled}"
-			>
+			<li v-for="(page, idx) in menuItems" :key="page.title + idx">
 				<button
 					class="btn-link"
 					:class="{active: pageStructure.id === page.pageId}"
@@ -44,14 +40,11 @@ export default {
 		// noinspection JSUnresolvedVariable
 		if (!this.moduleConfig.pages) return;
 
-		const pageListIds = this.pages.reduce((acc, pageObj) => [...acc, pageObj.id], []);
-		this.menuItems = this.moduleConfig.pages
-			.filter(menuItem => pageListIds.includes(menuItem.pageId))
-			.filter(menuItem => {
-				// noinspection RedundantIfStatementJS
-				if ('enable' in menuItem && menuItem.enable === false) return false;
-				return true;
-			});
+		this.menuItems = this.moduleConfig.pages.filter(menuItem => {
+			// noinspection RedundantIfStatementJS
+			if ('enable' in menuItem && menuItem.enable === false) return false;
+			return true;
+		});
 	},
 	methods: {
 		emitDataKey(pageId) {
