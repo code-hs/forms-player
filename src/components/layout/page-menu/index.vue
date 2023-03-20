@@ -2,7 +2,7 @@
 	<div v-if="isEnable" class="menu">
 		<ul>
 			<li
-				v-for="(page, idx) in moduleConfig.pages"
+				v-for="(page, idx) in menuItems"
 				:key="page.title + idx"
 				:class="{'not-enable': !page.enable}"
 			>
@@ -31,6 +31,7 @@ export default {
 		return {
 			moduleConfig,
 			isEnable: !!moduleConfig,
+			menuItems: [],
 			pages: SchemeController.getPages(),
 			filteredPages: [],
 		};
@@ -42,18 +43,19 @@ export default {
 	},
 	created() {
 		if (!this.isEnable) return;
+		// noinspection JSUnresolvedVariable
+		if (!this.moduleConfig.pages) return;
 
-		this.mapPages();
+		const pageListIds = this.pages.reduce((acc, pageObj) => {
+			acc.push(pageObj.id);
+			return acc;
+		}, []);
+
+		this.menuItems = this.moduleConfig.pages.filter(menuItem =>
+			pageListIds.includes(menuItem.pageId)
+		);
 	},
 	methods: {
-		mapPages() {
-			this.filteredPages = this.pages
-				.filter(item => this.moduleConfig.pages.findIndex(i => i.pageId === item.id) !== -1)
-				.map(el => ({
-					pageId: el.id,
-					key: el.key,
-				}));
-		},
 		emitDataKey(pageId) {
 			const key = this.filteredPages.filter(i => i.pageId === pageId)[0].key;
 			this.$emit('changePage', key);
