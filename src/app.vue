@@ -99,7 +99,6 @@ export default {
 		this.scheme = SchemeController.load();
 		this.initPage();
 		this.initPlugins();
-		this.sInitPages();
 	},
 
 	methods: {
@@ -108,7 +107,6 @@ export default {
 		}),
 		...mapActions({
 			sInitPage: 'scheme/initPage',
-			sInitPages: 'scheme/initPages',
 		}),
 		initPlugins() {
 			Api.init(this.dataProjectId, this.appId);

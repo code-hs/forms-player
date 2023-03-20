@@ -21,6 +21,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
+import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 export default {
 	props: {
@@ -38,7 +39,6 @@ export default {
 	computed: {
 		...mapGetters({
 			pageStructure: 'scheme/page',
-			sPages: 'scheme/pages',
 		}),
 	},
 	created() {
@@ -46,7 +46,8 @@ export default {
 	},
 	methods: {
 		mapPages() {
-			this.filteredPages = this.sPages
+			const pages = SchemeController.getPages();
+			this.filteredPages = pages
 				.filter(item => this.moduleMenu.findIndex(i => i.pageId === item.id) !== -1)
 				.map(el => ({
 					pageId: el.id,
