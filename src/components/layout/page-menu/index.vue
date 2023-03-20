@@ -44,11 +44,7 @@ export default {
 		// noinspection JSUnresolvedVariable
 		if (!this.moduleConfig.pages) return;
 
-		const pageListIds = this.pages.reduce((acc, pageObj) => {
-			acc.push(pageObj.id);
-			return acc;
-		}, []);
-
+		const pageListIds = this.pages.reduce((acc, pageObj) => [...acc, pageObj.id], []);
 		this.menuItems = this.moduleConfig.pages
 			.filter(menuItem => pageListIds.includes(menuItem.pageId))
 			.filter(menuItem => {
