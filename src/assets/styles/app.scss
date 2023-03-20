@@ -1,8 +1,6 @@
 .wdf {
 	&-app {
 		display: flex;
-		align-items: center;
-		flex-direction: column;
 		width: 100%;
 
 		color: var(--text);
@@ -16,10 +14,5 @@
 			color: var(--dump);
 			border-top: 1px dashed;
 		}
-	}
-
-	&-container {
-		display: flex;
-		width: 100%;
 	}
 }

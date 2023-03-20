@@ -1,21 +1,15 @@
 <template>
 	<div class="wdf-app" :data-layout="dataLayout" :data-theme="dataTheme">
-		<div class="wdf-container">
-			<PageMenu
-				v-if="enabledMenu"
-				:module-menu="moduleMenu.pages"
-				@changePage="changePageHandler"
-			/>
-			<div v-if="showContent" class="form-wrapper">
-				<FormC />
+		<PageMenu v-if="enabledMenu" :module-menu="moduleMenu.pages" @changePage="changePageHandler" />
+		<div v-if="showContent" class="form-wrapper">
+			<FormC />
 
-				<StyleIncluder />
-				<ValidationFocus />
-				<Actioner />
+			<StyleIncluder />
+			<ValidationFocus />
+			<Actioner />
 
-				<div v-if="showDump" class="dump">{{ modelStructure }}</div>
-				<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
-			</div>
+			<div v-if="showDump" class="dump">{{ modelStructure }}</div>
+			<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
 		</div>
 	</div>
 </template>
