@@ -2,7 +2,7 @@
 	<div class="menu">
 		<ul>
 			<li
-				v-for="(page, idx) in moduleMenu"
+				v-for="(page, idx) in moduleConfig.pages"
 				:key="page.title + idx"
 				:class="{'not-enable': !page.enable}"
 			>
@@ -22,17 +22,13 @@
 <script>
 import {mapGetters} from 'vuex';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
+import {ModuleController} from '@/libs/modules/module-controller';
 
 export default {
-	props: {
-		moduleMenu: {
-			type: Array,
-			default: null,
-			required: true,
-		},
-	},
 	data() {
 		return {
+			moduleConfig: ModuleController.getModuleConfig('menu'),
+			pages: SchemeController.getPages(),
 			filteredPages: [],
 		};
 	},
@@ -46,9 +42,8 @@ export default {
 	},
 	methods: {
 		mapPages() {
-			const pages = SchemeController.getPages();
-			this.filteredPages = pages
-				.filter(item => this.moduleMenu.findIndex(i => i.pageId === item.id) !== -1)
+			this.filteredPages = this.pages
+				.filter(item => this.moduleConfig.pages.findIndex(i => i.pageId === item.id) !== -1)
 				.map(el => ({
 					pageId: el.id,
 					key: el.key,

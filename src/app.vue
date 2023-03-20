@@ -1,6 +1,6 @@
 <template>
 	<div class="wdf-app" :data-layout="dataLayout" :data-theme="dataTheme">
-		<PageMenu v-if="enabledMenu" :module-menu="moduleMenu.pages" @changePage="changePageHandler" />
+		<PageMenu v-if="enabledMenu" @changePage="changePageHandler" />
 		<div v-if="showContent" class="form-wrapper">
 			<FormC />
 
@@ -25,7 +25,6 @@ import StyleIncluder from '@/components/utils/style/style-includer';
 import Actioner from '@/components/utils/actioner';
 import PageMenu from '@/components/layout/page-menu';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
-import {ModuleController} from '@/libs/modules/module-controller';
 
 export default {
 	components: {FormC, ValidationFocus, StyleIncluder, Actioner, PageMenu},
@@ -65,7 +64,6 @@ export default {
 			showDump: Config.showDump,
 			appId: generateHash(), // id for the app, for api ddos protection
 			scheme: null,
-			moduleMenu: ModuleController.getModuleConfig('menu'),
 		};
 	},
 
