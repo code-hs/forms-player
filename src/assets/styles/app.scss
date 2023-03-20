@@ -1,4 +1,4 @@
-.app {
+.wdf-app {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -6,7 +6,7 @@
 
 	color: var(--text);
 	background-color: var(--appBackground);
-	font: 16px/1.5 sans-serif;
+	font: 16px/1.5 inherit;
 
 	.dump {
 		width: 300px;
@@ -15,4 +15,9 @@
 		color: var(--dump);
 		border-top: 1px dashed;
 	}
+}
+
+.main-form {
+	display: flex;
+	width: 100%;
 }

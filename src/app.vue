@@ -1,6 +1,6 @@
 <template>
-	<div class="app" :data-layout="dataLayout" :data-theme="dataTheme">
-		<div class="main-form" style="width: 100%">
+	<div class="wdf-app" :data-layout="dataLayout" :data-theme="dataTheme">
+		<div class="main-form">
 			<Menu v-if="enabledMenu" @dataPageHandler="menuItemHandler" :module-menu="moduleMenu.pages" />
 			<div v-if="showContent" class="form-wrapper">
 				<FormC />
