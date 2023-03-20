@@ -1,7 +1,11 @@
 <template>
 	<div class="wdf-app" :data-layout="dataLayout" :data-theme="dataTheme">
 		<div class="wdf-container">
-			<Menu v-if="enabledMenu" @dataPageHandler="menuItemHandler" :module-menu="moduleMenu.pages" />
+			<PageMenu
+				v-if="enabledMenu"
+				@dataPageHandler="menuItemHandler"
+				:module-menu="moduleMenu.pages"
+			/>
 			<div v-if="showContent" class="form-wrapper">
 				<FormC />
 
@@ -25,12 +29,12 @@ import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
 import StyleIncluder from '@/components/utils/style/style-includer';
 import Actioner from '@/components/utils/actioner';
-import Menu from '@/components/layout/page-menu';
+import PageMenu from '@/components/layout/page-menu';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 import {ModuleController} from '@/libs/modules/module-controller';
 
 export default {
-	components: {FormC, ValidationFocus, StyleIncluder, Actioner, Menu},
+	components: {FormC, ValidationFocus, StyleIncluder, Actioner, PageMenu},
 	props: {
 		// project id
 		dataProjectId: {
