@@ -1,6 +1,6 @@
 <template>
 	<div class="wdf-app" :data-layout="dataLayout" :data-theme="dataTheme">
-		<PageMenu v-if="enabledMenu" @changePage="changePageHandler" />
+		<PageMenu @changePage="changePageHandler" />
 		<div v-if="showContent" class="form-wrapper">
 			<FormC />
 
@@ -72,9 +72,6 @@ export default {
 			modelStructure: 'model/structure',
 			validatorFields: 'validator/fields',
 		}),
-		enabledMenu() {
-			return Boolean(this.scheme.config.modules.filter(i => i.name === 'menu')[0].enable);
-		},
 	},
 
 	watch: {
