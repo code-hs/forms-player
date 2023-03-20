@@ -10,7 +10,7 @@
 					v-if="page.enable"
 					class="btn-link"
 					:class="{active: pageStructure.id === page.pageId}"
-					@click="emitDataPage(page.pageId)"
+					@click="emitDataKey(page.pageId)"
 				>
 					{{ page.title }}
 				</button>
@@ -53,9 +53,9 @@ export default {
 					key: el.key,
 				}));
 		},
-		emitDataPage(pageId) {
+		emitDataKey(pageId) {
 			const key = this.filteredPages.filter(i => i.pageId === pageId)[0].key;
-			this.$emit('dataPageHandler', key);
+			this.$emit('changePage', key);
 		},
 	},
 };

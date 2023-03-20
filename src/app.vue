@@ -3,8 +3,8 @@
 		<div class="wdf-container">
 			<PageMenu
 				v-if="enabledMenu"
-				@dataPageHandler="menuItemHandler"
 				:module-menu="moduleMenu.pages"
+				@changePage="changePageHandler"
 			/>
 			<div v-if="showContent" class="form-wrapper">
 				<FormC />
@@ -145,8 +145,8 @@ export default {
 			this.pageKey = pageName;
 			this.initPage(pageName);
 		},
-		menuItemHandler(item) {
-			this.menuItem = item;
+		changePageHandler(key) {
+			this.menuItem = key;
 		},
 	},
 };
