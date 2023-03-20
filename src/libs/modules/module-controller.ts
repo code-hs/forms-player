@@ -20,12 +20,14 @@ export class ModuleController {
 		}
 	}
 
-	static getModuleConfig(moduleName: string): ModuleConfig {
+	static getModuleConfig(moduleName: string): ModuleConfig | false {
 		const module: Module | undefined = this.getModule(moduleName);
 		if (!module) {
 			console.error(`InitModule.getModuleConfig: module '${moduleName}' is not found`);
 			return {};
 		}
+		// noinspection PointlessBooleanExpressionJS
+		if (module.enable === false) return false;
 
 		return module.config || {};
 	}

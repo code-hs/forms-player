@@ -1,5 +1,5 @@
 <template>
-	<div class="menu">
+	<div v-if="isEnable" class="menu">
 		<ul>
 			<li
 				v-for="(page, idx) in moduleConfig.pages"
@@ -26,8 +26,11 @@ import {ModuleController} from '@/libs/modules/module-controller';
 
 export default {
 	data() {
+		const moduleConfig = ModuleController.getModuleConfig('menu');
+
 		return {
-			moduleConfig: ModuleController.getModuleConfig('menu'),
+			moduleConfig,
+			isEnable: !!moduleConfig,
 			pages: SchemeController.getPages(),
 			filteredPages: [],
 		};
@@ -38,6 +41,8 @@ export default {
 		}),
 	},
 	created() {
+		if (!this.isEnable) return;
+
 		this.mapPages();
 	},
 	methods: {
