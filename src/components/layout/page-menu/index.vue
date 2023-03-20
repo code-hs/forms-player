@@ -4,10 +4,9 @@
 			<li
 				v-for="(page, idx) in menuItems"
 				:key="page.title + idx"
-				:class="{'not-enable': !page.enable}"
+				:class="{'not-enable': page.disabled}"
 			>
 				<button
-					v-if="page.enable"
 					class="btn-link"
 					:class="{active: pageStructure.id === page.pageId}"
 					@click="emitDataKey(page.pageId)"
@@ -33,7 +32,6 @@ export default {
 			isEnable: !!moduleConfig,
 			menuItems: [],
 			pages: SchemeController.getPages(),
-			filteredPages: [],
 		};
 	},
 	computed: {
@@ -51,14 +49,20 @@ export default {
 			return acc;
 		}, []);
 
-		this.menuItems = this.moduleConfig.pages.filter(menuItem =>
-			pageListIds.includes(menuItem.pageId)
-		);
+		this.menuItems = this.moduleConfig.pages
+			.filter(menuItem => pageListIds.includes(menuItem.pageId))
+			.filter(menuItem => {
+				// noinspection RedundantIfStatementJS
+				if ('enable' in menuItem && menuItem.enable === false) return false;
+				return true;
+			});
 	},
 	methods: {
 		emitDataKey(pageId) {
-			const key = this.filteredPages.filter(i => i.pageId === pageId)[0].key;
-			this.$emit('changePage', key);
+			const page = this.pages.find(page => page.id === pageId);
+			if (!page || !page.key) return;
+
+			this.$emit('changePage', page.key);
 		},
 	},
 };
