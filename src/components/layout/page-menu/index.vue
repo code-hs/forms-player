@@ -17,34 +17,25 @@
 <script>
 import {mapGetters} from 'vuex';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
-import {ModuleController} from '@/libs/modules/module-controller';
+import {PageMenu} from '@/libs/modules/page-menu/page-menu';
 
 export default {
 	data() {
-		const moduleConfig = ModuleController.getModuleConfig('menu');
+		const moduleConfig = PageMenu.getMenu();
+		const menuItems = PageMenu.filteredMenu();
 
 		return {
 			moduleConfig,
 			isEnable: !!moduleConfig,
-			menuItems: [],
+			menuItems,
 			pages: SchemeController.getPages(),
 		};
 	},
 	computed: {
 		...mapGetters({
 			pageStructure: 'scheme/page',
+			lang: 'localization/currentLanguage',
 		}),
-	},
-	created() {
-		if (!this.isEnable) return;
-		// noinspection JSUnresolvedVariable
-		if (!this.moduleConfig.pages) return;
-
-		this.menuItems = this.moduleConfig.pages.filter(menuItem => {
-			// noinspection RedundantIfStatementJS
-			if ('enable' in menuItem && menuItem.enable === false) return false;
-			return true;
-		});
 	},
 	methods: {
 		emitDataKey(pageId) {
