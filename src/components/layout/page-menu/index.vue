@@ -7,7 +7,7 @@
 					:class="{active: pageStructure.id === page.pageId}"
 					@click="emitDataKey(page.pageId)"
 				>
-					{{ page.title }}
+					{{ $t(page.title) }}
 				</button>
 			</li>
 		</ul>
@@ -34,7 +34,6 @@ export default {
 	computed: {
 		...mapGetters({
 			pageStructure: 'scheme/page',
-			lang: 'localization/currentLanguage',
 		}),
 	},
 	methods: {

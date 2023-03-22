@@ -6,11 +6,11 @@ export class PageMenu {
 
 	static getMenu() {
 		const dataMenu = ModuleController.getModuleConfig('menu');
-		if (dataMenu && !dataMenu.pages) {
+		if (dataMenu && !dataMenu.list) {
 			console.error('page-menu class: pages array with not correct data or empty');
 			return;
 		}
-		if (dataMenu && dataMenu.pages) {
+		if (dataMenu && dataMenu.list) {
 			this.moduleCfg = dataMenu;
 		}
 		return this.moduleCfg;
@@ -20,7 +20,7 @@ export class PageMenu {
 		// noinspection JSUnresolvedVariable
 		if (!this.moduleCfg) return;
 
-		return this.moduleCfg.pages.filter((menuItem: ModuleMenuPage) => {
+		return this.moduleCfg.list.filter((menuItem: ModuleMenuPage) => {
 			// noinspection RedundantIfStatementJS
 			if ('enable' in menuItem && !menuItem.enable) return false;
 			return true;
