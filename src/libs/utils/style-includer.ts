@@ -1,5 +1,6 @@
 import {StylesParams, Page, Field} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
+import {PagesController} from '@/libs/pages/pages-controller';
 
 export class StyleIncluder {
 	private readonly stack: StylesParams[] = [];
@@ -12,7 +13,7 @@ export class StyleIncluder {
 		const global: StylesParams | undefined = SchemeController.getConfig()?.styles;
 		if (global) this.stack.push(global);
 
-		const pages: Page[] = SchemeController.getScheme()?.pages;
+		const pages: Page[] = new PagesController().getPages();
 		pages.forEach(page => {
 			this.initStackInChildren(page);
 		});
