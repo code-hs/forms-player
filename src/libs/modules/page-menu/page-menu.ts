@@ -14,14 +14,14 @@ export class PageMenu {
 		}
 
 		this.list = moduleConfig.list;
-		this.filteredMenu();
+		this.menuItems();
 	}
 
 	getList(): MenuList {
 		return this.list;
 	}
 
-	private filteredMenu(): void {
+	private menuItems(): void {
 		this.list = this.list.filter((menuItem: ListItem) => {
 			// noinspection RedundantIfStatementJS
 			if ('enable' in menuItem && !menuItem.enable) return false;

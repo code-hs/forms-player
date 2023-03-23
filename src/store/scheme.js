@@ -1,4 +1,4 @@
-import {SchemeController} from '@/libs/scheme/scheme-controller';
+import {PagesController} from '@/libs/pages/pages-controller';
 // eslint-disable-next-line no-unused-vars
 import {Page} from '@/libs/scheme/scheme.types';
 
@@ -32,7 +32,7 @@ const actions = {
 			throw new Error('scheme.initPage: param pageKey is empty');
 		}
 
-		const page = SchemeController.getPage(pageKey);
+		const page = new PagesController().getPage(pageKey);
 		commit('setPage', page);
 
 		return page;
