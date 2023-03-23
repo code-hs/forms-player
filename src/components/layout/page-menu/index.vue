@@ -26,7 +26,6 @@ export default {
 		return {
 			menuItems,
 			isEnable: !!menuItems.length,
-			pages: SchemeController.getPages(),
 		};
 	},
 	computed: {
@@ -36,7 +35,7 @@ export default {
 	},
 	methods: {
 		emitDataKey(pageId) {
-			const page = this.pages.find(page => page.id === pageId);
+			const page = SchemeController.getPageById(pageId);
 			if (!page || !page.key) return;
 
 			this.$emit('changePage', page.key);
