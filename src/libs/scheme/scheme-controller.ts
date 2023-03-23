@@ -30,6 +30,12 @@ export class SchemeController {
 		return this.scheme.config;
 	}
 
+	static getPages(): Page[] {
+		if (!this.scheme?.pages) return [];
+
+		return this.scheme.pages;
+	}
+
 	static getPage(pageKey: string): Page {
 		if (!pageKey) {
 			throw new Error('SchemeController.getPage: param pageKey is empty');
@@ -39,9 +45,7 @@ export class SchemeController {
 		return this.scheme.pages.find(p => p.key === pageKey) as Page;
 	}
 
-	static getPages() {
-		if (!this.scheme?.pages) return {};
-
-		return this.scheme.pages;
+	static getPageById(id: number): Page | undefined {
+		return this.getPages().find(page => page.id === id);
 	}
 }
