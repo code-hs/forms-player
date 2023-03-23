@@ -1,5 +1,5 @@
 import {ModuleController} from '@/libs/modules/module-controller';
-import {ModuleMenuPage} from '@/libs/scheme/scheme.types';
+import {ModuleMenuPage} from './menu.types';
 
 export class PageMenu {
 	static moduleCfg: any;
@@ -21,7 +21,6 @@ export class PageMenu {
 		if (!this.moduleCfg) return;
 
 		return this.moduleCfg.list.filter((menuItem: ModuleMenuPage) => {
-			// noinspection RedundantIfStatementJS
 			if ('enable' in menuItem && !menuItem.enable) return false;
 			return true;
 		});
