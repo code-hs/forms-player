@@ -18,7 +18,6 @@
 
 :root {
 	/*copy from light.scss*/
-	--text: hsl(0, 0%, 69%);
 	--groupItemShadow: hsl(0, 0%, 0%, 28%);
 	--appBackgroundDark: hsl(210, 2%, 16%);
 }
@@ -49,14 +48,21 @@
 }
 
 body {
-	--text: hsl(0, 0%, 0%, 100%);
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 300;
 }
 
+/*styles for widget
+form-widget-g .wdf-app[data-theme=light] { 
+	--text: red !important;
+}
+form-widget-g .wdf-app[data-theme=dark] { 
+	--text: red !important;
+}
+*/
+
 body[data-theme='dark'] {
-	--text: hsl(0, 0%, 69%);
-	background-color: var(--appBackgroundDark);
+	background-color: hsl(210, 2%, 16%);
 }
 
 .btn-theme span {
