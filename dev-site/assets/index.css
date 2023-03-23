@@ -18,9 +18,8 @@
 
 :root {
 	/*copy from light.scss*/
-	--text: hsl(0, 0%, 69%);
-	--groupItemShadow: hsl(0, 0%, 0%, 28%);
-	--appBackgroundDark: hsl(210, 2%, 16%);
+	--boxShadow: hsl(0, 0%, 0%, 28%);
+	--darkBg: hsl(210, 2%, 16%);
 }
 
 *,
@@ -41,22 +40,27 @@
 	max-width: 1000px;
 	margin: 0 auto;
 	padding: 0.63em;
-
-	color: var(--text);
 	border-radius: 0.19em;
 
-	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
+	box-shadow: 0px 0px 3px 1px var(--boxShadow);
 }
 
+/*styles for widget
+form-widget-g .wdf-app[data-theme=light] { 
+	--text: red !important;
+}
+form-widget-g .wdf-app[data-theme=dark] { 
+	--text: red !important;
+}
+*/
+
 body {
-	--text: hsl(0, 0%, 0%, 100%);
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 300;
 }
 
 body[data-theme='dark'] {
-	--text: hsl(0, 0%, 69%);
-	background-color: var(--appBackgroundDark);
+	background-color: var(--darkBg)
 }
 
 .btn-theme span {
@@ -114,10 +118,10 @@ body[data-theme='light'] .header .--dark {
 	right: 5%;
 	top: 0;
 	height: 0px;
-	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
+	box-shadow: 0px 0px 3px 1px var(--boxShadow);
 	opacity: 0.5;
 }
 
 body[data-theme='dark'] .footer:after {
-	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
+	box-shadow: 0px 0px 3px 1px var(--boxShadow);
 }

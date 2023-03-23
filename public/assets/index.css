@@ -18,8 +18,8 @@
 
 :root {
 	/*copy from light.scss*/
-	--groupItemShadow: hsl(0, 0%, 0%, 28%);
-	--appBackgroundDark: hsl(210, 2%, 16%);
+	--boxShadow: hsl(0, 0%, 0%, 28%);
+	--darkBg: hsl(210, 2%, 16%);
 }
 
 *,
@@ -36,20 +36,18 @@
 	padding: 0.63rem;
 }
 
+body {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 300;
+}
+
 .content {
 	max-width: 1000px;
 	margin: 0 auto;
 	padding: 0.63em;
-
-	color: var(--text);
 	border-radius: 0.19em;
 
-	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
-}
-
-body {
-	font-family: 'Montserrat', sans-serif;
-	font-weight: 300;
+	box-shadow: 0px 0px 3px 1px var(--boxShadow);
 }
 
 /*styles for widget
@@ -62,7 +60,7 @@ form-widget-g .wdf-app[data-theme=dark] {
 */
 
 body[data-theme='dark'] {
-	background-color: hsl(210, 2%, 16%);
+	background-color: var(--darkBg)
 }
 
 .btn-theme span {
@@ -120,10 +118,10 @@ body[data-theme='light'] .header .--dark {
 	right: 5%;
 	top: 0;
 	height: 0px;
-	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
+	box-shadow: 0px 0px 3px 1px var(--boxShadow);
 	opacity: 0.5;
 }
 
 body[data-theme='dark'] .footer:after {
-	box-shadow: 0px 0px 3px 1px var(--groupItemShadow);
+	box-shadow: 0px 0px 3px 1px var(--boxShadow);
 }
