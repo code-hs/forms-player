@@ -21,13 +21,11 @@ import {PageMenu} from '@/libs/modules/page-menu/page-menu';
 
 export default {
 	data() {
-		const moduleConfig = PageMenu.getMenu();
-		const menuItems = PageMenu.filteredMenu();
+		const menuItems = new PageMenu().getList();
 
 		return {
-			moduleConfig,
-			isEnable: !!moduleConfig,
 			menuItems,
+			isEnable: !!menuItems.length,
 			pages: SchemeController.getPages(),
 		};
 	},

@@ -1,26 +1,29 @@
 import {ModuleController} from '@/libs/modules/module-controller';
-import {ModuleMenuPage} from './menu.types';
+import {ModuleConfig} from '@/libs/scheme/scheme.types';
+import {MenuList, ListItem} from './menu.types';
 
 export class PageMenu {
-	static moduleCfg: any;
+	list: MenuList = [];
 
-	static getMenu() {
-		const dataMenu = ModuleController.getModuleConfig('menu');
-		if (dataMenu && !dataMenu.list) {
-			console.error('page-menu class: pages array with not correct data or empty');
+	constructor() {
+		const moduleConfig: ModuleConfig | false = ModuleController.getModuleConfig('menu');
+
+		if (!moduleConfig || !moduleConfig?.list) {
+			console.error('page-menu.constructor: pages array with not correct data or empty');
 			return;
 		}
-		if (dataMenu && dataMenu.list) {
-			this.moduleCfg = dataMenu;
-		}
-		return this.moduleCfg;
+
+		this.list = moduleConfig.list;
+		this.filteredMenu();
 	}
 
-	static filteredMenu() {
-		// noinspection JSUnresolvedVariable
-		if (!this.moduleCfg) return;
+	getList(): MenuList {
+		return this.list;
+	}
 
-		return this.moduleCfg.list.filter((menuItem: ModuleMenuPage) => {
+	private filteredMenu(): void {
+		this.list = this.list.filter((menuItem: ListItem) => {
+			// noinspection RedundantIfStatementJS
 			if ('enable' in menuItem && !menuItem.enable) return false;
 			return true;
 		});
