@@ -8,22 +8,22 @@ export class PagesController {
 		this.getScheme = SchemeController.getScheme();
 	}
 
-	getPages(): Page[] {
+	getAll(): Page[] {
 		if (!this.getScheme?.pages) return [];
 
 		return this.getScheme.pages;
 	}
 
-	getPage(pageKey: string): Page {
+	getByKey(pageKey: string): Page {
 		if (!pageKey) {
 			throw new Error('SchemeController.getPage: param pageKey is empty');
 		}
-		if (!this.getPages()) return {};
+		if (!this.getAll()) return {};
 
-		return this.getPages().find(p => p.key === pageKey) as Page;
+		return this.getAll().find(p => p.key === pageKey) as Page;
 	}
 
-	getPageById(id: number): Page | undefined {
-		return this.getPages().find(page => page.id === id);
+	getById(id: number): Page | undefined {
+		return this.getAll().find((page: Page) => page.id === id);
 	}
 }

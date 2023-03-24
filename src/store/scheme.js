@@ -32,7 +32,7 @@ const actions = {
 			throw new Error('scheme.initPage: param pageKey is empty');
 		}
 
-		const page = new PagesController().getPage(pageKey);
+		const page = new PagesController().getByKey(pageKey);
 		commit('setPage', page);
 
 		return page;
