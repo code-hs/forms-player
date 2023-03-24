@@ -13,7 +13,7 @@ export class StyleIncluder {
 		const global: StylesParams | undefined = SchemeController.getConfig()?.styles;
 		if (global) this.stack.push(global);
 
-		const pages: Page[] = new PagesController().getAll();
+		const pages: Page[] = PagesController.getAll();
 		pages.forEach(page => {
 			this.initStackInChildren(page);
 		});

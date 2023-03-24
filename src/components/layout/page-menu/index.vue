@@ -35,7 +35,7 @@ export default {
 	},
 	methods: {
 		emitDataKey(pageId) {
-			const page = new PagesController().getById(pageId);
+			const page = PagesController.getById(pageId);
 			if (!page || !page.key) return;
 
 			this.$emit('changePage', page.key);
