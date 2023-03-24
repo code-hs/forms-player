@@ -2,19 +2,15 @@ import {Scheme, Page} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 export class PagesController {
-	getScheme: Scheme;
-
-	constructor() {
-		this.getScheme = SchemeController.getScheme();
-	}
-
 	getAll(): Page[] {
-		if (!this.getScheme?.pages) return [];
+		const scheme: Scheme = SchemeController.getScheme();
 
-		return this.getScheme.pages;
+		if (!scheme?.pages) return [];
+
+		return scheme.pages;
 	}
 
-	getByKey(pageKey: string): Page {
+	getByKey(pageKey: string): Page | undefined {
 		if (!pageKey) {
 			throw new Error('SchemeController.getPage: param pageKey is empty');
 		}
