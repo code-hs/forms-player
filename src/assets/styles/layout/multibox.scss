@@ -1,5 +1,5 @@
 .multibox {
-	margin-bottom: 3em;
+	margin: 3em 0;
 
 	.multibox__item {
 		position: relative;
@@ -13,6 +13,11 @@
 		&:last-child {
 			margin-bottom: 0;
 		}
+	}
+
+	.multibox__item-title {
+		text-align: center;
+		margin: 20px 0;
 	}
 
 	.multibox__button-remove {
