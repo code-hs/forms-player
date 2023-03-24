@@ -14,6 +14,8 @@ export default {
 	methods: {
 		hasError() {
 			// after each field catch error and update class
+			// need wait next tick, for get element by class
+			// class will be added after next tick
 			this.$nextTick(() => {
 				this.processError();
 			});
