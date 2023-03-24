@@ -12,7 +12,7 @@
 				@handleRemove="handleRemove"
 			/>
 
-			<!--suppress JSUnresolvedVariable -->
+			<!--suppress JSUnresolvedVariable 1-->
 			<div v-if="custom.title" class="multibox__item-title">{{ generateTitle(index) }}</div>
 
 			<VirtualComponent
