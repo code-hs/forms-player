@@ -13,7 +13,7 @@ describe('InitModule class', () => {
 			modules: [
 				{
 					name: 'auth',
-					enable: false,
+					enable: true,
 					config: {
 						forEachField: {
 							foo: 111,

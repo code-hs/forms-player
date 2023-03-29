@@ -3,5 +3,16 @@
 
 	&-wrapper {
 		width: 100%;
+
+		@media only screen and (max-width: $breakpoint-med) {
+			transition: 0.17s all;
+		}
+	}
+
+	> .vrc-TextContainer {
+		@media only screen and (max-width: $breakpoint-med) {
+			padding-left: 2rem;
+			padding-right: 2rem;
+		}
 	}
 }

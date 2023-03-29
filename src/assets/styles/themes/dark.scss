@@ -11,7 +11,7 @@
 	--fieldsetsSeparator: hsl(0, 0%, 14%);
 
 	// text
-	--text: hsl(0, 0%, 69%);
+	--wdfText: hsl(0, 0%, 69%);
 
 	// inputs
 	--formItemBorder: hsl(0, 0%, 10%);
@@ -36,4 +36,9 @@
 	//links
 	--linkItemActive: hsl(0, 0%, 14%);
 	--linkItemFocus: hsl(0, 0%, 20%);
+
+	//burger
+	--burgerBackground: #edecec;
+	--burgerDots: #383838;
+	--menuBackground: rgba(70, 70, 70, 0.8);
 }

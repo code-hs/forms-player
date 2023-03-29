@@ -16,7 +16,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {SchemeController} from '@/libs/scheme/scheme-controller';
+import {PagesController} from '@/libs/pages/pages-controller';
 import {PageMenu} from '@/libs/modules/page-menu/page-menu';
 
 export default {
@@ -35,7 +35,7 @@ export default {
 	},
 	methods: {
 		emitDataKey(pageId) {
-			const page = SchemeController.getPageById(pageId);
+			const page = PagesController.getById(pageId);
 			if (!page || !page.key) return;
 
 			this.$emit('changePage', page.key);

@@ -52,23 +52,6 @@ describe('SchemeController class', () => {
 	// @ts-ignore
 	SchemeController.scheme = scheme;
 
-	it('-> isValid', () => {
-		// @ts-ignore
-		SchemeController.scheme = null;
-		expect(SchemeController.isValid()).toBeFalsy();
-		// @ts-ignore
-		SchemeController.scheme = scheme;
-		expect(SchemeController.isValid()).toBeTruthy();
-
-		const page: Page = SchemeController.getPage('welcome_1');
-		expect(page.key).toBe('welcome_1');
-	});
-
-	it('-> getPage', () => {
-		const page: Page = SchemeController.getPage('welcome_1');
-		expect(page.key).toBe('welcome_1');
-	});
-
 	it('-> getConfig', () => {
 		const configuration: Configurations = SchemeController.getConfig();
 		// @ts-ignore
