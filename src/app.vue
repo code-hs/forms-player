@@ -1,5 +1,6 @@
 <template>
 	<div class="wdf-app" :data-layout="dataLayout" :data-theme="dataTheme">
+		<Burger />
 		<PageMenu @changePage="changePageHandler" />
 		<div v-if="showContent" class="form-wrapper">
 			<FormC />
@@ -24,10 +25,11 @@ import ValidationFocus from '@/components/utils/validation/focus';
 import StyleIncluder from '@/components/utils/style/style-includer';
 import Actioner from '@/components/utils/actioner';
 import PageMenu from '@/components/layout/page-menu';
+import Burger from '@/components/layout/page-menu/burger';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
 
 export default {
-	components: {FormC, ValidationFocus, StyleIncluder, Actioner, PageMenu},
+	components: {FormC, ValidationFocus, StyleIncluder, Actioner, PageMenu, Burger},
 	props: {
 		// project id
 		dataProjectId: {
