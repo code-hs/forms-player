@@ -21,6 +21,10 @@ export class PageMenu {
 		return this.list;
 	}
 
+	isEnable(): boolean {
+		return !!this.list.length;
+	}
+
 	private filterItems(): void {
 		this.list = this.list.filter((menuItem: ListItem) => {
 			// noinspection RedundantIfStatementJS

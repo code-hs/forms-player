@@ -21,11 +21,11 @@ import {PageMenu} from '@/libs/modules/page-menu/page-menu';
 
 export default {
 	data() {
-		const menuItems = new PageMenu().getList();
+		const pageMenu = new PageMenu();
 
 		return {
-			menuItems,
-			isEnable: !!menuItems.length,
+			menuItems: pageMenu.getList(),
+			isEnable: pageMenu.isEnable(),
 		};
 	},
 	computed: {
