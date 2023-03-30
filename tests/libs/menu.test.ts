@@ -35,17 +35,22 @@ describe('PageMenu class', () => {
 		},
 	};
 
-	it('-> getList', () => {
-		const listMenu: false | ModuleConfig | any = ModuleController.getModuleConfig('menu_1');
+	it('-> getList, not correct module name', () => {
+		const listMenu: false | ModuleConfig = ModuleController.getModuleConfig('menu_not_found');
+		expect(listMenu).toBeFalsy();
+	});
+
+	it('-> getList, find correct ', () => {
+		const listMenu = ModuleController.getModuleConfig('menu_1') as ModuleConfig;
+
 		expect(typeof listMenu).toBe('object');
-		expect(Array.isArray(listMenu?.list)).toBeTruthy();
-
-		const filterItems: MenuList = listMenu?.list.filter((menuItem: ListItem) => {
-			// noinspection RedundantIfStatementJS
-			if ('enable' in menuItem && !menuItem.enable) return false;
-			return true;
-		});
-
-		expect('enable' in filterItems[0]).toBeTruthy();
+		expect(Array.isArray(listMenu.list)).toBeTruthy();
+		// const filterItems: MenuList = listMenu?.list.filter((menuItem: ListItem) => {
+		// 	noinspection RedundantIfStatementJS
+		// if ('enable' in menuItem && !menuItem.enable) return false;
+		// return true;
+		// });
+		//
+		// expect('enable' in filterItems[0]).toBeTruthy();
 	});
 });

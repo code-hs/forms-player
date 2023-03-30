@@ -52,12 +52,12 @@ describe('PagesController class', () => {
 	});
 
 	it('-> getByKey', () => {
-		const pageKey: Page | undefined = PagesController.getByKey('welcome_1');
-		expect(pageKey?.key).toBe('welcome_1');
+		const pageKey = PagesController.getByKey('welcome_1') as Page;
+		expect(pageKey.key).toBe('welcome_1');
 	});
 
 	it('-> getById', () => {
-		const pageId: Page | undefined = PagesController.getById(1);
-		expect(pageId?.id).toBe(1);
+		const pageId = PagesController.getById(1) as Page;
+		expect(pageId.id).toBe(1);
 	});
 });
