@@ -1,8 +1,7 @@
 import {describe, it, expect} from '@jest/globals';
-import {ModuleConfig} from '@/libs/scheme/scheme.types';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
-import {ListItem, MenuList} from '@/libs/modules/page-menu/menu.types';
-import {ModuleController} from '@/libs/modules/module-controller';
+import {MenuList} from '@/libs/modules/page-menu/menu.types';
+import {PageMenu} from '@/libs/modules/page-menu/page-menu';
 
 describe('PageMenu class', () => {
 	// @ts-ignore
@@ -10,7 +9,7 @@ describe('PageMenu class', () => {
 		config: {
 			modules: [
 				{
-					name: 'menu_1',
+					name: 'menu',
 					enable: true,
 					config: {
 						list: [
@@ -35,17 +34,15 @@ describe('PageMenu class', () => {
 		},
 	};
 
-	it('-> getList, find correct ', () => {
-		const listMenu = ModuleController.getModuleConfig('menu_1') as ModuleConfig;
+	const listMenu: MenuList = new PageMenu().getList();
 
+	it('-> getList', () => {
 		expect(typeof listMenu).toBe('object');
-		expect(Array.isArray(listMenu.list)).toBeTruthy();
-		// const filterItems: MenuList = listMenu?.list.filter((menuItem: ListItem) => {
-		// 	noinspection RedundantIfStatementJS
-		// if ('enable' in menuItem && !menuItem.enable) return false;
-		// return true;
-		// });
-		//
-		// expect('enable' in filterItems[0]).toBeTruthy();
+		expect(Array.isArray(listMenu)).toBeTruthy();
+	});
+
+	it('-> filterItems', () => {
+		// one item is disabled (enable: false)
+		expect(listMenu.length).toBe(1);
 	});
 });
