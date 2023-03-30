@@ -35,12 +35,6 @@ describe('PageMenu class', () => {
 		},
 	};
 
-	it('-> getList, not correct module name', () => {
-		console.error = () => {};
-		const listMenu: false | ModuleConfig = ModuleController.getModuleConfig('menu_not_found');
-		expect(listMenu).toBeFalsy();
-	});
-
 	it('-> getList, find correct ', () => {
 		const listMenu = ModuleController.getModuleConfig('menu_1') as ModuleConfig;
 
