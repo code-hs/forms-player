@@ -45,6 +45,15 @@
 	.wrapper .wdf-app {
 		position: static;
 	}
+
+	.wrapper .wdf-burger {
+		top: 20px;
+		left: 20px;
+	}
+
+	.wrapper .menu {
+		padding-top: 2.63rem;
+	}
 }
 
 .content {
