@@ -7,14 +7,15 @@
 	justify-content: center;
 	flex-direction: column;
 	position: absolute;
-	left: 4px;
-	top: 4px;
+	left: 20px;
+	top: 20px;
 	z-index: 2;
 	border-radius: 50%;
 	cursor: pointer;
 
 	background: var(--burgerBackground);
 	transition: 0.17s all;
+	border: 1px solid var(--burgerDots);
 
 	@media only screen and (max-width: $breakpoint-med) {
 		display: flex;
@@ -61,9 +62,9 @@
 	.wdf-burger {
 		span {
 			width: 12px;
-			left: 6px;
+			left: 5px;
 			margin-left: 0;
-			top: 11px;
+			top: 10px;
 
 			&:first-child {
 				transform: rotate(45deg);
@@ -85,6 +86,7 @@
 		.form-wrapper {
 			transform: scale(0.95) translateX(15px);
 			pointer-events: none;
+			user-select: none;
 		}
 	}
 }

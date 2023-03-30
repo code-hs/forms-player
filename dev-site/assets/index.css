@@ -20,6 +20,9 @@
 	/*copy from light.scss*/
 	--boxShadow: hsl(0, 0%, 0%, 28%);
 	--darkBg: hsl(210, 2%, 16%);
+	--colorElBtnTheme: #b3b3b3;
+	--colorLightElBtnTheme: #f1f1f1;
+	--colorDarkElBtnTheme: #202020;
 }
 
 *,
@@ -34,6 +37,8 @@
 
 .wrapper {
 	padding: 0.63rem;
+	position: relative;
+	min-height: 100vh;
 }
 
 .content {
@@ -47,10 +52,10 @@
 
 /*styles for widget
 form-widget-g .wdf-app[data-theme=light] { 
-	--text: red !important;
+	--wdfText: red !important;
 }
 form-widget-g .wdf-app[data-theme=dark] { 
-	--text: red !important;
+	--wdfText: red !important;
 }
 */
 
@@ -79,7 +84,6 @@ body[data-theme='light'] .header .--dark {
 .btn-theme {
 	margin: 0 0 0 auto;
 	outline: none !important;
-	border: none !important;
 	line-height: 1;
 	font-size: 20px;
 	display: flex;
@@ -90,11 +94,19 @@ body[data-theme='light'] .header .--dark {
 	border-radius: 50%;
 	padding: 2px;
 	cursor: pointer;
-	background-color: #edecec;
+	background-color: transparent;
+	color: var(--colorElBtnTheme);
+	border: 1px solid var(--colorElBtnTheme);
 }
 
-.btn-theme:hover {
-	background-color: #f6f6f6;
+body[data-theme='dark'] .btn-theme:hover {
+	background-color: var(--colorDarkElBtnTheme);
+	color: var(--colorLightElBtnTheme);
+}
+
+body[data-theme='light'] .btn-theme:hover {
+	background-color: var(--colorLightElBtnTheme);
+	color: var(--colorDarkElBtnTheme);
 }
 
 .header {
