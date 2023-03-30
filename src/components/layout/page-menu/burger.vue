@@ -1,10 +1,15 @@
 <template>
-	<div class="wdf-burger" @click="emitMenuState"><span /><span /><span /></div>
+	<div v-if="isEnable" class="wdf-burger" @click="emitMenuState"><span /><span /><span /></div>
 </template>
 <script>
+import {Burger} from '@/libs/components/burger/burger';
+import {Consts} from '@/config/consts';
+
 export default {
 	data() {
+		const isEnable = new Burger().isEnable();
 		return {
+			isEnable,
 			state: false,
 		};
 	},
@@ -16,7 +21,10 @@ export default {
 	},
 	methods: {
 		windowSizeChecker(e) {
-			if ((e?.target?.outerWidth > 767 || window.innerWidth > 767) && this.state) {
+			if (
+				(e?.target?.outerWidth > Consts.mobilePoint || window.innerWidth > Consts.mobilePoint) &&
+				this.state
+			) {
 				this.emitMenuState();
 			}
 		},
