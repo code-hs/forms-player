@@ -1,8 +1,13 @@
 <template>
-	<div class="wdf-burger" @click="toggleMenu"><span /><span /><span /></div>
+	<div class="wdf-burger" @click="emitMenuState"><span /><span /><span /></div>
 </template>
 <script>
 export default {
+	data() {
+		return {
+			state: false,
+		};
+	},
 	created() {
 		window.addEventListener('resize', this.windowSizeChecker);
 	},
@@ -11,17 +16,12 @@ export default {
 	},
 	methods: {
 		windowSizeChecker(e) {
-			const form = document.querySelector('.wdf-app');
-			if (
-				(e?.target?.outerWidth > 767 || window.innerWidth > 767) &&
-				form.classList.contains('open-menu')
-			) {
-				form.classList.remove('open-menu');
+			if ((e?.target?.outerWidth > 767 || window.innerWidth > 767) && this.state) {
+				this.emitMenuState();
 			}
 		},
-		toggleMenu() {
-			const form = document.querySelector('.wdf-app');
-			form.classList.toggle('open-menu');
+		emitMenuState() {
+			this.$emit('emitMenuState', (this.state = !this.state));
 		},
 	},
 };

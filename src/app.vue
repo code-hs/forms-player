@@ -1,6 +1,11 @@
 <template>
-	<div class="wdf-app" :data-layout="dataLayout" :data-theme="dataTheme">
-		<Burger />
+	<div
+		class="wdf-app"
+		:data-menu-state="[menuState ? 'open-menu' : '']"
+		:data-layout="dataLayout"
+		:data-theme="dataTheme"
+	>
+		<Burger @emitMenuState="getMenuState" />
 		<PageMenu @changePage="changePageHandler" />
 		<div v-if="showContent" class="form-wrapper">
 			<FormC />
@@ -66,6 +71,7 @@ export default {
 			showDump: Config.showDump,
 			appId: generateHash(), // id for the app, for api ddos protection
 			scheme: null,
+			menuState: false,
 		};
 	},
 
@@ -136,6 +142,9 @@ export default {
 		},
 		changePageHandler(key) {
 			this.menuItem = key;
+		},
+		getMenuState(data) {
+			this.menuState = data;
 		},
 	},
 };
