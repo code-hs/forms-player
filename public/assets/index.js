@@ -1,10 +1,11 @@
 const formWidget = document.querySelector('form-widget-g');
 const getThemeFromStorage = () => localStorage.getItem('WT');
-const getBodyTheme = () => document.body.dataset.theme;
-const setBodyTheme = theme => (document.body.dataset.theme = theme);
-const setWidgetTheme = theme => (formWidget.dataset.theme = theme);
-
-init();
+const setBodyTheme = theme => {
+	document.body.dataset.theme = theme;
+};
+const setWidgetTheme = theme => {
+	formWidget.dataset.theme = theme;
+};
 
 function init() {
 	const theme = getThemeFromStorage() ? 'dark' : 'light';
@@ -14,6 +15,7 @@ function init() {
 	document.getElementById('year').innerHTML = new Date().getFullYear();
 }
 
+// eslint-disable-next-line no-unused-vars
 function changeTheme() {
 	if (getThemeFromStorage()) {
 		// set light theme
@@ -27,6 +29,8 @@ function changeTheme() {
 		setWidgetTheme('dark');
 	}
 }
+
+init();
 
 window.onload = () => {
 	init();
