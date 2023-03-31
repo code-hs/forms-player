@@ -7,10 +7,9 @@ import {Consts} from '@/config/consts';
 
 export default {
 	data() {
-		const isEnable = new Burger().isEnable();
 		return {
-			isEnable,
-			state: false,
+			isEnable: new Burger().isEnable(),
+			show: false,
 		};
 	},
 	created() {
@@ -22,14 +21,16 @@ export default {
 	methods: {
 		windowSizeChecker(e) {
 			if (
-				(e?.target?.outerWidth > Consts.mobilePoint || window.innerWidth > Consts.mobilePoint) &&
-				this.state
+				this.show &&
+				(e?.target?.outerWidth > Consts.mobilePoint || window.innerWidth > Consts.mobilePoint)
 			) {
+				// hide menu
 				this.emitMenuState();
 			}
 		},
 		emitMenuState() {
-			this.$emit('emitMenuState', (this.state = !this.state));
+			this.show = !this.show;
+			this.$emit('emitMenuState', this.show);
 		},
 	},
 };

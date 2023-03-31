@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="wdf-app"
-		:data-menu-state="[menuState ? 'open-menu' : '']"
+		:data-menu-state="[showMenu ? 'open-menu' : '']"
 		:data-layout="dataLayout"
 		:data-theme="dataTheme"
 	>
@@ -71,7 +71,7 @@ export default {
 			showDump: Config.showDump,
 			appId: generateHash(), // id for the app, for api ddos protection
 			scheme: null,
-			menuState: false,
+			showMenu: false,
 		};
 	},
 
@@ -143,8 +143,8 @@ export default {
 		changePageHandler(key) {
 			this.menuItem = key;
 		},
-		getMenuState(data) {
-			this.menuState = data;
+		getMenuState(v) {
+			this.showMenu = v;
 		},
 	},
 };
