@@ -38,4 +38,14 @@ export class ModuleController {
 
 		return modules.find(m => m.name === moduleName);
 	}
+
+	static isEnable(moduleName: string): boolean {
+		const module: Module | undefined = this.getByName(moduleName);
+
+		if (!module) return false;
+
+		// noinspection RedundantIfStatementJS
+		if ('enable' in module && !module.enable) return false;
+		return true;
+	}
 }
