@@ -90,7 +90,7 @@ export interface ModuleConfig {
 
 export interface Module {
 	readonly name: string;
-	readonly enable: boolean;
+	readonly enable?: boolean;
 	readonly config?: ModuleConfig;
 }
 
