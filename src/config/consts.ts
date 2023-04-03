@@ -11,6 +11,14 @@ const Consts = {
 	],
 	textContainerAllowedTags: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'p'],
 	mobilePoint: 767,
+	modules: {
+		datepicker: {
+			defaultValues: {
+				format: 'dd.mm.yyyy',
+				mask: '##.##.####',
+			},
+		},
+	},
 };
 
 Object.freeze(Consts);

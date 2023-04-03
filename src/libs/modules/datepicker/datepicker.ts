@@ -1,6 +1,7 @@
 import {ModuleConfig, ValidationParams} from '@/libs/scheme/scheme.types';
 import {FieldThis} from '@/libs/components/field/field.types';
 import {parseDate} from '@/utils/dateparser';
+import {Consts} from '@/config/consts';
 
 type Relations = {
 	[langFromAvailableLangs: string]: string;
@@ -10,12 +11,19 @@ export type FieldOptions = Record<string, any>;
 export class DatepickerL {
 	static validateFieldParams(fieldThis: FieldThis): void {
 		if (!fieldThis.custom.mask) {
-			console.error('InputDate: custom.mask is required');
+			console.warn(
+				`InputDate: custom.mask is required, use default mask  ${DatepickerL.getMask('')}`
+			);
 		}
 		if (!fieldThis.moduleData.fieldOptions.format) {
-			console.error(
-				'InputDate: format is required. In scheme.config.modules.datepicker.config.forEachField.format or in component [InputDate].module.format'
+			console.warn(
+				`InputDate: format is required. Used default ${DatepickerL.getFormat({})}.
+In scheme.config.modules.datepicker.config.forEachField.format or in component [InputDate].module.format`
 			);
+		}
+
+		if (fieldThis.custom.pattern) {
+			throw new Error('DatepickerL.validateFieldParams: pattern cant be used in datepicker');
 		}
 	}
 
@@ -35,9 +43,7 @@ export class DatepickerL {
 		inputValue: string
 	): void {
 		// string
-		const {format} = fieldOptions;
-		if (!format) return;
-
+		const format = DatepickerL.getFormat(fieldOptions);
 		let inputTimestamp: number;
 		try {
 			inputTimestamp = parseDate(inputValue, format);
@@ -59,7 +65,8 @@ export class DatepickerL {
 	): void {
 		// prepare min and max rules
 		// strings
-		const {minDate, maxDate, format} = fieldOptions;
+		const {minDate, maxDate} = fieldOptions;
+		const format = DatepickerL.getFormat(fieldOptions);
 		let minTimestamp: number;
 		let maxTimestamp: number;
 
@@ -96,5 +103,13 @@ export class DatepickerL {
 
 	private static isValidMax(time: number, max: number): boolean {
 		return time <= max;
+	}
+
+	private static getFormat(fieldOptions: FieldOptions): string {
+		return fieldOptions.format || Consts.modules.datepicker.defaultValues.format;
+	}
+
+	static getMask(mask: string): string {
+		return mask || Consts.modules.datepicker.defaultValues.mask;
 	}
 }
