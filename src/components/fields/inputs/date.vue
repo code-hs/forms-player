@@ -82,6 +82,7 @@ export default {
 				text: this.$t(this.validation?.texts?.required),
 			},
 			moduleData: {
+				isEnable: ModuleController.isEnable('datepicker'),
 				config: moduleConfig,
 				fieldOptions: moduleFieldOptions,
 			},
@@ -119,6 +120,8 @@ export default {
 		this.initValidation();
 	},
 	async mounted() {
+		if (!this.moduleData.isEnable) return;
+
 		// wait when all loaded
 		try {
 			await this.waitDatepicker();
