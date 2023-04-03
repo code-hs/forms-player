@@ -33,7 +33,6 @@
 import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
-import {InputL} from '@/libs/components/field/inputs/input';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import {ModuleController} from '@/libs/modules/module-controller';
@@ -74,7 +73,7 @@ export default {
 
 		return {
 			classes: FL.getClasses(this.common),
-			mask: '',
+			mask: DatepickerL.getMask(this.custom.mask),
 			multiboxName: FL.getMultiName(this),
 			valid: {
 				error: false,
@@ -116,7 +115,6 @@ export default {
 	},
 	created() {
 		DatepickerL.validateFieldParams(this);
-		InputL.initMaskDirty(this);
 		this.initValidation();
 	},
 	async mounted() {
@@ -204,7 +202,7 @@ export default {
 			this.vProcessDebounced();
 		},
 		isFieldFulled() {
-			return this.custom.mask.length === this.value.length;
+			return this.mask.length === this.value.length;
 		},
 		vProcess(updateStore = true) {
 			const errorTextKey = this.vGetErrorText();
