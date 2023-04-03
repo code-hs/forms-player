@@ -6,7 +6,7 @@ export class PageMenu {
 	list: MenuList = [];
 
 	constructor() {
-		const moduleConfig: ModuleConfig | false = ModuleController.getModuleConfig('menu');
+		const moduleConfig: ModuleConfig | false = ModuleController.getConfig('menu');
 
 		if (!moduleConfig || !moduleConfig?.list) {
 			console.error('PageMenu.constructor: pages array with not correct data or empty');

@@ -62,9 +62,9 @@ describe('InitModule class', () => {
 
 	it('-> getModuleConfig', () => {
 		// disable error logging
-		expect(ModuleController.getModuleConfig('auth2323')).toBeFalsy();
+		expect(ModuleController.getConfig('auth2323')).toBeFalsy();
 
-		const options = ModuleController.getModuleConfig('auth');
+		const options = ModuleController.getConfig('auth');
 		// @ts-ignore
 		expect(options.forEachField.foo).toEqual(111);
 	});

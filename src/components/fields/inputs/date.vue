@@ -68,7 +68,7 @@ export default {
 		},
 	},
 	data() {
-		const moduleConfig = ModuleController.getModuleConfig('datepicker');
+		const moduleConfig = ModuleController.getConfig('datepicker');
 		// union all options for field
 		const moduleFieldOptions = {...moduleConfig.forEachField, ...this.module};
 

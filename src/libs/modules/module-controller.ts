@@ -20,7 +20,7 @@ export class ModuleController {
 		}
 	}
 
-	static getModuleConfig(moduleName: string): ModuleConfig | false {
+	static getConfig(moduleName: string): ModuleConfig | false {
 		const module: Module | undefined = this.getByName(moduleName);
 		if (!module) {
 			console.error(`InitModule.getModuleConfig: module '${moduleName}' is not found`);
