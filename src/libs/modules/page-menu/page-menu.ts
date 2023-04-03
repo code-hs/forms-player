@@ -9,7 +9,7 @@ export class PageMenu {
 		const moduleConfig: ModuleConfig | false = ModuleController.getModuleConfig('menu');
 
 		if (!moduleConfig || !moduleConfig?.list) {
-			console.error('page-menu.constructor: pages array with not correct data or empty');
+			console.error('PageMenu.constructor: pages array with not correct data or empty');
 			return;
 		}
 
