@@ -8,6 +8,6 @@ describe('ComponentParams', () => {
 		const params = obj.default();
 
 		expect(params.placeholder).toBe('');
-		expect(params.hint).toBe('');
+		expect(params.label).toBe('');
 	});
 });

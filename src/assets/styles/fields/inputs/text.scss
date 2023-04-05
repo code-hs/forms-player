@@ -1,6 +1,6 @@
 .input-text {
 	@extend %error-text;
-	@extend %hint;
+	@extend %label;
 
 	input {
 		@extend %field-default;

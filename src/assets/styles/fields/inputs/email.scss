@@ -1,6 +1,6 @@
 .input-email {
 	@extend %error-text;
-	@extend %hint;
+	@extend %label;
 
 	input {
 		@extend %field-default;

@@ -32,7 +32,7 @@ export interface AttrsParams {
 }
 export interface TextParams {
 	readonly placeholder?: string;
-	readonly hint?: string;
+	readonly label?: string;
 }
 export interface StylesParams {
 	readonly value?: string | string[];

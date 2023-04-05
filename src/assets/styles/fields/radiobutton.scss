@@ -1,6 +1,6 @@
 .radiobutton {
 	@extend %error-text;
-	@extend %hint;
+	@extend %label;
 
 	padding: 0.62em;
 

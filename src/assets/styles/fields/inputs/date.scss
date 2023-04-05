@@ -1,13 +1,13 @@
 .input-date {
 	@extend %error-text;
-	@extend %hint;
+	@extend %label;
 
 	input {
 		@extend %field-default;
 		@extend %validation-icon;
 	}
 
-	.field__hint {
+	.field__label {
 		display: flex;
 		justify-content: space-between;
 

@@ -22,7 +22,7 @@ export const stylesExample: StylesParams = {};
 export const htmlExample: HtmlParams = {};
 export const textExample: TextParams = {
 	placeholder: '',
-	hint: '',
+	label: '',
 };
 export const validationExample: ValidationParams = {
 	required: false,

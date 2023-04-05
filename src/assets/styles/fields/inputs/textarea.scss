@@ -1,6 +1,6 @@
 .input-textarea {
 	@extend %error-text;
-	@extend %hint;
+	@extend %label;
 
 	textarea {
 		@extend %field-default;

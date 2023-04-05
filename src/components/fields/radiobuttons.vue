@@ -6,7 +6,7 @@
 		v-bind="attrs.container"
 	>
 		<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
-		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
+		<div v-if="text.label" class="field__label">{{ $t(text.label) }}</div>
 
 		<!--suppress JSUnresolvedVariable -->
 		<div v-if="custom.options" class="inputs">
@@ -66,7 +66,7 @@ export default {
 			type: Object,
 			required: false,
 			default: () => ({
-				hint: '',
+				label: '',
 			}),
 		},
 	},

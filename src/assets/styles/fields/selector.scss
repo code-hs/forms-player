@@ -1,6 +1,6 @@
 .input-selector {
 	@extend %error-text;
-	@extend %hint;
+	@extend %label;
 
 	select {
 		@extend %field-default;

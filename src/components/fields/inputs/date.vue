@@ -6,8 +6,8 @@
 		v-bind="attrs.container"
 	>
 		<!--suppress JSUnresolvedFunction-->
-		<div v-if="text.hint" class="field__hint">
-			{{ $t(text.hint) }}
+		<div v-if="text.label" class="field__label">
+			{{ $t(text.label) }}
 			<span class="--hint">{{ $t(custom.hint) }}</span>
 		</div>
 
