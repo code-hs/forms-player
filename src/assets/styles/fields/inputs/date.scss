@@ -7,6 +7,15 @@
 		@extend %validation-icon;
 	}
 
+	.field__hint {
+		display: flex;
+		justify-content: space-between;
+
+		.--hint {
+			font-size: 12px;
+		}
+	}
+
 	.datepicker-picker {
 		background-color: var(--formItemBg);
 		color: var(--wdfText);

@@ -6,7 +6,10 @@
 		v-bind="attrs.container"
 	>
 		<!--suppress JSUnresolvedFunction-->
-		<div v-if="text.hint" class="field__hint">{{ $t(text.hint) }}</div>
+		<div v-if="text.hint" class="field__hint">
+			{{ $t(text.hint) }}
+			<span class="--hint">{{ $t(custom.hint) }}</span>
+		</div>
 
 		<!--suppress JSUnresolvedFunction JSUnresolvedVariable-->
 		<input
@@ -51,6 +54,7 @@ export default {
 			required: true,
 			default: () => ({
 				mask: '', // required
+				hint: '',
 			}),
 		},
 		validation: {
