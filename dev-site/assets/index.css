@@ -17,7 +17,6 @@
 }
 
 :root {
-	/*copy from light.scss*/
 	--boxShadow: hsl(0, 0%, 0%, 28%);
 	--darkBg: hsl(210, 2%, 16%);
 	--colorElBtnTheme: #b3b3b3;
@@ -42,11 +41,10 @@ body {
 
 /*themes*/
 body[data-theme='dark'] {
-	background-color: var(--darkBg)
+	background-color: var(--darkBg);
 }
 
 /*layouts*/
-
 .wrapper {
 	padding: 0.63rem;
 	position: relative;
@@ -132,9 +130,10 @@ body[data-theme='light'] .btn-theme:hover {
 	color: var(--colorDarkElBtnTheme);
 }
 
-/*media*/
+/* customize widget */
 @media only screen and (max-width: 767px) {
 	.wrapper .wdf-app {
+		/* bind the menu to the site, by default it is attached to the widget */
 		position: static;
 	}
 
@@ -143,12 +142,12 @@ body[data-theme='light'] .btn-theme:hover {
 		left: 20px;
 	}
 
-	.wrapper .menu {
+	.wrapper .wdf-app .menu {
 		padding-top: 2.63rem;
 	}
 }
 
-/*styles for widget
+/* customize widget colors
 form-widget-g .wdf-app[data-theme=light] {
 	--wdfText: red !important;
 }

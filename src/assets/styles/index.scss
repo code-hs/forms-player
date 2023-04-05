@@ -1,3 +1,5 @@
+// if site styles override form-widget styles, add selectors to main selector 'form-widget-g' or add class, id to .wdf-app
+
 form-widget-g {
 	// all imports only in this file!!!
 	@import 'utils/reset';

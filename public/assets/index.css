@@ -2,8 +2,7 @@
 	font-family: 'Montserrat';
 	src: url('fonts/montserrat-light.otf');
 	src: url('fonts/montserrat-light.woff2') format('woff2'),
-	url('fonts/montserrat-light.woff') format('woff'),
-	url('fonts/montserrat-light.ttf');
+		url('fonts/montserrat-light.woff') format('woff'), url('fonts/montserrat-light.ttf');
 	font-weight: 300;
 }
 
@@ -11,13 +10,11 @@
 	font-family: 'Montserrat';
 	src: url('fonts/montserrat-regular.otf');
 	src: url('fonts/montserrat-regular.woff2') format('woff2'),
-	url('fonts/montserrat-regular.woff') format('woff'),
-	url('fonts/montserrat-regular.ttf');
+		url('fonts/montserrat-regular.woff') format('woff'), url('fonts/montserrat-regular.ttf');
 	font-weight: 400;
 }
 
 :root {
-	/*copy from light.scss*/
 	--boxShadow: hsl(0, 0%, 0%, 28%);
 	--darkBg: hsl(210, 2%, 16%);
 	--colorElBtnTheme: #b3b3b3;
@@ -42,11 +39,10 @@ body {
 
 /*themes*/
 body[data-theme='dark'] {
-	background-color: var(--darkBg)
+	background-color: var(--darkBg);
 }
 
 /*layouts*/
-
 .wrapper {
 	padding: 0.63rem;
 	position: relative;
@@ -132,9 +128,10 @@ body[data-theme='light'] .btn-theme:hover {
 	color: var(--colorDarkElBtnTheme);
 }
 
-/*media*/
+/* customize widget */
 @media only screen and (max-width: 767px) {
 	.wrapper .wdf-app {
+		/* bind the menu to the site, by default it is attached to the widget */
 		position: static;
 	}
 
@@ -143,12 +140,12 @@ body[data-theme='light'] .btn-theme:hover {
 		left: 20px;
 	}
 
-	.wrapper .menu {
+	.wrapper .wdf-app .menu {
 		padding-top: 2.63rem;
 	}
 }
 
-/*styles for widget
+/* customize widget colors
 form-widget-g .wdf-app[data-theme=light] {
 	--wdfText: red !important;
 }
