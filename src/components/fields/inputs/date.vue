@@ -33,7 +33,6 @@
 import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex';
 import {FieldValidator} from '@/libs/validator/field-validator';
-import {InputL} from '@/libs/components/field/inputs/input';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import {ModuleController} from '@/libs/modules/module-controller';
@@ -68,13 +67,13 @@ export default {
 		},
 	},
 	data() {
-		const moduleConfig = ModuleController.getModuleConfig('datepicker');
+		const moduleConfig = ModuleController.getConfig('datepicker');
 		// union all options for field
 		const moduleFieldOptions = {...moduleConfig.forEachField, ...this.module};
 
 		return {
 			classes: FL.getClasses(this.common),
-			mask: '',
+			mask: DatepickerL.getMask(this.custom.mask),
 			multiboxName: FL.getMultiName(this),
 			valid: {
 				error: false,
@@ -82,6 +81,7 @@ export default {
 				text: this.$t(this.validation?.texts?.required),
 			},
 			moduleData: {
+				isEnable: ModuleController.isEnable('datepicker'),
 				config: moduleConfig,
 				fieldOptions: moduleFieldOptions,
 			},
@@ -115,10 +115,11 @@ export default {
 	},
 	created() {
 		DatepickerL.validateFieldParams(this);
-		InputL.initMaskDirty(this);
 		this.initValidation();
 	},
 	async mounted() {
+		if (!this.moduleData.isEnable) return;
+
 		// wait when all loaded
 		try {
 			await this.waitDatepicker();
@@ -201,7 +202,7 @@ export default {
 			this.vProcessDebounced();
 		},
 		isFieldFulled() {
-			return this.custom.mask.length === this.value.length;
+			return this.mask.length === this.value.length;
 		},
 		vProcess(updateStore = true) {
 			const errorTextKey = this.vGetErrorText();

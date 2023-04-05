@@ -20,8 +20,8 @@ export class ModuleController {
 		}
 	}
 
-	static getModuleConfig(moduleName: string): ModuleConfig | false {
-		const module: Module | undefined = this.getModule(moduleName);
+	static getConfig(moduleName: string): ModuleConfig | false {
+		const module: Module | undefined = this.getByName(moduleName);
 		if (!module) {
 			console.error(`InitModule.getModuleConfig: module '${moduleName}' is not found`);
 			return false;
@@ -32,10 +32,20 @@ export class ModuleController {
 		return module.config || {};
 	}
 
-	private static getModule(moduleName: string): Module | undefined {
+	private static getByName(moduleName: string): Module | undefined {
 		const configuration: Configurations = SchemeController.getConfig();
 		const modules: Module[] = configuration.modules || [];
 
 		return modules.find(m => m.name === moduleName);
+	}
+
+	static isEnable(moduleName: string): boolean {
+		const module: Module | undefined = this.getByName(moduleName);
+
+		if (!module) return false;
+
+		// noinspection RedundantIfStatementJS
+		if ('enable' in module && !module.enable) return false;
+		return true;
 	}
 }

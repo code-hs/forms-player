@@ -6,7 +6,7 @@ import {SmartTimeout} from '@/utils/smart-timeout';
 // fix not useful messaging
 console.error = () => {};
 
-describe('InitModule class', () => {
+describe('ModuleController', () => {
 	// @ts-ignore
 	SchemeController.scheme = {
 		config: {
@@ -18,6 +18,26 @@ describe('InitModule class', () => {
 						forEachField: {
 							foo: 111,
 						},
+					},
+				},
+				{
+					name: 'datepicker',
+					enable: true,
+					config: {
+						foo: 111,
+					},
+				},
+				{
+					name: 'datepicker_dis',
+					enable: false,
+					config: {
+						foo: 111,
+					},
+				},
+				{
+					name: 'datepicker_true',
+					config: {
+						foo: 111,
 					},
 				},
 			],
@@ -60,11 +80,11 @@ describe('InitModule class', () => {
 		],
 	};
 
-	it('-> getModuleConfig', () => {
+	it('-> getConfig', () => {
 		// disable error logging
-		expect(ModuleController.getModuleConfig('auth2323')).toBeFalsy();
+		expect(ModuleController.getConfig('auth2323')).toBeFalsy();
 
-		const options = ModuleController.getModuleConfig('auth');
+		const options = ModuleController.getConfig('auth');
 		// @ts-ignore
 		expect(options.forEachField.foo).toEqual(111);
 	});
@@ -78,6 +98,18 @@ describe('InitModule class', () => {
 
 		await ModuleController.waitWhenLoaded(checker, smtt);
 		expect(true).toBeTruthy();
+	});
+
+	it('-> isEnable', () => {
+		// 1. Test a module that exists and is enabled, expect the function to return true
+		expect(ModuleController.isEnable('datepicker')).toBeTruthy();
+		// 2. Test a module that exists and is disabled, expect the function to return false
+		expect(ModuleController.isEnable('datepicker_dis')).toBeFalsy();
+		// 3. Test a module that does not exist, expect the function to return false.
+		expect(ModuleController.isEnable('auth2323')).toBeFalsy();
+		// 4. Test a module that exists but doesn't have an 'enable' property,
+		// expect the function to return true.
+		expect(ModuleController.isEnable('datepicker_true')).toBeTruthy();
 	});
 
 	// it('-> waitWhenLoaded. incorrect work', () => {
