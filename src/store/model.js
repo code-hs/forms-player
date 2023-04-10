@@ -88,9 +88,40 @@ const mutations = {
 	},
 };
 
+const actions = {
+	/**
+	 * @param {string} fieldName
+	 * @param {string} multiboxName
+	 * @param {number} multiboxId
+	 */
+	getValueFromStructure({state}, {fieldName, multiboxName, multiboxId}) {
+		if (!fieldName) {
+			throw new Error('model.getValueFromStructure: param fieldName is empty');
+		}
+		if (!state.structure) {
+			throw new Error('model.getValueFromStructure: structure is empty');
+		}
+
+		if (multiboxName) {
+			if (!state.structure[multiboxName] || multiboxId === undefined) {
+				throw new Error(
+					'model.getValueFromStructure: cant find multiboxName' +
+						' in structure or multiboxId is empty'
+				);
+			}
+
+			const multiboxItem = state.structure[multiboxName][multiboxId];
+			return multiboxItem[fieldName];
+		}
+
+		return state.structure[fieldName];
+	},
+};
+
 export default {
 	namespaced: true,
 	state,
 	getters,
 	mutations,
+	actions,
 };

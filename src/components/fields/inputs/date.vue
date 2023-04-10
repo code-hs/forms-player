@@ -208,8 +208,8 @@ export default {
 		isFieldFulled() {
 			return this.mask.length === this.value.length;
 		},
-		vProcess(updateStore = true) {
-			const errorTextKey = this.vGetErrorText();
+		async vProcess(updateStore = true) {
+			const errorTextKey = await this.vGetErrorText();
 
 			if (errorTextKey) {
 				this.valid.error = true;
@@ -220,11 +220,12 @@ export default {
 
 			if (updateStore) this.vUpdateStore();
 		},
-		vGetErrorText() {
+		async vGetErrorText() {
 			try {
 				const isValid = FieldValidator.isValid(this.validation, this.value);
 				if (!isValid) {
 					// Can't find error text, ' ' - fix for show error,
+					// because empty string not show error, need some text, invisible space.
 					return this.validation.texts.required || ' ';
 				}
 			} catch (e) {
@@ -235,10 +236,17 @@ export default {
 
 			try {
 				// noinspection JSCheckFunctionSignatures
-				DatepickerL.processValidate(this.moduleData?.fieldOptions, this.validation, this.value);
+				await DatepickerL.processValidate(
+					this.moduleData?.fieldOptions,
+					this.validation,
+					this.value,
+					this
+				);
 			} catch (e) {
 				return e.message || ' ';
 			}
+
+			return false;
 		},
 		vUpdateStore() {
 			this.vsUpdate({
