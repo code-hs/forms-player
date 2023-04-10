@@ -59,7 +59,7 @@ In scheme.config.modules.datepicker.config.forEachField.format or in component [
 		}
 
 		this.processRange(fieldOptions, validation, inputTimestamp);
-		await this.processWorkTogetherOption(fieldThis, inputTimestamp, format, validation);
+		await this.processWorkTogetherOption(fieldThis, inputTimestamp, format);
 	}
 
 	private static processRange(
@@ -120,8 +120,7 @@ In scheme.config.modules.datepicker.config.forEachField.format or in component [
 	private static async processWorkTogetherOption(
 		fieldThis: FieldThis,
 		inputTimestamp: number,
-		format: string,
-		validation: ValidationParams
+		format: string
 	): Promise<void> {
 		// don't have workTogether option, correct go out
 		if (!fieldThis.custom.workTogether) return;
@@ -154,7 +153,7 @@ In scheme.config.modules.datepicker.config.forEachField.format or in component [
 				const finishTimestamp = parseDate(value, format);
 				// check if start date is bigger than finish date
 				if (inputTimestamp >= finishTimestamp) {
-					throw new Error(validation.texts?.biggerThanFinishDate);
+					throw new Error(fieldThis.custom.workTogether.validateText);
 				}
 				break;
 			}
@@ -164,7 +163,7 @@ In scheme.config.modules.datepicker.config.forEachField.format or in component [
 				const startTimestamp = parseDate(value, format);
 				// check if start date is bigger than finish date
 				if (startTimestamp >= inputTimestamp) {
-					throw new Error(validation.texts?.biggerThanStartDate);
+					throw new Error(fieldThis.custom.workTogether.validateText);
 				}
 				break;
 			}
