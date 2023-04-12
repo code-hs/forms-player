@@ -1,9 +1,8 @@
-// @ts-ignore
-import store from '@/store';
 import {ModuleConfig, ValidationParams} from '@/libs/scheme/scheme.types';
 import {FieldThis} from '@/libs/components/field/field.types';
 import {parseDate} from '@/utils/dateparser';
 import {Consts} from '@/config/consts';
+import {WorkTogether} from './work-together';
 
 type Relations = {
 	[langFromAvailableLangs: string]: string;
@@ -59,7 +58,10 @@ In scheme.config.modules.datepicker.config.forEachField.format or in component [
 		}
 
 		this.processRange(fieldOptions, validation, inputTimestamp);
-		await this.processWorkTogetherOption(fieldThis, inputTimestamp, format);
+
+		const errorText = await new WorkTogether(fieldThis, inputTimestamp, format).process();
+		// for that out functional, based on try/catch
+		if (errorText) throw new Error(errorText);
 	}
 
 	private static processRange(
@@ -115,61 +117,5 @@ In scheme.config.modules.datepicker.config.forEachField.format or in component [
 
 	static getMask(mask: string): string {
 		return mask || Consts.modules.datepicker.defaultValues.mask;
-	}
-
-	private static async processWorkTogetherOption(
-		fieldThis: FieldThis,
-		inputTimestamp: number,
-		format: string
-	): Promise<void> {
-		// don't have workTogether option, correct go out
-		if (!fieldThis.custom.workTogether) return;
-
-		const {selfIdentify, purposeModel} = fieldThis.custom.workTogether;
-		if (!selfIdentify || !purposeModel) {
-			console.error('Not correct options in workTogether');
-			return;
-		}
-		let value = '';
-		try {
-			const options = {
-				fieldName: purposeModel,
-				multiboxName: fieldThis.multiboxName,
-				multiboxId: fieldThis.multiboxIndex,
-			};
-
-			value = await store.dispatch('model/getValueFromStructure', options);
-		} catch (e) {
-			console.error('Not correct options in workTogether');
-			return;
-		}
-
-		// if field is empty, nothing to check, correct go out
-		if (!value) return;
-
-		switch (selfIdentify) {
-			case 'START': {
-				// parse finish date
-				const finishTimestamp = parseDate(value, format);
-				// check if start date is bigger than finish date
-				if (inputTimestamp >= finishTimestamp) {
-					throw new Error(fieldThis.custom.workTogether.validateText);
-				}
-				break;
-			}
-
-			case 'END': {
-				// parse start date
-				const startTimestamp = parseDate(value, format);
-				// check if start date is bigger than finish date
-				if (startTimestamp >= inputTimestamp) {
-					throw new Error(fieldThis.custom.workTogether.validateText);
-				}
-				break;
-			}
-
-			default:
-				console.error('Not correct selfIdentify in workTogether option');
-		}
 	}
 }
