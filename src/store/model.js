@@ -94,7 +94,7 @@ const actions = {
 	 * @param {string} multiboxName
 	 * @param {number} multiboxId
 	 */
-	getValueFromStructure({state}, {fieldName, multiboxName, multiboxId}) {
+	getValueFromStructure({state}, {fieldName, multiboxName, multiboxIndex}) {
 		if (!fieldName) {
 			throw new Error('model.getValueFromStructure: param fieldName is empty');
 		}
@@ -103,14 +103,14 @@ const actions = {
 		}
 
 		if (multiboxName) {
-			if (!state.structure[multiboxName] || multiboxId === undefined) {
+			if (!state.structure[multiboxName] || multiboxIndex === undefined) {
 				throw new Error(
 					'model.getValueFromStructure: cant find multiboxName' +
-						' in structure or multiboxId is empty'
+						' in structure or multiboxIndex is empty'
 				);
 			}
 
-			const multiboxItem = state.structure[multiboxName][multiboxId];
+			const multiboxItem = state.structure[multiboxName][multiboxIndex];
 			return multiboxItem[fieldName];
 		}
 
