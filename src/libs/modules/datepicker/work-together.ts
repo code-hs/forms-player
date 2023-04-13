@@ -11,10 +11,10 @@ interface WorkTogetherOptions {
 }
 
 export class WorkTogether {
-	options: WorkTogetherOptions;
-	inputValue: Timestamp;
-	format: string;
-	multiboxInfo: MultiboxInfo;
+	private readonly options: WorkTogetherOptions;
+	private readonly inputValue: Timestamp;
+	private readonly format: string;
+	private readonly multiboxInfo: MultiboxInfo;
 
 	constructor(fieldThis: FieldThis, inputTimestamp: number, format: string) {
 		this.options = fieldThis.custom?.workTogether;
@@ -46,6 +46,11 @@ export class WorkTogether {
 			return false;
 		}
 
+		if (!['START', 'END'].includes(this.options.selfIdentify)) {
+			console.error('WorkTogether.compareTimes: not correct selfIdentify in workTogether option');
+			return false;
+		}
+
 		return true;
 	}
 
@@ -66,8 +71,6 @@ export class WorkTogether {
 			return this.compareByStart(purposeValue);
 		} else if (this.options.selfIdentify === 'END') {
 			return this.compareByEnd(purposeValue);
-		} else {
-			console.error('WorkTogether.compareTimes: not correct selfIdentify in workTogether option');
 		}
 
 		// correct, not find any errors in times
