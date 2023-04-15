@@ -51,10 +51,15 @@ export default {
 		...CP.getAllParams(),
 		custom: {
 			type: Object,
-			required: true,
+			required: false,
 			default: () => ({
 				mask: '', // required
 				hint: '',
+				workTogether: {
+					selfIdentify: '',
+					purposeModel: '',
+					validateText: '',
+				},
 			}),
 		},
 		validation: {
