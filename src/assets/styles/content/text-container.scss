@@ -1,0 +1,10 @@
+.text-container {
+	h2 {
+		font-size: 1.5rem;
+		margin-bottom: 1.2em;
+	}
+}
+
+.text-container.--center > * {
+	text-align: center;
+}
