@@ -98,13 +98,15 @@ $breakpoint-large: 60em; // 960px
 	$gutter: 4%;
 
 	@media only screen and (min-width: $breakpoint-med) {
-		.g-2-col > * {
+		.g-2-cols > * {
+			// 2 cols in row
 			width: math.div($width, 2) - math.div($gutter * 6, 12);
 		}
-		.g-3-col > * {
+		.g-3-cols > * {
+			// 3 cols in row
 			width: math.div($width, 3) - math.div($gutter * 8, 12);
 		}
-		.g-4-col > * {
+		.g-4-cols > * {
 			width: math.div($width, 4) - math.div($gutter * 9, 12);
 		}
 
@@ -149,4 +151,9 @@ $breakpoint-large: 60em; // 960px
 			display: block;
 		}
 	}
+}
+
+.col-middle {
+	margin-left: auto;
+	margin-right: auto;
 }
