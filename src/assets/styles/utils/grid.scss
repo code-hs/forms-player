@@ -42,20 +42,6 @@ $breakpoint-large: 60em; // 960px
 	width: $width;
 }
 
-.g-2-col,
-.g-3-col,
-.g-4-col {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
-
-.g-2-col > *,
-.g-3-col > *,
-.g-4-col > * {
-	width: $width;
-}
-
 .col-1-sm {
 	width: math.div($width, 12) - math.div($gutter * 11, 12);
 }
@@ -98,18 +84,6 @@ $breakpoint-large: 60em; // 960px
 	$gutter: 4%;
 
 	@media only screen and (min-width: $breakpoint-med) {
-		.g-2-cols > * {
-			// 2 cols in row
-			width: math.div($width, 2) - math.div($gutter * 6, 12);
-		}
-		.g-3-cols > * {
-			// 3 cols in row
-			width: math.div($width, 3) - math.div($gutter * 8, 12);
-		}
-		.g-4-cols > * {
-			width: math.div($width, 4) - math.div($gutter * 9, 12);
-		}
-
 		.col-1 {
 			width: math.div($width, 12) - math.div($gutter * 11, 12);
 		}
@@ -153,6 +127,45 @@ $breakpoint-large: 60em; // 960px
 	}
 }
 
+/*
+Grid cols system 2
+ */
+.g-2-cols,
+.g-3-cols,
+.g-4-cols {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.g-2-cols > *,
+.g-3-cols > *,
+.g-4-cols > * {
+	width: $width;
+}
+
+.wdf-app[data-layout='large'] {
+	$width: 96%;
+	$gutter: 4%;
+
+	@media only screen and (min-width: $breakpoint-med) {
+		.g-2-cols > * {
+			// 2 cols in row
+			width: math.div($width, 2) - math.div($gutter * 6, 12);
+		}
+		.g-3-cols > * {
+			// 3 cols in row
+			width: math.div($width, 3) - math.div($gutter * 8, 12);
+		}
+		.g-4-cols > * {
+			width: math.div($width, 4) - math.div($gutter * 9, 12);
+		}
+	}
+}
+
+/*
+options
+ */
 .col-middle {
 	margin-left: auto;
 	margin-right: auto;
