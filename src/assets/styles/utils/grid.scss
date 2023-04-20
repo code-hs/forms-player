@@ -138,12 +138,6 @@ Grid cols system 2
 	justify-content: space-between;
 }
 
-.g-2-cols > *,
-.g-3-cols > *,
-.g-4-cols > * {
-	width: $width;
-}
-
 .wdf-app[data-layout='large'] {
 	$width: 96%;
 	$gutter: 4%;
@@ -164,9 +158,18 @@ Grid cols system 2
 }
 
 /*
+for mobile
+ */
+.g-2-cols > *,
+.g-3-cols > *,
+.g-4-cols > * {
+	width: 100%;
+}
+
+/*
 options
  */
-.col-middle {
+.--col-middle {
 	margin-left: auto;
 	margin-right: auto;
 }
