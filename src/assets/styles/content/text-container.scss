@@ -8,3 +8,15 @@
 .text-container.--center > * {
 	text-align: center;
 }
+
+.text-container.--right > * {
+	text-align: right;
+}
+
+.text-container.--left > * {
+	text-align: left;
+}
+
+.text-container.--justify > * {
+	text-align: justify;
+}
