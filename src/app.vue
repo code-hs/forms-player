@@ -14,7 +14,7 @@
 			<ValidationFocus />
 			<Actioner />
 
-			<div v-if="dumpModel" class="dump">{{ modelStructure }}</div>
+			<div v-if="dataDumpModel" class="dump">{{ modelStructure }}</div>
 			<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
 		</div>
 	</div>
@@ -61,10 +61,10 @@ export default {
 			default: '',
 		},
 		// show/hide dump block
-		dumpModel: {
+		dataDumpModel: {
 			type: Boolean,
-			required: true,
-			default: true,
+			required: false,
+			default: false,
 		},
 	},
 
