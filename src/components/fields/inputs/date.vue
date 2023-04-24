@@ -27,7 +27,7 @@
 
 		<!--suppress JSUnresolvedVariable-->
 		<div v-if="valid.text" class="field__error-text">
-			{{ valid.text }}
+			{{ $t(valid.text) }}
 		</div>
 	</div>
 </template>
@@ -87,7 +87,7 @@ export default {
 			valid: {
 				error: false,
 				connect: false,
-				text: this.$t(this.validation?.texts?.required),
+				text: this.validation?.texts?.required || '',
 			},
 			moduleData: {
 				isEnable: ModuleController.isEnable('datepicker'),
@@ -218,7 +218,7 @@ export default {
 
 			if (errorTextKey) {
 				this.valid.error = true;
-				this.valid.text = this.$t(errorTextKey);
+				this.valid.text = errorTextKey;
 			} else {
 				this.valid.error = false;
 			}
