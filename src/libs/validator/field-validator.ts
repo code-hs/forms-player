@@ -1,7 +1,7 @@
 import {ValidationParams} from '@/libs/scheme/scheme.types';
 import {FieldThis} from '@/libs/components/field/field.types';
 import {FieldL as FL} from '@/libs/components/field/field';
-import {RulesValidator} from '@/libs/validator/rules-validator';
+import {RulesValidator} from './rules-validator';
 
 export class FieldValidator {
 	static debounceTime: number = 300;
