@@ -2,6 +2,8 @@
 	@extend %error-text;
 	@extend %label;
 
+	margin-bottom: 1.8em;
+
 	textarea {
 		@extend %field-default;
 		@extend %validation-icon;
