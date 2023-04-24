@@ -7,7 +7,9 @@
 	padding: 0;
 	outline: none;
 }
-main {
+main,
+header,
+footer {
 	display: block;
 }
 h1 {
@@ -56,6 +58,10 @@ button {
 	overflow: visible;
 	text-transform: none;
 }
+button,
+a {
+	cursor: pointer;
+}
 [type='button'],
 [type='reset'],
 [type='submit'],
@@ -68,10 +74,10 @@ input {
 }
 input,
 textarea {
-	padding: 1px;
+	padding: 0;
 }
 fieldset {
-	margin: 0 2px;
+	margin: 0;
 	border: 1px solid currentColor;
 }
 legend {
@@ -129,7 +135,7 @@ hr {
 dl,
 ol,
 ul {
-	margin: 1em 0;
+	margin: 0;
 }
 dl dl,
 dl ol,
@@ -175,7 +181,7 @@ dialog {
 	width: fit-content;
 	height: fit-content;
 	margin: auto;
-	padding: 1em;
+	padding: 0;
 	color: inherit;
 	border: solid;
 	background-color: inherit;
