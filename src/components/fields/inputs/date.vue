@@ -87,7 +87,7 @@ export default {
 			valid: {
 				error: false,
 				connect: false,
-				text: this.validation?.texts?.required || '',
+				text: '',
 			},
 			moduleData: {
 				isEnable: ModuleController.isEnable('datepicker'),
@@ -226,17 +226,9 @@ export default {
 			if (updateStore) this.vUpdateStore();
 		},
 		async vGetErrorText() {
-			try {
-				const isValid = FieldValidator.isValid(this.validation, this.value);
-				if (!isValid) {
-					// Can't find error text, ' ' - fix for show error,
-					// because empty string not show error, need some text, invisible space.
-					return this.validation.texts.required || ' ';
-				}
-			} catch (e) {
-				// bad scheme validation options
-				console.error(e);
-			}
+			const errorKey = FieldValidator.validate(this.validation, this.value);
+			if (errorKey) return errorKey;
+
 			if (!this.isFieldFulled()) return;
 
 			try {

@@ -65,7 +65,7 @@ export default {
 				error: false,
 				// is need validate this field
 				connect: false,
-				text: this.validation?.texts?.required || '',
+				text: '',
 			},
 		};
 	},
@@ -145,11 +145,8 @@ export default {
 			if (updateStore) this.vUpdateStore();
 		},
 		vUpdateError() {
-			try {
-				this.valid.error = !FieldValidator.isValid(this.validation, this.value);
-			} catch (e) {
-				console.error(e);
-			}
+			this.valid.text = FieldValidator.validate(this.validation, this.value);
+			this.valid.error = !!this.valid.text;
 		},
 		vUpdateStore() {
 			this.vsUpdate({

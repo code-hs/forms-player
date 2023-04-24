@@ -1,37 +1,33 @@
 import {ValidationParams} from '@/libs/scheme/scheme.types';
-import {stringToRegex} from '@/utils/regexp';
 import {FieldThis} from '@/libs/components/field/field.types';
 import {FieldL as FL} from '@/libs/components/field/field';
+import {RulesValidator} from '@/libs/validator/rules-validator';
 
 export class FieldValidator {
 	static debounceTime: number = 300;
 
-	static isValid(rules: ValidationParams, fieldValue: string): boolean {
+	static validate(rules: ValidationParams, fieldValue: string): string {
 		// if there are no rules in the scheme ->  field becomes valid
-		if (!rules || !Object.keys(rules).length) {
-			return true;
-		}
+		if (!this.hasRules(rules)) return '';
 
-		if (rules.pattern) {
-			try {
-				const regexp = stringToRegex(rules.pattern);
-				return regexp.test(fieldValue);
-			} catch {
-				throw new Error('FieldValidator.isValid: validation pattern is broken');
+		const rulesValidator = new RulesValidator(rules, fieldValue);
+		try {
+			if (!rulesValidator.isValidRequired()) {
+				// Can't find error text, ' ' - fix for show error,
+				// because empty string not show error, need some text, invisible space.
+				return rules.texts?.required || ' ';
+			} else if (!rulesValidator.isValidPattern()) {
+				return rules.texts?.pattern || ' ';
 			}
-		} else if ('required' in rules) {
-			// if rules have only required
-			// if required === true -> check the field
-
-			if (rules.required) return Boolean(fieldValue);
-
-			// if required === false -> return true (valid)
-			return true;
+		} catch (e) {
+			console.error('FieldValidator.validate: ', e);
 		}
 
-		// if no pattern and no required, rules have not useful options
-		// -> field valid
-		return true;
+		return '';
+	}
+
+	private static hasRules(rules: ValidationParams): boolean {
+		return Boolean(rules && Object.keys(rules).length);
 	}
 
 	static canValidation(rules: ValidationParams, onlyRequired: boolean = false): boolean {
