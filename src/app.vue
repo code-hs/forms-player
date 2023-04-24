@@ -14,7 +14,7 @@
 			<ValidationFocus />
 			<Actioner />
 
-			<div v-if="showDump" class="dump">{{ modelStructure }}</div>
+			<div v-if="dumpModel" class="dump">{{ modelStructure }}</div>
 			<!--		<div v-if="showDump" class="dump">{{ validatorFields }}</div>-->
 		</div>
 	</div>
@@ -23,7 +23,6 @@
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import FormC from '@/components/form';
-import {Config} from '@/config';
 import {Api} from '@/libs/api/api';
 import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
@@ -61,6 +60,12 @@ export default {
 			type: String,
 			default: '',
 		},
+		// show/hide dump block
+		dumpModel: {
+			type: Boolean,
+			required: true,
+			default: true,
+		},
 	},
 
 	data() {
@@ -68,7 +73,6 @@ export default {
 			menuItem: '',
 			pageKey: this.getPageKey(),
 			showContent: false,
-			showDump: Config.showDump,
 			appId: generateHash(), // id for the app, for api ddos protection
 			scheme: null,
 			showMenu: false,
