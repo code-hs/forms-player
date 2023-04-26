@@ -58,7 +58,6 @@ export default {
 			required: false,
 			default: () => ({
 				required: false,
-				requiredOnlyIfVisible: false,
 				texts: {},
 			}),
 		},
