@@ -10,6 +10,10 @@ export class RulesValidator {
 		this.fieldValue = fieldValue;
 	}
 
+	hasRules(): boolean {
+		return Boolean(this.rules && Object.keys(this.rules).length);
+	}
+
 	isValidRequired(): boolean {
 		// no required -> field valid
 		if (!('required' in this.rules)) return true;

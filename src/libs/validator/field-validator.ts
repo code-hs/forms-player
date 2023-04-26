@@ -2,15 +2,17 @@ import {ValidationParams} from '@/libs/scheme/scheme.types';
 import {FieldThis} from '@/libs/components/field/field.types';
 import {FieldL as FL} from '@/libs/components/field/field';
 import {RulesValidator} from './rules-validator';
+import type {ErrorKey} from './types';
 
 export class FieldValidator {
 	static debounceTime: number = 300;
 
-	static validate(rules: ValidationParams, fieldValue: string): string {
-		// if there are no rules in the scheme ->  field becomes valid
-		if (!this.hasRules(rules)) return '';
-
+	static validate(rules: ValidationParams, fieldValue: string): ErrorKey {
 		const rulesValidator = new RulesValidator(rules, fieldValue);
+
+		// if there are no rules in the scheme ->  field becomes valid
+		if (!rulesValidator.hasRules()) return '';
+
 		try {
 			if (!rulesValidator.isValidRequired()) {
 				// Can't find error text, ' ' - fix for show error,
@@ -24,10 +26,6 @@ export class FieldValidator {
 		}
 
 		return '';
-	}
-
-	private static hasRules(rules: ValidationParams): boolean {
-		return Boolean(rules && Object.keys(rules).length);
 	}
 
 	static canValidation(rules: ValidationParams, onlyRequired: boolean = false): boolean {
