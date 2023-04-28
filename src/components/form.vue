@@ -58,7 +58,7 @@ export default {
 			}
 
 			// const data = ApiResponser.getData(res);
-			// alert('success');
+			console.log('success');
 		},
 	},
 };

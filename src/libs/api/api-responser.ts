@@ -5,21 +5,27 @@ interface ResponseError {
 }
 
 interface Response {
-	data: object;
+	data?: object;
 	success: boolean;
-	error: ResponseError;
+	error?: ResponseError;
 }
 
 export class ApiResponser {
+	static getSuccess(): Response {
+		return {
+			success: true,
+		};
+	}
+
 	static isSuccess(response: Response): boolean {
 		return response && response.success;
 	}
 
-	static getError(response: Response): ResponseError {
+	static getError(response: Response): ResponseError | undefined {
 		return response?.error;
 	}
 
-	static getData(response: Response): object {
+	static getData(response: Response): object | undefined {
 		return response?.data;
 	}
 }

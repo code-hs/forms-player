@@ -51,8 +51,8 @@ export interface Field {
 }
 
 export interface Page {
-	readonly id?: number;
-	readonly key?: string;
+	readonly id: number;
+	readonly key: string;
 	readonly description?: string;
 	readonly styles?: StylesParams;
 	readonly submitActionUrl?: string;

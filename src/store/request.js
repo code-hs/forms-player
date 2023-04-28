@@ -4,6 +4,7 @@ import {ModelStructureStore} from '@/libs/model/model-structure';
 // eslint-disable-next-line no-unused-vars
 import {Page} from '@/libs/scheme/scheme.types';
 import {Submitter} from '../libs/api/submitter';
+import {ApiResponser} from '../libs/api/api-responser';
 
 const state = () => ({
 	saveFormFinished: true,
@@ -29,8 +30,13 @@ const actions = {
 
 		// noinspection JSCheckFunctionSignatures
 		const submitter = new Submitter(page, values);
+		const url = submitter.getUrl();
+		if (!url) {
+			commit('setSaveFormFinished', true);
+			return ApiResponser.getSuccess();
+		}
 
-		const res = await Api.post(submitter.getUrl(), {
+		const res = await Api.post(url, {
 			pageKey: page.key,
 			values,
 		});
