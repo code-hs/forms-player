@@ -3,6 +3,7 @@ import {Api} from '@/libs/api/api';
 import {ModelStructureStore} from '@/libs/model/model-structure';
 // eslint-disable-next-line no-unused-vars
 import {Page} from '@/libs/scheme/scheme.types';
+import {Submitter} from '../libs/api/submitter';
 
 const state = () => ({
 	saveFormFinished: true,
@@ -23,9 +24,13 @@ const actions = {
 	 * @param {Page} page - current page structure
 	 * @param {ModelStructureStore} values - store model/structure
 	 */
-	async saveFormValues({commit}, {page, values}) {
+	async submitForm({commit}, {page, values}) {
 		commit('setSaveFormFinished', false);
-		const res = await Api.post('form/save-form', {
+
+		// noinspection JSCheckFunctionSignatures
+		const submitter = new Submitter(page, values);
+
+		const res = await Api.post(submitter.getUrl(), {
 			pageKey: page.key,
 			values,
 		});

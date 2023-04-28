@@ -37,7 +37,7 @@ export default {
 	methods: {
 		...mapActions({
 			validatorStart: 'validator/start',
-			saveForm: 'request/saveFormValues',
+			submitForm: 'request/submitForm',
 		}),
 		initClass() {
 			this.pageClass = this.pageStructure?.common?.class.container || '';
@@ -48,7 +48,7 @@ export default {
 			bus.$on(busBroadcasts.VALIDATION_FINISH_SUCCESS, this.validationFinishSuccess);
 		},
 		async validationFinishSuccess() {
-			const res = await this.saveForm({
+			const res = await this.submitForm({
 				page: this.pageStructure,
 				values: this.modelStructure,
 			});

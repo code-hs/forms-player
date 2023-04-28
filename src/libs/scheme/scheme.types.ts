@@ -54,8 +54,8 @@ export interface Page {
 	readonly id?: number;
 	readonly key?: string;
 	readonly description?: string;
-	readonly position?: number;
 	readonly styles?: StylesParams;
+	readonly submitActionUrl?: string;
 	components?: Field[];
 }
 
@@ -103,6 +103,7 @@ export interface Configurations {
 	readonly localization?: LocalizationConfig;
 	readonly styles?: StylesParams;
 	readonly variables?: Variables;
+	readonly apiBaseUrl?: string;
 }
 
 export interface Scheme {

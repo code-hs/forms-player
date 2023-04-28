@@ -34,9 +34,8 @@ export class Api {
 			...this.getProjectInfo(),
 			...data,
 		};
-		const fullLink: string = Config.apiUrl + url;
 
-		return fetch(fullLink, {
+		return fetch(url, {
 			method: 'POST',
 			body: JSON.stringify(sendData),
 			headers: {
