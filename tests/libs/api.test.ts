@@ -7,11 +7,10 @@ describe('Api class', () => {
 		let info: ProjectInfo = Api.getProjectInfo();
 		expect(info.projectId).toBe('');
 
-		Api.init('projectId', 'appId');
+		Api.init('projectId');
 		// @ts-ignore
 		info = Api.getProjectInfo();
 
 		expect(info.projectId).toBe('projectId');
-		expect(info.appId).toBe('appId');
 	});
 });

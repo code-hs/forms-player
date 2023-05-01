@@ -1,4 +1,4 @@
-import {Config} from '@/config';
+import {Global} from '@/libs/main/global';
 
 export interface ProjectInfo {
 	projectId: string;
@@ -12,13 +12,13 @@ export class Api {
 	/**
 	 * @param {string} appId - unique id for current client
 	 */
-	static init(projectId: string, appId: string): void {
-		if (!projectId || !appId) {
-			throw new Error('Api.init: prop "projectId" or "appId" is empty');
+	static init(projectId: string): void {
+		if (!projectId) {
+			throw new Error('Api.init: prop "projectId" is empty');
 		}
 
 		this.projectId = projectId;
-		this.appId = appId;
+		this.appId = Global.getAppId();
 	}
 
 	private static getProjectInfo(): ProjectInfo {

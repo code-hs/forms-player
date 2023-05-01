@@ -24,7 +24,6 @@
 import {mapActions, mapGetters, mapMutations} from 'vuex';
 import FormC from '@/components/form';
 import {Api} from '@/libs/api/api';
-import {generateHash} from '@/utils/random';
 import ValidationFocus from '@/components/utils/validation/focus';
 import StyleIncluder from '@/components/utils/style/style-includer';
 import Actioner from '@/components/utils/actioner';
@@ -73,7 +72,6 @@ export default {
 			menuItem: '',
 			pageKey: this.getPageKey(),
 			showContent: false,
-			appId: generateHash(), // id for the app, for api ddos protection
 			scheme: null,
 			showMenu: false,
 		};
@@ -116,7 +114,7 @@ export default {
 			sInitPage: 'scheme/initPage',
 		}),
 		initPlugins() {
-			Api.init(this.dataProjectId, this.appId);
+			Api.init(this.dataProjectId);
 			this.localization.init(this.dataLanguage);
 		},
 		async initPage() {
