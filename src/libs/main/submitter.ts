@@ -14,9 +14,14 @@ export class Submitter {
 		this.saveValues();
 	}
 
-	saveValues(): void {
+	private saveValues(): void {
 		const key: string = `saved-page-model:${this.page.key}`;
 		Storage.save(key, this.values);
+	}
+
+	static getValues(key: string): ModelStructureStore | null {
+		const fullKey: string = `saved-page-model:${key}`;
+		return Storage.get(fullKey) as ModelStructureStore | null;
 	}
 
 	getUrl(): string {

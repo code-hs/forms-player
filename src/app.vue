@@ -30,6 +30,7 @@ import Actioner from '@/components/utils/actioner';
 import PageMenu from '@/components/layout/page-menu';
 import Burger from '@/components/layout/page-menu/burger';
 import {SchemeController} from '@/libs/scheme/scheme-controller';
+import {Submitter} from '@/libs/main/submitter';
 
 export default {
 	components: {FormC, ValidationFocus, StyleIncluder, Actioner, PageMenu, Burger},
@@ -140,6 +141,12 @@ export default {
 		setPage(pageName) {
 			this.showContent = false;
 			this.pageKey = pageName;
+
+			const modelValues = Submitter.getValues(pageName);
+			console.log(modelValues);
+			// and what do next ?
+			// set in model values
+
 			this.initPage();
 		},
 		changePageHandler(key) {

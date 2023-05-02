@@ -14,7 +14,9 @@ export class PagesController {
 		if (!pageKey) {
 			throw new Error('SchemeController.getPage: param pageKey is empty');
 		}
-		if (!this.getAll()) return {};
+		if (!this.getAll()) {
+			throw new Error('SchemeController.getPage: empty pages in scheme');
+		}
 
 		return this.getAll().find(p => p.key === pageKey) as Page;
 	}

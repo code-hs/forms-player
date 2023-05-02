@@ -7,7 +7,7 @@ export class Storage {
 		localStorage.setItem(this.getFullKey(key), JSON.stringify(data));
 	}
 
-	static load(key: string): unknown | null {
+	static get(key: string): unknown | null {
 		const data = localStorage.getItem(this.getFullKey(key));
 		if (!data) return null;
 

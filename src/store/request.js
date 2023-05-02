@@ -3,8 +3,8 @@ import {Api} from '@/libs/api/api';
 import {ModelStructureStore} from '@/libs/model/model-structure';
 // eslint-disable-next-line no-unused-vars
 import {Page} from '@/libs/scheme/scheme.types';
-import {Submitter} from '../libs/api/submitter';
-import {ApiResponser} from '../libs/api/api-responser';
+import {Submitter} from '@/libs/main/submitter';
+import {ApiResponser} from '@/libs/api/api-responser';
 
 const state = () => ({
 	saveFormFinished: true,
