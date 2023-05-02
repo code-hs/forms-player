@@ -70,7 +70,7 @@ export default {
 	data() {
 		return {
 			menuItem: '',
-			pageKey: this.getPageKey(),
+			pageKey: '',
 			showContent: false,
 			scheme: null,
 			showMenu: false,
@@ -89,10 +89,10 @@ export default {
 			this.localization.changeLanguage(newLang);
 		},
 		dataPage(newPage) {
-			this.setNewPage(newPage);
+			this.setPage(newPage);
 		},
 		menuItem() {
-			this.setNewPage(this.menuItem);
+			this.setPage(this.menuItem);
 		},
 	},
 
@@ -102,7 +102,7 @@ export default {
 		}
 
 		this.scheme = SchemeController.load();
-		this.initPage();
+		this.setPage(this.getPageKey());
 		this.initPlugins();
 	},
 
@@ -137,10 +137,10 @@ export default {
 
 			return this.dataPage;
 		},
-		setNewPage(pageName) {
+		setPage(pageName) {
 			this.showContent = false;
 			this.pageKey = pageName;
-			this.initPage(pageName);
+			this.initPage();
 		},
 		changePageHandler(key) {
 			this.menuItem = key;
