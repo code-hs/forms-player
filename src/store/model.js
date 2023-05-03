@@ -116,6 +116,11 @@ const actions = {
 
 		return state.structure[fieldName];
 	},
+	// eslint-disable-next-line no-unused-vars
+	setValues({state}, values) {
+		console.logp(state.structure);
+		console.log(values);
+	},
 };
 
 export default {

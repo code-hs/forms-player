@@ -113,6 +113,7 @@ export default {
 		}),
 		...mapActions({
 			sInitPage: 'scheme/initPage',
+			setModelValues: 'model/setValues',
 		}),
 		initPlugins() {
 			Api.init(this.dataProjectId);
@@ -138,16 +139,16 @@ export default {
 
 			return this.dataPage;
 		},
-		setPage(pageName) {
+		async setPage(pageName) {
 			this.showContent = false;
 			this.pageKey = pageName;
-
-			const modelValues = Submitter.getValues(pageName);
-			console.log(modelValues);
 			// and what do next ?
 			// set in model values
 
-			this.initPage();
+			await this.initPage();
+
+			const modelValues = Submitter.getValues(pageName);
+			if (modelValues) this.setModelValues(modelValues);
 		},
 		changePageHandler(key) {
 			this.menuItem = key;
