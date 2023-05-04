@@ -10,7 +10,10 @@ import {Field, Page} from '@/libs/scheme/scheme.types';
  * 	"surname": ""
  * }
  */
-export type ModelStructureStore = Record<string, string | object>;
+
+export type MultiboxItem = Record<string, string>;
+export type MultiboxContainer = MultiboxItem[];
+export type ModelStructureStore = Record<string, string | MultiboxContainer>;
 
 export class ModelController {
 	/**
@@ -38,9 +41,9 @@ export class ModelController {
 		// process multibox structure
 		const structure: ModelStructureStore = {};
 		// create a store for future fields
-		const inputsStore: ModelStructureStore = {};
+		const inputsStore: MultiboxItem = {};
 		const multiBoxModel: string = field.common.model;
-		structure[multiBoxModel] = [inputsStore];
+		structure[multiBoxModel] = [inputsStore] as MultiboxContainer;
 
 		return structure;
 	}

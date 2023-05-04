@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex';
+import {mapMutations, mapGetters} from 'vuex';
 import {Multibox} from '@/libs/components/layout/multibox/multibox';
 import {ComponentParams as CP} from '@/libs/components/component/component-params';
 import {FieldL as FL} from '@/libs/components/field/field';
@@ -59,22 +59,26 @@ export default {
 		},
 	},
 	data() {
-		// мультибокс = [группа1, группа2, группа3]
-		// в группе уже хранятся поля = [поле1, поле2, поле3]
-		// предполагается что в схеме указана только одна группа от мультибокса
-		// и в этой первой группе прописываем информацию о мультибоксе
-		const groups = new Multibox(this.components, this.common.model).createGroups();
-
 		return {
-			groups,
+			groups: null,
 			classes: FL.getClasses(this.common),
 			addIndexInTitle: this.custom.addIndex ?? true,
 		};
 	},
 	computed: {
+		...mapGetters({
+			modelStructure: 'model/structure',
+		}),
 		showMultipleSeparator() {
 			return this.groups.length > 1;
 		},
+	},
+	created() {
+		// this.modelStructure work only in created() hook
+		// all components in multibox wrapped in object and in array
+		this.groups = new Multibox(this.components, this.common.model).createGroups(
+			this.modelStructure
+		);
 	},
 	methods: {
 		...mapMutations({

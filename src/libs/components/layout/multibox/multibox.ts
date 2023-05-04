@@ -1,6 +1,7 @@
 import {generateKey} from '@/utils/random';
 import {deepCopy} from '@/utils/objects';
 import {Field, CustomParams} from '@/libs/scheme/scheme.types';
+import type {ModelStructureStore, MultiboxContainer} from '@/libs/model/model-structure';
 
 // stack of components
 export type Group = Field[];
@@ -15,11 +16,27 @@ export class Multibox {
 		this.multiboxName = multiboxName;
 	}
 
-	createGroups(): Groups {
-		// create groups from components, from the first component
-		// that component is the basis for all other components, as template
+	createGroups(modelData: ModelStructureStore): Groups {
+		// create groups from components
 		this.writeInfo(this.group);
-		return [this.group] as Groups;
+		const groupsCount: number = this.getGroupCount(modelData);
+
+		return new Array(groupsCount).fill(this.group);
+	}
+
+	getGroupCount(modelData: ModelStructureStore): number {
+		// If we have any data in modelData multibox, -> then we return the number of elements,
+		// for reproduce the data in field
+		if (modelData && modelData[this.multiboxName]) {
+			const container = modelData[this.multiboxName] as MultiboxContainer;
+
+			if (container.length > 1) {
+				return container.length;
+			}
+		}
+
+		// default return 1
+		return 1;
 	}
 
 	private writeInfo(group: Group): void {
