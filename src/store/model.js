@@ -116,10 +116,29 @@ const actions = {
 
 		return state.structure[fieldName];
 	},
-	// eslint-disable-next-line no-unused-vars
-	setValues({state}, values) {
-		console.logp(state.structure);
-		console.log(values);
+
+	/**
+	 * @param {ModelStructureStore} values
+	 */
+	setValues({state}, savedModelData) {
+		const entries = Object.entries(state.structure);
+
+		for (const [key, value] of entries) {
+			if (value instanceof Array) {
+				// if array - multibox container
+				const multiboxName = key;
+				// multibox is not empty, and has fields
+				if (!savedModelData[multiboxName] || !Object.keys(savedModelData[multiboxName]).length) {
+					continue;
+				}
+
+				state.structure[multiboxName] = savedModelData[multiboxName];
+			} else if (key in savedModelData && savedModelData[key] !== undefined) {
+				// another field (not multibox)
+				// not a boolean, because field can be boolean and be FALSE values
+				state.structure[key] = savedModelData[key];
+			}
+		}
 	},
 };
 

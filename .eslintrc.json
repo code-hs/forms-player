@@ -59,7 +59,8 @@
 		"import/no-extraneous-dependencies": 0,
 		"no-restricted-syntax": 0,
 		"no-else-return": 0,
-		"no-shadow": "off"
+		"no-shadow": "off",
+		"no-continue": "off"
 	},
 	"parserOptions": {
 		"parser": "@typescript-eslint/parser"
