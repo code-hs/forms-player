@@ -122,6 +122,7 @@ export default {
 			}
 
 			this.generateModelSkeleton(pageStructure);
+			this.processSavedPages();
 			// after page structure generated, we can inject inputs
 			// each input will be run init and create self field in modelStructure.
 			// need to wait for modelStructure to be generated.
@@ -129,19 +130,20 @@ export default {
 			// that was after initialized fields
 			if (pageStructure && this.modelStructure) this.showContent = true;
 		},
+		processSavedPages() {
+			const modelValues = Submitter.getValues(this.pageKey);
+			if (modelValues) this.setModelValues(modelValues);
+		},
 		getPageKey() {
 			const urlHash = window.location.hash.slice(1);
 			if (urlHash) return urlHash;
 
 			return this.dataPage;
 		},
-		async setPage(pageName) {
+		setPage(pageName) {
 			this.showContent = false;
 			this.pageKey = pageName;
-			await this.initPage(pageName);
-
-			const modelValues = Submitter.getValues(pageName);
-			if (modelValues) this.setModelValues(modelValues);
+			this.initPage();
 		},
 		changePageHandler(key) {
 			this.setPage(key);

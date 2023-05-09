@@ -44,8 +44,10 @@ const mutations = {
 		if (!inputModelName) {
 			throw new Error('model.initField: param inputModelName is empty');
 		}
+
 		if (s.structure[inputModelName] !== undefined) {
-			throw new Error('model.initField: model already exists');
+			// model already exists  (from storage)
+			return true;
 		}
 
 		Vue.set(s.structure, inputModelName, inputValue);
@@ -120,24 +122,7 @@ const actions = {
 	 * @param {ModelStructureStore} values
 	 */
 	setValues({state}, savedModelData) {
-		const entries = Object.entries(state.structure);
-
-		for (const [key, value] of entries) {
-			if (value instanceof Array) {
-				// if array - multibox container
-				const multiboxName = key;
-				// multibox is not empty, and has fields
-				if (!savedModelData[multiboxName] || !Object.keys(savedModelData[multiboxName]).length) {
-					continue;
-				}
-
-				state.structure[multiboxName] = savedModelData[multiboxName];
-			} else if (key in savedModelData && savedModelData[key] !== undefined) {
-				// another field (not multibox)
-				// not a boolean, because field can be boolean and be FALSE values
-				state.structure[key] = savedModelData[key];
-			}
-		}
+		state.structure = savedModelData;
 	},
 };
 
