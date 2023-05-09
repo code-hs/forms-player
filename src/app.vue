@@ -70,7 +70,6 @@ export default {
 
 	data() {
 		return {
-			menuItem: '',
 			pageKey: '',
 			showContent: false,
 			scheme: null,
@@ -91,9 +90,6 @@ export default {
 		},
 		dataPage(newPage) {
 			this.setPage(newPage);
-		},
-		menuItem() {
-			this.setPage(this.menuItem);
 		},
 	},
 
@@ -142,16 +138,13 @@ export default {
 		async setPage(pageName) {
 			this.showContent = false;
 			this.pageKey = pageName;
-			// and what do next ?
-			// set in model values
-
-			await this.initPage();
+			await this.initPage(pageName);
 
 			const modelValues = Submitter.getValues(pageName);
 			if (modelValues) this.setModelValues(modelValues);
 		},
 		changePageHandler(key) {
-			this.menuItem = key;
+			this.setPage(key);
 		},
 		getMenuState(v) {
 			this.showMenu = v;
