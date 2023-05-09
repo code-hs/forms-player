@@ -18,7 +18,7 @@
 			@change="handleChange"
 		>
 			<!--suppress JSUnresolvedFunction, JSUnresolvedVariable -->
-			<option v-if="custom.defaultText" :value="defaultValue" disabled>
+			<option v-if="custom.defaultText" :value="defaultLine" disabled>
 				{{ $t(custom.defaultText) }}
 			</option>
 
@@ -74,7 +74,6 @@ export default {
 		return {
 			classes: FL.getClasses(this.common),
 			multiboxName: FL.getMultiName(this),
-			defaultValue: '',
 			valid: {
 				error: false,
 				connect: false,
@@ -96,15 +95,22 @@ export default {
 		value() {
 			return this.modelStore[this.common.model];
 		},
+		defaultLine() {
+			// stay in computed, because modelStore work only here
+
+			// if selector stay in multibox container, modelStore = {}
+			// and modelStore[this.common.model] === undefined
+			// if not multibox, modelStore[this.common.model] === ''
+			// in multibox - value="undefined"
+			// in usual field - value=""
+
+			// for correct work default selected value need return 'undefined' or ''
+			// and current selector model === 'undefined' || '' and always show default selector line
+			if (this.modelStore[this.common.model] === undefined) return undefined;
+			return '';
+		},
 	},
 	created() {
-		// get correct default value
-		// if selector stay in multibox, field hasn't default value like ''
-		// and default value is undefined
-		// if it is not multibox, field has default value like ''
-		// defaultValue using for set default text in select
-		this.defaultValue = `${this.modelStore[this.common.model]}`;
-
 		// eslint-disable-next-line vue/no-mutating-props
 		this.custom.options = FL.variabling(this.custom.options);
 		this.initValidation();
