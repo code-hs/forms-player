@@ -61,7 +61,7 @@ export class WorkTogether {
 			multiboxIndex: this.multiboxInfo.index,
 		};
 
-		return store.dispatch('model/getValueFromStructure', options);
+		return store.dispatch('model/getValue', options);
 	}
 
 	private compareTimes(purposeValue: string): string {
